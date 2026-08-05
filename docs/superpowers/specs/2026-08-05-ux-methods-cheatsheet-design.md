@@ -235,7 +235,7 @@ Accent used **only** for the `kind` taxonomy (generative / descriptive / evaluat
 
 ### 6.1 Command palette — the primary interface
 
-`⌘K` / `/` from anywhere. Built on Astryx's Command Palette with a custom scorer (see the §7.0 spike — `cmdk` is the fallback if the component won't host a custom filter).
+`⌘K` / `/` from anywhere. Built on Astryx's `CommandPalette`, with the entire search supplied by our own scorer through its `searchSource` prop (§7.0).
 
 Search runs over three weighted fields:
 
@@ -324,7 +324,7 @@ The §5 palette is applied as CSS custom property overrides after the theme impo
 
 **Risk, stated plainly.** Astryx is v0.2.0, Beta, 674 npm versions since June 2026. Breaking changes between minors are likely. Mitigations: exact-pin every `@astryxdesign/*` version in `package.json` (no `^`), keep `bun.lock` committed, and confine Astryx imports to `components/ui/` so a breaking change has one blast radius. `swizzle` (ejects a component's source into the repo) is the escape hatch if a component becomes a blocker.
 
-**Phase 0 spike, before anything else is built:** confirm Astryx's Command Palette accepts a custom filter/scorer. §6.1's weighted search is the core of this site — if the component can't host it, fall back to `cmdk` and use Astryx for everything else. This is the one unknown that would change the plan, so it gets resolved first.
+**Phase 0 spike — resolved during planning, 2026-08-05.** `CommandPalette` takes a `searchSource: SearchSource<T>` prop, where `SearchSource` is just `{ search(query): T[] | Promise<T[]>; bootstrap(): T[] | Promise<T[]>; cancel?(): void }`. The entire search implementation is ours — this is better than a custom filter hook. It also auto-groups results by `auxiliaryData.group` and takes a `renderItem(item, isSelected)`, which covers §6.1's grouped results and custom rows without any workaround. **`cmdk` is not needed and is not a dependency.**
 
 Content pipeline is hand-rolled rather than Velite/Contentlayer: fewer dependencies, no version-coupling risk, and the whole thing is readable in one sitting.
 
@@ -374,7 +374,7 @@ No E2E in v1. The site has no state to break beyond `localStorage`.
 
 ## 10. Delivery plan
 
-**Phase 0 — Astryx Command Palette spike.** Confirm it accepts a custom filter/scorer (§7.0). Decides palette vs `cmdk` before anything is built on top.
+**Phase 0 — Astryx Command Palette spike.** ✅ Resolved 2026-08-05 (§7.0). `searchSource` hosts the custom scorer directly.
 
 **Phase 1 — Platform.** Next.js scaffold on Bun, Astryx + Tailwind layer setup, §5 theme overrides, Geist, content pipeline, Zod schema, validator, palette, all three page types, motion. Seeded with ~6 hand-written entries spanning several categories to exercise every schema field — including `## Using AI`.
 
