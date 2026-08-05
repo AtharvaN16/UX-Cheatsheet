@@ -6,13 +6,15 @@
 @import '@astryxdesign/core/astryx.css';
 @import '@astryxdesign/theme-stone/theme.css';
 /*
- * Built (SSR-safe) output of `bun run astryx theme build lib/theme.ts` — see
- * predev/prebuild in package.json. lib/theme.ts is the editable source;
- * lib/cheatsheet.css is generated and gitignored. Must load after the
- * theme-stone import above so `[data-astryx-theme="cheatsheet"]` is the
- * theme actually applied (theme-stone's own `[data-astryx-theme="stone"]`
- * scope never matches our tree, but the load order still documents intent
- * and matches @astryxdesign/core's own recommended layer recipe).
+ * Built (SSR-safe) output of `astryx theme build lib/theme.ts` — run
+ * automatically from next.config.ts on every next dev/build, so it's always
+ * fresh (see the comment there for why it isn't a package.json script hook).
+ * lib/theme.ts is the editable source; lib/cheatsheet.css is generated and
+ * gitignored. Must load after the theme-stone import above so
+ * `[data-astryx-theme="cheatsheet"]` is the theme actually applied
+ * (theme-stone's own `[data-astryx-theme="stone"]` scope never matches our
+ * tree, but the load order still documents intent and matches
+ * @astryxdesign/core's own recommended layer recipe).
  */
 @import '../lib/cheatsheet.css';
 @import '@astryxdesign/core/tailwind-theme.css';
@@ -22,4 +24,28 @@ html,
 body {
   background: var(--color-background-body);
   color: var(--color-text-primary);
+}
+
+/*
+ * Force dark unconditionally, regardless of OS/browser preference.
+ *
+ * lib/cheatsheet.css inherits ~165 tokens from stoneTheme that we did not
+ * override (e.g. --color-accent, used by Button's primary variant) as
+ * light-dark(light, dark) pairs — plus a generated `:root { color-scheme:
+ * light dark; }` rule (@layer astryx-theme) whenever any token uses
+ * light-dark(). With color-scheme: light dark, those pairs resolve based on
+ * the user's OS/browser preference, which would make parts of the UI shift
+ * with system settings — a real violation of "single theme, no light mode"
+ * even though the six tokens this project actually sets are plain hex, not
+ * pairs, and are unaffected by color-scheme either way.
+ *
+ * This rule is intentionally unlayered (outside any @layer), so cascade-layer
+ * rules always lose to it regardless of import order or selector specificity
+ * — see MDN's Cascade Layers: unlayered styles beat all layered styles. That
+ * makes it win over astryx-theme's `:root { color-scheme: light dark; }` no
+ * matter what. Verified in fix-round-1 with Playwright, `prefers-color-scheme:
+ * light` forced: no visual change (see task-2-report.md).
+ */
+:root {
+  color-scheme: dark;
 }

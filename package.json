@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "bun run astryx theme build lib/theme.ts",
     "dev": "next dev",
-    "prebuild": "bun run astryx theme build lib/theme.ts",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
