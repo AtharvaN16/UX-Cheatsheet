@@ -36,4 +36,46 @@ describe('createMethodSource', () => {
     const src = createMethodSource(items, scorables);
     expect(await src.bootstrap()).toEqual([]);
   });
+
+  test('search silently drops scorable ids with no matching item, without crashing', async () => {
+    const partialItems: MethodItem[] = [
+      { id: 'tree-testing', label: 'Tree Testing', auxiliaryData: { category: 'ia-structure', kind: 'evaluative', group: '' } },
+    ];
+    const bothScorables: ScorableMethod[] = [
+      ...scorables,
+      { id: 'no-item-for-this-id', title: 'Ghost Method', aka: [], whenToUse: '', rest: '' },
+    ];
+    const src = createMethodSource(partialItems, bothScorables);
+    const r = await src.search('tree testing card sorting ghost method');
+    expect(r.map((x) => x.id)).toEqual(['tree-testing']);
+  });
+
+  test('bootstrap silently drops recent ids with no matching item, without crashing', async () => {
+    const src = createMethodSource(items, scorables, ['does-not-exist', 'tree-testing']);
+    const r = await src.bootstrap();
+    expect(r.map((x) => x.id)).toEqual(['tree-testing']);
+  });
+
+  test('bootstrap dedupes a recent id repeated in the history list', async () => {
+    const src = createMethodSource(items, scorables, ['tree-testing', 'tree-testing', 'tree-testing']);
+    const r = await src.bootstrap();
+    expect(r.map((x) => x.id)).toEqual(['tree-testing']);
+  });
+
+  test('search on empty items/scorables returns [] without crashing', async () => {
+    const src = createMethodSource([], []);
+    expect(await src.search('anything')).toEqual([]);
+  });
+
+  test('bootstrap on empty items/scorables returns [] without crashing', async () => {
+    const src = createMethodSource([], [], ['tree-testing']);
+    expect(await src.bootstrap()).toEqual([]);
+  });
+
+  test('search does not mutate the caller-supplied items array', async () => {
+    const src = createMethodSource(items, scorables);
+    await src.search('tree testing');
+    expect(items[0].auxiliaryData.group).toBe('');
+    expect(items[1].auxiliaryData.group).toBe('');
+  });
 });

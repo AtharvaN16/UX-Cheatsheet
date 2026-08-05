@@ -4,17 +4,25 @@ import type { ScorableMethod } from '../search/score';
 
 const CONTENT_DIR = join(process.cwd(), 'content', 'methods');
 
-let cache: Method[] | null = null;
+let cache: { dir: string; methods: Method[] } | null = null;
 
-/** All valid methods. Throws at build time if any entry is invalid. */
-export function getAllMethods(): Method[] {
-  if (cache) return cache;
-  const { methods, errors } = loadMethods(CONTENT_DIR);
+/**
+ * All valid methods. Throws at build time if any entry is invalid.
+ *
+ * `dir` defaults to the real `content/methods` directory; it is overridable
+ * so tests can point this at a fixture directory. The cache is keyed on
+ * `dir` so a failed load (which never populates the cache) can't be masked
+ * by a previously cached successful load of a different directory, and a
+ * successful load of the same directory is only ever read from disk once.
+ */
+export function getAllMethods(dir: string = CONTENT_DIR): Method[] {
+  if (cache && cache.dir === dir) return cache.methods;
+  const { methods, errors } = loadMethods(dir);
   if (errors.length > 0) {
     throw new Error(`Invalid content:\n${errors.map((e) => `  ${e}`).join('\n')}`);
   }
-  cache = methods;
-  return cache;
+  cache = { dir, methods };
+  return cache.methods;
 }
 
 export function getMethod(id: string): Method | undefined {
