@@ -896,10 +896,18 @@ describe('scoreMethods', () => {
   });
 
   test('title match outranks a whenToUse match for the same query', () => {
-    const r = scoreMethods('card sorting', methods);
-    expect(r[0].id).toBe('card-sorting');
+    // Isolated fixture: the shared `methods` array can't test this cleanly,
+    // since tree-testing's aka ('reverse card sorting') fully contains the
+    // query "card sorting" and aka shares title's weight — a legitimate tie,
+    // not the property under test here.
+    const scoped: ScorableMethod[] = [
+      { id: 'a', title: 'Some Method With Widgets', aka: [], whenToUse: 'irrelevant', rest: '' },
+      { id: 'b', title: 'Other Method', aka: [], whenToUse: 'You need widgets to succeed', rest: '' },
+    ];
+    const r = scoreMethods('widgets', scoped);
+    expect(r[0].id).toBe('a');
     expect(r[0].matchedOn).toBe('title');
-    expect(r.find((x) => x.id === 'tree-testing')!.score).toBeLessThan(r[0].score);
+    expect(r.find((x) => x.id === 'b')!.score).toBeLessThan(r[0].score);
   });
 
   test('falls back to body text with the lowest weight', () => {
