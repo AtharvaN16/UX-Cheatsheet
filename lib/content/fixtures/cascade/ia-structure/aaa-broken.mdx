@@ -1,0 +1,50 @@
+---
+id: aaa-broken
+title: Broken Kind Method
+aka: []
+category: ia-structure
+kind: vibes
+gives: quantitative
+effort: low
+timeframe: days
+useInstead:
+  - when: You do not have a structure yet
+    method: bbb-valid
+sources:
+  - title: Some Source
+    author: Jane Doe
+    url: https://example.test/aaa-broken
+    type: article
+    year: 2020
+  - title: Another Source
+    author: John Roe
+    url: https://example.test/aaa-broken-2
+    type: book
+    seminal: true
+---
+
+## What is it
+This file is deliberately invalid: `kind` is not one of the allowed enum values.
+
+## Purpose
+Exercises the case where a file with a valid id fails schema validation on
+an unrelated field.
+
+## When to use
+- Never — this is a test fixture
+
+## How to do it
+1. Nothing, this is a fixture
+
+## Common mistakes
+- **Assuming this file loads** — it should fail on `kind`
+
+## Tips
+None.
+
+## Using AI
+**Where it helps**
+- Nothing
+
+**Where it produces confident garbage**
+- Nothing
