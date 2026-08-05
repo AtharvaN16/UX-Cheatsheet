@@ -1,6 +1,8 @@
-node_modules/
-.next/
-.vercel/
-.DS_Store
 *.log
+.DS_Store
+.claude/settings.local.json
 .env*.local
+.next/
+.vercel
+.vercel/
+node_modules/

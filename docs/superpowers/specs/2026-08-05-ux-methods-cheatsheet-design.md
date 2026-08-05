@@ -106,7 +106,7 @@ Fixed `##` headings, validated by the loader. Order is fixed; a missing required
 
 ### 3.4 Build-time validation
 
-`pnpm validate` (and the Next build) enforces:
+`bun run validate` (and the Next build) enforces:
 
 1. Frontmatter parses against the Zod schema.
 2. `id` matches the filename and is globally unique.
@@ -266,11 +266,29 @@ scripts/validate-content.ts
 
 **Module boundaries.** `lib/content` is the only code that touches the filesystem; everything else consumes its typed output. `lib/search/score.ts` is pure — string in, ranked ids out — so it is unit-testable without fixtures. Components never read frontmatter directly; they receive typed props.
 
-**Stack** — Next.js 16 App Router · TypeScript · Tailwind v4 (`@theme`) · `motion` v12 · `geist` · `cmdk` · `next-mdx-remote/rsc` · `gray-matter` · `zod` · Vitest.
+**Stack** — Bun (package manager, test runner, scripts) · Next.js 16 App Router · TypeScript · Tailwind v4 (`@theme`) · `motion` v12 · `geist` · `cmdk` · `next-mdx-remote/rsc` · `gray-matter` · `zod`.
 
 Content pipeline is hand-rolled rather than Velite/Contentlayer: fewer dependencies, no version-coupling risk, and the whole thing is readable in one sitting.
 
-**Deploy** — Vercel, public URL. No backend, no environment variables, no database.
+**Deploy** — Vercel project `ux-cheatsheet` (`anayak-2220s-projects`), connected to `github.com/AtharvaN16/UX-Cheatsheet`. Public URL. No backend, no environment variables, no database.
+
+### 7.1 Branch and deploy flow
+
+| Branch | Purpose | Vercel |
+|---|---|---|
+| `dev` | All work happens here | Preview deployment per push |
+| `main` | Release only | **Production** |
+
+`main` is the GitHub default branch and Vercel's pinned production branch. Work lands on `dev`, gets reviewed on its preview URL, then merges to `main` to ship.
+
+### 7.2 Agent skills installed
+
+Vendored into `.claude/skills/` and committed, so they travel with the repo:
+
+- **18 engineering skills** from [mattpocock/skills](https://github.com/mattpocock/skills) — `tdd`, `implement`, `to-spec`, `code-review`, `codebase-design`, `diagnosing-bugs`, `research`, `prototype`, `wayfinder`, and others. Run `/setup-matt-pocock-skills` once to configure issue tracking and doc locations.
+- **[Impeccable](https://github.com/pbakaus/impeccable)** — design-quality skill. Installs `PostToolUse` and `Stop` hooks that check UI changes as they are written. Run `/impeccable init` to generate `PRODUCT.md` and `DESIGN.md` from §5 of this spec.
+
+`.claude/settings.local.json` holds the Impeccable hook wiring but is **not** committed (it also carries machine-local permissions). Re-run `bunx impeccable install --providers=claude --scope=project` on a fresh clone.
 
 ---
 
@@ -306,7 +324,7 @@ Chosen because "use instead" carries the most weight here (research method selec
 
 **Phase 3+ — Remaining parts,** in priority order: 02 Starting a Project (the `Starting Project Right` workspace already has nine reference documents to mine), 03 Research Ops & Ethics, 01 Foundations, then the rest.
 
-Each phase ends with a passing `pnpm validate` and a deploy.
+Each phase ends with a passing `bun run validate` and a deploy.
 
 ---
 
