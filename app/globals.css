@@ -5,6 +5,16 @@
 @import '@astryxdesign/core/reset.css';
 @import '@astryxdesign/core/astryx.css';
 @import '@astryxdesign/theme-stone/theme.css';
+/*
+ * Built (SSR-safe) output of `bun run astryx theme build lib/theme.ts` — see
+ * predev/prebuild in package.json. lib/theme.ts is the editable source;
+ * lib/cheatsheet.css is generated and gitignored. Must load after the
+ * theme-stone import above so `[data-astryx-theme="cheatsheet"]` is the
+ * theme actually applied (theme-stone's own `[data-astryx-theme="stone"]`
+ * scope never matches our tree, but the load order still documents intent
+ * and matches @astryxdesign/core's own recommended layer recipe).
+ */
+@import '../lib/cheatsheet.css';
 @import '@astryxdesign/core/tailwind-theme.css';
 @import 'tailwindcss/utilities.css' layer(utilities);
 
