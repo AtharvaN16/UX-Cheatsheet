@@ -1390,12 +1390,24 @@ const scorables = methods.map(toScorable);
 
 Then wrap children: `<Providers><PaletteProvider items={items} scorables={scorables}>{children}</PaletteProvider></Providers>`
 
-- [ ] **Step 5: Verify manually**
+- [ ] **Step 5: Give the palette real data to search**
+
+Tasks 9 and 10 also need content to render. Copy the two valid fixtures into the real content directory — Task 12 supersedes them with full entries.
+
+```bash
+mkdir -p content/methods/ia-structure
+cp lib/content/fixtures/valid/ia-structure/*.mdx content/methods/ia-structure/
+bun run validate
+```
+
+Expected: `✓ 2 methods valid`
+
+- [ ] **Step 6: Verify manually**
 
 Run: `bun run dev`. Press ⌘K.
-Expected: palette opens on the gray surface; typing a seed method's name filters to it; Enter navigates to `/m/<id>`; Escape closes. If no results appear, confirm `content/methods` has entries — Task 12 seeds them, so before that this test uses the two fixture files copied into `content/methods/ia-structure/`.
+Expected: palette opens on the gray surface; typing "tree" filters to Tree Testing; Enter navigates to `/m/tree-testing` (a 404 until Task 9 — confirm the URL changes); Escape closes.
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
 git add -A
@@ -1669,7 +1681,7 @@ Append to `app/globals.css`:
 - [ ] **Step 9: Verify**
 
 Run: `bun run build`
-Expected: build succeeds and logs one static route per seeded method under `/m/`.
+Expected: build succeeds and logs two static routes under `/m/` (the fixtures seeded in Task 8). Visit `/m/tree-testing` — all seven sections render, the use-instead block links to `/m/card-sorting`, both sources listed.
 
 - [ ] **Step 10: Commit**
 
@@ -1858,7 +1870,7 @@ export default function IndexPage() {
 - [ ] **Step 5: Verify**
 
 Run: `bun run build`
-Expected: 21 static `/c/` routes plus one `/m/` route per seeded method.
+Expected: 21 static `/c/` routes plus 2 `/m/` routes. `/` lists all 21 categories, with `08 IA & Structure` showing a count of 2 and the rest 0. `/c/ia-structure` shows both method cards.
 
 - [ ] **Step 6: Commit**
 
@@ -1931,8 +1943,11 @@ git commit -m "feat: add scroll reveal motion"
 Six real entries spanning several categories, exercising every schema field including `alsoIn`, `aka`, `needs`, all three `related` groups, and a `seminal: true` source.
 
 **Files:**
-- Create: `content/methods/ia-structure/card-sorting.mdx`, `content/methods/ia-structure/tree-testing.mdx`, `content/methods/qualitative-research/user-interviews.mdx`, `content/methods/qualitative-research/contextual-inquiry.mdx`, `content/methods/evaluation/usability-testing.mdx`, `content/methods/quantitative-research/seq.mdx`
+- Replace (Task 8 copied thin fixtures here — overwrite with full entries): `content/methods/ia-structure/card-sorting.mdx`, `content/methods/ia-structure/tree-testing.mdx`
+- Create: `content/methods/qualitative-research/user-interviews.mdx`, `content/methods/qualitative-research/contextual-inquiry.mdx`, `content/methods/evaluation/usability-testing.mdx`, `content/methods/quantitative-research/seq.mdx`
 - Delete: `lib/smoke.test.ts`
+
+Leave `lib/content/fixtures/` untouched — the loader tests depend on those files.
 
 **Interfaces:**
 - Consumes: the schema and section contract

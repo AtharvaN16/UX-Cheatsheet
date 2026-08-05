@@ -3,6 +3,7 @@
 .claude/settings.local.json
 .env*.local
 .next/
+.superpowers/
 .vercel
 .vercel/
 node_modules/
