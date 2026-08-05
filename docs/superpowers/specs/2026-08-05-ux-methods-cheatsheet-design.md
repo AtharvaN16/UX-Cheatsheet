@@ -7,7 +7,7 @@
 
 ## 1. What this is
 
-A personal reference site covering ~315 UX methods, frameworks, and mental models across 21 categories. Every entry answers the same eleven questions in the same order, so the reader can compare two methods by scanning the same position on two pages.
+A personal reference site covering ~315 UX methods, frameworks, and mental models across 21 categories. Every entry answers the same twelve questions in the same order, so the reader can compare two methods by scanning the same position on two pages.
 
 The site's job is to answer **"which method, right now?"** in under ten seconds. It is a decision aid first and a library second.
 
@@ -85,7 +85,8 @@ sources:                            # min 2
     author: Dave O'Brien
     url: https://…
     type: article                   # book | article | paper | video | standard | tool
-    seminal: false
+    year: 2026
+    seminal: false                  # true = timeless bucket, see §11.1
 ```
 
 ### 3.3 Body sections
@@ -100,11 +101,32 @@ Fixed `##` headings, validated by the loader. Order is fixed; a missing required
 | `## How to do it` | yes | Numbered steps someone could follow |
 | `## Common mistakes` | yes | Bullets, each `**Mistake** — the fix` |
 | `## Tips` | yes | Practitioner advice, not restated steps |
+| `## Using AI` | yes | Two halves — see §3.4 |
 | `## Notes` | no | Anything that doesn't fit above |
 
 `When not to use`, `Use instead`, `Prerequisites`, `Related methods`, and `Further reading` are **rendered from frontmatter**, not written as prose. This is deliberate: it makes them queryable, guarantees they exist, and lets the site build a method-relationship graph for free.
 
-### 3.4 Build-time validation
+### 3.4 The `## Using AI` section
+
+Every method carries an AI section with a fixed two-part shape:
+
+```markdown
+## Using AI
+
+**Where it helps**
+- Draft the discussion guide, then attack it for leading questions…
+- Transcribe and timestamp, so you can search by phrase later…
+
+**Where it produces confident garbage**
+- Synthetic participants. A model predicting what a user "would say" returns
+  the median of its training data — the opposite of why you interview…
+```
+
+The second half is not a disclaimer, it is the more valuable half. The dominant 2026 failure mode in UX is a model producing fluent, plausible, *unfalsifiable* research output — synthetic personas, invented quotes, themes that read well and describe nobody. A reference that only lists AI's uses would make the reader worse at their job.
+
+Both halves are required and validated. Where a method genuinely has no good AI application, the first half says so in one line rather than inventing one.
+
+### 3.5 Build-time validation
 
 `bun run validate` (and the Next build) enforces:
 
@@ -175,7 +197,12 @@ Additions to the original outline are marked **[+]**.
 
 ## 5. Visual design
 
-Modelled on [interfacecraft.dev](https://www.interfacecraft.dev) — editorial restraint executed in a modern app typeface.
+Two inputs, cleanly separated:
+
+- **Structure and pacing** from [interfacecraft.dev](https://www.interfacecraft.dev) — single centered column, whitespace as the divider, uppercase mono eyebrows, tight display tracking, generous vertical rhythm.
+- **Palette** is the author's own call: **warm gray background, cream-white text**. This is a deliberate departure from Interface Craft's white-on-light. The structural qualities carry over; the colour scheme does not.
+
+The result is a single committed dark, warm reading surface — not a light/dark pair. A reference used daily in long sittings benefits more from one well-tuned surface than from two adequate ones.
 
 **Type**
 - Geist Sans (variable) — body and UI
@@ -183,20 +210,24 @@ Modelled on [interfacecraft.dev](https://www.interfacecraft.dev) — editorial r
 - Display headings: `letter-spacing: -0.025em`
 - Uppercase mono eyebrows: `letter-spacing: 0.05–0.1em`
 
-**Color** — warm neutrals, not blue-gray. Light default, dark supported via `prefers-color-scheme` + a manual toggle.
+**Color** — warm gray, no blue in the neutrals. Applied as CSS custom property overrides on Astryx's `stone` theme (see §7).
 
-| Token | Light | Dark |
+| Role | Token | Value |
 |---|---|---|
-| `--background` | `#ffffff` | `#0c0a09` |
-| `--foreground` | `#171717` | `#e7e5e4` |
-| `--muted` | stone-500 | stone-400 |
-| `--border` | stone-200 | stone-800 |
+| Page | `--color-background-body` | `#24231F` |
+| Surface (cards, palette) | `--color-background-surface` | `#2C2B26` |
+| Raised | `--color-background-card` | `#333230` |
+| Primary text (cream) | `--color-text-primary` | `#F2EBDE` |
+| Secondary text | `--color-text-secondary` | `#B8B2A6` |
+| Border | `--color-border` | `#3D3B35` |
 
-Accent used **only** for the `kind` taxonomy (generative / descriptive / evaluative / causal / framework) — five hues, consistent site-wide, so the badge colour becomes a learnable signal rather than decoration. Contrast verified at 4.5:1 minimum in both themes.
+Contrast computed, not estimated: cream on page = **13.3:1**, secondary on page = **7.5:1**. Both clear AAA for body text.
 
-**Layout** — single centered column, `max-width` ~68ch for prose. Whitespace as the divider; hairline borders only where structure genuinely needs them. Generous vertical rhythm.
+Accent used **only** for the `kind` taxonomy (generative / descriptive / evaluative / causal / framework) — five of Astryx's ten hues, using the `-vivid` variants so they hold up against the gray. Consistent site-wide, so the badge colour becomes a learnable signal rather than decoration. Each verified ≥ 4.5:1 on both page and surface.
 
-**Radii** — `0.25rem` → `1.5rem`, matching the reference's scale.
+**Layout** — single centered column, `max-width` ~68ch for prose. Hairline borders only where structure genuinely needs them.
+
+**Radii** — Astryx's `--radius-inner` / `element` / `container`, bridged to Tailwind's `rounded-sm` / `md` / `lg`.
 
 ---
 
@@ -204,7 +235,7 @@ Accent used **only** for the `kind` taxonomy (generative / descriptive / evaluat
 
 ### 6.1 Command palette — the primary interface
 
-`⌘K` / `/` from anywhere. Built on `cmdk` with a custom scorer.
+`⌘K` / `/` from anywhere. Built on Astryx's Command Palette with a custom scorer (see the §7.0 spike — `cmdk` is the fallback if the component won't host a custom filter).
 
 Search runs over three weighted fields:
 
@@ -266,7 +297,34 @@ scripts/validate-content.ts
 
 **Module boundaries.** `lib/content` is the only code that touches the filesystem; everything else consumes its typed output. `lib/search/score.ts` is pure — string in, ranked ids out — so it is unit-testable without fixtures. Components never read frontmatter directly; they receive typed props.
 
-**Stack** — Bun (package manager, test runner, scripts) · Next.js 16 App Router · TypeScript · Tailwind v4 (`@theme`) · `motion` v12 · `geist` · `cmdk` · `next-mdx-remote/rsc` · `gray-matter` · `zod`.
+**Stack** — Bun (package manager, test runner, scripts) · Next.js 16 App Router · React 19 · TypeScript · **[Astryx](https://github.com/facebook/astryx)** (`@astryxdesign/core` + `theme-stone` + `cli`) · Tailwind v4 · `motion` v12 · `geist` · `next-mdx-remote/rsc` · `gray-matter` · `zod`.
+
+### 7.0 Astryx
+
+Meta's design system — 150+ React components, MIT, 8 years internal (13,000+ apps), public since Jan 2026.
+
+**It does not force a styling rewrite.** Astryx authors its styles with StyleX but ships pre-built CSS: *"no build plugin, no PostCSS or Babel config."* `@astryxdesign/core/tailwind-theme.css` bridges its tokens to Tailwind utilities via `@theme inline`, so `bg-surface text-primary rounded-lg` resolves to Astryx tokens. Tailwind v4 stays.
+
+Setup is a CSS layer order plus a `<Theme>` provider:
+
+```css
+@layer reset, theme, base, astryx-base, astryx-theme, components, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import '@astryxdesign/core/reset.css';
+@import '@astryxdesign/core/astryx.css';
+@import '@astryxdesign/theme-stone/theme.css';
+@import '@astryxdesign/core/tailwind-theme.css';
+@import 'tailwindcss/utilities.css' layer(utilities);
+```
+
+The §5 palette is applied as CSS custom property overrides after the theme import — Astryx's documented customization path, no forking or wrapping.
+
+**What it replaces:** `cmdk` (Astryx ships a Command Palette), plus Dialog, Popover, Toast, Badge, Tooltip, Skeleton, and the layout primitives. Its CLI (`astryx component --list`, docs, codemods) is explicitly built for agent use, which suits how this repo is worked on.
+
+**Risk, stated plainly.** Astryx is v0.2.0, Beta, 674 npm versions since June 2026. Breaking changes between minors are likely. Mitigations: exact-pin every `@astryxdesign/*` version in `package.json` (no `^`), keep `bun.lock` committed, and confine Astryx imports to `components/ui/` so a breaking change has one blast radius. `swizzle` (ejects a component's source into the repo) is the escape hatch if a component becomes a blocker.
+
+**Phase 0 spike, before anything else is built:** confirm Astryx's Command Palette accepts a custom filter/scorer. §6.1's weighted search is the core of this site — if the component can't host it, fall back to `cmdk` and use Astryx for everything else. This is the one unknown that would change the plan, so it gets resolved first.
 
 Content pipeline is hand-rolled rather than Velite/Contentlayer: fewer dependencies, no version-coupling risk, and the whole thing is readable in one sitting.
 
@@ -306,7 +364,7 @@ The only meaningful failure mode is bad content, and it is caught before deploy.
 
 ## 9. Testing
 
-- **Unit (Vitest)** — `lib/search/score.ts` ranking behaviour, including the situational-search cases that justify the field weighting; `lib/content/load.ts` against fixture MDX (valid, missing section, broken reference, duplicate id).
+- **Unit (`bun test`)** — `lib/search/score.ts` ranking behaviour, including the situational-search cases that justify the field weighting; `lib/content/load.ts` against fixture MDX (valid, missing section, broken reference, duplicate id).
 - **Build-time** — the validator is the integration test. It runs on every build and in CI.
 - **Manual** — a `kind`/contrast check in both themes, and a reduced-motion pass.
 
@@ -316,7 +374,9 @@ No E2E in v1. The site has no state to break beyond `localStorage`.
 
 ## 10. Delivery plan
 
-**Phase 1 — Platform.** Next.js scaffold, design tokens, Geist, content pipeline, Zod schema, validator, palette, all three page types, motion. Seeded with ~6 hand-written entries spanning several categories to exercise every schema field.
+**Phase 0 — Astryx Command Palette spike.** Confirm it accepts a custom filter/scorer (§7.0). Decides palette vs `cmdk` before anything is built on top.
+
+**Phase 1 — Platform.** Next.js scaffold on Bun, Astryx + Tailwind layer setup, §5 theme overrides, Geist, content pipeline, Zod schema, validator, palette, all three page types, motion. Seeded with ~6 hand-written entries spanning several categories to exercise every schema field — including `## Using AI`.
 
 **Phase 2 — Vertical slice: the research spine.** Parts 04 Qualitative (18), 05 Quantitative (33), 13 Evaluation (12) — 63 entries written to full depth.
 
@@ -337,6 +397,29 @@ Content is grounded in, in order of preference:
 3. **Established practitioner sources** — NN/g, MeasuringU, Baymard, IDEO, GV, WCAG.
 
 Parametric recall is not a source. Any claim that cannot be attributed gets cut or marked as the author's own judgment.
+
+### 11.1 Recency policy
+
+Split every claim into one of two buckets, and source it accordingly:
+
+| Bucket | Sourcing rule |
+|---|---|
+| **Timeless** — Fitts's Law, Gestalt, the maths of significance, Miller's 7±2, the mechanics of card sorting | Cite the seminal source. Age is a virtue. Do **not** substitute a 2026 blog post for the original paper. |
+| **Time-sensitive** — tooling, benchmarks, platform behaviour, legal thresholds, sample-size norms, anything about AI | Prefer 2026. A 2019 source is a red flag unless nothing has changed. |
+
+Time-sensitive areas where the 2026 answer differs materially from the older one, and which therefore need current sourcing rather than recall:
+
+- **Accessibility law** — the European Accessibility Act, WCAG 2.2 as the operative version, WCAG 3.0's status
+- **Experimentation** — sequential testing and always-valid inference have moved mainstream; fixed-horizon advice is dated
+- **Analytics & privacy** — post-cookie measurement, consent-mode effects on funnel data
+- **Research tooling** — the repository/ReOps landscape changes yearly
+- **Anything AI** — including the §3.4 sections, which are the most perishable content on the site
+
+`sources[].seminal: true` marks the timeless bucket. The build reports any entry whose sources are *all* non-seminal and older than three years — a nudge to re-check, not a hard failure.
+
+### 11.2 AI's role in producing this content
+
+AI is used to draft, cross-check, and find sources — never as the source itself. Every citation is resolved to a real, reachable URL before it ships; a plausible-looking reference to a paper that does not exist is worse than no reference. This is the same discipline §3.4 asks of the reader.
 
 ---
 
