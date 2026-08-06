@@ -1,0 +1,74 @@
+---
+id: seq
+title: Single Ease Question (SEQ)
+aka: [SEQ]
+category: quantitative-research
+alsoIn: [evaluation]
+kind: evaluative
+gives: quantitative
+effort: low
+timeframe: hours
+needs:
+  - A task-based usability test already running — SEQ is asked immediately after each task
+  - Roughly 15-20+ responses per task for a stable average
+useInstead:
+  - when: You need to know *why* a task was hard, not just how hard it felt
+    method: usability-testing
+related:
+  alongside: [usability-testing]
+sources:
+  - title: "10 Things To Know About the Single Ease Question (SEQ)"
+    author: Jeff Sauro
+    url: https://measuringu.com/seq10/
+    type: article
+    seminal: true
+  - title: "Beyond the NPS: Measuring Perceived Usability with the SUS, NASA-TLX, and the Single Ease Question"
+    author: Nielsen Norman Group
+    url: https://www.nngroup.com/articles/measuring-perceived-usability/
+    type: article
+    year: 2026
+    seminal: false
+---
+
+## What is it
+
+One question, asked right after a participant finishes a task in a usability test: "Overall, how difficult or easy was this task to complete?" on a 7-point scale from very difficult to very easy.
+
+## Purpose
+
+Gives you a fast, per-task perceived-difficulty number without stopping to run a full questionnaire like SUS after every single task. It's the cheapest way to turn "that felt clunky" into a comparable number across tasks, designs, or releases.
+
+## When to use
+
+- You're running a task-based usability test and want a difficulty rating for each task, not just pass/fail
+- You need a lightweight metric to compare the same task across design iterations or across competitors
+- You want a number that correlates with completion time and success without adding real time to the session
+
+## How to do it
+
+1. Immediately after each task attempt (successful or not), ask: "Overall, how difficult or easy was this task to complete?"
+2. Present a 7-point scale, labeling only the endpoints (1 = Very Difficult, 7 = Very Easy) — don't label every point, which slows responses without adding precision.
+3. Ask it every time, not only after failures — a task someone "completed" but rated a 2 is a real signal that easily gets missed if you only probe failures.
+4. Collect roughly 15-20+ responses per task before treating the average as stable, per Sauro's guidance.
+5. Benchmark against Sauro's published norms — average SEQ scores across studies cluster around 5.3-5.5, so a task scoring meaningfully below that is worth prioritizing even if everyone eventually succeeded.
+6. Pair with completion rate and time-on-task; SEQ tells you how it *felt*, not whether it *worked*.
+
+## Common mistakes
+
+- **Asking it only when a task fails** — throws away the signal from tasks that were "completed" but painful, which is often the more actionable finding.
+- **Labeling every scale point** — adds cognitive load and inconsistent interpretation without improving data quality; label only the two ends.
+- **Treating a single response as meaningful** — one person's 3 is noise; the average across ~15-20+ responses is the signal.
+- **Using SEQ as your only usability metric** — it measures perceived ease, not task success, error rate, or time. Use it alongside those, not instead of them.
+
+## Tips
+
+Ask SEQ before any debrief or think-aloud discussion of the task — talking about a task first anchors the participant's later rating to how the conversation went, not to their in-the-moment experience.
+
+## Using AI
+
+**Where it helps**
+- Aggregating SEQ scores across sessions and tasks into a single comparison table or chart for a stakeholder readout
+- Flagging tasks whose SEQ average sits well below your benchmark for a closer look, as a triage step before manual review
+
+**Where it produces confident garbage**
+- Estimating a "likely SEQ score" for a task from a design mockup instead of asking real participants. SEQ measures a person's subjective experience of a task they actually attempted — there's no shortcut that substitutes a model's guess for that lived moment, and a fabricated number would be indistinguishable from a real one on a chart.

@@ -1,0 +1,50 @@
+---
+id: self-ref
+title: Self Referencing Method
+aka: []
+category: ia-structure
+kind: evaluative
+gives: quantitative
+effort: low
+timeframe: days
+useInstead:
+  - when: You do not have a structure yet
+    method: self-ref
+sources:
+  - title: Some Source
+    author: Jane Doe
+    url: https://example.test/self-ref
+    type: article
+    year: 2021
+  - title: Another Source
+    author: John Roe
+    url: https://example.test/self-ref-2
+    type: book
+    seminal: true
+---
+
+## What is it
+This file's `useInstead[0].method` points at its own id, which is
+nonsensical and should be reported as a self-reference.
+
+## Purpose
+Exercises the self-reference guard.
+
+## When to use
+- Never — this is a test fixture
+
+## How to do it
+1. Nothing, this is a fixture
+
+## Common mistakes
+- **Referencing yourself in useInstead or related** — always a mistake
+
+## Tips
+None.
+
+## Using AI
+**Where it helps**
+- Nothing
+
+**Where it produces confident garbage**
+- Nothing

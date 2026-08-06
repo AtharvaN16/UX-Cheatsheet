@@ -1,0 +1,50 @@
+---
+id: foo
+title: Foo Method (Duplicate Copy)
+aka: []
+category: ia-structure
+kind: evaluative
+gives: quantitative
+effort: low
+timeframe: days
+useInstead:
+  - when: You need the other method instead
+    method: bar
+sources:
+  - title: Foo Source
+    author: Jane Doe
+    url: https://example.test/foo-b
+    type: article
+    year: 2022
+  - title: Foo Source Two
+    author: John Roe
+    url: https://example.test/foo-b-2
+    type: book
+    seminal: true
+---
+
+## What is it
+A second fixture file that reuses the `foo` id from `dir-a/foo.mdx` to test
+that duplicate-id detection works across directories.
+
+## Purpose
+Exercises that two files sharing the same id are both named in the error.
+
+## When to use
+- Never — this is a test fixture
+
+## How to do it
+1. Nothing, this is a fixture
+
+## Common mistakes
+- **Assuming ids are unique per directory rather than globally** — they are not
+
+## Tips
+None.
+
+## Using AI
+**Where it helps**
+- Nothing
+
+**Where it produces confident garbage**
+- Nothing

@@ -1,0 +1,51 @@
+---
+id: foo
+title: Foo Method
+aka: []
+category: ia-structure
+kind: evaluative
+gives: quantitative
+effort: low
+timeframe: days
+useInstead:
+  - when: You need the other method instead
+    method: bar
+sources:
+  - title: Foo Source
+    author: Jane Doe
+    url: https://example.test/foo-a
+    type: article
+    year: 2021
+  - title: Foo Source Two
+    author: John Roe
+    url: https://example.test/foo-a-2
+    type: book
+    seminal: true
+---
+
+## What is it
+A fully valid fixture method. Its id `foo` is reused by
+`dir-b/foo.mdx`, which also has an unrelated schema error.
+
+## Purpose
+Exercises that duplicate-id detection still fires when one of the two
+copies sharing an id also fails schema validation for an unrelated reason.
+
+## When to use
+- Never — this is a test fixture
+
+## How to do it
+1. Nothing, this is a fixture
+
+## Common mistakes
+- **Nothing** — this file is fully valid
+
+## Tips
+None.
+
+## Using AI
+**Where it helps**
+- Nothing
+
+**Where it produces confident garbage**
+- Nothing

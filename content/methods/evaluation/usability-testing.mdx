@@ -1,0 +1,78 @@
+---
+id: usability-testing
+title: Usability Testing
+aka: [usability study, user testing]
+category: evaluation
+alsoIn: []
+kind: evaluative
+gives: mixed
+effort: medium
+timeframe: days
+needs:
+  - A prototype or live product people can actually attempt tasks in
+  - 5-8 participants per round (5 finds roughly 85% of usability problems)
+  - A small set of realistic task scenarios
+useInstead:
+  - when: You need to test navigation/findability in isolation, without visual design as a variable
+    method: tree-testing
+  - when: You need to understand a workflow in its real environment, not a single task in a lab
+    method: contextual-inquiry
+related:
+  alongside: [seq]
+sources:
+  - title: "Why You Only Need to Test with 5 Users"
+    author: Jakob Nielsen
+    url: https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/
+    type: article
+    year: 2000
+    seminal: true
+  - title: "Rocket Surgery Made Easy: The Do-It-Yourself Guide to Finding and Fixing Usability Problems"
+    author: Steve Krug
+    url: https://www.amazon.com/Rocket-Surgery-Made-Easy-Yourself/dp/0321657292
+    type: book
+    year: 2009
+    seminal: true
+---
+
+## What is it
+
+You give someone a realistic task and a working prototype or product, then watch them attempt it — where they hesitate, what they misread, what they click that does the wrong thing.
+
+## Purpose
+
+Finds usability problems before they ship, by watching real behavior instead of asking opinions. People are often poor judges of their own confusion in the moment ("oh, I get it now") but their hesitation, backtracking, and errors are directly observable.
+
+## When to use
+
+- You have something people can actually try — a clickable prototype or a live build
+- You need to know whether a specific flow works, not whether the overall concept is liked
+- You're choosing between two design directions and want behavioral, not just opinion-based, evidence
+
+## How to do it
+
+1. Write 3-5 realistic task scenarios framed around a goal, not your UI ("you want to send $50 to a friend," not "find the transfer button").
+2. Recruit 5 participants per round per distinct user segment — Nielsen and Landauer's model shows five participants surface roughly 85% of usability problems in a single round, and testing more without iterating in between wastes budget on diminishing returns.
+3. Run one participant at a time, thinking aloud, with a facilitator who asks what they're trying to do rather than leading them toward the right answer.
+4. Record completion (did they succeed?), path (how did they get there?), and moments of visible hesitation or error — not just the end state.
+5. Fix the most severe, most frequent problems between rounds. Krug's whole framing is that a small, cheap round done monthly beats one large, expensive round done once.
+6. Retest the fixed flow in the next round rather than assuming the fix worked.
+
+## Common mistakes
+
+- **Helping the participant** — the moment a facilitator gives a hint, that task's data is contaminated. Sit with the silence.
+- **Testing with only 1-2 participants and generalizing** — one person's confusion might be idiosyncratic; a pattern across 3+ of 5 is a real problem.
+- **Confusing "they completed the task" with "it was easy"** — someone can succeed after real struggle. Pair completion with a difficulty measure like [SEQ](/m/seq) to catch this.
+- **Running one giant round instead of several small ones** — Krug's core argument: a morning a month, fixing the worst problems each time, beats a single exhaustive study that gets shelved.
+
+## Tips
+
+Recruit participants who match your actual user base's *unfamiliarity* level, not just their demographics — someone who's never seen your product before will surface onboarding problems a power-user tester never will.
+
+## Using AI
+
+**Where it helps**
+- Drafting task scenarios from a feature spec, then checking each one for accidental hints about the "correct" path
+- Turning session recordings into timestamped summaries of where each participant hesitated, so a team can jump straight to the moment instead of rewatching full sessions
+
+**Where it produces confident garbage**
+- Predicting where users will struggle instead of watching them. Heuristic evaluation and expert review are legitimate methods for this kind of prediction when done by a trained evaluator against known usability principles — but an LLM asked to "guess where users get confused" is pattern-matching on generic UI conventions, not reasoning about your specific design, and will produce plausible-sounding predictions regardless of whether they're true.

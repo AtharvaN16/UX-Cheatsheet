@@ -1,0 +1,78 @@
+---
+id: card-sorting
+title: Card Sorting
+aka: []
+category: ia-structure
+alsoIn: [qualitative-research]
+kind: generative
+gives: mixed
+effort: medium
+timeframe: days
+needs:
+  - 15-30 participants for stable patterns
+  - Your content broken into discrete, comparable topics
+useInstead:
+  - when: You already have a structure and want to know if it works
+    method: tree-testing
+related:
+  after: [tree-testing]
+sources:
+  - title: "Card Sorting: Designing Usable Categories"
+    author: Donna Spencer
+    url: https://www.amazon.com/Card-Sorting-Designing-Usable-Categories/dp/1933820020
+    type: book
+    year: 2009
+    seminal: true
+  - title: "Card Sorting: Pushing Users Beyond Terminology Matches"
+    author: Nielsen Norman Group
+    url: https://www.nngroup.com/articles/card-sorting-terminology-matches/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+Participants sort a set of topics into groups that make sense to them, and name those groups in their own words. You watch how people naturally categorize your content instead of imposing a structure on them.
+
+## Purpose
+
+Tells you how people think your content should be organized, before you commit to a navigation, a sitemap, or a set of categories. It replaces internal opinion ("I think this belongs under Settings") with evidence about how outsiders actually group things.
+
+## When to use
+
+- You're building or overhauling an information architecture and don't yet have a structure to test
+- You suspect your internal team's mental model of the content doesn't match users'
+- You need category labels, not just groupings — an open sort surfaces the words people reach for
+
+## How to do it
+
+1. Pick 40-80 representative content items (fewer if the domain is narrow) and write each on its own card, physical or digital.
+2. Decide open, closed, or hybrid. Open: participants create and name their own groups. Closed: they sort into categories you already have. Hybrid gives you both a check and new ideas.
+3. Recruit 15-30 participants; more than ~30 rarely changes the pattern, per Spencer.
+4. Run individually, remote or in person (a tool like Optimal Workshop's card-sort product, or a physical card deck, both work). Ask participants to think aloud as they sort.
+5. Analyze with a similarity matrix or dendrogram to find clusters that recur across participants, not just any one person's idiosyncratic grouping.
+6. Turn recurring clusters into a draft structure, using participants' own group names as a starting point for labels.
+
+## Common mistakes
+
+- **Card labels are too vague or too specific** — either produces near-random sorting. Pilot with 2-3 people first.
+- **Reading a single participant's sort as "the answer"** — one person's structure is an anecdote. Look for the pattern across the group.
+- **Skipping the "why"** — a think-aloud protocol that captures *why* someone grouped two things together is often more useful than the grouping itself.
+- **Using your own jargon on the cards** — participants will sort by matching your terminology back to itself rather than by genuine conceptual grouping, which produces a structure that looks validated but isn't. This is the specific trap the NN/g article on terminology matching documents.
+
+## Tips
+
+Run an open sort before you've committed to any category names — a closed sort too early just confirms your own bias. If stakeholders resist spending time on this, a remote unmoderated card sort with 20 participants can be turned around in under a week.
+
+## Using AI
+
+**Where it helps**
+- Drafting the initial list of content items from a sitemap or CMS export, so you start from completeness rather than memory
+- Clustering open-sort results at scale — an LLM can suggest candidate group names from participants' own labels faster than manual affinity mapping
+
+**Where it produces confident garbage**
+- Predicting how users would sort your content instead of running the study. A model's guess about "intuitive" categories reflects general web conventions, not your specific users' mental model — the entire reason to run a card sort is that those two things often disagree.
+
+## Notes
+
+Rosenfeld & Morville's *Information Architecture for the Web and Beyond* — cited under [Tree Testing](/m/tree-testing) — treats card sorting and tree testing as a matched pair: generate a structure with one, evaluate it with the other.

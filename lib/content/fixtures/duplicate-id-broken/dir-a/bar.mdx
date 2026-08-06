@@ -1,0 +1,51 @@
+---
+id: bar
+title: Bar Method
+aka: []
+category: ia-structure
+kind: descriptive
+gives: qualitative
+effort: low
+timeframe: hours
+useInstead:
+  - when: You need the other method instead
+    method: foo
+sources:
+  - title: Bar Source
+    author: Jane Doe
+    url: https://example.test/bar
+    type: article
+    year: 2021
+  - title: Bar Source Two
+    author: John Roe
+    url: https://example.test/bar-2
+    type: book
+    seminal: true
+---
+
+## What is it
+A fully valid fixture method that both copies of `foo` reference, so the
+only expected errors in this fixture are the duplicate id and the unrelated
+schema error on `dir-b/foo.mdx`.
+
+## Purpose
+Provides a resolvable reference target for the duplicate-id-broken fixture.
+
+## When to use
+- Never — this is a test fixture
+
+## How to do it
+1. Nothing, this is a fixture
+
+## Common mistakes
+- **Nothing** — this file is fully valid
+
+## Tips
+None.
+
+## Using AI
+**Where it helps**
+- Nothing
+
+**Where it produces confident garbage**
+- Nothing
