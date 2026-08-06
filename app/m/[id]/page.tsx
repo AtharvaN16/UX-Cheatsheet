@@ -6,6 +6,7 @@ import { UseInsteadBlock } from '@/components/method/UseInsteadBlock';
 import { SourceList } from '@/components/method/SourceList';
 import { RelatedRail } from '@/components/method/RelatedRail';
 import { Eyebrow } from '@/components/ui/Eyebrow';
+import { Reveal } from '@/components/ui/Reveal';
 
 export function generateStaticParams() {
   return getAllMethods().map((m) => ({ id: m.id }));
@@ -34,9 +35,9 @@ export default async function MethodPage({ params }: { params: Promise<{ id: str
         <MDXRemote source={method.body} />
       </article>
 
-      <UseInsteadBlock entries={method.useInstead} titleOf={titleOf} />
-      <RelatedRail related={method.related} titleOf={titleOf} />
-      <SourceList sources={method.sources} />
+      <Reveal><UseInsteadBlock entries={method.useInstead} titleOf={titleOf} /></Reveal>
+      <Reveal><RelatedRail related={method.related} titleOf={titleOf} /></Reveal>
+      <Reveal><SourceList sources={method.sources} /></Reveal>
     </main>
   );
 }
