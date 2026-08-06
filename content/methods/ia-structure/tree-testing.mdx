@@ -3,49 +3,77 @@ id: tree-testing
 title: Tree Testing
 aka: [reverse card sorting]
 category: ia-structure
+alsoIn: [evaluation]
 kind: evaluative
 gives: quantitative
 effort: low
 timeframe: days
+needs:
+  - A proposed or existing navigation structure, as plain nested text
+  - 30+ participants for stable success-rate numbers
+  - A handful of realistic findability tasks
 useInstead:
-  - when: You do not have a structure yet
+  - when: You don't have a structure yet — you're building one
     method: card-sorting
+  - when: You need to know why people chose wrong, not just that they did
+    method: usability-testing
 related:
   before: [card-sorting]
 sources:
-  - title: Tree Testing
-    author: Dave OBrien
-    url: https://example.test/tree-testing
+  - title: "Information Architecture: For the Web and Beyond"
+    author: Rosenfeld, Morville & Arango
+    url: https://www.amazon.com/Information-Architecture-Beyond-Louis-Rosenfeld/dp/1491911689
+    type: book
+    year: 2015
+    seminal: true
+  - title: "How to Get Started With Tree Testing"
+    author: Optimal Workshop
+    url: https://www.optimalworkshop.com/blog/getting-started-with-tree-testing
     type: article
     year: 2026
-  - title: Information Architecture
-    author: Rosenfeld and Morville
-    url: https://example.test/ia
-    type: book
-    seminal: true
+    seminal: false
 ---
 
 ## What is it
-People find things in a text-only version of your navigation.
+
+Participants are given a task ("find where you'd renew a passport") and a text-only, collapsible version of your navigation — no visual design, no styling, just labels and hierarchy. You watch whether they can find the right place.
 
 ## Purpose
-Tells you whether your structure works before visual design hides the problem.
+
+Tests whether your information architecture actually works, stripped of every visual crutch (color, imagery, layout) that might otherwise carry a bad structure. If people can't find things in plain text, visual design won't save them.
 
 ## When to use
-- You want to know whether people find things in an existing navigation
+
+- You want to know whether people can find things in an existing or proposed navigation
+- You have a structure — existing, redesigned, or newly proposed from a card sort — and need to know if it works
+- You want a "before" baseline to compare a redesigned IA against the current one
+- You're choosing between two or three candidate structures and need a quantitative tiebreaker
 
 ## How to do it
-1. Write the tree as plain nested text
+
+1. Write the tree as plain nested text — every category and page label, no visual treatment.
+2. Write 5-10 realistic tasks, each with one or more correct destinations. Word tasks around the user's goal, not your labels ("you're moving next month" not "find the Address Change page").
+3. Run remotely with a tool like Optimal Workshop's Treejack, or manually with paper and a facilitator.
+4. Recruit 30+ participants — smaller samples make the success-rate numbers noisy.
+5. Measure per task: success rate, directness (did they backtrack?), and time. A low success rate with high directness means the label was simply wrong; low success with heavy backtracking means the *grouping* is wrong.
+6. Fix the worst-performing tasks' branches and, if stakes are high, retest.
 
 ## Common mistakes
-- **Testing with your own labels** — use the words users use
+
+- **Testing your own labels** — write tasks in the user's language, not your internal terminology, or you're testing vocabulary recall instead of structure.
+- **Treating "found it eventually" as success** — directness matters as much as raw success rate; a structure people stumble through by luck won't hold up at scale.
+- **Skipping the baseline** — testing only the new structure tells you it's *fine*, not that it's *better*. Test the current structure with the same tasks first.
+- **Too few tasks** — five tasks testing the same branch of the tree tell you about one branch, not the whole architecture.
 
 ## Tips
-Run it before wireframes.
+
+Run this before wireframes exist, not after — a tree test that reveals a broken structure is cheap to fix on paper and expensive to fix once visual design and engineering have built on top of it.
 
 ## Using AI
+
 **Where it helps**
-- Draft candidate label variants to test
+- Drafting candidate label variants to test against each other in the same tree
+- Turning raw task-success data into a per-branch heatmap summary for a stakeholder readout
 
 **Where it produces confident garbage**
-- Predicting which label users prefer without testing
+- Predicting which label a user will prefer without testing. This is exactly the class of intuition tree testing exists to check — a model trained on general web conventions has no access to your users' specific mental model, and a confident-sounding prediction here is indistinguishable from a wrong one until you run the study.
