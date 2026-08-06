@@ -49,3 +49,37 @@ body {
 :root {
   color-scheme: dark;
 }
+
+@layer components {
+  .prose-cheatsheet h2 {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-secondary);
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-cheatsheet p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+  .prose-cheatsheet ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .prose-cheatsheet ol {
+    list-style: decimal;
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .prose-cheatsheet li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+  .prose-cheatsheet strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+}
