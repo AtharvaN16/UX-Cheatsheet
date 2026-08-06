@@ -23,4 +23,13 @@ describe('getAllMethods', () => {
     const b = getAllMethods(dir);
     expect(a).toBe(b);
   });
+
+  test('caches per directory: loading a different directory in between does not evict the first', () => {
+    const dirA = join(FIXTURES, 'valid');
+    const dirB = join(FIXTURES, 'forward-ref');
+    const first = getAllMethods(dirA);
+    getAllMethods(dirB);
+    const third = getAllMethods(dirA);
+    expect(third).toBe(first);
+  });
 });
