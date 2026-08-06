@@ -7,6 +7,9 @@ import { Providers } from './providers';
 // object (see app/providers.tsx). Used below only to avoid hardcoding the
 // theme name twice.
 import { cheatsheetTheme } from '@/lib/cheatsheet';
+import { getAllMethods, toScorable } from '@/lib/content';
+import { PaletteProvider } from '@/components/ui/PaletteProvider';
+import type { MethodItem } from '@/lib/search/source';
 
 export const metadata: Metadata = {
   title: 'UX Methods',
@@ -14,6 +17,14 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const methods = getAllMethods();
+  const items: MethodItem[] = methods.map((m) => ({
+    id: m.id,
+    label: m.title,
+    auxiliaryData: { category: m.category, kind: m.kind, group: '' },
+  }));
+  const scorables = methods.map(toScorable);
+
   return (
     // <Theme>'s root-sync effect (useIsomorphicLayoutEffect in
     // @astryxdesign/core's Theme.js) sets these same two attributes on
@@ -33,7 +44,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <PaletteProvider items={items} scorables={scorables}>
+            {children}
+          </PaletteProvider>
+        </Providers>
       </body>
     </html>
   );
