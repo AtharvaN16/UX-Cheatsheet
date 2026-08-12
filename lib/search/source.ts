@@ -6,6 +6,10 @@ export interface MethodAux {
   kind: string;
   /** CommandPalette auto-groups on this. */
   group: string;
+  /** Route to navigate to on selection. Falls back to `/m/${id}` in Palette.tsx when absent. */
+  href?: string;
+  /** Distinguishes a category entry from a method entry. Defaults to 'method' behavior when absent. */
+  type?: 'method' | 'category';
 }
 
 export interface MethodItem extends SearchableItem<MethodAux> {
@@ -36,7 +40,9 @@ export function createMethodSource(
       return scoreMethods(query, scorables).flatMap((s) => {
         const item = byId.get(s.id);
         if (!item) return [];
-        return [{ ...item, auxiliaryData: { ...item.auxiliaryData, group: GROUP_LABEL[s.matchedOn] } }];
+        const group =
+          item.auxiliaryData.type === 'category' ? 'CATEGORIES' : GROUP_LABEL[s.matchedOn];
+        return [{ ...item, auxiliaryData: { ...item.auxiliaryData, group } }];
       });
     },
     bootstrap(): MethodItem[] {
