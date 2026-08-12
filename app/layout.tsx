@@ -10,7 +10,7 @@ import { cheatsheetTheme } from '@/lib/cheatsheet';
 import { getAllMethods, toScorable } from '@/lib/content';
 import { PaletteProvider } from '@/components/ui/PaletteProvider';
 import type { MethodItem } from '@/lib/search/source';
-import { AppShell } from '@astryxdesign/core/AppShell';
+import { AppShellFrame } from '@/components/ui/AppShellFrame';
 import { AppSidebar } from '@/components/ui/AppSidebar';
 import { CATEGORIES } from '@/lib/categories';
 
@@ -37,6 +37,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       type: 'category',
     },
   }));
+  const idCollision = methodItems.find((m) =>
+    categoryItems.some((c) => c.id === m.id),
+  );
+  if (idCollision) {
+    throw new Error(
+      `Search index id collision: "${idCollision.id}" is used by both a method and a category. ` +
+        'Method and category ids must be disjoint — rename one of them.',
+    );
+  }
   const items: MethodItem[] = [...methodItems, ...categoryItems];
 
   const categoryScorables = CATEGORIES.map((c) => ({
@@ -69,9 +78,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Providers>
           <PaletteProvider items={items} scorables={scorables}>
-            <AppShell sideNav={<AppSidebar />} mobileNav={{ breakpoint: 'md' }}>
+            <AppShellFrame sideNav={<AppSidebar />} mobileNav={{ breakpoint: 'md' }}>
               {children}
-            </AppShell>
+            </AppShellFrame>
           </PaletteProvider>
         </Providers>
       </body>
