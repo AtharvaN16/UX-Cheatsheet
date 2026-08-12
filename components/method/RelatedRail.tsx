@@ -23,7 +23,7 @@ export function RelatedRail({
       <div className="mt-4 space-y-3">
         {populated.map(([label, ids]) => (
           <div key={label} className="flex flex-wrap items-baseline gap-x-3">
-            <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-secondary">
+            <span className="text-sm font-medium uppercase tracking-[0.08em] text-secondary">
               {label}
             </span>
             {ids.map((id) => (

@@ -5,7 +5,7 @@ const valid = {
   id: 'tree-testing',
   title: 'Tree Testing',
   category: 'ia-structure',
-  kind: 'evaluative',
+  kind: 'method',
   gives: 'quantitative',
   effort: 'low',
   timeframe: 'days',

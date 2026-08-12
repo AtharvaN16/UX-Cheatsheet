@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const KIND = ['generative', 'descriptive', 'evaluative', 'causal', 'framework'] as const;
+export const KIND = ['concept', 'framework', 'method'] as const;
 export const GIVES = ['quantitative', 'qualitative', 'mixed', 'conceptual'] as const;
 export const EFFORT = ['low', 'medium', 'high'] as const;
 export const TIMEFRAME = ['hours', 'days', 'weeks', 'months', 'ongoing'] as const;

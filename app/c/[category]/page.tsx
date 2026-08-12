@@ -1,8 +1,10 @@
 import { notFound } from 'next/navigation';
 import { getMethodsByCategory } from '@/lib/content';
 import { CATEGORIES, getCategory } from '@/lib/categories';
+import { getTaxonomyForCategory } from '@/lib/taxonomy';
 import { MethodCard } from '@/components/ui/MethodCard';
-import { Eyebrow } from '@/components/ui/Eyebrow';
+import { TaxonomyCard } from '@/components/ui/TaxonomyCard';
+import { CategoryBanner } from '@/components/ui/CategoryBanner';
 
 export function generateStaticParams() {
   return CATEGORIES.map((c) => ({ category: c.id }));
@@ -18,23 +20,52 @@ export default async function CategoryPage({
   if (!meta) notFound();
 
   const { primary, secondary } = getMethodsByCategory(category);
+  const taxonomy = getTaxonomyForCategory(category);
+  const writtenIds = new Set(primary.map((m) => m.id));
 
   return (
-    <main className="mx-auto max-w-[68ch] px-6 py-16">
-      <Eyebrow>{meta.number}</Eyebrow>
-      <h1 className="mt-3 text-4xl tracking-[-0.025em] text-primary">{meta.title}</h1>
-      <p className="mt-2 text-sm text-secondary">
-        {primary.length} method{primary.length === 1 ? '' : 's'}
-      </p>
+    <main className="w-full p-6">
+      <CategoryBanner categoryId={category} title={meta.title} />
 
-      <div className="mt-10 space-y-3">
-        {primary.map((m) => (
-          <MethodCard key={m.id} method={m} />
-        ))}
-        {secondary.map((m) => (
-          <MethodCard key={m.id} method={m} isSecondary />
-        ))}
-      </div>
+      {taxonomy ? (
+        <div className="mt-10 space-y-10">
+          {taxonomy.groups.map((group) => (
+            <section key={group.title ?? category}>
+              {group.title && (
+                <h2 className="mb-3 font-mono text-xs uppercase tracking-[0.08em] text-secondary">
+                  {group.title}
+                </h2>
+              )}
+              <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+                {group.items.map((item) => (
+                  <TaxonomyCard
+                    key={item.id}
+                    title={item.title}
+                    href={writtenIds.has(item.id) ? `/m/${item.id}` : undefined}
+                  />
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      ) : (
+        <div className="mt-10 space-y-3">
+          {primary.map((m) => (
+            <MethodCard key={m.id} method={m} />
+          ))}
+        </div>
+      )}
+
+      {secondary.length > 0 && (
+        <div className="mt-10 space-y-3">
+          <h2 className="mb-3 font-mono text-xs uppercase tracking-[0.08em] text-secondary">
+            Also relevant here
+          </h2>
+          {secondary.map((m) => (
+            <MethodCard key={m.id} method={m} isSecondary />
+          ))}
+        </div>
+      )}
     </main>
   );
 }
