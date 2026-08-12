@@ -579,3 +579,9 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
 export function getTaxonomyForCategory(categoryId: string): TaxonomyCategory | undefined {
   return TAXONOMY.find((c) => c.categoryId === categoryId);
 }
+
+export function getTaxonomyEntryCount(categoryId: string): number {
+  const tax = getTaxonomyForCategory(categoryId);
+  if (!tax) return 0;
+  return tax.groups.reduce((sum, g) => sum + g.items.length, 0);
+}
