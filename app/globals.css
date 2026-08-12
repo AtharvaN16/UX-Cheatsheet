@@ -43,8 +43,9 @@ body {
  * rules always lose to it regardless of import order or selector specificity
  * — see MDN's Cascade Layers: unlayered styles beat all layered styles. That
  * makes it win over astryx-theme's `:root { color-scheme: light dark; }` no
- * matter what. Verified in fix-round-1 with Playwright, `prefers-color-scheme:
- * dark` forced: no visual change (see task-2-report.md).
+ * matter what — the outcome is decided by unlayered-vs-layered origin
+ * precedence before either rule's declared value is even considered, so it
+ * holds regardless of what `prefers-color-scheme` the OS/browser reports.
  */
 :root {
   color-scheme: light;
