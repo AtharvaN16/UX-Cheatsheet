@@ -35,12 +35,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     // of wrong theme before hydration"). Without this, `[data-astryx-theme=
     // "cheatsheet"]`-scoped tokens (lib/cheatsheet.css) don't match <html> or
     // <body> until JS runs, and the page paints Astryx's neutral-light
-    // default first. Values must match the mode="dark" prop on <Theme> in
+    // default first. Values must match the mode="light" prop on <Theme> in
     // app/providers.tsx exactly, or hydration would flip them back.
     <html
       lang="en"
       data-astryx-theme={cheatsheetTheme.name}
-      data-theme="dark"
+      data-theme="light"
       className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body>

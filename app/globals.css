@@ -27,7 +27,7 @@ body {
 }
 
 /*
- * Force dark unconditionally, regardless of OS/browser preference.
+ * Force light unconditionally, regardless of OS/browser preference.
  *
  * lib/cheatsheet.css inherits ~165 tokens from stoneTheme that we did not
  * override (e.g. --color-accent, used by Button's primary variant) as
@@ -35,7 +35,7 @@ body {
  * light dark; }` rule (@layer astryx-theme) whenever any token uses
  * light-dark(). With color-scheme: light dark, those pairs resolve based on
  * the user's OS/browser preference, which would make parts of the UI shift
- * with system settings — a real violation of "single theme, no light mode"
+ * with system settings — a real violation of "single theme, no dark mode"
  * even though the six tokens this project actually sets are plain hex, not
  * pairs, and are unaffected by color-scheme either way.
  *
@@ -44,10 +44,10 @@ body {
  * — see MDN's Cascade Layers: unlayered styles beat all layered styles. That
  * makes it win over astryx-theme's `:root { color-scheme: light dark; }` no
  * matter what. Verified in fix-round-1 with Playwright, `prefers-color-scheme:
- * light` forced: no visual change (see task-2-report.md).
+ * dark` forced: no visual change (see task-2-report.md).
  */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 /*
