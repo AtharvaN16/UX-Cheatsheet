@@ -12,7 +12,7 @@ export default function IndexPage() {
   }
 
   return (
-    <main className="w-full p-6">
+    <main className="mx-auto w-full max-w-[68ch] p-6">
       <Eyebrow>UX Methods</Eyebrow>
       <h1 className="mt-3 text-4xl tracking-[-0.025em] text-primary">
         A Cheatsheet

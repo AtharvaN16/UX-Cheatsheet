@@ -1,0 +1,78 @@
+---
+id: comparative-testing
+title: Comparative Testing
+aka: [competitive usability testing]
+category: evaluation
+alsoIn: []
+kind: method
+gives: mixed
+effort: medium
+timeframe: days
+needs:
+  - Working access to each product being compared, ideally including at least one competitor
+  - An identical task set and metric battery run against every product in the comparison
+  - 8-12 participants per product for a stable read, more if the products are close
+useInstead:
+  - when: You want to track your own product's usability over time, not against competitors
+    method: benchmark-testing
+  - when: You need deep behavioral detail on a single product, not a head-to-head score
+    method: usability-testing
+related:
+  alongside: [benchmark-testing]
+sources:
+  - title: "Handbook of Usability Testing: How to Plan, Design, and Conduct Effective Tests"
+    author: Jeffrey Rubin & Dana Chisnell
+    url: https://www.wiley.com/en-us/Handbook+of+Usability+Testing%3A+How+to+Plan%2C+Design%2C+and+Conduct+Effective+Tests%2C+2nd+Edition-p-9780470185483
+    type: book
+    year: 2008
+    seminal: true
+  - title: "Competitive Usability Evaluations"
+    author: Nielsen Norman Group
+    url: https://www.nngroup.com/articles/competitive-testing/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+The same task set and metrics are run across two or more competing products — often yours plus one or more competitors — with different participants (or the same participants, counterbalanced) attempting equivalent tasks in each, so results can be compared head to head.
+
+## Purpose
+
+Tells you where your product actually stands relative to alternatives, on the same tasks, rather than in isolation. A usability test of your product alone can tell you it's "hard to complete task X" — comparative testing tells you whether that's actually worse than what users already tolerate elsewhere, which changes how urgently it needs fixing.
+
+## When to use
+
+- You're entering a market with established competitors and need to know where you stand on usability, not just features
+- Stakeholders are citing a competitor as "better" without evidence, and you need a fair, structured comparison
+- You're deciding which of several existing tools or approaches to standardize on
+- You want context for your own benchmark numbers — is a 70% success rate good, or is that just what this task category looks like everywhere?
+
+## How to do it
+
+1. Define tasks that are genuinely equivalent across every product being compared — not tasks that happen to favor one product's specific workflow.
+2. Decide on a within-subjects design (same participants try every product, counterbalanced to control for order effects) or between-subjects (different participants per product) based on your timeline and risk of learning effects.
+3. Recruit 8-12 participants per product condition — more if the products are likely to be close, since small differences need more data to distinguish from noise.
+4. Run identical task instructions and identical metrics (success, time, SEQ) across every product, changing only which product the participant is using.
+5. Randomize product order for within-subjects designs to prevent the first product tested from suffering an unfair "still learning the tasks" disadvantage.
+6. Report results side by side per task, not just an aggregate score — a product that wins overall but loses badly on one critical task is a different finding than a uniform win.
+
+## Common mistakes
+
+- **Writing tasks that favor your own product's workflow** — comparative testing is only fair, and only useful, if the tasks are genuinely equivalent across products; this is easy to get wrong unintentionally.
+- **Ignoring order effects in within-subjects designs** — if everyone tries your product first, they're less practiced on it than on whatever they try second; counterbalance the order.
+- **Comparing against an out-of-date competitor version** — competitors ship updates too; confirm you're testing their current release, not a stale account of how it used to work.
+- **Reporting only an aggregate "we won" or "we lost"** — task-by-task results usually tell a more nuanced, more actionable story than a single rolled-up score.
+
+## Tips
+
+Recruit participants who have never used any of the products in the comparison, where possible — existing familiarity with one product creates an advantage that has nothing to do with that product's actual usability.
+
+## Using AI
+
+**Where it helps**
+- Drafting equivalent task wording across products from each one's actual UI, then checking each version doesn't accidentally hint at its product's specific path
+- Aggregating task-by-task results across products into a clear comparison table for a stakeholder readout
+
+**Where it produces confident garbage**
+- Predicting how your product would compare to a competitor without running the test. Perceptions of competitor usability are often based on marketing polish or a single team member's own experience, not structured data — a model's guess reflecting general reputation or public sentiment repeats that same unvalidated bias rather than correcting it.

@@ -1,0 +1,79 @@
+---
+id: longitudinal-testing
+title: Longitudinal Testing
+aka: [longitudinal usability study, diary-based usability tracking]
+category: evaluation
+alsoIn: [metrics-experimentation]
+kind: method
+gives: mixed
+effort: high
+timeframe: months
+needs:
+  - The same group of participants tracked across multiple sessions or weeks of real use
+  - A lightweight, repeatable way to capture data between sessions (diary, in-app logging, brief check-ins)
+  - A retention plan — participant drop-off over months is the method's biggest practical risk
+useInstead:
+  - when: You need a single snapshot of usability, not change over time
+    method: usability-testing
+  - when: You need real usage data at scale rather than a small tracked cohort
+    method: a-b-testing
+related:
+  alongside: [benchmark-testing]
+sources:
+  - title: "Longitudinal Studies: Uncovering How Product Usage Changes Over Time"
+    author: Nielsen Norman Group
+    url: https://www.nngroup.com/articles/longitudinal-studies/
+    type: article
+    year: 2016
+    seminal: true
+  - title: "The Diary Method: Capturing Life as It Is Lived"
+    author: Reed Larson & Mihaly Csikszentmihalyi
+    url: https://doi.org/10.1146/annurev.psych.54.101601.145030
+    type: paper
+    year: 2003
+    seminal: true
+---
+
+## What is it
+
+The same participants are studied repeatedly over an extended period — weeks or months — to track how their experience with a product changes as familiarity grows, novelty fades, and usage settles into a real routine, rather than capturing a single moment.
+
+## Purpose
+
+Single-session methods capture a first impression or a snapshot; they can't tell you whether a delightful first-run experience holds up after week three, or whether a rough first session smooths out once someone learns the product. Longitudinal testing is the only method that directly observes how experience evolves with real, sustained use.
+
+## When to use
+
+- You need to know how onboarding experience translates into sustained, habitual use — not just whether people complete it once
+- You suspect novelty effects are inflating short-term metrics and want to see what holds up over time
+- The product is used repeatedly over weeks or months in real life (not a one-time-use tool), so a single session can't represent typical use
+- You're tracking adoption of a significant change and want to see the full adjustment curve, not just the initial reaction
+
+## How to do it
+
+1. Recruit a cohort of participants willing to commit to the full study duration — weeks to months — and budget for meaningful incentive and follow-up effort to sustain engagement.
+2. Choose your data collection rhythm: a diary study (participants log entries after each use), periodic check-in sessions, in-app usage logging, or some combination.
+3. Keep the between-session burden as light as possible — a two-minute diary entry gets completed; a fifteen-minute one gets skipped after week one.
+4. Track the same core metrics or questions at each touchpoint so you can build a real trend line, not disconnected snapshots.
+5. Actively manage retention: send reminders, keep participants informed of progress, and plan for attrition by recruiting more participants than your minimum sample requires.
+6. Analyze both the trend (how did metrics or sentiment change over time) and the individual trajectories (did everyone follow the same curve, or did the cohort split into distinct patterns).
+
+## Common mistakes
+
+- **Underestimating attrition** — participant drop-off over a multi-week study is the norm, not the exception; recruit a buffer above your target sample size from the start.
+- **Making the between-session task too heavy** — a diary entry or check-in that takes real effort gets skipped or rushed, degrading data quality as the study progresses.
+- **Only measuring at the start and end** — the value of longitudinal data is in the trajectory; two data points can't distinguish a steady change from a spike-and-recover pattern in between.
+- **Treating the cohort as homogeneous** — different participants often follow genuinely different adoption curves; averaging them together can mask two real, distinct patterns as one muddy trend.
+
+## Tips
+
+Build in a mid-study check-in with participants, not just data collection — a short call partway through often surfaces context (a life event, a workaround they've adopted) that raw logged data alone won't explain.
+
+## Using AI
+
+**Where it helps**
+- Structuring and summarizing diary entries or check-in transcripts into a per-participant timeline, so trend analysis doesn't require rereading months of raw notes
+- Flagging participants whose trajectory diverges notably from the cohort average, as a triage step for closer manual review
+
+**Where it produces confident garbage**
+- Projecting how sentiment or usage "would" evolve over the remaining study period from early data. Genuine behavior change over time is exactly what this method exists to observe because it's not reliably predictable in advance — a model extrapolating a smooth trend from early weeks assumes the kind of steady, forecastable pattern that real longitudinal data routinely contradicts.

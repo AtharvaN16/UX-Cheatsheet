@@ -1,0 +1,79 @@
+---
+id: a-b-testing
+title: A/B Testing
+aka: [split testing, randomized controlled experiment, online controlled experiment]
+category: evaluation
+alsoIn: [metrics-experimentation]
+kind: method
+gives: quantitative
+effort: high
+timeframe: weeks
+needs:
+  - Enough traffic to reach statistical significance on your target metric in a reasonable timeframe
+  - A single, clearly defined success metric decided before the test starts
+  - Infrastructure to randomly assign users to variants and track outcomes per variant
+useInstead:
+  - when: You don't have the traffic volume to reach significance, or need to know *why*, not just *which*
+    method: usability-testing
+  - when: You want a baseline number to track over time rather than a head-to-head comparison
+    method: benchmark-testing
+related:
+  before: [pilot-testing]
+sources:
+  - title: "Trustworthy Online Controlled Experiments: A Practical Guide to A/B Testing"
+    author: Ron Kohavi, Diane Tang & Ya Xu
+    url: https://www.cambridge.org/core/books/trustworthy-online-controlled-experiments/D97B26382EB0EB2DC2019A7A7B518F59
+    type: book
+    year: 2020
+    seminal: true
+  - title: "A Refresher on A/B Testing"
+    author: Harvard Business Review
+    url: https://hbr.org/2017/06/a-refresher-on-ab-testing
+    type: article
+    year: 2017
+    seminal: false
+---
+
+## What is it
+
+Two or more versions of a product experience are shown to randomly assigned, statistically comparable groups of real users at the same time, and a predefined metric is measured to see which version performs better.
+
+## Purpose
+
+Gives causal evidence — not just correlation — about which design change actually moves a metric, because random assignment controls for every other variable that might otherwise explain a difference. It answers "does this specific change cause this specific outcome," which no amount of watching users in a lab session can, since a lab study can't isolate a change's effect on real behavior at scale.
+
+## When to use
+
+- You have enough traffic to reach statistical significance on your target metric within a reasonable timeframe
+- You have a specific, testable hypothesis about a change's effect on a defined metric — not an open-ended "which do people like better"
+- The decision is high-stakes or high-traffic enough that the cost of running the test is justified by the cost of shipping the wrong version to everyone
+- You want to validate a design change's real-world impact, not just its usability in a moderated session
+
+## How to do it
+
+1. Write a specific hypothesis: this change will move this metric in this direction, for this reason — not just "let's see what happens."
+2. Choose one primary success metric before the test starts. Tracking many metrics and picking whichever moved after the fact is p-hacking, not experimentation.
+3. Calculate the sample size needed to detect a meaningful effect at your traffic volume, before launching — this tells you upfront whether the test is even viable in your timeframe.
+4. Randomly assign users to control and variant, and run both simultaneously — never sequentially — so external factors (seasonality, a marketing campaign, a holiday) don't confound the comparison.
+5. Run for the full predetermined duration and sample size. Stopping early the moment a result looks significant inflates your false-positive rate — this is one of the most common ways A/B tests mislead.
+6. Analyze against the pre-registered metric and significance threshold, and report the confidence interval, not just a point estimate or a "winner."
+
+## Common mistakes
+
+- **Peeking and stopping early** — checking results daily and stopping as soon as you see significance dramatically increases the odds of a false positive; decide your sample size and stick to it.
+- **Testing too many metrics and cherry-picking the one that moved** — with enough metrics tracked, something will show "significance" by chance alone; define the primary metric in advance.
+- **Underpowered tests** — running a test with too little traffic to detect the effect size you actually care about produces an inconclusive result that gets misread as "no difference."
+- **Ignoring novelty effects** — a redesign can spike engagement simply because it's new, not because it's better; effects that don't hold up after the novelty fades aren't real wins.
+
+## Tips
+
+Segment your results after the fact only for hypothesis generation, never as the basis for a final decision — finding that a variant "won" only among one browser or region, discovered by digging through subgroups after the main result was flat, is exactly the kind of post-hoc pattern that looks real and usually isn't.
+
+## Using AI
+
+**Where it helps**
+- Calculating required sample size and expected test duration from your traffic and baseline conversion rate
+- Drafting the hypothesis and pre-registration document, and summarizing results into a clear readout once the test concludes
+
+**Where it produces confident garbage**
+- Predicting which variant will win instead of running the test. A/B testing exists precisely because intuition about user behavior at scale is unreliable — a model's confident prediction about which design "should" perform better carries the same unvalidated-intuition problem the method is designed to eliminate, just from a different source.
