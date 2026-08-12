@@ -87,3 +87,7 @@ export const CATEGORY_GROUPS: readonly CategoryGroup[] = [
 export function getCategory(id: string): Category | undefined {
   return CATEGORIES.find((c) => c.id === id);
 }
+
+export function getCategoryGroup(categoryId: string): CategoryGroup | undefined {
+  return CATEGORY_GROUPS.find((group) => group.categoryIds.includes(categoryId));
+}
