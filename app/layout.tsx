@@ -10,6 +10,9 @@ import { cheatsheetTheme } from '@/lib/cheatsheet';
 import { getAllMethods, toScorable } from '@/lib/content';
 import { PaletteProvider } from '@/components/ui/PaletteProvider';
 import type { MethodItem } from '@/lib/search/source';
+import { AppShell } from '@astryxdesign/core/AppShell';
+import { AppSidebar } from '@/components/ui/AppSidebar';
+import { CATEGORIES } from '@/lib/categories';
 
 export const metadata: Metadata = {
   title: 'UX Methods',
@@ -18,12 +21,32 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const methods = getAllMethods();
-  const items: MethodItem[] = methods.map((m) => ({
+  const methodItems: MethodItem[] = methods.map((m) => ({
     id: m.id,
     label: m.title,
     auxiliaryData: { category: m.category, kind: m.kind, group: '' },
   }));
-  const scorables = methods.map(toScorable);
+  const categoryItems: MethodItem[] = CATEGORIES.map((c) => ({
+    id: c.id,
+    label: c.title,
+    auxiliaryData: {
+      category: c.id,
+      kind: 'category',
+      group: '',
+      href: `/c/${c.id}`,
+      type: 'category',
+    },
+  }));
+  const items: MethodItem[] = [...methodItems, ...categoryItems];
+
+  const categoryScorables = CATEGORIES.map((c) => ({
+    id: c.id,
+    title: c.title,
+    aka: [],
+    whenToUse: '',
+    rest: '',
+  }));
+  const scorables = [...methods.map(toScorable), ...categoryScorables];
 
   return (
     // <Theme>'s root-sync effect (useIsomorphicLayoutEffect in
@@ -46,7 +69,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Providers>
           <PaletteProvider items={items} scorables={scorables}>
-            {children}
+            <AppShell sideNav={<AppSidebar />} mobileNav={{ breakpoint: 'md' }}>
+              {children}
+            </AppShell>
           </PaletteProvider>
         </Providers>
       </body>

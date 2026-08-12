@@ -23,7 +23,7 @@ export default async function CategoryPage({
   const groups = taxonomy?.groups ? [...taxonomy.groups] : [];
 
   return (
-    <main className="w-full min-h-screen pb-16">
+    <div className="w-full min-h-screen pb-16">
       <div className="w-full px-[32px] pt-6">
         <CategoryTopicGrid
           categoryId={category}
@@ -33,7 +33,7 @@ export default async function CategoryPage({
           secondaryMethods={secondary}
         />
       </div>
-    </main>
+    </div>
   );
 }
 
