@@ -1,18 +1,10 @@
-import { getAllMethods } from '@/lib/content';
-import { CATEGORIES } from '@/lib/categories';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 import { Kbd } from '@astryxdesign/core/Kbd';
-import { CategoryGroupList } from '@/components/ui/CategoryGroupList';
+import { CategoryDashboardGrid } from '@/components/ui/CategoryDashboardGrid';
 
 export default function IndexPage() {
-  const methods = getAllMethods();
-  const counts: Record<string, number> = {};
-  for (const c of CATEGORIES) {
-    counts[c.id] = methods.filter((m) => m.category === c.id || m.alsoIn.includes(c.id)).length;
-  }
-
   return (
-    <div className="mx-auto w-full max-w-[68ch] p-6">
+    <div className="mx-auto w-full max-w-7xl p-6">
       <Eyebrow>UX Methods</Eyebrow>
       <h1 className="mt-3 text-4xl tracking-[-0.025em] text-primary">
         A Cheatsheet
@@ -22,7 +14,7 @@ export default function IndexPage() {
         what you are trying to learn.
       </p>
 
-      <CategoryGroupList counts={counts} />
+      <CategoryDashboardGrid />
     </div>
   );
 }
