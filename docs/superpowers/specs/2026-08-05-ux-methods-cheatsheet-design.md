@@ -48,9 +48,9 @@ The original outline listed Card Sorting three times, Service Blueprint three ti
 
 **One MDX file per method.** A method declares one `category` (which owns its URL) and any number in `alsoIn`. Category listing pages render both, marking secondary entries with a "primary home" link.
 
-~315 canonical entries produce ~350 listing appearances.
+~310 canonical entries produce ~345 listing appearances.
 
-**Count derivation.** The original outline listed 242 entries, ~215 unique after removing repeats. Additions in §4 total ~98. Net ~315. This is materially larger than the ~260 estimated during brainstorming — the additions were counted low at that point. It does not change the architecture, only the content-writing runway, which is why the work is phased (§10).
+**Count derivation.** The original outline listed 242 entries, ~215 unique after removing repeats. Additions in §4 total ~98. Net ~315, then -5 from the 2026-08-06 taxonomy restructure (§4 — six Research Ops & Ethics entries consolidated into one Ethical Design entry). Net ~310. This is materially larger than the ~260 estimated during brainstorming — the additions were counted low at that point. It does not change the architecture, only the content-writing runway, which is why the work is phased (§10).
 
 ### 3.2 Frontmatter schema
 
@@ -61,7 +61,7 @@ aka: [reverse card sorting]         # searchable aliases
 category: ia-structure              # primary; owns the URL
 alsoIn: [evaluation]
 
-kind: evaluative                    # generative | descriptive | evaluative | causal | framework
+kind: method                        # concept | framework | method
 gives: quantitative                 # quantitative | qualitative | mixed | conceptual
 effort: low                         # low | medium | high
 timeframe: days                     # hours | days | weeks | months | ongoing
@@ -95,16 +95,23 @@ Fixed `##` headings, validated by the loader. Order is fixed; a missing required
 
 | Heading | Required | Notes |
 |---|---|---|
-| `## What is it` | yes | 2–4 sentences, no jargon, no method name in the first sentence |
+| `## What is it` | yes | 2–4 sentences, no jargon, no entry's own name in the first sentence |
 | `## Purpose` | yes | The problem it solves. One paragraph. |
 | `## When to use` | yes | Bullets. Situational, not abstract. |
-| `## How to do it` | yes | Numbered steps someone could follow |
+| `## How to do it` | yes | Numbered steps someone could follow — see the `kind` flex below |
 | `## Common mistakes` | yes | Bullets, each `**Mistake** — the fix` |
 | `## Tips` | yes | Practitioner advice, not restated steps |
 | `## Using AI` | yes | Two halves — see §3.4 |
 | `## Notes` | no | Anything that doesn't fit above |
 
 `When not to use`, `Use instead`, `Prerequisites`, `Related methods`, and `Further reading` are **rendered from frontmatter**, not written as prose. This is deliberate: it makes them queryable, guarantees they exist, and lets the site build a method-relationship graph for free.
+
+**`## How to do it` flexes by `kind`, not the entries.** The heading, its position, and its required status never change — the validator only checks the heading exists. What changes is what the writer puts under it:
+
+- `kind: framework | method` — a structured tool with defined parts (Kano Model, RICE, Governance Models) or a technique you run to produce research/design output (Tree Testing, User Interviews, A/B Testing). Both have a real, followable procedure — numbered steps someone could literally do, start to finish.
+- `kind: concept` — laws, effects, and mental models (Hick's Law, Peak-End Rule, Loss Aversion) have no start-to-finish procedure to number — you don't "run" Hick's Law. For these, `## How to do it` means *how to recognize and apply it*: the situations where it kicks in, and what to do differently because of it. Forcing a fake numbered procedure onto a law is worse than writing prose that's honest about what the entry actually is.
+
+This is a one-line authoring judgment call, not a schema fork — deliberately, so the site keeps its "same twelve questions in the same order" comparability (§1) and a single validator/page template for all ~310 entries.
 
 ### 3.4 The `## Using AI` section
 
@@ -141,57 +148,58 @@ Failures print `content/methods/<cat>/<file>.mdx: <field> — <what's wrong>` an
 
 ---
 
-## 4. Taxonomy — 21 parts, ~315 entries
+## 4. Taxonomy — 20 parts, ~310 entries
 
-Additions to the original outline are marked **[+]**.
+Additions to the original outline are marked **[+]**. Restructured 2026-08-06 from the original 21-part outline: Foundations split in two (psychology pulled out on its own), Starting a Project and Research Ops & Ethics folded into a merged research part, and a new Ethical Design entry consolidates what had been six separate ethics/legal entries. Net: 21 → 20 parts, ~315 → ~310 entries. Rationale is in the design conversation, not repeated here — this section states the result.
 
-**01 · Foundations** *(four groups; largest part)*
+**01 · UX Psychology** *(the former "Human Behavior" and "Motivation Models" groups from Foundations, split out as their own part — this is laws, biases, and effects, not something anyone "runs")*
 - *Human Behavior* — Mental Models, Cognitive Load, Hick's Law, Fitts's Law, Miller's Law, Peak-End Rule, Goal Gradient Effect, Habit Loop, Dual Process Theory, Loss Aversion, Anchoring, Availability Bias, Confirmation Bias, Social Proof, Reciprocity, Scarcity, Progress Principle, Behavioral Economics Basics, **[+]** Jakob's Law, **[+]** Tesler's Law, **[+]** Postel's Law, **[+]** Doherty Threshold, **[+]** Von Restorff Effect, **[+]** Serial Position Effect, **[+]** Zeigarnik Effect, **[+]** Aesthetic-Usability Effect, **[+]** Choice Overload, **[+]** Default Effect, **[+]** Framing Effect, **[+]** Sunk Cost Fallacy, **[+]** Survivorship Bias, **[+]** Endowment Effect, **[+]** IKEA Effect, **[+]** Weber–Fechner Law
-- *Motivation Models* (replaces the "Motivation Models" stub) — **[+]** Fogg Behavior Model, **[+]** COM-B, **[+]** Self-Determination Theory, **[+]** Hook Model, **[+]** Flow
+- *Motivation Models* — **[+]** Fogg Behavior Model, **[+]** COM-B, **[+]** Self-Determination Theory, **[+]** Hook Model, **[+]** Flow
+
+**02 · Strategic Thinking** *(the former Foundations remainder — Product Thinking, Systems Thinking, Decision Making, Process Frameworks. Not psychology; kept separate from Part 01 for that reason)*
 - *Product Thinking* — Product-Market Fit, Jobs To Be Done, North Star Metric, Pirate Metrics (AARRR), HEART, OKRs, Opportunity Solution Tree, Kano Model, RICE, ICE, MoSCoW, Cost vs Value, Product Strategy, Value Proposition Canvas, Business Model Canvas, **[+]** WSJF, **[+]** Cost of Delay, **[+]** Buy-a-Feature, **[+]** Impact/Effort Matrix
-- *Systems Thinking* — Feedback Loops, Stocks & Flows, Leverage Points, Second Order Effects, Emergent Behavior, Causal Loop Diagrams, System Mapping, Actor Network, Cynefin Framework *(Ecosystem Mapping lives in Part 15 and appears here via `alsoIn`)*
+- *Systems Thinking* — Feedback Loops, Stocks & Flows, Leverage Points, Second Order Effects, Emergent Behavior, Causal Loop Diagrams, System Mapping, Actor Network, Cynefin Framework *(Ecosystem Mapping lives in Part 14 and appears here via `alsoIn`)*
 - *Decision Making* — First Principles, Inversion, OODA Loop, RAPID, DACI, Eisenhower Matrix, Pareto Principle, Expected Value, Opportunity Cost, Assumption Mapping, Risk Matrix, Decision Trees, **[+]** Pre-mortem, **[+]** Red Teaming, **[+]** Six Thinking Hats
 - *Process frameworks* **[+]** — Double Diamond, Design Thinking, Lean UX, Google Design Sprint, Continuous Discovery, Story Mapping, Working Backwards / PR-FAQ
 
-**02 · Starting a Project** — Problem Framing, Stakeholder Interviews, Kickoff Workshop, Project Brief, Goal Setting, Research Plan, Success Metrics, Constraints Mapping, Scope Definition, Competitive Analysis, Literature Review, Heuristic Review, Risk Assessment *(Assumption Mapping and Journey Mapping appear here via `alsoIn`)*
-
-**03 · Research Ops & Ethics** **[+ NEW PART]** — Screener Design, Participant Recruitment, Incentives, Informed Consent, Research Ethics, Privacy & GDPR in Research, Research Repository, Atomic Research, Sample Size & Saturation, Session Logistics & Note-taking, Consequence Scanning, Privacy by Design, Deceptive Patterns (what to avoid)
+**03 · Research & Synthesis** *(merged from the former Starting a Project, the non-ethics half of Research Ops & Ethics, and Synthesis — everything about framing, running, and making sense of research lives in one part now)*
+- *Framing & Planning* — Problem Framing, Stakeholder Interviews, Kickoff Workshop, Project Brief, Goal Setting, Research Plan, Success Metrics, Constraints Mapping, Scope Definition, Competitive Analysis, Literature Review, Heuristic Review, Risk Assessment *(Assumption Mapping and Journey Mapping appear here via `alsoIn`)*
+- *Research Operations* — Screener Design, Participant Recruitment, Incentives, Research Repository, Atomic Research, Sample Size & Saturation, Session Logistics & Note-taking
+- *Synthesis* — Affinity Mapping, Thematic Analysis, Qualitative Coding *(renamed from "Coding")*, Journey Mapping, Experience Mapping, Personas, Proto Personas, Empathy Maps, Insight Statements, Opportunity Areas, JTBD Statements, POV Statements, HMW Questions
 
 **04 · Qualitative Research** — User Interviews, Contextual Inquiry, Ethnography, Diary Studies, Think Aloud, Retrospective Think Aloud, Focus Groups, Participatory Design, Co-design Workshops, Cultural Probes, Observation, Shadowing, Fly-on-the-wall Observation, Expert Interviews, **[+]** Grounded Theory, **[+]** Triangulation, **[+]** Mixed-Methods Design, **[+]** Inter-rater Reliability
 
 **05 · Quantitative Research** — Surveys, Analytics, Funnel Analysis, Heatmaps, Session Recordings, Click Tracking, Eye Tracking, Multivariate Testing, Benchmark Studies, SUS, UMUX, NPS, CES, Time on Task, Task Success Rate, Error Rate, Retention Analysis, Cohort Analysis, **[+]** SEQ (Single Ease Question), **[+]** UMUX-Lite, **[+]** SUPR-Q, **[+]** NASA-TLX, **[+]** MaxDiff, **[+]** Conjoint Analysis, **[+]** Kano Survey, **[+]** Van Westendorp, **[+]** TURF Analysis, **[+]** Top Task Analysis, **[+]** First-Click Testing, **[+]** 5-Second Test, **[+]** Preference Testing, **[+]** Desirability Testing (Reaction Cards), **[+]** Tracking Plan & Instrumentation
 
-**06 · Synthesis** — Affinity Mapping, Thematic Analysis, Qualitative Coding *(renamed from "Coding")*, Journey Mapping, Experience Mapping, Personas, Proto Personas, Empathy Maps, Insight Statements, Opportunity Areas, JTBD Statements, POV Statements, HMW Questions
+**06 · Ideation** — Brainstorming, Brainwriting, Crazy 8s, SCAMPER, Design Studio, Reverse Brainstorming, Morphological Matrix, Lotus Blossom, Bodystorming, Analogous Inspiration, Dot Voting
 
-**07 · Ideation** — Brainstorming, Brainwriting, Crazy 8s, SCAMPER, Design Studio, Reverse Brainstorming, Morphological Matrix, Lotus Blossom, Bodystorming, Analogous Inspiration, Dot Voting
+**07 · IA & Structure** — Site Maps, User Flows, Task Flows, Information Architecture, Content Inventory, Card Sorting, Tree Testing, Navigation Design, Taxonomy, Labeling
 
-**08 · IA & Structure** — Site Maps, User Flows, Task Flows, Information Architecture, Content Inventory, Card Sorting, Tree Testing, Navigation Design, Taxonomy, Labeling
+**08 · Interaction Design** — Wireframes, State Diagrams, Interaction Patterns, Microinteractions, Feedback, Progressive Disclosure, Empty States, Error Handling, Onboarding, Motion Principles
 
-**09 · Interaction Design** — Wireframes, State Diagrams, Interaction Patterns, Microinteractions, Feedback, Progressive Disclosure, Empty States, Error Handling, Onboarding, Motion Principles
+**09 · Content Design** **[+ NEW PART]** — UX Writing, Microcopy, Error Message Writing, Voice & Tone, Plain Language & Readability, Content Strategy, Content Modelling, Localization & i18n
 
-**10 · Content Design** **[+ NEW PART]** — UX Writing, Microcopy, Error Message Writing, Voice & Tone, Plain Language & Readability, Content Strategy, Content Modelling, Localization & i18n
+**10 · Visual Design** — Visual Hierarchy, Typography, Color Theory, Contrast, Spacing, Gestalt Principles, Layout, Grid Systems, Iconography, Design Tokens
 
-**11 · Visual Design** — Visual Hierarchy, Typography, Color Theory, Contrast, Spacing, Gestalt Principles, Layout, Grid Systems, Iconography, Design Tokens
+**11 · Prototyping** — Paper Prototypes, Low Fidelity, Mid Fidelity, High Fidelity, Interactive Prototypes, Wizard of Oz, Concierge MVP, Clickable Prototype, **[+]** Fake Door Test, **[+]** Painted Door, **[+]** Smoke Test
 
-**12 · Prototyping** — Paper Prototypes, Low Fidelity, Mid Fidelity, High Fidelity, Interactive Prototypes, Wizard of Oz, Concierge MVP, Clickable Prototype, **[+]** Fake Door Test, **[+]** Painted Door, **[+]** Smoke Test
+**12 · Evaluation** — Usability Testing, Heuristic Evaluation, Cognitive Walkthrough, Accessibility Audit, Expert Review, A/B Testing, Benchmark Testing, Comparative Testing, Longitudinal Testing, Pilot Testing, **[+]** Pluralistic Walkthrough, **[+]** GOMS / KLM
 
-**13 · Evaluation** — Usability Testing, Heuristic Evaluation, Cognitive Walkthrough, Accessibility Audit, Expert Review, A/B Testing, Benchmark Testing, Comparative Testing, Longitudinal Testing, Pilot Testing, **[+]** Pluralistic Walkthrough, **[+]** GOMS / KLM
+**13 · Accessibility** — WCAG, Screen Readers, Keyboard Navigation, Focus States, Color Blindness, Accessible Forms, Accessible Tables, ARIA, Inclusive Design, Universal Design, **[+]** Cognitive Accessibility, **[+]** Legal Landscape (ADA / EN 301 549 / European Accessibility Act)
 
-**14 · Accessibility** — WCAG, Screen Readers, Keyboard Navigation, Focus States, Color Blindness, Accessible Forms, Accessible Tables, ARIA, Inclusive Design, Universal Design, **[+]** Cognitive Accessibility, **[+]** Legal Landscape (ADA / EN 301 549 / European Accessibility Act)
+**14 · Service Design** — Service Blueprint, Stakeholder Maps, Ecosystem Maps, Touchpoint Analysis, Service Safari, Experience Prototyping, Backstage Mapping, **[+]** Ethical Design *(consolidates what had been six separate Research Ops & Ethics entries — Informed Consent, Research Ethics, Privacy & GDPR in Research, Consequence Scanning, Privacy by Design, and Deceptive Patterns — into one entry rather than six thin ones)*
 
-**15 · Service Design** — Service Blueprint, Stakeholder Maps, Ecosystem Maps, Touchpoint Analysis, Service Safari, Experience Prototyping, Backstage Mapping
+**15 · AI Design** — Prompt Design, AI Interaction Patterns, AI Transparency, Human-in-the-loop, AI Error Recovery, Trust Calibration, AI Mental Models, Explainability, Confidence Indicators, **[+]** AI Ethics & Harm Review
 
-**16 · AI Design** — Prompt Design, AI Interaction Patterns, AI Transparency, Human-in-the-loop, AI Error Recovery, Trust Calibration, AI Mental Models, Explainability, Confidence Indicators, **[+]** AI Ethics & Harm Review
+**16 · Metrics & Experimentation** — KPI Trees, Experiment Design, Statistical Significance, Confidence Intervals, Power Analysis, Leading vs Lagging Metrics, Goal-Signal-Metric, **[+]** Guardrail & Counter Metrics, **[+]** Sample Ratio Mismatch, **[+]** Novelty Effect, **[+]** The Peeking Problem, **[+]** Quasi-experiments & Diff-in-Diff, **[+]** Holdout Groups, **[+]** Switchback Tests
 
-**17 · Metrics & Experimentation** — KPI Trees, Experiment Design, Statistical Significance, Confidence Intervals, Power Analysis, Leading vs Lagging Metrics, Goal-Signal-Metric, **[+]** Guardrail & Counter Metrics, **[+]** Sample Ratio Mismatch, **[+]** Novelty Effect, **[+]** The Peeking Problem, **[+]** Quasi-experiments & Diff-in-Diff, **[+]** Holdout Groups, **[+]** Switchback Tests
+**17 · Design Systems** **[+ NEW PART — promoted from a single line in Career]** — Design System Strategy, Component API Design, Token Architecture, Governance Models, Contribution Model, Component Documentation, Versioning & Deprecation, Adoption Measurement
 
-**18 · Design Systems** **[+ NEW PART — promoted from a single line in Career]** — Design System Strategy, Component API Design, Token Architecture, Governance Models, Contribution Model, Component Documentation, Versioning & Deprecation, Adoption Measurement
+**18 · Facilitation** — Workshop Design, Sprint Planning, Design Critiques, Retrospectives, Brainstorm Facilitation, Silent Voting, Timeboxing
 
-**19 · Facilitation** — Workshop Design, Sprint Planning, Design Critiques, Retrospectives, Brainstorm Facilitation, Silent Voting, Timeboxing
+**19 · Communication** — UX Reports, Executive Summaries, Research Readouts, Storytelling, Design Reviews, Presentations, Design Rationale, Project Documentation
 
-**20 · Communication** — UX Reports, Executive Summaries, Research Readouts, Storytelling, Design Reviews, Presentations, Design Rationale, Project Documentation
-
-**21 · Career & Practice** — Portfolio Storytelling, Case Studies, Working with PMs, Working with Engineers, Design QA, Prioritization, Time Management
+**20 · Career & Practice** — Portfolio Storytelling, Case Studies, Working with PMs, Working with Engineers, Design QA, Prioritization, Time Management
 
 ---
 
@@ -223,7 +231,7 @@ The result is a single committed dark, warm reading surface — not a light/dark
 
 Contrast computed, not estimated: cream on page = **13.3:1**, secondary on page = **7.5:1**. Both clear AAA for body text.
 
-Accent used **only** for the `kind` taxonomy (generative / descriptive / evaluative / causal / framework) — five of Astryx's ten hues, using the `-vivid` variants so they hold up against the gray. Consistent site-wide, so the badge colour becomes a learnable signal rather than decoration. Each verified ≥ 4.5:1 on both page and surface.
+Accent used **only** for the `kind` taxonomy (concept / framework / method) — three of Astryx's ten hues, using the `-vivid` variants so they hold up against the gray. Consistent site-wide, so the badge colour becomes a learnable signal rather than decoration. Each verified ≥ 4.5:1 on both page and surface.
 
 **Layout** — single centered column, `max-width` ~68ch for prose. Hairline borders only where structure genuinely needs them.
 
@@ -378,11 +386,11 @@ No E2E in v1. The site has no state to break beyond `localStorage`.
 
 **Phase 1 — Platform.** Next.js scaffold on Bun, Astryx + Tailwind layer setup, §5 theme overrides, Geist, content pipeline, Zod schema, validator, palette, all three page types, motion. Seeded with ~6 hand-written entries spanning several categories to exercise every schema field — including `## Using AI`.
 
-**Phase 2 — Vertical slice: the research spine.** Parts 04 Qualitative (18), 05 Quantitative (33), 13 Evaluation (12) — 63 entries written to full depth.
+**Phase 2 — Vertical slice: the research spine.** Parts 04 Qualitative (18), 05 Quantitative (33), 12 Evaluation (12) — 63 entries written to full depth.
 
 Chosen because "use instead" carries the most weight here (research method selection is exactly the decision this site should win), these three exercise every schema field, and Part 05 is backed by the existing `Quantitative UX Research` workspace.
 
-**Phase 3+ — Remaining parts,** in priority order: 02 Starting a Project (the `Starting Project Right` workspace already has nine reference documents to mine), 03 Research Ops & Ethics, 01 Foundations, then the rest.
+**Phase 3+ — Remaining parts,** in priority order: 03 Research & Synthesis (the `Starting Project Right` workspace already has nine reference documents to mine, and the *Framing & Planning* group draws on it directly), 01 UX Psychology, 02 Strategic Thinking, then the rest.
 
 Each phase ends with a passing `bun run validate` and a deploy.
 
@@ -395,6 +403,18 @@ Content is grounded in, in order of preference:
 1. **Sibling workspaces** — `Product Thinking`, `Quantitative UX Research`, `Systems Thinking`, `Decision Making`, `Human Behaviour`, `Starting Project Right`, `Digital Product Craft`. Each has a curated `RESOURCES.md` (21–97 lines) plus glossary and reference documents. This is vetted material and the first place to look.
 2. **Primary sources** — the originating book or paper, cited directly.
 3. **Established practitioner sources** — NN/g, MeasuringU, Baymard, IDEO, GV, WCAG.
+
+**Where each sibling workspace lands after the 2026-08-06 taxonomy restructure (§4)** — kept explicit because prose mentions scattered through the doc are easy to lose track of:
+
+| Sibling workspace | Grounds |
+|---|---|
+| `Human Behaviour` | 01 UX Psychology |
+| `Product Thinking` | 02 Strategic Thinking — *Product Thinking* subgroup |
+| `Systems Thinking` | 02 Strategic Thinking — *Systems Thinking* subgroup |
+| `Decision Making` | 02 Strategic Thinking — *Decision Making* subgroup |
+| `Starting Project Right` | 03 Research & Synthesis — *Framing & Planning* subgroup |
+| `Quantitative UX Research` | 05 Quantitative Research |
+| `Digital Product Craft` | Not pinned to one part — spans craft-level parts (Interaction Design, Visual Design, Prototyping, Content Design). Flagging this as unresolved rather than guessing a single home. |
 
 Parametric recall is not a source. Any claim that cannot be attributed gets cut or marked as the author's own judgment.
 
@@ -420,6 +440,18 @@ Time-sensitive areas where the 2026 answer differs materially from the older one
 ### 11.2 AI's role in producing this content
 
 AI is used to draft, cross-check, and find sources — never as the source itself. Every citation is resolved to a real, reachable URL before it ships; a plausible-looking reference to a paper that does not exist is worse than no reference. This is the same discipline §3.4 asks of the reader.
+
+### 11.3 Resource-first triage for parts with no sibling workspace
+
+§11's ordering assumes a curated `RESOURCES.md` exists to check first. It does for the parts a sibling workspace covers — `Foundations`, `Starting a Project`, `Quantitative Research`, and pieces of a few others. It does not for roughly half the taxonomy: `Research Ops & Ethics`, `Synthesis`, `Ideation`, `Content Design`, `Prototyping`, `Service Design`, `Design Systems`, `Facilitation`, `Communication`, and parts of `Interaction Design` / `Visual Design` / `AI Design`.
+
+Adopted from the `/teach` skill's own resourcing discipline ([mattpocock/skills](https://github.com/mattpocock/skills), `productivity/teach`): *"Before `RESOURCES.md` is well-populated, your focus should be to find high-quality resources... Never trust your parametric knowledge."* Applied here — before drafting any entry in an uncovered part:
+
+1. Spend a research pass finding 3–6 high-quality sources for that *part* (not just the one entry), same bar as §11's tier 2/3 — primary sources first, established practitioner sources second.
+2. Note them inline in that part's authoring notes (no need for a formal `RESOURCES.md` file per part — the sibling-workspace format is overkill for a part that will only ever produce a handful of MDX files here).
+3. Only then draft entries, citing from that set rather than recall.
+
+This turns "no sibling workspace" into a research step instead of a licence to draft from memory — the same failure mode §3.4 warns the reader about, applied to the act of writing the cheatsheet itself.
 
 ---
 

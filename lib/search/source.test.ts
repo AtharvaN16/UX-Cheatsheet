@@ -3,8 +3,8 @@ import { createMethodSource, type MethodItem } from './source';
 import type { ScorableMethod } from './score';
 
 const items: MethodItem[] = [
-  { id: 'tree-testing', label: 'Tree Testing', auxiliaryData: { category: 'ia-structure', kind: 'evaluative', group: '' } },
-  { id: 'card-sorting', label: 'Card Sorting', auxiliaryData: { category: 'ia-structure', kind: 'generative', group: '' } },
+  { id: 'tree-testing', label: 'Tree Testing', auxiliaryData: { category: 'ia-structure', kind: 'method', group: '' } },
+  { id: 'card-sorting', label: 'Card Sorting', auxiliaryData: { category: 'ia-structure', kind: 'method', group: '' } },
 ];
 
 const scorables: ScorableMethod[] = [
@@ -39,7 +39,7 @@ describe('createMethodSource', () => {
 
   test('search silently drops scorable ids with no matching item, without crashing', async () => {
     const partialItems: MethodItem[] = [
-      { id: 'tree-testing', label: 'Tree Testing', auxiliaryData: { category: 'ia-structure', kind: 'evaluative', group: '' } },
+      { id: 'tree-testing', label: 'Tree Testing', auxiliaryData: { category: 'ia-structure', kind: 'method', group: '' } },
     ];
     const bothScorables: ScorableMethod[] = [
       ...scorables,

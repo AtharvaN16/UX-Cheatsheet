@@ -42,7 +42,7 @@ export function Palette({
       renderItem={(item, isSelected) => (
         <div className="flex w-full items-center justify-between gap-4">
           <span className={isSelected ? 'text-primary' : 'text-secondary'}>{item.label}</span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-secondary">
+          <span className="text-sm font-medium uppercase tracking-[0.08em] text-secondary">
             {item.auxiliaryData.kind}
           </span>
         </div>

@@ -1,38 +1,28 @@
-import Link from 'next/link';
 import { getAllMethods } from '@/lib/content';
 import { CATEGORIES } from '@/lib/categories';
 import { Eyebrow } from '@/components/ui/Eyebrow';
+import { Kbd } from '@astryxdesign/core/Kbd';
+import { CategoryGroupList } from '@/components/ui/CategoryGroupList';
 
 export default function IndexPage() {
   const methods = getAllMethods();
-  const countFor = (id: string) =>
-    methods.filter((m) => m.category === id || m.alsoIn.includes(id)).length;
+  const counts: Record<string, number> = {};
+  for (const c of CATEGORIES) {
+    counts[c.id] = methods.filter((m) => m.category === c.id || m.alsoIn.includes(c.id)).length;
+  }
 
   return (
-    <main className="mx-auto max-w-[68ch] px-6 py-16">
+    <main className="w-full p-6">
       <Eyebrow>UX Methods</Eyebrow>
       <h1 className="mt-3 text-4xl tracking-[-0.025em] text-primary">
-        A working reference
+        A Cheatsheet
       </h1>
-      <p className="mt-3 text-secondary">
-        Press <kbd className="font-mono text-sm text-primary">⌘K</kbd> to search by name, or by
+      <p className="mt-3 inline-flex flex-wrap items-center gap-1.5 text-secondary">
+        Press <Kbd keys="mod+k" /> to search by name, or by
         what you are trying to learn.
       </p>
 
-      <ul className="mt-12 divide-y divide-border border-y border-border">
-        {CATEGORIES.map((c) => (
-          <li key={c.id}>
-            <Link
-              href={`/c/${c.id}`}
-              className="flex items-baseline justify-between gap-4 py-4 transition-colors hover:text-primary"
-            >
-              <span className="font-mono text-xs text-secondary">{c.number}</span>
-              <span className="flex-1 text-primary">{c.title}</span>
-              <span className="font-mono text-xs text-secondary">{countFor(c.id)}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <CategoryGroupList counts={counts} />
     </main>
   );
 }

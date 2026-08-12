@@ -50,10 +50,39 @@ body {
   color-scheme: dark;
 }
 
+/*
+ * Global Typography Floor (Strict 14px / 0.875rem minimum)
+ * Ensures all text elements, input placeholders, keybinding badges, metadata labels,
+ * and CommandPalette items meet or exceed 14px.
+ */
+html,
+body,
+p,
+span,
+dt,
+dd,
+li,
+a,
+input,
+textarea,
+button,
+label,
+kbd,
+code,
+small {
+  font-size: max(14px, 0.875rem);
+}
+
+kbd {
+  font-size: 0.875rem !important;
+  min-width: 1.5rem !important;
+  height: 1.5rem !important;
+}
+
 @layer components {
   .prose-cheatsheet h2 {
-    font-family: var(--font-geist-mono), ui-monospace, monospace;
-    font-size: 0.75rem;
+    font-family: var(--font-geist-sans), sans-serif;
+    font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--color-text-secondary);
@@ -63,6 +92,7 @@ body {
   .prose-cheatsheet p {
     margin-bottom: 1rem;
     line-height: 1.7;
+    font-size: 0.875rem;
   }
   .prose-cheatsheet ul {
     list-style: disc;
@@ -77,6 +107,7 @@ body {
   .prose-cheatsheet li {
     margin-bottom: 0.5rem;
     line-height: 1.6;
+    font-size: 0.875rem;
   }
   .prose-cheatsheet strong {
     color: var(--color-text-primary);

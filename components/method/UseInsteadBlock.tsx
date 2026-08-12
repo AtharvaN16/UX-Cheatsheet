@@ -18,7 +18,7 @@ export function UseInsteadBlock({
             <p className="text-primary">{e.when}</p>
             <Link
               href={`/m/${e.method}`}
-              className="mt-1 inline-block font-mono text-sm text-secondary underline underline-offset-4 hover:text-primary"
+              className="mt-1 inline-block text-sm text-secondary underline underline-offset-4 hover:text-primary"
             >
               → {titleOf(e.method)}
             </Link>
