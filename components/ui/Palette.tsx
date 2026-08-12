@@ -35,9 +35,10 @@ export function Palette({
       emptySearchText="No method matches. Try describing the situation instead."
       emptyBootstrapText="Search by name, or by what you are trying to learn."
       onValueChange={(id) => {
+        const item = items.find((i) => i.id === id);
         push(id);
         onOpenChange(false);
-        router.push(`/m/${id}`);
+        router.push(item?.auxiliaryData.href ?? `/m/${id}`);
       }}
       renderItem={(item, isSelected) => (
         <div className="flex w-full items-center justify-between gap-4">
