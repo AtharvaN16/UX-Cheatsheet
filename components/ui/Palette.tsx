@@ -10,7 +10,7 @@ import { useRecent } from '@/lib/useRecent';
 function getTypeBadgeStyle(kind?: string) {
   const k = (kind || 'method').toLowerCase().trim();
   if (k === 'category') {
-    return 'bg-[#D97757]/15 text-[#D97757] font-semibold rounded-md';
+    return 'bg-[#2E8A75]/15 text-[#2E8A75] font-semibold rounded-md';
   }
   if (k === 'framework') {
     return 'bg-[#8C77B8]/15 text-[#8C77B8] font-semibold rounded-md';
