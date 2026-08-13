@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import { getMethodsByCategory } from '@/lib/content';
 import { CATEGORIES, getCategory } from '@/lib/categories';
 import { getTaxonomyForCategory } from '@/lib/taxonomy';
-import { CategoryBanner } from '@/components/ui/CategoryBanner';
 import { CategoryTopicGrid } from '@/components/ui/CategoryTopicGrid';
 
 export function generateStaticParams() {
@@ -36,4 +35,3 @@ export default async function CategoryPage({
     </div>
   );
 }
-

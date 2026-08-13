@@ -479,7 +479,7 @@ Record everything.
 **Where it helps**
 - Transcription
 
-**Where it produces confident garbage**
+**Where it fails**
 - Synthetic participants
 `;
 
@@ -645,7 +645,7 @@ Run it before wireframes.
 **Where it helps**
 - Draft candidate label variants to test
 
-**Where it produces confident garbage**
+**Where it fails**
 - Predicting which label users prefer without testing
 ```
 
@@ -1974,7 +1974,7 @@ Each follows the fixture shape from Task 5 with real content. Cross-reference gr
 | `usability-testing` | `evaluation` | — | `tree-testing`, `contextual-inquiry` | alongside: `seq` |
 | `seq` | `quantitative-research` | `evaluation` | `usability-testing` | alongside: `usability-testing` |
 
-Write real prose for all seven sections in each. `## Using AI` must have both bolded halves — `**Where it helps**` and `**Where it produces confident garbage**`. Every `sources[].url` must be a real, reachable page; verify each with `curl -s -o /dev/null -w "%{http_code}" <url>` before committing.
+Write real prose for all seven sections in each. `## Using AI` must have both bolded halves — `**Where it helps**` and `**Where it fails**`. Every `sources[].url` must be a real, reachable page; verify each with `curl -s -o /dev/null -w "%{http_code}" <url>` before committing.
 
 - [ ] **Step 2: Remove the scaffold smoke test**
 

@@ -9,7 +9,7 @@ export const cheatsheetTheme = defineTheme({
   name: 'cheatsheet',
   extends: stoneTheme,
   tokens: {
-    '--color-background-body': '#FAF6EF',
+    '--color-background-body': '#faf9f5',
     '--color-background-surface': '#FDFBF6',
     '--color-background-card': '#FFFFFF',
     '--color-text-primary': '#23211D',

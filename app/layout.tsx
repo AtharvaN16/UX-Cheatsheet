@@ -10,8 +10,7 @@ import { cheatsheetTheme } from '@/lib/cheatsheet';
 import { getAllMethods, toScorable } from '@/lib/content';
 import { PaletteProvider } from '@/components/ui/PaletteProvider';
 import type { MethodItem } from '@/lib/search/source';
-import { AppShellFrame } from '@/components/ui/AppShellFrame';
-import { AppSidebar } from '@/components/ui/AppSidebar';
+import { AppFrame } from '@/components/ui/AppFrame';
 import { CATEGORIES } from '@/lib/categories';
 
 export const metadata: Metadata = {
@@ -78,9 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Providers>
           <PaletteProvider items={items} scorables={scorables}>
-            <AppShellFrame sideNav={<AppSidebar />} mobileNav={{ breakpoint: 'md' }}>
-              {children}
-            </AppShellFrame>
+            <AppFrame>{children}</AppFrame>
           </PaletteProvider>
         </Providers>
       </body>
