@@ -8,6 +8,7 @@ import type { TaxonomyGroup } from '@/lib/taxonomy';
 import { get1Liner } from '@/lib/taxonomyDescriptions';
 import { ConceptSheetModal, type ConceptSheetItem, SHEET_TRANSITION } from '@/components/ui/ConceptSheetModal';
 import { CategoryBanner } from '@/components/ui/CategoryBanner';
+import { inferKind } from '@/lib/inferKind';
 
 export interface CategoryItem extends ConceptSheetItem {
   href?: string;
@@ -19,51 +20,6 @@ interface CategoryTopicGridProps {
   groups: TaxonomyGroup[];
   methods: Method[];
   secondaryMethods?: Method[];
-}
-
-export function inferKind(title: string, categoryId: string, itemId: string): 'method' | 'framework' | 'concept' {
-  const cat = categoryId.toLowerCase().trim();
-  const t = title.toLowerCase().trim();
-  const id = itemId.toLowerCase().trim();
-
-  if (cat === 'ux-psychology') return 'concept';
-
-  if (
-    t.includes('law') ||
-    t.includes('effect') ||
-    t.includes('bias') ||
-    t.includes('rule') ||
-    t.includes('theory') ||
-    t.includes('fallacy') ||
-    t.includes('threshold') ||
-    t.includes('principle') ||
-    t.includes('paradox') ||
-    t.includes('mental model') ||
-    t.includes('cognitive')
-  ) {
-    return 'concept';
-  }
-
-  if (
-    t.includes('framework') ||
-    t.includes('model') ||
-    t.includes('canvas') ||
-    t.includes('matrix') ||
-    t.includes('tree') ||
-    t.includes('funnel') ||
-    t.includes('grid') ||
-    t.includes('map') ||
-    id.includes('jtbd') ||
-    id.includes('rice') ||
-    id.includes('kano') ||
-    id.includes('aarrr') ||
-    id.includes('heart') ||
-    id.includes('okrs')
-  ) {
-    return 'framework';
-  }
-
-  return 'method';
 }
 
 export function CategoryTopicGrid({
@@ -269,32 +225,8 @@ export function CategoryTopicGrid({
             </nav>
           </div>
 
-          {/* Control Bar: Search Bar on Left, Filter & Sort Floating Popover Dropdown on Right */}
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between py-1">
-            {/* Search Input on Left */}
-            <div className="relative w-full sm:max-w-md">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-[#8C887E]">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </div>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={`Search in ${categoryTitle}...`}
-                className="w-full rounded-full border border-[#E5E2D9] bg-white pl-11 pr-10 py-3 text-sm text-[#1A1A1A] placeholder:text-[#8C887E] focus:outline-none focus:border-[#1A1A1A] shadow-2xs transition-colors"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-[#8C887E] hover:text-[#1A1A1A]"
-                >
-                  ✕
-                </button>
-              )}
-            </div>
-
+          {/* Control Bar: Filter & Sort Floating Popover Dropdown on Right */}
+          <div className="flex items-center justify-end py-1">
             {/* Filter & Sort Popover Dropdown Trigger */}
             <div className="relative">
               <button
@@ -423,10 +355,18 @@ export function CategoryTopicGrid({
                     : 'bg-orange-500';
 
                 return (
-                  <button
+                  <div
                     key={item.id}
                     onClick={() => setSelectedConcept(item)}
-                    className="group block h-full text-left focus:outline-none"
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setSelectedConcept(item);
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
+                    className="group block h-full text-left focus:outline-none cursor-pointer"
                   >
                     <div
                       className="h-full min-h-[160px] sm:min-h-[180px] flex flex-col justify-between rounded-2xl border p-6 sm:p-7 transition-all border-border/60 group-hover:border-primary/50 relative"
@@ -466,7 +406,7 @@ export function CategoryTopicGrid({
                         </h3>
                       </div>
                     </div>
-                  </button>
+                  </div>
                 );
               })}
             </div>

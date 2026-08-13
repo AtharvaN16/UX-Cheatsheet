@@ -85,9 +85,13 @@ export const CATEGORY_GROUPS: readonly CategoryGroup[] = [
 ] as const;
 
 export function getCategory(id: string): Category | undefined {
-  return CATEGORIES.find((c) => c.id === id);
+  if (!id) return undefined;
+  const normId = id.toLowerCase().trim();
+  return CATEGORIES.find((c) => c.id === normId || c.title.toLowerCase().trim() === normId);
 }
 
 export function getCategoryGroup(categoryId: string): CategoryGroup | undefined {
-  return CATEGORY_GROUPS.find((group) => group.categoryIds.includes(categoryId));
+  if (!categoryId) return undefined;
+  const normId = categoryId.toLowerCase().trim();
+  return CATEGORY_GROUPS.find((group) => group.categoryIds.includes(normId));
 }

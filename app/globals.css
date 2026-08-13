@@ -5,17 +5,6 @@
 @import '@astryxdesign/core/reset.css';
 @import '@astryxdesign/core/astryx.css';
 @import '@astryxdesign/theme-stone/theme.css';
-/*
- * Built (SSR-safe) output of `astryx theme build lib/theme.ts` — run
- * automatically from next.config.ts on every next dev/build, so it's always
- * fresh (see the comment there for why it isn't a package.json script hook).
- * lib/theme.ts is the editable source; lib/cheatsheet.css is generated and
- * gitignored. Must load after the theme-stone import above so
- * `[data-astryx-theme="cheatsheet"]` is the theme actually applied
- * (theme-stone's own `[data-astryx-theme="stone"]` scope never matches our
- * tree, but the load order still documents intent and matches
- * @astryxdesign/core's own recommended layer recipe).
- */
 @import '../lib/cheatsheet.css';
 @import '@astryxdesign/core/tailwind-theme.css';
 @import 'tailwindcss/utilities.css' layer(utilities);
@@ -26,35 +15,12 @@ body {
   color: var(--color-text-primary);
 }
 
-/*
- * Force light unconditionally, regardless of OS/browser preference.
- *
- * lib/cheatsheet.css inherits ~165 tokens from stoneTheme that we did not
- * override (e.g. --color-accent, used by Button's primary variant) as
- * light-dark(light, dark) pairs — plus a generated `:root { color-scheme:
- * light dark; }` rule (@layer astryx-theme) whenever any token uses
- * light-dark(). With color-scheme: light dark, those pairs resolve based on
- * the user's OS/browser preference, which would make parts of the UI shift
- * with system settings — a real violation of "single theme, no dark mode"
- * even though the six tokens this project actually sets are plain hex, not
- * pairs, and are unaffected by color-scheme either way.
- *
- * This rule is intentionally unlayered (outside any @layer), so cascade-layer
- * rules always lose to it regardless of import order or selector specificity
- * — see MDN's Cascade Layers: unlayered styles beat all layered styles. That
- * makes it win over astryx-theme's `:root { color-scheme: light dark; }` no
- * matter what — the outcome is decided by unlayered-vs-layered origin
- * precedence before either rule's declared value is even considered, so it
- * holds regardless of what `prefers-color-scheme` the OS/browser reports.
- */
 :root {
   color-scheme: light;
 }
 
 /*
  * Global Typography Floor (Strict 14px / 0.875rem minimum)
- * Ensures all text elements, input placeholders, keybinding badges, metadata labels,
- * and CommandPalette items meet or exceed 14px.
  */
 html,
 body,
@@ -78,6 +44,14 @@ kbd {
   font-size: 0.875rem !important;
   min-width: 1.5rem !important;
   height: 1.5rem !important;
+}
+
+mark {
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline !important;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 @layer components {
@@ -114,4 +88,178 @@ kbd {
     color: var(--color-text-primary);
     font-weight: 600;
   }
+}
+
+/* Command Palette Group Subheadings - Medium font weight */
+[data-command-palette-group-heading],
+[class*="group-heading"],
+[class*="GroupHeading"] {
+  font-weight: 500 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #8C887E !important;
+}
+
+/* =========================================================
+   STRICT COMMAND PALETTE NATIVE HTML <dialog> STYLING
+   ========================================================= */
+
+/* 1. Fixed Height Native HTML <dialog> Container - STRICT 500px ALWAYS */
+dialog,
+dialog[open],
+div[role="dialog"],
+div[role="dialog"] > div,
+div[role="dialog"] > div > div {
+  height: 500px !important;
+  min-height: 500px !important;
+  max-height: 500px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+  overflow: hidden !important;
+  background-color: #FAF8F5 !important;
+  border-radius: 14px !important;
+  padding: 0 !important;
+}
+
+dialog *,
+div[role="dialog"] [class*="Layout"] {
+  box-sizing: border-box;
+}
+
+dialog > form,
+dialog > div,
+div[role="dialog"] form,
+div[role="dialog"] [class*="Layout"],
+dialog [class*="Layout"] {
+  height: 100% !important;
+  min-height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+  flex: 1 1 auto !important;
+  width: 100% !important;
+}
+
+/* 2. Top Header Search Bar - Fixed 52px Height, Warm Beige Background (#EAE6DD) */
+dialog header,
+dialog [data-astryx-component="layout-header"],
+dialog [data-astryx-component="command-palette-input"],
+dialog div[class*="command-palette-input"],
+div[role="dialog"] header,
+div[role="dialog"] [data-astryx-component="command-palette-input"] {
+  height: 52px !important;
+  min-height: 52px !important;
+  max-height: 52px !important;
+  flex: 0 0 52px !important;
+  background-color: #EAE6DD !important;
+  background: #EAE6DD !important;
+  padding: 0 20px !important;
+  border-bottom: 1px solid #DCD7CC !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+dialog header *,
+dialog [data-astryx-component="command-palette-input"] *,
+div[role="dialog"] header *,
+div[role="dialog"] [data-astryx-component="command-palette-input"] * {
+  background-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+dialog input,
+div[role="dialog"] input {
+  background-color: transparent !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 1.05rem !important;
+  color: #1A1A1A !important;
+  border: none !important;
+  outline: none !important;
+  width: 100% !important;
+}
+
+/* 3. Middle Content Container (Results & Empty State) - FLEX-1 Fills Remaining 406px Space */
+dialog [data-astryx-component="layout-content"],
+dialog [data-astryx-component="command-palette-list"],
+dialog [role="listbox"],
+dialog div[class*="Empty"],
+dialog div[class*="empty"],
+div[role="dialog"] [class*="Content"],
+div[role="dialog"] [class*="List"],
+div[role="dialog"] [class*="Empty"],
+div[role="dialog"] [role="listbox"] {
+  flex: 1 1 auto !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow-y: auto !important;
+  background-color: #FAF8F5 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* 4. SINGLE 42px FOOTER FRAME (NO INNER / OUTER DUPLICATION) */
+dialog footer,
+dialog [data-astryx-component="layout-footer"],
+div[role="dialog"] [data-astryx-component="layout-footer"] {
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+  flex: 0 0 42px !important;
+  padding: 0 20px !important;
+  margin: 0 !important;
+  margin-top: auto !important;
+  background-color: #FAF8F5 !important;
+  border-top: 1px solid #E5E2D9 !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+dialog [data-astryx-component="layout-footer"] *,
+div[role="dialog"] [data-astryx-component="layout-footer"] * {
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  --container-padding-block-start: 0px !important;
+  --container-padding-block-end: 0px !important;
+  --container-padding-inline-start: 0px !important;
+  --container-padding-inline-end: 0px !important;
+}
+
+dialog [data-astryx-component="layout-footer"] span,
+div[role="dialog"] [data-astryx-component="layout-footer"] span {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  gap: 6px !important;
+}
+
+dialog [data-astryx-component="layout-footer"] kbd,
+div[role="dialog"] [data-astryx-component="layout-footer"] kbd {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  height: 20px !important;
+  min-height: 20px !important;
+  max-height: 20px !important;
 }
