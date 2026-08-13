@@ -15,7 +15,7 @@ describe('loadMethods', () => {
     const { methods } = loadMethods(join(FIX, 'valid'));
     const tree = methods.find((m) => m.id === 'tree-testing')!;
     expect(tree.sections['When to use']).toContain('existing navigation');
-    expect(tree.sections['Using AI']).toContain('confident garbage');
+    expect(tree.sections['Using AI']).toContain('Where it fails');
   });
 
   test('reports an unresolved useInstead reference', () => {

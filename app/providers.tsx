@@ -14,16 +14,16 @@ import { cheatsheetTheme } from '@/lib/cheatsheet';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    // mode="dark" (not the "system" default) is required, not cosmetic: it's
+    // mode="light" (not the "system" default) is required, not cosmetic: it's
     // what makes <Theme>'s client-side root-sync effect set the SAME
-    // data-theme="dark" value that app/layout.tsx already set for SSR. If
+    // data-theme="light" value that app/layout.tsx already set for SSR. If
     // this were "system", the effect would instead *remove* data-theme right
     // after hydration, flipping color-scheme back to "light dark" and
     // re-exposing every un-overridden light-dark() token (e.g.
     // --color-accent, inherited from stoneTheme) to the OS/browser
-    // preference — see app/globals.css's `:root { color-scheme: dark; }`
+    // preference — see app/globals.css's `:root { color-scheme: light; }`
     // comment for the other half of this fix.
-    <Theme theme={cheatsheetTheme} mode="dark">
+    <Theme theme={cheatsheetTheme} mode="light">
       <LinkProvider component={Link}>
         <MotionConfig reducedMotion="user">{children}</MotionConfig>
       </LinkProvider>

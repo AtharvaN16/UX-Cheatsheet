@@ -1,9 +1,24 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { Palette } from './Palette';
 import type { MethodItem } from '@/lib/search/source';
 import type { ScorableMethod } from '@/lib/search/score';
+
+interface PaletteControls {
+  open: () => void;
+}
+
+const PaletteContext = createContext<PaletteControls | null>(null);
+
+/** Lets any descendant of PaletteProvider open the command palette programmatically. */
+export function usePaletteControls(): PaletteControls {
+  const ctx = useContext(PaletteContext);
+  if (!ctx) {
+    throw new Error('usePaletteControls must be used within a PaletteProvider');
+  }
+  return ctx;
+}
 
 export function PaletteProvider({
   items,
@@ -34,9 +49,9 @@ export function PaletteProvider({
   }, []);
 
   return (
-    <>
+    <PaletteContext value={{ open: () => setIsOpen(true) }}>
       {children}
       <Palette items={items} scorables={scorables} isOpen={isOpen} onOpenChange={setIsOpen} />
-    </>
+    </PaletteContext>
   );
 }

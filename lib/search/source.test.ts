@@ -78,4 +78,45 @@ describe('createMethodSource', () => {
     expect(items[0].auxiliaryData.group).toBe('');
     expect(items[1].auxiliaryData.group).toBe('');
   });
+
+  test('tags a category-type item with the CATEGORIES group regardless of matched field', async () => {
+    const catItems: MethodItem[] = [
+      {
+        id: 'evaluation',
+        label: 'Evaluation',
+        auxiliaryData: { category: 'evaluation', kind: 'category', group: '', href: '/c/evaluation', type: 'category' },
+      },
+    ];
+    const catScorables: ScorableMethod[] = [
+      { id: 'evaluation', title: 'Evaluation', aka: [], whenToUse: '', rest: '' },
+    ];
+    const src = createMethodSource(catItems, catScorables);
+    const r = await src.search('evaluation');
+    expect(r[0].auxiliaryData.group).toBe('CATEGORIES');
+  });
+
+  test('a mixed items list ranks methods and categories together by score', async () => {
+    const mixedItems: MethodItem[] = [
+      ...items,
+      {
+        id: 'ia-structure',
+        label: 'IA & Structure',
+        auxiliaryData: { category: 'ia-structure', kind: 'category', group: '', href: '/c/ia-structure', type: 'category' },
+      },
+    ];
+    const mixedScorables: ScorableMethod[] = [
+      ...scorables,
+      { id: 'ia-structure', title: 'IA & Structure', aka: [], whenToUse: '', rest: '' },
+    ];
+    const src = createMethodSource(mixedItems, mixedScorables);
+    const r = await src.search('tree testing');
+    expect(r[0].id).toBe('tree-testing');
+  });
+
+  test('items without href/type still work (existing method items are unaffected)', async () => {
+    const src = createMethodSource(items, scorables);
+    const r = await src.search('tree testing');
+    expect(r[0].auxiliaryData.href).toBeUndefined();
+    expect(r[0].auxiliaryData.type).toBeUndefined();
+  });
 });

@@ -1,0 +1,78 @@
+---
+id: cognitive-walkthrough
+title: Cognitive Walkthrough
+aka: []
+category: evaluation
+alsoIn: []
+kind: method
+gives: qualitative
+effort: low
+timeframe: hours
+needs:
+  - A specific user task and its correct, expected action sequence
+  - 1-3 evaluators working through the task questions at each step
+  - A prototype or spec detailed enough to trace every screen in the sequence
+useInstead:
+  - when: You want broad coverage of usability principles, not first-time learnability on one task
+    method: heuristic-evaluation
+  - when: You want behavioral evidence from real users attempting the task, not expert prediction
+    method: usability-testing
+related:
+  alongside: [heuristic-evaluation, pluralistic-walkthrough]
+sources:
+  - title: "The Cognitive Walkthrough Method: A Practitioner's Guide"
+    author: Cathleen Wharton, John Rieman, Clayton Lewis & Peter Polson
+    url: https://www.researchgate.net/publication/247863674_The_Cognitive_Walkthrough_Method_A_Practitioner's_Guide
+    type: paper
+    year: 1994
+    seminal: true
+  - title: "Cognitive Walkthroughs: How to Test First-Time Use"
+    author: Nielsen Norman Group
+    url: https://www.nngroup.com/articles/cognitive-walkthroughs/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+An evaluator steps through a task one action at a time, and at each step asks a fixed set of questions about whether a first-time user would know what to do and would understand the result of doing it — without actually running the task with a real user.
+
+## Purpose
+
+Predicts specifically where a first-time, unassisted user would get stuck, by forcing evaluators to reason step-by-step through the interface from that user's perspective rather than their own expert one. It's narrower than a heuristic evaluation — it doesn't check general usability principles, only whether *this specific task* is learnable on first attempt.
+
+## When to use
+
+- The design needs to be learnable without training or documentation, and you want to check that before building
+- You have a small number of critical, well-defined tasks (checkout, onboarding, account setup) worth walking through in detail
+- You're early enough in the process that recruiting real users for a full usability test isn't yet justified
+- You want to catch first-use friction specifically, as distinct from expert-user efficiency problems
+
+## How to do it
+
+1. Define the task and write out the correct sequence of actions an expert would take to complete it — this is your reference path.
+2. Define who the user is: their background knowledge, goals, and what they already know coming in.
+3. For each step in the sequence, ask the four canonical questions: Will the user try to achieve the right effect? Will they notice the correct action is available? Will they associate the correct action with the effect they're trying to achieve? If the correct action is taken, will they see progress toward their goal?
+4. Where the answer to any question is "no" or "unclear," record it as a usability problem, along with your reasoning for why a first-time user would fail there.
+5. Walk the entire task sequence this way before summarizing — don't stop at the first failure, since later steps assume the user got past earlier ones.
+6. Summarize findings by step, prioritizing failures early in the sequence, since those block the user from ever reaching later steps.
+
+## Common mistakes
+
+- **Evaluating as an expert, not as the target first-time user** — the whole method hinges on genuinely reasoning from the defined user's knowledge, not the evaluator's own familiarity with the product.
+- **Skipping the explicit reference task sequence** — without a defined correct path, evaluators can't consistently judge "will they notice the right action," since there's no agreed-on right action.
+- **Using it for expert-efficiency questions** — cognitive walkthrough is specifically about first-time learnability; questions like "is this fast for a daily user" belong to a different method.
+- **Stopping after finding one blocking problem** — later steps in the sequence still need walking through, in case they hide problems too, even if a real user would never reach them.
+
+## Tips
+
+Keep task scope narrow — one specific task per walkthrough, not "explore the whole app." The four-question rigor that makes this method useful doesn't scale to broad, unstructured exploration.
+
+## Using AI
+
+**Where it helps**
+- Drafting the reference action sequence for a task from a spec or flow diagram, for a human evaluator to verify and correct
+- Structuring raw walkthrough notes into a per-step findings table with the four questions answered explicitly
+
+**Where it fails**
+- Answering the four walkthrough questions itself instead of a trained evaluator reasoning from a defined user profile. The method's value comes from careful, explicit reasoning about a specific persona's knowledge at each step — a model asked to guess "would a user notice this button" defaults to generic interface conventions, which is exactly the shortcut the method exists to avoid.

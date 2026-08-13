@@ -1,0 +1,77 @@
+---
+id: accessibility-audit
+title: Accessibility Audit
+aka: [a11y audit, accessibility conformance review]
+category: evaluation
+alsoIn: [accessibility]
+kind: method
+gives: mixed
+effort: medium
+timeframe: days
+needs:
+  - A target conformance level, usually WCAG 2.2 AA
+  - Both automated scanning tools and manual testing — screen reader, keyboard-only navigation, zoom/reflow
+  - Assistive technology set up correctly (NVDA/JAWS or VoiceOver, a keyboard, a screen magnifier)
+useInstead:
+  - when: You need to know how people who use assistive technology daily actually experience the product, not just conformance status
+    method: usability-testing
+related:
+  alongside: [heuristic-evaluation]
+sources:
+  - title: "Web Content Accessibility Guidelines (WCAG) 2.2"
+    author: W3C Web Accessibility Initiative
+    url: https://www.w3.org/TR/WCAG22/
+    type: standard
+    year: 2023
+    seminal: true
+  - title: "A Web for Everyone: Designing Accessible User Experiences"
+    author: Sarah Horton & Whitney Quesenbery
+    url: https://rosenfeldmedia.com/books/a-web-for-everyone/
+    type: book
+    year: 2013
+    seminal: true
+---
+
+## What is it
+
+A systematic check of a product against accessibility standards — usually WCAG — combining automated scanning tools with manual testing: navigating with only a keyboard, using a screen reader, checking color contrast and zoom/reflow behavior.
+
+## Purpose
+
+Finds barriers that block people using assistive technology or with disabilities from using the product at all, not just barriers that make it merely inconvenient. Automated tools alone catch roughly a third of WCAG issues; manual testing is what catches the rest — things like whether a screen reader announces a form error in a way that's actually useful, or whether focus order actually follows visual reading order.
+
+## When to use
+
+- You're shipping to a legal or contractual standard (WCAG 2.1/2.2 AA is the common bar) and need to know your conformance status
+- You suspect keyboard or screen reader users are hitting specific barriers and want to locate them precisely
+- You're auditing before a redesign ships, to establish a baseline of known issues
+- Automated scanning already flagged issues and you need manual confirmation of severity and real-world impact
+
+## How to do it
+
+1. Pick the target conformance level explicitly — WCAG 2.2 Level AA is the standard default for most legal and contractual requirements.
+2. Run automated scanning tools (axe, WAVE, Lighthouse) first, as a fast pass to catch the mechanically detectable issues: missing alt text, insufficient contrast, missing form labels.
+3. Navigate the entire interface using only a keyboard — no mouse — checking that every interactive element is reachable, has a visible focus indicator, and follows a logical tab order.
+4. Navigate with a screen reader (NVDA or JAWS on Windows, VoiceOver on Mac/iOS) to check that content, controls, and state changes are announced in a way that actually makes sense out loud, not just technically present in the markup.
+5. Check zoom and reflow behavior at 200%+ browser zoom, and test with a color-blindness simulator for anything conveyed by color alone.
+6. Log every finding against its specific WCAG success criterion, with severity and a concrete fix — a flat list of "accessibility issues" without the mapped criterion is much harder for engineering to prioritize and verify against.
+
+## Common mistakes
+
+- **Treating automated scan results as a complete audit** — automated tools catch roughly a third of WCAG issues at best; the rest (meaningful focus order, sensible screen reader announcements, logical heading structure) require a human pass.
+- **Testing only with a mouse-and-eyes mental model of "does this look accessible"** — visual inspection alone misses the majority of keyboard and screen reader problems, which live in markup and interaction order, not visual layout.
+- **Skipping the mapped success criterion** — a finding like "the search field is hard to use with a screen reader" isn't actionable until it's tied to a specific criterion (e.g., 4.1.2 Name, Role, Value) that tells engineering exactly what's missing.
+- **Auditing once and never retesting** — accessibility regresses easily with new features; a single point-in-time audit goes stale fast without periodic re-checks.
+
+## Tips
+
+Test with real assistive technology yourself before hiring specialists for a deeper audit — a basic keyboard-only and screen-reader pass by someone on the team catches a surprising fraction of issues and builds the team's own sense of what "accessible" actually feels like to use.
+
+## Using AI
+
+**Where it helps**
+- Mapping raw findings to specific WCAG success criteria and drafting a fix recommendation per issue
+- Summarizing automated scan output into a prioritized list, as a starting point before manual verification
+
+**Where it fails**
+- Judging whether a screen reader experience is actually usable without one being run. A model can check markup against WCAG's technical rules, but whether an announcement sequence *makes sense* to someone listening is a lived, sequential experience — the same gap that makes automated-only audits incomplete applies just as much to an AI-only pass over the markup.

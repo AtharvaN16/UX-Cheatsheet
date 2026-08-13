@@ -1,0 +1,77 @@
+---
+id: goms-klm
+title: GOMS / KLM
+aka: [Keystroke-Level Model, Goals Operators Methods Selection rules]
+category: evaluation
+alsoIn: []
+kind: framework
+gives: quantitative
+effort: medium
+timeframe: days
+needs:
+  - A precisely defined, repetitive expert task with a known correct action sequence
+  - The standard operator time constants (keystroke, pointing, mental preparation, etc.)
+  - No participants required — this is a predictive model, not a study
+useInstead:
+  - when: You need real expert-user behavior, not a modeled prediction of it
+    method: usability-testing
+  - when: The task isn't repetitive or expert-driven enough to model cleanly
+    method: cognitive-walkthrough
+sources:
+  - title: "The Keystroke-Level Model for User Performance Time with Interactive Systems"
+    author: Stuart Card, Thomas Moran & Allen Newell
+    url: https://dl.acm.org/doi/10.1145/358886.358895
+    type: paper
+    year: 1980
+    seminal: true
+  - title: "The Psychology of Human-Computer Interaction"
+    author: Stuart Card, Thomas Moran & Allen Newell
+    url: https://www.taylorfrancis.com/books/mono/10.1201/9780203736166/psychology-human-computer-interaction-stuart-card-thomas-moran-allen-newell
+    type: book
+    year: 1983
+    seminal: true
+---
+
+## What is it
+
+A predictive model of how long an expert user takes to complete a routine task, built by breaking the task into primitive operators — keystrokes, pointing, mental preparation, system response waits — each with a known average time, and summing them. No participants, no study: you calculate the number.
+
+## Purpose
+
+Estimates expert-user task time and compares design alternatives on efficiency, without building anything or recruiting anyone. It's the tool for the question "which of these two interaction sequences is faster for a frequent, expert user," answered with a number you can defend, in an afternoon rather than a study cycle.
+
+## When to use
+
+- You're comparing two or more interaction designs for the same repetitive task and need an efficiency number, not just a hunch
+- The task is well-defined, repetitive, and performed by trained/expert users — data entry, POS systems, professional tools used daily
+- You need an estimate fast, before a prototype exists to test with real users
+- You're optimizing an existing high-frequency task where even small per-instance time savings compound significantly at scale
+
+## How to do it
+
+1. Confirm the task fits the model: routine, error-free, expert execution — GOMS/KLM does not model learning, errors, or novice exploration.
+2. Break the task into GOMS terms: Goals (what the user wants), Operators (primitive actions), Methods (the sequence of operators to reach the goal), Selection rules (which method applies when more than one exists).
+3. For the Keystroke-Level Model specifically, decompose the method into its primitive operators: K (keystroke), P (pointing, e.g. mouse move), H (homing, hand repositioning), M (mental preparation), R (system response wait).
+4. Assign each operator its standard time constant from Card, Moran & Newell's original values (e.g., ~0.28s for an average keystroke, ~1.2s for mental preparation) or from empirically updated constants for your context.
+5. Sum the operator times across the full sequence to get a predicted task completion time for an expert user.
+6. Repeat for each design alternative you're comparing, and compare the totals — the relative difference between designs is usually more trustworthy than the absolute predicted time.
+
+## Common mistakes
+
+- **Applying it to novice or exploratory tasks** — the model assumes expert, error-free, well-learned performance; using it to predict a first-time user's experience produces a number that means something else entirely.
+- **Treating the absolute time prediction as precise** — the model is most reliable for *relative* comparison between design alternatives, not as a guarantee of real-world seconds, which vary with individual differences and context.
+- **Ignoring mental preparation (M) operators** — it's tempting to count only physical actions (keystrokes, clicks), but the M operator often accounts for a large share of total time and is easy to under- or over-count without practice.
+- **Using it where errors and recovery matter** — GOMS/KLM models the error-free path only; if your actual concern is how often users make mistakes, this isn't the right tool.
+
+## Tips
+
+Use it as a comparative tool between two or three concrete alternatives, not as a standalone justification for a single design — its real power is in the delta between options, calculated the same way for each.
+
+## Using AI
+
+**Where it helps**
+- Decomposing a described interaction sequence into candidate GOMS operators as a starting point for a human to verify against the actual UI
+- Doing the arithmetic — summing operator times across a long sequence — quickly and checking it against a second calculation
+
+**Where it fails**
+- Guessing operator time constants or skipping the decomposition step to give a "roughly how long this takes" estimate. The model's validity comes from the specific, standardized operator constants derived from real timing studies — a model inventing plausible-sounding numbers without decomposing the actual action sequence produces a confident number with none of the empirical grounding that makes GOMS/KLM useful in the first place.

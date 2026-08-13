@@ -21,7 +21,7 @@ export default async function MethodPage({ params }: { params: Promise<{ id: str
   const titleOf = (mid: string) => getMethod(mid)?.title ?? mid;
 
   return (
-    <main className="w-full p-6">
+    <div className="mx-auto w-full max-w-[68ch] p-6">
       <BackButton href="/" label="Back to Cheatsheet" />
       <Eyebrow>{method.category.replace(/-/g, ' ')}</Eyebrow>
       <h1 className="mt-3 text-4xl tracking-[-0.025em] text-primary">{method.title}</h1>
@@ -40,6 +40,6 @@ export default async function MethodPage({ params }: { params: Promise<{ id: str
       <Reveal><UseInsteadBlock entries={method.useInstead} titleOf={titleOf} /></Reveal>
       <Reveal><RelatedRail related={method.related} titleOf={titleOf} /></Reveal>
       <Reveal><SourceList sources={method.sources} /></Reveal>
-    </main>
+    </div>
   );
 }

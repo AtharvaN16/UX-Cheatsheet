@@ -1,0 +1,78 @@
+---
+id: expert-review
+title: Expert Review
+aka: [expert evaluation, usability inspection]
+category: evaluation
+alsoIn: []
+kind: method
+gives: qualitative
+effort: low
+timeframe: hours
+needs:
+  - One or more evaluators with genuine UX expertise, ideally including someone unfamiliar with the product
+  - Access to the interface plus enough context on user goals and business constraints to judge tradeoffs
+  - A structured reporting format so findings are actionable rather than a loose set of opinions
+useInstead:
+  - when: You want a repeatable, criteria-based inspection rather than one expert's broader judgment
+    method: heuristic-evaluation
+  - when: You need to validate findings against real user behavior, not expert prediction
+    method: usability-testing
+related:
+  alongside: [heuristic-evaluation, cognitive-walkthrough]
+sources:
+  - title: "Usability Inspection Methods"
+    author: Jakob Nielsen & Robert L. Mack (Eds.)
+    url: https://www.wiley.com/en-us/Usability+Inspection+Methods-p-9780471018773
+    type: book
+    year: 1994
+    seminal: true
+  - title: "Expert Reviews"
+    author: Nielsen Norman Group
+    url: https://www.nngroup.com/articles/expert-reviews/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+One or a small number of experienced UX practitioners review an interface and give their professional judgment on what's working and what isn't — drawing on broad pattern-recognition from prior projects rather than a fixed checklist or a single defined task.
+
+## Purpose
+
+Gets a fast, experienced read on a design's overall quality and likely problem areas, without the setup cost of recruiting users or the narrower scope of a checklist-based inspection. It's especially good at catching issues a team is too close to the product to see themselves, and at pattern-matching against conventions the reviewer has seen fail elsewhere.
+
+## When to use
+
+- You want a broad, experienced opinion on a design's overall direction, not a narrow check against one task or one heuristic list
+- You need input fast — a single senior reviewer can turn around a useful review in hours
+- You want an outside perspective specifically because your team has been too close to the product to see it clearly
+- You're validating a design direction before committing budget to a fuller evaluation or user study
+
+## How to do it
+
+1. Choose reviewers for genuine relevant expertise — ideally at least one who has never seen the product before, since familiarity is exactly what limits an internal team's view.
+2. Give reviewers context: who the users are, what they're trying to do, and any real constraints (technical, business, timeline) that bound what's actually fixable.
+3. Have each reviewer go through the interface using realistic tasks, not just aimless browsing, so findings connect to actual user goals.
+4. Require a structured write-up per finding: what's wrong, why it matters, and (where possible) what would fix it — not just a list of things the reviewer personally dislikes.
+5. If using multiple reviewers, have them work independently first, the same way as a heuristic evaluation, before comparing notes.
+6. Rank findings by expected impact and feasibility, and separate "this breaks the task" from "this is a stylistic preference."
+
+## Common mistakes
+
+- **Treating a single reviewer's taste as fact** — expert review is judgment, not measurement; a second opinion or a follow-up study matters more here than in methods with harder data.
+- **Choosing reviewers with no relevant background** — a "fresh pair of eyes" without usability expertise gives you an opinion, not an expert review; the value of the method depends on genuine expertise.
+- **Skipping context on constraints** — a reviewer who doesn't know what's technically or contractually fixed will flag things the team already knows about and can't change, wasting the review's limited time.
+- **Presenting findings as unstructured feedback** — a rambling list of impressions is far less actionable than a ranked, reasoned set of specific problems.
+
+## Tips
+
+Ask the reviewer to separate "I would design this differently" from "users will struggle with this" explicitly in their write-up — the two get conflated constantly, and only the second is usually worth acting on without further validation.
+
+## Using AI
+
+**Where it helps**
+- Formatting a reviewer's raw notes or recording into a structured, ranked findings report
+- Drafting follow-up questions to ask the reviewer where a finding's reasoning or severity is unclear
+
+**Where it fails**
+- Substituting for the expert's judgment itself. The value of an expert review is a specific person's accumulated pattern-recognition from real projects and real failures — a model's "expert-sounding" critique is a plausible-looking simulation of that judgment with none of the track record behind it, and presenting it as an expert review misrepresents what actually backs the opinion.

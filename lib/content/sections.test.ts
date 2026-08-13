@@ -25,7 +25,7 @@ Record everything.
 **Where it helps**
 - Transcription
 
-**Where it produces confident garbage**
+**Where it fails**
 - Synthetic participants
 `;
 
@@ -40,7 +40,7 @@ describe('parseSections', () => {
   test('keeps multi-line section content intact', () => {
     const s = parseSections(body);
     expect(s['Using AI']).toContain('Where it helps');
-    expect(s['Using AI']).toContain('confident garbage');
+    expect(s['Using AI']).toContain('Where it fails');
   });
 
   test('ignores h3 and deeper headings', () => {

@@ -1,0 +1,78 @@
+---
+id: heuristic-evaluation
+title: Heuristic Evaluation
+aka: [expert heuristic review]
+category: evaluation
+alsoIn: []
+kind: method
+gives: qualitative
+effort: low
+timeframe: hours
+needs:
+  - 3-5 evaluators, each independently reviewing the interface
+  - A set of usability heuristics (Nielsen's 10 is the standard default)
+  - Access to the interface — prototype or live — with enough context on user goals to judge it against
+useInstead:
+  - when: You need evidence from real users, not expert judgment
+    method: usability-testing
+  - when: You want to trace specific user tasks step by step, not review screens broadly
+    method: cognitive-walkthrough
+related:
+  alongside: [cognitive-walkthrough, expert-review]
+sources:
+  - title: "Heuristic Evaluation of User Interfaces"
+    author: Jakob Nielsen & Rolf Molich
+    url: https://dl.acm.org/doi/10.1145/97243.97281
+    type: paper
+    year: 1990
+    seminal: true
+  - title: "How to Conduct a Heuristic Evaluation"
+    author: Nielsen Norman Group
+    url: https://www.nngroup.com/articles/how-to-conduct-a-heuristic-evaluation/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A small group of evaluators independently reviews an interface against a fixed set of usability principles — Nielsen's 10 heuristics, most commonly — and each writes up where the interface violates them.
+
+## Purpose
+
+Finds a broad set of usability problems fast and cheaply, without needing to recruit users or build a test protocol. It trades the behavioral certainty of usability testing for speed: a heuristic evaluation can run in an afternoon and catch the kind of violations (inconsistent labeling, poor error messages, hidden system status) that would otherwise only surface once real users hit them.
+
+## When to use
+
+- You need a fast, low-cost pass before investing in a full usability test
+- You're early enough that there's no built prototype to put in front of users yet, but there is a design to review
+- You want a baseline set of known issues to prioritize before a more expensive method
+- Budget or timeline genuinely doesn't allow for recruiting participants
+
+## How to do it
+
+1. Pick a heuristic set — Nielsen's 10 (visibility of system status, match between system and real world, user control and freedom, consistency and standards, error prevention, recognition over recall, flexibility and efficiency, aesthetic and minimalist design, help users recognize and recover from errors, help and documentation) covers most cases.
+2. Recruit 3-5 evaluators. Nielsen and Molich's original research found this range catches the majority of findable problems; a single evaluator misses too much, and returns drop sharply past five.
+3. Have each evaluator review the interface **independently**, at least twice — once to get a feel for the flow, once to go heuristic-by-heuristic against each screen.
+4. Each evaluator writes findings separately, citing the specific heuristic violated and a severity rating (cosmetic, minor, major, catastrophic).
+5. Only after independent review, aggregate findings across evaluators and deduplicate. Merging severity ratings before independent review contaminates the count of how many evaluators independently found the same problem — which is itself a strong severity signal.
+6. Prioritize fixes by severity and by how many evaluators independently flagged the same issue.
+
+## Common mistakes
+
+- **Running it as a group discussion instead of independent reviews** — groupthink collapses the range of problems found; the whole value of multiple evaluators is that they miss different things.
+- **Using one evaluator and calling it a heuristic evaluation** — a single reviewer's individual biases and blind spots go unchecked; Nielsen's research is specifically about the *aggregate* of several independent passes.
+- **Skipping severity ratings** — a flat list of "problems" without severity buries the catastrophic issue in a sea of cosmetic ones.
+- **Using evaluators with no usability background** — the method depends on evaluators who know the heuristics well enough to apply them consistently; untrained reviewers tend to produce generic opinions instead.
+
+## Tips
+
+Use "double experts" when you can — people who know both usability heuristics *and* the specific domain (e.g., healthcare, finance) tend to find more real problems than generalists, since domain-specific conventions matter as much as general usability principles.
+
+## Using AI
+
+**Where it helps**
+- Drafting an initial pass against each heuristic from a set of screenshots, as a starting checklist for a human evaluator to confirm, expand, or reject
+- Formatting and deduplicating multiple evaluators' raw notes into a single severity-ranked findings report
+
+**Where it fails**
+- Treating a single AI pass as equivalent to multiple independent expert evaluators. The method's statistical power comes specifically from several *different* people's independent judgment surfacing different problems — one model's single pass, however detailed, isn't a substitute for that, and presenting it as one is a claim the method itself doesn't support.

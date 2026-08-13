@@ -1,0 +1,78 @@
+---
+id: benchmark-testing
+title: Benchmark Testing
+aka: [UX benchmarking]
+category: evaluation
+alsoIn: [metrics-experimentation]
+kind: method
+gives: quantitative
+effort: medium
+timeframe: weeks
+needs:
+  - A fixed set of tasks and metrics you'll reuse identically across every measurement round
+  - 15-20+ participants per round for stable averages
+  - A defined cadence — quarterly, per release, etc. — for retesting the same benchmark
+useInstead:
+  - when: You need a single point-in-time comparison against competitors, not an internal baseline over time
+    method: comparative-testing
+  - when: You need to know why a metric changed, not just that it did
+    method: usability-testing
+related:
+  alongside: [comparative-testing]
+sources:
+  - title: "Quantifying the User Experience: Practical Statistics for User Research"
+    author: Jeff Sauro & James R. Lewis
+    url: https://www.sciencedirect.com/book/9780128023082/quantifying-the-user-experience
+    type: book
+    year: 2016
+    seminal: true
+  - title: "UX Benchmarking"
+    author: Nielsen Norman Group
+    url: https://www.nngroup.com/articles/ux-benchmarking-overview/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A task-based usability test run with a fixed protocol — same tasks, same metrics, same scale — repeated at a set cadence, purely to track whether the product's usability is improving, declining, or flat over time.
+
+## Purpose
+
+Turns "does this feel better than last release" into a number you can actually track, by holding the measurement instrument constant while the product changes underneath it. A single usability test tells you about today; a benchmark tells you about the trend.
+
+## When to use
+
+- You need to demonstrate whether usability investment is actually paying off across releases, to a team or stakeholders who want a number, not an anecdote
+- You're tracking a product over a long redesign or multi-quarter roadmap and want an early warning if usability regresses
+- You want a standing baseline to compare any future competitive or comparative test against
+- Leadership wants UX quality reported alongside other product metrics on a recurring cadence
+
+## How to do it
+
+1. Define a fixed task set and metric battery — task success rate, time on task, SEQ or SUS score — and commit to running the *same* protocol every round.
+2. Recruit 15-20+ participants per round from your actual target population, keeping recruitment criteria as consistent as possible round to round.
+3. Run the benchmark at a fixed cadence (quarterly, per major release) rather than opportunistically, so trend data is genuinely comparable.
+4. Resist the urge to "improve" the task wording or metrics between rounds — any change breaks comparability with prior rounds, even if the change is objectively better.
+5. Report results as a trend line across rounds, not just a single round's snapshot, and flag any round where a real product change likely explains a shift.
+6. If you must change the protocol (e.g., the old tasks no longer apply), run one round with both the old and new protocol side by side to bridge the trend line.
+
+## Common mistakes
+
+- **"Improving" the protocol between rounds** — even well-intentioned tweaks to task wording or scale break comparability with historical data, which defeats the entire purpose of a benchmark.
+- **Changing the participant recruitment criteria round to round** — a benchmark that quietly shifts from novice to expert users, or vice versa, produces a trend line that reflects the sample change, not the product.
+- **Treating a single round's number as meaningful without the trend** — one benchmark round establishes a baseline; its value is entirely in the comparison to future rounds, not as a standalone score.
+- **Running it too infrequently to catch regressions early** — an annual benchmark can let a usability regression compound across several releases before it's caught.
+
+## Tips
+
+Report benchmark trends alongside major product or design changes on a shared timeline — a dip that lines up with a specific release is a far more useful finding than the number in isolation.
+
+## Using AI
+
+**Where it helps**
+- Aggregating results across rounds into a consistent trend chart and flagging statistically meaningful shifts round over round
+- Drafting the standing protocol document so future rounds are run identically regardless of who's facilitating
+
+**Where it fails**
+- Estimating what a benchmark score "probably" is between rounds instead of measuring it. The entire value of a benchmark is a real, comparable measurement at each interval — a model's interpolated guess between two real data points isn't data, and treating it as a benchmark reading corrupts the trend line it's meant to inform.

@@ -1,28 +1,21 @@
+import { CategoryDashboardGrid } from '@/components/ui/CategoryDashboardGrid';
 import { getAllMethods } from '@/lib/content';
-import { CATEGORIES } from '@/lib/categories';
-import { Eyebrow } from '@/components/ui/Eyebrow';
-import { Kbd } from '@astryxdesign/core/Kbd';
-import { CategoryGroupList } from '@/components/ui/CategoryGroupList';
 
 export default function IndexPage() {
-  const methods = getAllMethods();
-  const counts: Record<string, number> = {};
-  for (const c of CATEGORIES) {
-    counts[c.id] = methods.filter((m) => m.category === c.id || m.alsoIn.includes(c.id)).length;
-  }
+  const allMethods = getAllMethods();
 
   return (
-    <main className="w-full p-6">
-      <Eyebrow>UX Methods</Eyebrow>
-      <h1 className="mt-3 text-4xl tracking-[-0.025em] text-primary">
-        A Cheatsheet
-      </h1>
-      <p className="mt-3 inline-flex flex-wrap items-center gap-1.5 text-secondary">
-        Press <Kbd keys="mod+k" /> to search by name, or by
-        what you are trying to learn.
-      </p>
+    <div className="w-full min-h-screen pb-16">
+      <div className="w-full px-8 sm:px-12 lg:px-16 pt-6 sm:pt-8">
+        {/* Cheatsheets Page Header Title */}
+        <div className="mb-8 sm:mb-10 pt-2">
+          <h1 className="text-4xl font-extrabold tracking-tight text-[#1A1A1A] sm:text-5xl lg:text-6xl">
+            Cheatsheets
+          </h1>
+        </div>
 
-      <CategoryGroupList counts={counts} />
-    </main>
+        <CategoryDashboardGrid allMethods={allMethods} />
+      </div>
+    </div>
   );
 }

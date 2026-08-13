@@ -1,0 +1,78 @@
+---
+id: pluralistic-walkthrough
+title: Pluralistic Walkthrough
+aka: [participatory walkthrough]
+category: evaluation
+alsoIn: []
+kind: method
+gives: qualitative
+effort: medium
+timeframe: hours
+needs:
+  - Printed or projected screens for a defined task sequence, plus room for a group session
+  - "A mixed panel: representative users, developers, and usability experts in the same room"
+  - A facilitator to run turn-taking and capture findings as the group works
+useInstead:
+  - when: You want one evaluator working alone through a task, not a group session
+    method: cognitive-walkthrough
+  - when: You need real users attempting the task unassisted, not narrating alongside a panel
+    method: usability-testing
+related:
+  alongside: [cognitive-walkthrough]
+sources:
+  - title: "The Pluralistic Usability Walkthrough: Coordinated Empathies"
+    author: Robert Bias
+    url: https://www.wiley.com/en-us/Usability+Inspection+Methods-p-9780471018773
+    type: book
+    year: 1994
+    seminal: true
+  - title: "Pluralistic Usability Walkthrough"
+    author: Usability Body of Knowledge (UXPA)
+    url: https://usabilitybok.org/pluralistic-usability-walkthrough
+    type: article
+    seminal: false
+---
+
+## What is it
+
+Representative users, developers, and usability experts sit down together and step through screens for a defined task in the same order a user would encounter them. Each person writes down what they'd do at that step *before* anyone discusses it, then the group compares notes and moves on.
+
+## Purpose
+
+Surfaces gaps between how designers, developers, and actual users each interpret the same screen, in one session — the developer explains what was intended, the user says what they'd actually try, and the usability expert flags what convention or principle is being broken, all before the next screen loads.
+
+## When to use
+
+- You want the perspectives of users, builders, and evaluators reconciled in the same room rather than in three separate reports
+- The team has strong assumptions about how a flow will be understood that are worth stress-testing against real users, live
+- You're early enough that paper or low-fidelity screens are enough to walk through
+- You want a fast way to build shared team understanding of usability problems, not just a findings document
+
+## How to do it
+
+1. Define the task and lay out screens in the exact order a user would move through them, one per step.
+2. Recruit a mixed panel: a few representative users, a few product/dev team members, and one or more usability experts, all in the same session.
+3. At each screen, everyone — including team members — independently writes down what action they'd take, *before* any discussion, so team members' answers aren't contaminated by already knowing the "right" path.
+4. Compare answers as a group. Where users diverge from the intended path, discuss why, with the usability expert framing it against known principles.
+5. Move to the next screen only after discussion — the walkthrough follows the task's real order, not a jump to wherever a problem was flagged.
+6. Have the facilitator log every divergence and its proposed cause as the session runs, rather than reconstructing findings from memory afterward.
+
+## Common mistakes
+
+- **Letting team members answer after seeing the user's response** — the requirement to write down an answer independently, before discussion, is what prevents the "well obviously you'd click here" hindsight bias.
+- **Running it out of task order** — the method depends on each participant experiencing the flow the way a real user would, screen by screen; skipping around breaks that.
+- **Excluding developers or product owners from the panel** — part of the value is that the people who built the thing hear directly, in the room, where their mental model diverges from a real user's.
+- **Letting one strong voice dominate discussion** — the facilitator needs to actively draw out quieter participants, especially users in a room with more vocal team members.
+
+## Tips
+
+Keep the panel small enough to manage — 3-4 users plus a handful of team members is usually the ceiling before turn-taking and discussion time balloon past what a single session can hold.
+
+## Using AI
+
+**Where it helps**
+- Preparing the screen sequence and facilitator script ahead of the session from an existing prototype or flow
+- Structuring the facilitator's raw session notes into a per-screen log of divergences and their likely causes afterward
+
+**Where it fails**
+- Simulating what "users" or "developers" would say at each screen instead of running the live session. The entire mechanism of this method is real people's independent, in-the-moment reactions compared against each other — a model generating plausible reactions for either role skips the actual comparison the walkthrough is built to produce.

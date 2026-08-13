@@ -12,14 +12,14 @@ export function CategoryBanner({
 
   return (
     <div
-      className="mb-10 relative flex min-h-[40vh] flex-col justify-between overflow-hidden rounded-3xl p-8 sm:p-12 shadow-2xl"
+      className="mb-10 relative flex min-h-[40vh] flex-col justify-between overflow-hidden rounded-3xl p-8 sm:p-12 transition-colors"
       style={{ backgroundColor: color.hex }}
     >
       {/* Top action bar */}
       <div className="relative z-10 flex items-center justify-between">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 rounded-full bg-[#101014]/80 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white transition-transform hover:scale-105 hover:bg-[#101014]"
+          className="inline-flex items-center gap-2 rounded-full bg-black/20 backdrop-blur-md border border-white/20 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white transition-transform hover:scale-105 hover:bg-black/35"
         >
           <span>←</span>
           <span>Back to All</span>
@@ -27,7 +27,7 @@ export function CategoryBanner({
       </div>
 
       {/* Main banner title */}
-      <div className="relative z-10 my-auto pt-8">
+      <div className="relative z-10 my-auto pt-6">
         <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-7xl">
           {title}
         </h1>

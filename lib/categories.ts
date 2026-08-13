@@ -24,9 +24,9 @@ export const CATEGORIES: readonly Category[] = [
   { id: 'prototyping', number: '11', title: 'Prototyping' },
   { id: 'evaluation', number: '12', title: 'Evaluation' },
   { id: 'accessibility', number: '13', title: 'Accessibility' },
-  { id: 'service-design', number: '14', title: 'Service Design' },
-  { id: 'ai-design', number: '15', title: 'AI Design' },
-  { id: 'metrics-experimentation', number: '16', title: 'Metrics & Experimentation' },
+  { id: 'ai-design', number: '14', title: 'AI Design' },
+  { id: 'metrics-experimentation', number: '15', title: 'Metrics & Experimentation' },
+  { id: 'service-design', number: '16', title: 'Service Design' },
   { id: 'design-systems', number: '17', title: 'Design Systems' },
   { id: 'facilitation', number: '18', title: 'Facilitation' },
   { id: 'communication', number: '19', title: 'Communication' },
@@ -85,5 +85,13 @@ export const CATEGORY_GROUPS: readonly CategoryGroup[] = [
 ] as const;
 
 export function getCategory(id: string): Category | undefined {
-  return CATEGORIES.find((c) => c.id === id);
+  if (!id) return undefined;
+  const normId = id.toLowerCase().trim();
+  return CATEGORIES.find((c) => c.id === normId || c.title.toLowerCase().trim() === normId);
+}
+
+export function getCategoryGroup(categoryId: string): CategoryGroup | undefined {
+  if (!categoryId) return undefined;
+  const normId = categoryId.toLowerCase().trim();
+  return CATEGORY_GROUPS.find((group) => group.categoryIds.includes(normId));
 }
