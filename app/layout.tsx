@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         category: categoryMeta?.title || m.category,
         kind: m.kind || inferKind(m.title, m.category, m.id),
         group: '',
-        href: `/m/${m.id}`,
+        href: `/c/${m.category}?item=${m.id}`,
       },
     };
   });

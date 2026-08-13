@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import Link from 'next/link';
 import type { Method } from '@/lib/content';
+import { useMethodLookup, type MethodLookupEntry } from '@/components/ui/PaletteProvider';
 
 export interface ConceptSheetItem {
   id: string;
@@ -276,7 +277,142 @@ function CollapsibleSection({
   );
 }
 
+const SECTION_HEADING_STYLE: React.CSSProperties = { fontSize: '28px', fontWeight: 600, lineHeight: '1.3' };
+const SECTION_BODY_STYLE: React.CSSProperties = { fontSize: '20px', fontWeight: 400, lineHeight: '1.6' };
+const FURTHER_READING_STYLE: React.CSSProperties = { fontSize: '16px', fontWeight: 400, lineHeight: '1.6' };
+const SECTION_EMPTY_STYLE: React.CSSProperties = { fontSize: '18px' };
+
+/** Gray, rectangular-rounded (not pill-rounded) tag used for related/alternative method links */
+const TAG_LINK_CLASS =
+  'inline-flex items-center rounded-lg bg-border/40 px-3 py-1.5 font-semibold text-primary hover:bg-border/60 transition-colors';
+const TAG_STATIC_CLASS =
+  'inline-flex items-center rounded-lg bg-border/40 px-3 py-1.5 font-semibold text-secondary';
+
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 style={SECTION_HEADING_STYLE} className="text-primary tracking-tight">
+      {children}
+    </h2>
+  );
+}
+
+function SectionEmptyState() {
+  return (
+    <p style={SECTION_EMPTY_STYLE} className="text-secondary">
+      Content queued for the next release.
+    </p>
+  );
+}
+
+function WhenNotToUseSection({
+  entries,
+  lookup,
+}: {
+  entries?: Method['useInstead'];
+  lookup: Map<string, MethodLookupEntry>;
+}) {
+  return (
+    <div className="space-y-4">
+      <SectionHeading>When Not to Use</SectionHeading>
+      {entries && entries.length > 0 ? (
+        <ul className="space-y-4">
+          {entries.map((e) => {
+            const target = lookup.get(e.method);
+            return (
+              <li key={`${e.when}-${e.method}`} className="space-y-2">
+                <p style={SECTION_BODY_STYLE} className="text-secondary">
+                  {e.when}
+                </p>
+                {target?.href ? (
+                  <Link href={target.href} style={SECTION_BODY_STYLE} className={TAG_LINK_CLASS}>
+                    {target.title}
+                  </Link>
+                ) : (
+                  <span style={SECTION_BODY_STYLE} className={TAG_STATIC_CLASS}>
+                    {target?.title ?? e.method}
+                  </span>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <SectionEmptyState />
+      )}
+    </div>
+  );
+}
+
+function RelatedTopicsSection({
+  related,
+  lookup,
+}: {
+  related?: Method['related'];
+  lookup: Map<string, MethodLookupEntry>;
+}) {
+  const ids = related ? [...related.before, ...related.after, ...related.alongside] : [];
+
+  return (
+    <div className="space-y-4">
+      <SectionHeading>Related Topics</SectionHeading>
+      {ids.length > 0 ? (
+        <div className="flex flex-wrap items-center gap-3">
+          {ids.map((id) => {
+            const target = lookup.get(id);
+            return target?.href ? (
+              <Link key={id} href={target.href} style={SECTION_BODY_STYLE} className={TAG_LINK_CLASS}>
+                {target.title}
+              </Link>
+            ) : (
+              <span key={id} style={SECTION_BODY_STYLE} className={TAG_STATIC_CLASS}>
+                {target?.title ?? id}
+              </span>
+            );
+          })}
+        </div>
+      ) : (
+        <SectionEmptyState />
+      )}
+    </div>
+  );
+}
+
+function FurtherReadingSection({ sources }: { sources?: Method['sources'] }) {
+  return (
+    <div className="space-y-4">
+      <SectionHeading>Further Reading</SectionHeading>
+      {sources && sources.length > 0 ? (
+        <ul className="space-y-4">
+          {sources.map((s) => (
+            <li key={s.url}>
+              <a
+                href={s.url}
+                target="_blank"
+                rel="noreferrer"
+                style={FURTHER_READING_STYLE}
+                className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
+              >
+                {s.title}
+              </a>
+              <span style={FURTHER_READING_STYLE} className="text-secondary">
+                {' '}
+                — {s.author}
+                {s.year ? `, ${s.year}` : ''}
+                {s.seminal ? ' · seminal' : ''}
+              </span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <SectionEmptyState />
+      )}
+    </div>
+  );
+}
+
 export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
+  const lookup = useMethodLookup();
+
   // Lock body scroll and listen for Escape key
   useEffect(() => {
     if (!item) return;
@@ -370,7 +506,7 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
             </div>
 
             {/* Scrollable Content Body (Flat Laws of UX Layout) */}
-            <div className="flex-1 overflow-y-auto px-8 sm:px-14 pt-2 pb-10 space-y-10 bg-surface">
+            <div className="flex-1 overflow-y-auto px-8 sm:px-14 pt-2 pb-10 space-y-16 bg-surface">
               {/* Overview Paragraph: Strictly 28px Semibold */}
               <div className="pb-8 border-b border-border/40">
                 <FormattedText
@@ -420,17 +556,6 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
                         </div>
                       );
                     })}
-
-                  {/* Bottom Action Link */}
-                  <div className="pt-8 flex justify-start border-t border-border/40">
-                    <Link
-                      href={`/m/${item.id}`}
-                      className="inline-flex items-center gap-3 text-lg font-bold text-primary hover:underline"
-                    >
-                      <span>View Full Standalone Method Page</span>
-                      <span>→</span>
-                    </Link>
-                  </div>
                 </div>
               ) : (
                 /* Unwritten item preview block */
@@ -461,15 +586,10 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
                 </div>
               )}
 
-              {/* Further Reading (always present, content queued for later) */}
-              <div className="pt-8 border-t border-border/40">
-                <h2
-                  style={{ fontSize: '28px', fontWeight: 600, lineHeight: '1.3' }}
-                  className="text-primary tracking-tight"
-                >
-                  Further Reading
-                </h2>
-              </div>
+              {/* When Not to Use / Related Topics / Further Reading — real data for written methods, queued placeholder otherwise */}
+              <WhenNotToUseSection entries={item.method?.useInstead} lookup={lookup} />
+              <RelatedTopicsSection related={item.method?.related} lookup={lookup} />
+              <FurtherReadingSection sources={item.method?.sources} />
             </div>
           </motion.div>
         </>

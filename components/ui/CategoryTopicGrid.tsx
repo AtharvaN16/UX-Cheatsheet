@@ -11,9 +11,7 @@ import { ConceptSheetModal, type ConceptSheetItem, SHEET_TRANSITION } from '@/co
 import { CategoryBanner } from '@/components/ui/CategoryBanner';
 import { inferKind } from '@/lib/inferKind';
 
-export interface CategoryItem extends ConceptSheetItem {
-  href?: string;
-}
+export type CategoryItem = ConceptSheetItem;
 
 interface CategoryTopicGridProps {
   categoryId: string;
@@ -98,7 +96,6 @@ export function CategoryTopicGrid({
             title: item.title,
             topicTitle: groupTitle,
             description: cleanDesc,
-            href: `/m/${item.id}`,
             isWritten: !!written,
             kind: itemKind,
             method: written,
@@ -118,7 +115,6 @@ export function CategoryTopicGrid({
           title: written.title,
           topicTitle: categoryTitle,
           description: cleanDesc,
-          href: `/m/${written.id}`,
           isWritten: true,
           kind: written.kind || inferKind(written.title, categoryId, written.id),
           method: written,

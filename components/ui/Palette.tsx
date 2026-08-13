@@ -101,7 +101,7 @@ export function Palette({
         const item = items.find((i) => i.id === id);
         push(id);
         onOpenChange(false);
-        router.push(item?.auxiliaryData.href ?? `/m/${id}`);
+        router.push(item?.auxiliaryData.href ?? '/');
       }}
       renderItem={(item, isSelected) => {
         const typeBadgeStyle = getTypeBadgeStyle(item.auxiliaryData.kind);

@@ -8,7 +8,7 @@ const OTHER_ITEMS = ['Books', 'Courses', 'Checklists', 'Quotes'] as const;
 
 export function AppNavbar() {
   const pathname = usePathname();
-  const cheatsheetActive = pathname === '/' || pathname.startsWith('/m/');
+  const cheatsheetActive = pathname === '/';
   const { open } = usePaletteControls();
 
   return (
