@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
 import { getMethodsByCategory } from '@/lib/content';
 import { CATEGORIES, getCategory } from '@/lib/categories';
@@ -24,13 +25,15 @@ export default async function CategoryPage({
   return (
     <div className="w-full min-h-screen pb-16">
       <div className="w-full px-[32px] pt-6">
-        <CategoryTopicGrid
-          categoryId={category}
-          categoryTitle={meta.title}
-          groups={groups}
-          methods={primary}
-          secondaryMethods={secondary}
-        />
+        <Suspense fallback={null}>
+          <CategoryTopicGrid
+            categoryId={category}
+            categoryTitle={meta.title}
+            groups={groups}
+            methods={primary}
+            secondaryMethods={secondary}
+          />
+        </Suspense>
       </div>
     </div>
   );

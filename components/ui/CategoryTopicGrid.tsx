@@ -2,7 +2,8 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
-import { motion } from 'motion/react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { motion, AnimatePresence } from 'motion/react';
 import type { Method } from '@/lib/content';
 import type { TaxonomyGroup } from '@/lib/taxonomy';
 import { get1Liner } from '@/lib/taxonomyDescriptions';
@@ -29,9 +30,12 @@ export function CategoryTopicGrid({
   methods,
   secondaryMethods = [],
 }: CategoryTopicGridProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [kindFilter, setKindFilter] = useState<'all' | 'method' | 'framework' | 'concept'>('all');
+  const [effortFilter, setEffortFilter] = useState<'all' | 'low' | 'medium' | 'high'>('all');
   const [sortOrder, setSortOrder] = useState<'default' | 'a-z' | 'z-a'>('default');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedConcept, setSelectedConcept] = useState<CategoryItem | null>(null);
@@ -125,6 +129,18 @@ export function CategoryTopicGrid({
     return list;
   }, [groups, categoryTitle, categoryId, writtenMap]);
 
+  // Deep link from search (e.g. /c/ux-psychology?item=hicks-law): open that item's sheet on load
+  useEffect(() => {
+    const deepLinkId = searchParams.get('item');
+    if (!deepLinkId) return;
+
+    const match = allItems.find((i) => i.id === deepLinkId);
+    if (match) setSelectedConcept(match);
+
+    router.replace(`/c/${categoryId}`, { scroll: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams, allItems, categoryId]);
+
   // Compute unique topic tabs
   const tabs = useMemo(() => {
     const topicSet = new Set<string>();
@@ -153,6 +169,14 @@ export function CategoryTopicGrid({
       });
     }
 
+    // Filter by effort (only meaningful when narrowed to Methods)
+    if (kindFilter === 'method' && effortFilter !== 'all') {
+      result = result.filter((item) => {
+        const e = (item.method?.effort || 'low').toLowerCase().trim();
+        return e === effortFilter;
+      });
+    }
+
     // Filter down to bookmarked items only
     if (showBookmarkedOnly) {
       result = result.filter((item) => bookmarkedIds.has(item.id));
@@ -174,9 +198,22 @@ export function CategoryTopicGrid({
     }
 
     return result;
-  }, [allItems, activeTab, kindFilter, searchQuery, sortOrder, showBookmarkedOnly, bookmarkedIds]);
+  }, [allItems, activeTab, kindFilter, effortFilter, searchQuery, sortOrder, showBookmarkedOnly, bookmarkedIds]);
 
   const isModalOpen = selectedConcept !== null;
+
+  // Escape on the topic page (sheet closed) navigates back to the main cheatsheet page.
+  // When the sheet is open, ConceptSheetModal owns Escape and closes itself instead.
+  useEffect(() => {
+    if (isModalOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') router.push('/');
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isModalOpen, router]);
 
   return (
     <>
@@ -283,7 +320,7 @@ export function CategoryTopicGrid({
               <button
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
                 className={`inline-flex items-center gap-2 rounded-full border border-[#E5E2D9] px-4 py-2.5 text-sm font-medium transition-colors ${
-                  isFilterOpen || kindFilter !== 'all' || sortOrder !== 'default'
+                  isFilterOpen || kindFilter !== 'all' || sortOrder !== 'default' || effortFilter !== 'all'
                     ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
                     : 'bg-white text-[#1A1A1A] hover:bg-[#F0EDE6]'
                 }`}
@@ -292,7 +329,7 @@ export function CategoryTopicGrid({
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.707 7.293A1 1 0 013 6.586V4z" />
                 </svg>
                 <span>Filter and sort</span>
-                {(kindFilter !== 'all' || sortOrder !== 'default') && (
+                {(kindFilter !== 'all' || sortOrder !== 'default' || effortFilter !== 'all') && (
                   <span className="ml-1 rounded-full bg-white/20 px-2 py-0.5 text-xs font-bold">
                     !
                   </span>
@@ -309,12 +346,13 @@ export function CategoryTopicGrid({
 
                   <div className="absolute right-0 mt-3 z-50 w-80 sm:w-96 rounded-2xl border border-[#E5E2D9] bg-[#FAF8F5] p-6 shadow-2xl space-y-5 text-[#1A1A1A]">
                     {/* Header */}
-                    <div className="flex items-center justify-between border-b border-[#E6E3DA] pb-3">
+                    <div className="flex items-center justify-between">
                       <h3 className="text-xl font-bold text-[#1A1A1A] tracking-tight">Filter and sort</h3>
-                      {(kindFilter !== 'all' || sortOrder !== 'default') && (
+                      {(kindFilter !== 'all' || sortOrder !== 'default' || effortFilter !== 'all') && (
                         <button
                           onClick={() => {
                             setKindFilter('all');
+                            setEffortFilter('all');
                             setSortOrder('default');
                           }}
                           className="text-xs font-semibold text-[#737067] hover:text-[#1A1A1A] underline"
@@ -325,7 +363,7 @@ export function CategoryTopicGrid({
                     </div>
 
                     {/* Section 1: Sort by */}
-                    <div className="border-b border-[#E6E3DA] pb-4 space-y-3">
+                    <div className="space-y-3">
                       <button
                         type="button"
                         onClick={() => setSortSectionOpen((v) => !v)}
@@ -390,19 +428,57 @@ export function CategoryTopicGrid({
                             { id: 'framework', label: 'Frameworks' },
                             { id: 'concept', label: 'Concepts' },
                           ].map((t) => (
-                            <label
-                              key={t.id}
-                              className="flex items-center gap-3 cursor-pointer group text-base font-medium text-[#1A1A1A] hover:text-black"
-                            >
-                              <input
-                                type="radio"
-                                name="kindFilter"
-                                checked={kindFilter === t.id}
-                                onChange={() => setKindFilter(t.id as any)}
-                                className="w-5 h-5 border-[#D1CEC4] text-[#1A1A1A] focus:ring-0 cursor-pointer"
-                              />
-                              <span>{t.label}</span>
-                            </label>
+                            <div key={t.id}>
+                              <label className="flex items-center gap-3 cursor-pointer group text-base font-medium text-[#1A1A1A] hover:text-black">
+                                <input
+                                  type="radio"
+                                  name="kindFilter"
+                                  checked={kindFilter === t.id}
+                                  onChange={() => {
+                                    setKindFilter(t.id as any);
+                                    if (t.id !== 'method') setEffortFilter('all');
+                                  }}
+                                  className="w-5 h-5 border-[#D1CEC4] text-[#1A1A1A] focus:ring-0 cursor-pointer"
+                                />
+                                <span>{t.label}</span>
+                              </label>
+
+                              {/* Progressive disclosure: Effort options only when Methods is selected */}
+                              <AnimatePresence initial={false}>
+                                {t.id === 'method' && kindFilter === 'method' && (
+                                  <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: 'auto', opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{ duration: 0.2, ease: [0.32, 0.72, 0, 1] }}
+                                    className="overflow-hidden"
+                                  >
+                                    <div className="pl-8 pt-2.5 space-y-2.5">
+                                      {[
+                                        { id: 'all', label: 'All' },
+                                        { id: 'low', label: 'Low' },
+                                        { id: 'medium', label: 'Medium' },
+                                        { id: 'high', label: 'High' },
+                                      ].map((e) => (
+                                        <label
+                                          key={e.id}
+                                          className="flex items-center gap-3 cursor-pointer group text-sm font-medium text-[#3A3834] hover:text-black"
+                                        >
+                                          <input
+                                            type="radio"
+                                            name="effortFilter"
+                                            checked={effortFilter === e.id}
+                                            onChange={() => setEffortFilter(e.id as any)}
+                                            className="w-4 h-4 border-[#D1CEC4] text-[#1A1A1A] focus:ring-0 cursor-pointer"
+                                          />
+                                          <span>{e.label}</span>
+                                        </label>
+                                      ))}
+                                    </div>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </div>
                           ))}
                         </div>
                       )}

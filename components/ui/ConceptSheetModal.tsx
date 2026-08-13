@@ -334,7 +334,7 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
             <div className="w-full h-2.5 shrink-0" style={{ backgroundColor: kindTheme.barHex }} />
 
             {/* Header: Top Row (Effort Pill + ESC Button), Main Title below */}
-            <div className="flex flex-col gap-4 px-8 sm:px-14 py-8 border-b border-border/40 bg-surface">
+            <div className="flex flex-col gap-4 px-8 sm:px-14 pt-8 pb-4 bg-surface">
               {/* Top Row: Effort Pill on left (only for methods), ESC button on right */}
               <div className="flex items-center justify-between gap-4">
                 {isMethod ? (
@@ -370,12 +370,12 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
             </div>
 
             {/* Scrollable Content Body (Flat Laws of UX Layout) */}
-            <div className="flex-1 overflow-y-auto px-8 sm:px-14 py-10 space-y-10 bg-surface">
+            <div className="flex-1 overflow-y-auto px-8 sm:px-14 pt-2 pb-10 space-y-10 bg-surface">
               {/* Overview Paragraph: Strictly 28px Semibold */}
               <div className="pb-8 border-b border-border/40">
                 <FormattedText
                   content={item.description}
-                  style={{ fontSize: '28px', fontWeight: 600, lineHeight: '1.4' }}
+                  style={{ fontSize: '30px', fontWeight: 600, lineHeight: '1.4' }}
                   className="text-primary tracking-tight"
                 />
               </div>
@@ -460,6 +460,16 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
                   </div>
                 </div>
               )}
+
+              {/* Further Reading (always present, content queued for later) */}
+              <div className="pt-8 border-t border-border/40">
+                <h2
+                  style={{ fontSize: '28px', fontWeight: 600, lineHeight: '1.3' }}
+                  className="text-primary tracking-tight"
+                >
+                  Further Reading
+                </h2>
+              </div>
             </div>
           </motion.div>
         </>

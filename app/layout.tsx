@@ -59,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               category: categoryName,
               kind,
               group: '',
-              href: `/c/${catTax.categoryId}`,
+              href: `/c/${catTax.categoryId}?item=${item.id}`,
             },
           });
 
