@@ -1,0 +1,91 @@
+---
+id: risk-matrix
+title: Risk Matrix
+aka: ["Probability-Impact Matrix", "Risk Assessment Matrix"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: mixed
+effort: low
+timeframe: hours
+needs:
+  - A list of identified risks to assess
+  - Rough estimates of each risk's likelihood and its impact if it occurs
+useInstead:
+  - when: You need to model a full sequence of dependent decisions and probabilities, not just rank standalone risks
+    method: decision-trees
+  - when: The goal is generating concrete failure scenarios in the first place, not scoring risks you've already named
+    method: pre-mortem
+related:
+  before: [pre-mortem]
+  alongside: [decision-trees, assumption-mapping]
+sources:
+  - title: "Project Management Body of Knowledge (PMBOK Guide)"
+    author: Project Management Institute
+    url: https://en.wikipedia.org/wiki/Project_Management_Body_of_Knowledge
+    type: standard
+    seminal: true
+  - title: "How to Use a Risk Matrix in Project Management"
+    author: Project Management Academy
+    url: https://projectmanagementacademy.net/resources/blog/risk-matrix/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A grid that scores each identified risk on two axes — probability of occurring and impact if it does — and plots them together into a ranked view of which risks deserve attention first.
+
+## Overview & Purpose
+
+Not every risk deserves equal attention, and without a structured way to compare them, teams tend to focus on whichever risk was mentioned most recently or most loudly (availability bias, not actual severity). The risk matrix forces every identified risk through the same two-axis scoring, so a low-probability catastrophic risk and a high-probability minor annoyance can be compared on the same terms instead of by gut feel.
+
+## When to use
+
+- You have a list of known risks — technical, product, or organizational — and need to decide which ones to actively mitigate versus monitor versus ignore.
+- You're presenting risk to a stakeholder or leadership audience that needs a fast, visual way to see relative severity.
+- Before a launch, migration, or any high-stakes change where several distinct things could go wrong and resources for mitigation are limited.
+
+## Structure
+
+- **Probability axis**: how likely the risk is to occur, typically scored low/medium/high or on a numeric scale.
+- **Impact axis**: how severe the consequence would be if it occurred, scored on the same kind of scale.
+- **Risk score**: probability × impact, used to rank risks against each other.
+- **Zones**: risks typically get grouped into accept (low score — monitor only), mitigate (medium score — active plan needed), and escalate/avoid (high score — needs immediate action or a decision to not proceed).
+
+## How to use
+
+1. List every risk identified for the project or decision — pull from a pre-mortem, a team retro, or direct domain knowledge.
+2. Score each risk's probability and impact independently; scoring them together tends to conflate "scary" with "likely."
+3. Plot every risk on the grid and read off the zone it falls into.
+4. For anything in the mitigate or escalate zones, assign an owner and a specific mitigation action — a risk with no owner tends to just sit on the matrix unaddressed.
+5. Revisit the matrix as the project progresses; probability and impact both shift as more information becomes available.
+
+## Example
+
+A team launching a redesign scores "users can't find the new checkout flow" as high probability / high impact (top priority — needs a mitigation plan, likely a phased rollout or in-product guidance), and "the new color palette clashes with an obscure legacy print material" as low probability / low impact (accept and move on).
+
+## Common mistakes
+
+- **Scoring probability and impact as one combined gut feeling** — this collapses the two axes back into an undifferentiated severity guess, defeating the purpose of separating them.
+- **Listing risks without assigning an owner or action** — a populated matrix with no follow-through is a documentation exercise, not a risk-management one.
+- **Treating the scores as precise** — probability and impact estimates are usually rough; the matrix is for relative ranking, not for producing a defensible exact number.
+
+## Limitations
+
+- **Inputs are subjective**: probability and impact are usually estimated by the same team that's invested in the project succeeding, which can systematically understate both.
+- **Doesn't capture risk interactions**: two medium risks that compound each other if both occur simultaneously aren't well represented by scoring each in isolation.
+- **A coarse grid loses information**: collapsing continuous probability and impact into low/medium/high buckets can put genuinely different risks in the same cell.
+
+## Tips
+
+Pair it with a pre-mortem to generate the risk list in the first place — a risk matrix is only as good as the risks someone thought to put on it, and a pre-mortem's specific, concrete failure scenarios tend to surface better raw material than an unstructured brainstorm.
+
+## Using AI
+
+**Where it helps**
+- Drafting an initial risk list from a project description as a starting point for the team to refine, expand, and re-score.
+- Formatting and sorting a long list of team-identified risks into the matrix quickly.
+
+**Where it fails**
+- Probability and impact estimates require real context about your specific team, users, and technical environment — a model's scores can look calibrated while being generic guesses, and treating them as the real assessment skips the domain judgment the exercise depends on.

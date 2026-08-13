@@ -1,0 +1,85 @@
+---
+id: product-strategy
+title: Product Strategy
+aka: ["Strategy Document", "Product Strategy Framework"]
+category: strategic-thinking
+alsoIn: []
+kind: method
+gives: conceptual
+effort: high
+timeframe: ongoing
+needs:
+  - A clear point of view on which customer and problem you're building for
+  - Visibility into the competitive landscape and what makes your position defensible
+  - Enough leadership alignment to make real trade-offs, including saying no
+useInstead:
+  - when: You need to explore and test the solution space for one specific problem, not set overall direction
+    method: opportunity-solution-tree
+  - when: You need to communicate a single initiative's rationale in narrative form for a launch decision
+    method: working-backwards-pr-faq
+related:
+  after: [okrs]
+  alongside: [north-star-metric, product-market-fit]
+sources:
+  - title: "Getting better at product strategy"
+    author: Lenny Rachitsky
+    url: https://www.lennysnewsletter.com/p/getting-better-at-product-strategy
+    type: article
+    seminal: false
+  - title: "Strategy Blocks: an operator's guide to product strategy"
+    author: Lenny Rachitsky
+    url: https://www.lennysnewsletter.com/p/strategy-blocks-an-operators-guide
+    type: article
+    seminal: false
+  - title: "7 Powers: The Foundations of Business Strategy"
+    author: Hamilton Helmer
+    url: https://7powers.com/
+    type: book
+    year: 2016
+    seminal: true
+---
+
+## What is it
+
+The small set of choices about who you serve, what problem you solve for them, and how you win — the thing that shapes the roadmap, what gets built, and what gets deliberately left undone. As a designer, you rarely author the document, but you design inside it.
+
+## Purpose
+
+Gives a team a shared answer to "why this and not that" so a hundred smaller decisions don't each need a meeting. A real strategy names a sacrifice — a market it won't chase, a feature it won't build — because a plan with no trade-offs isn't a strategy, it's a wish list.
+
+## When to use
+
+- Kicking off a new product area or major initiative, where the roadmap has no coherent "why" yet
+- A roadmap conversation keeps re-litigating the same disagreement because there's no stated position to point back to
+- You're a designer trying to figure out whether a request fits the actual strategy or is scope creep dressed as a priority
+- Leadership alignment has drifted and decisions are increasingly being made ad hoc, initiative by initiative
+
+## How to do it
+
+1. Start from a real customer and problem, not a market category — "who exactly are we building for, and what are they stuck on" beats "we're building a platform for X industry."
+2. State the choice about how you win, not just what you'll build. Helmer's 7 Powers framing is useful here: name the specific benefit (better margins, higher retention, lower cost) and the barrier that stops a competitor from copying it once it works — a strategy that's only a good idea, with no barrier, gets copied in a quarter.
+3. Write down what you are explicitly not doing, and why. This is usually the hardest and most valuable sentence in the document.
+4. Connect the strategy to a small number of measurable bets — not vague aspirations — so it's falsifiable rather than just aspirational.
+5. Socialize it as a working document that changes as you learn, not a plaque. Rachitsky's "Strategy Blocks" framing treats strategy as decomposable, revisitable pieces rather than a single monolithic plan handed down once.
+6. Push the strategy down to a level a designer can act on: it should be specific enough that you can tell whether a given feature request is on-strategy or off-strategy without asking.
+
+## Common mistakes
+
+- **A roadmap with no stated outcome**: a list of features isn't a strategy — it's the symptom sometimes called the build trap, optimizing for shipped output with no stated bet on what outcome it produces.
+- **No sacrifice, so no strategy**: if the document doesn't name something the team is deliberately not doing, it's a wish list wearing a strategy's clothes.
+- **Writing it once and never revisiting**: markets move; a strategy that isn't updated as assumptions get tested calcifies into stale direction nobody actually follows.
+- **Strategy written for executives, illegible to designers**: if a designer can't use the document to decide whether a given feature belongs, it hasn't actually been pushed down to where decisions get made.
+- **Confusing a Power with a good idea**: an improvement that's easy to copy isn't a moat, however good it is — the barrier matters as much as the benefit.
+
+## Tips
+
+Test your own strategy with the question a designer should always ask of any decision framework here: what would make this fail, and would you notice? A strategy nobody could ever prove wrong isn't specific enough to be useful.
+
+## Using AI
+
+**Where it helps**
+- Stress-testing a draft strategy as a skeptical stakeholder — generating counter-arguments and the most likely reasons a competitor could copy the approach
+- Summarizing scattered strategy inputs (research notes, competitive scans, past roadmap docs) into a first-draft structure for a human to sharpen
+
+**Where it fails**
+- Generating the strategic choice itself. The hard part of product strategy is picking what to sacrifice under real uncertainty about your specific market and org — a model producing a fluent-sounding strategy document creates the appearance of judgment having happened without the underlying trade-off actually being made by anyone accountable for it.

@@ -1,0 +1,72 @@
+---
+id: inversion
+title: Inversion
+aka: ["Invert, Always Invert", "Inversion Thinking"]
+category: strategic-thinking
+alsoIn: []
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - A clearly stated goal or plan to invert
+useInstead:
+  - when: You need your team to catalog specific, concrete failure reasons together, not just apply the mental model solo
+    method: pre-mortem
+  - when: You want someone actively arguing against your plan from an adversarial stance, not just imagining failure modes
+    method: red-teaming
+related:
+  alongside: [first-principles, pre-mortem]
+  after: [pre-mortem]
+sources:
+  - title: "A Lesson on Elementary, Worldly Wisdom As It Relates To Investment Management & Business"
+    author: Charlie Munger
+    url: https://fs.blog/great-talks/a-lesson-on-worldly-wisdom/
+    type: article
+    year: 1994
+    seminal: true
+  - title: "Inversion"
+    author: Shane Parrish / Farnam Street
+    url: https://fs.blog/inversion/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+Solving a problem backward: instead of asking how to achieve a goal, ask what would guarantee its failure — then avoid those things.
+
+## Why it matters
+
+Some problems resist being solved forward. "How do I make this launch succeed?" is vague enough to invite optimism. "What would make this launch fail?" is specific enough to invite honesty. Munger's own framing — "I want to know where I'm going to die, so I'll never go there" — is the whole method in one line: avoiding stupidity is a more reliable route to a good outcome than chasing brilliance.
+
+## Key ideas
+
+- **Forward and backward are different questions**: "how do I succeed" and "what guarantees failure" don't always surface the same list — inversion catches blind spots the forward question skips.
+- **It surfaces hidden assumptions**: asking what has to be true for a plan to fail forces you to name what has to be true for it to work, which is often left implicit.
+- **Avoiding stupidity beats seeking brilliance**: a decision-maker who eliminates every obvious way to fail ends up with a shorter, higher-quality list of options than one chasing the single best move.
+
+## Application
+
+- Before committing to a roadmap, ask "what would make this the wrong roadmap in twelve months?" instead of only "why is this the right roadmap?"
+- When a design pattern feels obviously right, invert it: "what would make this pattern a bad choice for this specific user and context?" — if the answer is easy to generate, the pattern isn't as safe as it felt.
+- Use it as a cheap first pass before a formal pre-mortem: inversion is the individual mental habit; pre-mortem is the structured team exercise built on the same logic.
+
+## Limitations
+
+- **Generates a list, not a decision**: inversion tells you what to avoid; it doesn't rank or resolve trade-offs between the things worth avoiding.
+- **Easy to do superficially**: a shallow "what could go wrong" list feels like inversion but misses the specific, concrete failure modes that make the technique useful — see pre-mortem's "prospective hindsight" for why specificity matters.
+
+## Common misconceptions
+
+- **"Inversion is just pessimism"**: it isn't advocacy for a negative outlook — it's a reasoning direction. The goal is still a good outcome; inversion is one more angle to find the assumptions that threaten it.
+- **"Inversion replaces forward planning"**: it's a complement, not a substitute. Good decision-making runs both directions and compares what each one surfaces.
+
+## Using AI
+
+**Where it helps**
+- Generating a first-pass list of failure conditions for a stated plan, as raw material for a human to prioritize and verify against real context.
+- Stress-testing a decision by asking a model to argue the inverted case explicitly, surfacing assumptions the original framing didn't examine.
+
+**Where it fails**
+- A model's inverted list tends toward generic, plausible-sounding failure modes rather than the specific mechanisms of *this* plan, in *this* market, with *this* team — the value of inversion comes from concrete specificity, and a fluent-but-generic list can look thorough while missing the actual risk.

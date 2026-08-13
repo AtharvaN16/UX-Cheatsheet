@@ -23,19 +23,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const methods = getAllMethods();
   const writtenIds = new Set(methods.map((m) => m.id));
 
-  // 1. Written method search items
-  const writtenMethodItems: MethodItem[] = methods.map((m) => {
-    const categoryMeta = getCategory(m.category);
-    return {
-      id: m.id,
-      label: m.title,
-      auxiliaryData: {
-        category: categoryMeta?.title || m.category,
-        kind: m.kind || inferKind(m.title, m.category, m.id),
-        group: '',
-        href: `/c/${m.category}?item=${m.id}`,
-      },
-    };
+  // 1. Written method search items — one entry per category a method actually
+  // renders under (its primary `category` plus every `alsoIn`), so a search
+  // result's label/href always matches the page the user found it on instead
+  // of silently pointing back to the primary category only.
+  const writtenMethodItems: MethodItem[] = methods.flatMap((m) => {
+    const categoriesForSearch = [m.category, ...m.alsoIn];
+    return categoriesForSearch.map((catId, i) => {
+      const categoryMeta = getCategory(catId);
+      return {
+        id: i === 0 ? m.id : `${m.id}::${catId}`,
+        label: m.title,
+        auxiliaryData: {
+          category: categoryMeta?.title || catId,
+          kind: m.kind || inferKind(m.title, catId, m.id),
+          group: '',
+          href: `/c/${catId}?item=${m.id}`,
+        },
+      };
+    });
   });
 
   // 2. Index all ~310 taxonomy entries (Hick's Law, Fitts's Law, RICE, Kano, etc.)
@@ -96,9 +102,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     rest: c.title,
   }));
 
+  // Mirrors writtenMethodItems: one scorable per category a method renders under,
+  // keyed with the same ids, so createMethodSource's byId lookup resolves each row.
+  const writtenScorables: ScorableMethod[] = methods.flatMap((m) => {
+    const base = toScorable(m);
+    return [m.category, ...m.alsoIn].map((catId, i) => ({
+      ...base,
+      id: i === 0 ? m.id : `${m.id}::${catId}`,
+    }));
+  });
+
   const items: MethodItem[] = [...writtenMethodItems, ...taxonomyItems, ...categoryItems];
   const scorables: ScorableMethod[] = [
-    ...methods.map(toScorable),
+    ...writtenScorables,
     ...taxonomyScorables,
     ...categoryScorables,
   ];

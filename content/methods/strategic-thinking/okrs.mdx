@@ -1,0 +1,89 @@
+---
+id: okrs
+title: OKRs
+aka: ["Objectives and Key Results"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: quantitative
+effort: medium
+timeframe: months
+needs:
+  - Organizational buy-in on a fixed cadence, usually quarterly
+  - A small number of genuinely measurable Key Results, not a disguised task list
+useInstead:
+  - when: You need one single alignment metric for day-to-day decisions, not a periodic goal-setting system
+    method: north-star-metric
+related:
+  alongside: [north-star-metric]
+  before: [product-strategy]
+sources:
+  - title: "Measure What Matters: How Google, Bono, and the Gates Foundation Rock the World with OKRs"
+    author: John Doerr
+    url: https://www.penguinrandomhouse.com/books/546304/measure-what-matters-by-john-doerr-foreword-by-larry-page/
+    type: book
+    year: 2018
+    seminal: true
+  - title: "Guide: Set goals with OKRs"
+    author: Google re:Work
+    url: https://rework.withgoogle.com/intl/en/guides/set-goals-with-okrs
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A goal-setting system pairing a qualitative **Objective** (what you want to achieve, stated ambitiously) with a small set of quantitative **Key Results** (how you'll know you got there, stated as measurable outcomes, not tasks).
+
+## When to use
+
+- A team or company needs a shared, time-boxed way to state priorities and check progress — typically quarterly
+- Leadership wants ambitious, stretch-level goals rather than safe, easily-hit targets
+- You need to distinguish, in writing, between what you're trying to achieve (Objective) and how you'll know (Key Results) — teams that skip this distinction end up with a roadmap of outputs and no stated outcome
+- You want a mechanism that forces prioritization: a small number of Key Results per Objective, not an exhaustive list of everything worth doing
+
+## Structure
+
+- **Objective**: a qualitative, ambitious, memorable statement of what you want to achieve — inspirational enough to motivate, specific enough to be unambiguous about direction.
+- **Key Results**: 2-5 measurable outcomes that would prove the Objective was achieved — each one gradable with a number, not a "done/not done" checkbox.
+- **Cadence**: OKRs are typically set and graded on a fixed rhythm (Google's default is quarterly, with some annual OKRs for longer-range direction).
+- **Grading**: Google grades Key Results on a 0.0-1.0 scale rather than pass/fail, explicitly because stretch goals graded at 0.7 are often a better outcome than safe goals graded at 1.0.
+
+## How to use
+
+1. Write the Objective first, in plain language, answering "what do we want to achieve" — resist the urge to make it measurable; that's the Key Results' job.
+2. Write 2-5 Key Results that would be true if, and only if, the Objective was actually achieved — if a Key Result could be hit while the Objective clearly wasn't, rewrite it.
+3. Keep Key Results as outcomes, not tasks — "ship the new onboarding flow" is a task; "increase Day-7 activation from X% to Y%" is a Key Result. A shipped feature that doesn't move the number wasn't a completed Key Result.
+4. Set OKRs at company, team, and (optionally) individual level, with lower levels supporting — not simply restating — the level above.
+5. Track progress through the cadence, not just at the end — OKRs are meant to be revisited, not written once and rediscovered at the deadline.
+6. Grade honestly at the end of the cycle, including partial and failed Key Results, and use the grading conversation to inform the next cycle's OKRs rather than treating a low score as a performance failure.
+
+## Example
+
+Intel's "Operation Crush" set the Objective of establishing the 8086 as the dominant 16-bit microprocessor, with Key Results that included specific benchmark wins and design-in commitments against Motorola — concrete, gradable outcomes that made it unambiguous, quarter by quarter, whether the company was actually winning the fight it had declared, rather than just staying busy on it.
+
+## Common mistakes
+
+- **Writing Key Results as a task list**: "launch feature X," "run 3 user interviews" are outputs with no outcome attached — a completed task list that doesn't move a number wasn't a successful Key Result.
+- **Confusing OKRs with performance reviews**: Doerr and Grove both stress that stretch-goal grading (a deliberately ambitious 0.7) should not map directly to compensation or performance scoring, or people will quietly write safe OKRs to protect their score.
+- **Setting too many Objectives at once**: an organization with a dozen "top" Objectives has no actual priority — OKRs' value comes from forcing a small, visible set of choices.
+- **Skipping the mid-cycle check-in**: OKRs written in week one and revisited only at grading time become a compliance exercise rather than a working tool for prioritization.
+
+## Limitations
+
+- **Doesn't tell you which Objective is right**: OKRs are a structure for stating and tracking goals, not a method for deciding which goals are strategically correct — that judgment has to come from elsewhere (product-strategy, opportunity-solution-tree).
+- **Cadence mismatch with discovery work**: quarterly Key Results can pressure teams toward committing to solutions before enough discovery has happened, especially when leadership expects a shippable Key Result by the deadline.
+- **Easy to cascade badly**: OKRs that are simply copy-pasted or mechanically derived level by level down an org chart lose the local judgment about what actually matters at each level.
+
+## Tips
+
+Separate "committed" OKRs (must-hit, usually operational) from "aspirational" OKRs (stretch, expected to land around 70%) explicitly, the way Google does — grading both on the same 1.0-is-success scale quietly punishes ambition and rewards sandbagging.
+
+## Using AI
+
+**Where it helps**
+- Drafting candidate Key Results from a stated Objective and flagging which ones are actually tasks in disguise, for a team to argue over and tighten.
+- Summarizing quarterly progress against Key Results into a plain-language update for stakeholders who don't need the raw dashboard.
+
+**Where it fails**
+- Grading whether an Objective was strategically the right one to set. A model can score whether Key Results are well-formed (measurable, outcome-shaped) with useful precision, but whether the underlying Objective represents the highest-leverage bet for the business this quarter is a judgment call about trade-offs and opportunity cost that the framework deliberately leaves to the humans setting it.

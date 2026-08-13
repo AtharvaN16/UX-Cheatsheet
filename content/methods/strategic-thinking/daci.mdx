@@ -1,0 +1,94 @@
+---
+id: daci
+title: DACI
+aka: ["Driver Approver Contributors Informed"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: conceptual
+effort: low
+timeframe: days
+needs:
+  - A single project decision where roles need clarifying, not an org-wide decision-rights overhaul
+  - A named person willing to be the Driver — someone who chases the decision to a close
+useInstead:
+  - when: The decision spans an entire organization and involves execution risk, not just one project call
+    method: rapid
+  - when: The question is decision speed under changing conditions, not decision ownership
+    method: ooda-loop
+related:
+  alongside: [rapid, ooda-loop]
+sources:
+  - title: "DACI: A Decision-Making Framework"
+    author: Atlassian Team Playbook
+    url: https://www.atlassian.com/team-playbook/plays/daci
+    type: article
+    seminal: false
+  - title: "Who Has the D? How Clear Decision Roles Enhance Organizational Performance"
+    author: Paul Rogers & Marcia Blenko
+    url: https://hbr.org/2006/01/who-has-the-d-how-clear-decision-roles-enhance-organizational-performance
+    type: article
+    year: 2006
+    seminal: true
+---
+
+## What is it
+
+A four-role decision-making structure — Driver, Approver, Contributors, Informed — aimed at clarifying who decides, not who does the task, as a variant of the RACI responsibility matrix.
+
+## Overview & Purpose
+
+DACI exists for the same underlying reason RAPID does — because unclear decision ownership stalls teams more often than unclear strategy does (the finding Rogers and Blenko's Bain research made explicit) — but it's a lighter four-role version aimed at a single project decision rather than an organization-wide decision-rights redesign. It's the practical default for a product or design team deciding on a specific call: a feature scope, a launch date, a design direction.
+
+## When to use
+
+- A specific project decision (not an organizational policy) has stalled because ownership is unclear or too many people believe they have a vote.
+- You're kicking off a decision-heavy project and want to set expectations about who decides before the debate starts, not during it.
+- The decision involves subject-matter experts whose input matters but who shouldn't individually block the call.
+
+## Structure
+
+- **Driver**: coordinates the process — gathers input, keeps the decision moving, and ensures it actually gets made by the target date. Doesn't necessarily decide.
+- **Approver**: the one person with final authority to say yes or no.
+- **Contributors**: subject-matter experts who provide input and recommendations — voice, not vote.
+- **Informed**: people affected by the decision who are told the outcome, but have no input role.
+
+## How to use
+
+1. Name the Driver first — someone accountable for the decision reaching a conclusion by a set date, distinct from the person who makes the call.
+2. Name exactly one Approver. As with RAPID's Decide role, diffusing this across multiple people is the single most common way DACI breaks down.
+3. List Contributors explicitly and tell them their role is input, not veto — this avoids the same Agree/Input confusion RAPID guards against.
+4. Identify who only needs to be Informed, and commit to actually telling them once the decision is made — skipping this step is a common source of downstream friction.
+5. Put the roles somewhere visible (a doc, a ticket) before the discussion starts, not after.
+
+## Example
+
+A design team deciding on a new component's interaction pattern: the lead designer is Driver, the design director is Approver, the accessibility and engineering leads are Contributors, and the wider product team is Informed once the pattern is locked. The Driver runs sessions to gather Contributor input, but the Approver — not consensus — makes the final call.
+
+## Common mistakes
+
+- **Naming the Driver and Approver as the same person without noticing** — this can work, but it removes the check-and-balance the split is meant to provide, and should be a deliberate choice, not a default.
+- **Treating Contributors as silent voters** — if their input is consistently overridden without explanation, they'll disengage from the process, undermining the framework's value in future decisions.
+- **Forgetting the Informed group** — people who are affected by a decision but never told about it tend to find out badly, at the worst time, from someone else.
+
+## Limitations
+
+- Works best at the scale of a single project or decision — for cross-organizational decisions with multiple business units, RAPID's more elaborate role set (especially the explicit Perform role) tends to hold up better.
+- Doesn't resolve disagreement between Contributors and the Approver — it only clarifies whose disagreement is advisory versus decisive.
+
+## Variations
+
+Some teams merge Driver and Approver for very small decisions; some split Contributors into tiers when the number of subject-matter experts is large. The core discipline — one Approver, input clearly separated from veto — is what to preserve across variations.
+
+## Tips
+
+Set the decision date when you set the roles, not after — a Driver without a deadline tends to let the decision drift, which defeats the point of naming a Driver at all.
+
+## Using AI
+
+**Where it helps**
+- Drafting a first-pass DACI role assignment from a list of stakeholders and their stakes, as a starting point for the team to adjust.
+- Turning a scattered decision thread into a clear summary of who currently appears to be playing each role — useful for spotting where a decision has stalled because no one is actually the Approver.
+
+**Where it fails**
+- Assigning who *should* hold authority is an organizational and political judgment, not a factual one — a model's suggested assignment can look tidy and reasonable while being wrong about the actual power dynamics in the room, and presenting it as settled skips the negotiation the framework depends on.

@@ -1,0 +1,92 @@
+---
+id: wsjf
+title: WSJF (Weighted Shortest Job First)
+aka: ["Weighted Shortest Job First"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: quantitative
+effort: medium
+timeframe: days
+needs:
+  - A backlog of comparably-scoped items (epics, features, or capabilities) to score against each other
+  - Relative estimates for user/business value, time criticality, and risk reduction/opportunity enablement per item
+  - A relative size or duration estimate per item
+useInstead:
+  - when: You don't have SAFe's epic/PI structure and the relative-estimation overhead isn't worth it for a smaller backlog
+    method: impact-effort-matrix
+related:
+  alongside: [cost-of-delay]
+sources:
+  - title: "The Principles of Product Development Flow: Second Generation Lean Product Development"
+    author: Donald G. Reinertsen
+    url: https://books.google.com/books/about/The_Principles_of_Product_Development_Fl.html?id=5ayA0QEACAAJ
+    type: book
+    year: 2009
+    seminal: true
+  - title: "WSJF"
+    author: Scaled Agile Framework
+    url: https://framework.scaledagile.com/wsjf
+    type: standard
+    seminal: false
+---
+
+## What is it
+
+A prioritization formula that ranks backlog items by dividing each one's Cost of Delay by its job size: WSJF = Cost of Delay ÷ Job Duration. It sequences work to maximize economic outcome, not just to work through the biggest or loudest items first.
+
+## Purpose
+
+Answers "which job should we do first" with an economic argument instead of a political one: prefer whichever item returns the most value per unit of time spent building it. Reinertsen's underlying point — inherited directly into WSJF — is that most teams don't know the cost of delaying something, and without that number, sequencing decisions default to opinion.
+
+## When to use
+
+- Sequencing a portfolio or program backlog of epics/features that differ meaningfully in both value and size
+- You're in or adjacent to a SAFe context where Cost of Delay and relative-sizing conventions already exist
+- Two initiatives seem similarly valuable, but one is far smaller — WSJF is built specifically to catch the case where the smaller job should go first because it returns value faster
+- You want a repeatable, defensible ranking rather than a one-off argument about priority
+
+## Structure
+
+- **Cost of Delay** = User-Business Value + Time Criticality + Risk Reduction/Opportunity Enablement, each scored on a relative scale (commonly a Fibonacci-like sequence: 1, 2, 3, 5, 8, 13, 20).
+- **Job Duration** (or size) — the relative size of the job, scored on the same kind of scale.
+- **WSJF score** = Cost of Delay ÷ Job Duration. Higher score, higher sequencing priority.
+
+## How to use
+
+1. Assemble the set of items to sequence (SAFe typically applies this at Epic, Capability, or Feature level within a defined backlog).
+2. For each item, score User-Business Value, Time Criticality, and Risk Reduction/Opportunity Enablement relative to the others in the set — not in absolute terms.
+3. Sum those three to get Cost of Delay.
+4. Score relative Job Duration/size for each item, on the same comparative scale.
+5. Divide Cost of Delay by Job Duration for each item to get its WSJF score.
+6. Sequence highest score first. Re-run the exercise whenever the backlog composition changes meaningfully — the scores are relative to the current set, not absolute.
+
+## Example
+
+Two epics: Epic A has high business value and moderate time criticality but is large (size 13); Epic B has moderate value but is small and quick to ship (size 3). Even if Epic A scores higher on raw Cost of Delay, dividing by size can put Epic B ahead — it returns a smaller amount of value, but returns it much faster, which is exactly the case WSJF is designed to catch that a value-only ranking would miss.
+
+## Common mistakes
+
+- **Scoring in absolute terms**: WSJF's Fibonacci-like scales are meant for relative comparison within one set of items, not fixed units — mixing absolute dollar figures with relative story-point-style scores produces meaningless ratios.
+- **Skipping Time Criticality and Risk Reduction**: teams default to scoring Cost of Delay as pure business value and ignore the other two components, which quietly biases the ranking toward big, obviously-valuable items over urgent or risk-reducing smaller ones.
+- **Re-scoring too rarely**: because scores are relative to the current backlog, adding or removing items changes what the numbers mean — a stale WSJF ranking from three backlogs ago isn't just outdated, it's not comparable.
+- **Using it below the level it's built for**: WSJF is meant for epics/features being sequenced against each other, not for ranking individual small tasks — Impact/Effort or MoSCoW fit that scale better.
+
+## Limitations
+
+- **Every input is a relative estimate, not a measurement**: the formula is only as good as the group's honesty and calibration when scoring value, criticality, risk, and size.
+- **Assumes items are genuinely comparable**: ranking a compliance-mandated item against a growth bet on the same scale can produce a number that technically computes but doesn't reflect the real decision.
+- **Adds process overhead**: the scoring ceremony has a real cost; for a small team or backlog, that overhead can exceed the value of the extra precision over a simpler matrix.
+
+## Tips
+
+Score Time Criticality and Risk Reduction/Opportunity Enablement explicitly and separately from Value, even though it's tempting to bundle everything into one "how important is this" number — the whole point of decomposing Cost of Delay is to catch urgency and risk that a pure value score would miss.
+
+## Using AI
+
+**Where it helps**
+- Drafting an initial relative-size estimate across a large epic list from written descriptions, as a starting point for the team's own estimation session
+- Checking score consistency across a large backlog — flagging items scored similarly on inputs but wildly differently on final WSJF, which usually indicates a scoring error worth re-checking
+
+**Where it fails**
+- Generating the value, criticality, or risk scores themselves without the team's actual judgment behind them. WSJF's output is only meaningful because it reflects a real group's calibrated relative judgment about their specific backlog; a model's plausible-sounding scores for items it has no real stake in evaluating produce a ranking with the appearance of rigor and none of the actual signal.

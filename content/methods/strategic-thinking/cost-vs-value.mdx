@@ -1,0 +1,84 @@
+---
+id: cost-vs-value
+title: Cost vs Value
+aka: ["Cost/Value Matrix", "Cost versus Value Prioritization", "Value vs Complexity Matrix"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: mixed
+effort: low
+timeframe: hours
+needs:
+  - A candidate list of features or initiatives
+  - A rough, shared estimate of implementation cost (dev time, complexity, risk) per item
+  - A rough, shared estimate of business or customer value per item
+useInstead:
+  - when: You want a single weighted numeric score across more than two factors
+    method: rice
+related:
+  alongside: [impact-effort-matrix, moscow]
+sources:
+  - title: "Value vs. Complexity"
+    author: ProductPlan
+    url: https://www.productplan.com/glossary/value-vs-complexity
+    type: article
+    seminal: false
+  - title: "Prioritization frameworks"
+    author: Atlassian
+    url: https://www.atlassian.com/agile/product-management/prioritization-framework
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A 2x2 matrix that plots candidate work by estimated implementation cost against estimated business value, sorting everything into four quadrants to decide what to build first.
+
+## Purpose
+
+Gets a room to a prioritized shortlist fast, using estimates the team already roughly has, without building a scoring model. It's the blunt instrument you reach for before you've earned the right to something more rigorous like RICE.
+
+## When to use
+
+- Early-stage prioritization where you need a defensible first cut, not a precise rank
+- The team has rough cost and value intuition but no hard usage or revenue data yet
+- You need something a mixed room (design, eng, business) can fill in together in one sitting
+- As a pre-filter before spending scoring effort on a smaller shortlist
+
+## Structure
+
+Two axes, four quadrants:
+
+- **Low cost, high value**: build now — the obvious priority.
+- **High cost, high value**: strategic bets — worth it, but sequence and resource deliberately.
+- **Low cost, low value**: fill-ins — fine for downtime, never the main focus.
+- **High cost, low value**: avoid — the items that quietly drain a roadmap if no one says no to them.
+
+## How to use
+
+1. List every candidate initiative.
+2. Score cost: development time, technical complexity, risk, and downstream maintenance burden — not just "how many days."
+3. Score value: how much it moves the business or customer outcome you actually care about, not how loudly someone is asking for it.
+4. Plot each item and read off the quadrant.
+5. Sequence low-cost/high-value first, then negotiate the high-cost/high-value bets against actual capacity.
+
+## Example
+
+A B2B SaaS backlog: a bug fix blocking checkout is low-cost/high-value (do now); a from-scratch permissions system is high-cost/high-value (roadmap it deliberately); a rarely-requested UI theme option is low-cost/low-value (fill-in); a bespoke integration for one customer is high-cost/low-value (say no).
+
+## Common mistakes
+
+- **Confusing cost with effort**: cost should include risk and maintenance burden, not just calendar days — a "quick" feature that's expensive to support long-term isn't actually low-cost.
+- **Confusing value with loudness**: the customer who complains most isn't necessarily the one whose request moves the needle — value should trace to an actual business or user outcome.
+- **Treating quadrant placement as objective**: this is a structured way to make a subjective conversation visible, not a measurement. Don't defend a placement as if it were data.
+- **Never revisiting placement**: cost and value estimates decay as you learn more; a matrix filled in once at kickoff and never touched again is a stale artifact, not a decision tool.
+
+## Limitations
+
+- **Two dimensions hide everything else**: strategic fit, dependencies, and timing don't show up on the grid at all.
+- **Estimates are opinion, not evidence**: without user research or usage data behind the value axis, you're prioritizing by whoever's most persuasive in the room.
+- **Doesn't distinguish itself cleanly from Impact/Effort**: cost is not quite effort (cost includes long-term maintenance and risk; effort is closer to raw implementation work), and value is not quite impact (value is estimated business return; impact in an Impact/Effort matrix is usually framed around user-facing benefit) — pick one framing and use its definitions consistently rather than blending the two matrices.
+
+## Tips
+
+Write down what "cost" and "value" mean for this specific exercise before anyone starts plotting — the matrix is only as useful as the shared definitions behind the two axes, and most disagreements about placement are actually disagreements about definitions.

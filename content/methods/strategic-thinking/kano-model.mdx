@@ -1,0 +1,89 @@
+---
+id: kano-model
+title: Kano Model
+aka: ["Kano Analysis", "Attractive Quality Theory"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: mixed
+effort: medium
+timeframe: weeks
+needs:
+  - A customer survey using paired functional/dysfunctional questions
+  - A list of candidate features or attributes to classify
+useInstead:
+  - when: You need to rank a backlog by numeric reach/impact/effort math rather than classify features by satisfaction type
+    method: rice
+related:
+  alongside: [rice, moscow]
+sources:
+  - title: "Attractive Quality and Must-Be Quality"
+    author: Noriaki Kano, Nobuhiko Seraku, Fumio Takahashi & Shin-ichi Tsuji
+    url: https://doi.org/10.20684/quality.14.2_147
+    type: paper
+    year: 1984
+    seminal: true
+  - title: "The Kano Model: Prioritizing Features That Delight"
+    author: Product School
+    url: https://productschool.com/blog/product-fundamentals/kano-model
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A model for classifying product features by the *shape* of their relationship to customer satisfaction, not just its size. Some features only prevent dissatisfaction (Must-be), some satisfy proportionally to investment (Performance), and some delight precisely because they're unexpected (Attractive).
+
+## When to use
+
+- You're deciding which features earn genuine differentiation versus which just clear a baseline expectation, and a flat priority list is flattening that distinction
+- Stakeholders keep asking to invest more in a feature that's already satisfied its category (e.g., pouring more effort into a Must-be feature well past the point it stops mattering)
+- You want customer-survey evidence for whether a proposed feature would delight, satisfy proportionally, or barely register, before committing engineering time
+- You're prioritizing across a mature product where most obvious Must-be features are already built, and the interesting decisions are all in Performance versus Attractive trade-offs
+
+## Structure
+
+- **Must-be (basic) quality**: taken for granted when present, causes strong dissatisfaction when absent. Satisfaction doesn't rise much past a baseline no matter how much more you invest.
+- **One-dimensional (performance) quality**: satisfaction rises roughly linearly with how much of the attribute you deliver — more is better, less is worse, in proportion.
+- **Attractive (excitement) quality**: not expected by customers at all; its presence creates a satisfaction jump disproportionate to the investment, precisely because it was unanticipated.
+- **Indifferent and reverse quality**: attributes customers don't notice either way, or that actively reduce satisfaction when added (a feature perceived as complexity or clutter).
+- **Attribute migration over time**: excitement attributes decay into performance attributes, then into must-be attributes, as a market matures and competitors copy them — Kano's own example is the car airbag, excitement when Mercedes introduced it, must-be today.
+
+## How to use
+
+1. List the candidate features or attributes you want to classify — keep the list specific enough that a respondent can picture using each one.
+2. Write a paired functional/dysfunctional question for each attribute ("How would you feel if this feature were present?" / "How would you feel if this feature were absent?") with the same five-point response scale (like it, expect it, neutral, can live with it, dislike it) for both.
+3. Survey a real sample of customers with both questions per attribute, and cross-tabulate the functional and dysfunctional answers using Kano's standard evaluation table to classify each attribute.
+4. Segment the results — the same attribute can classify differently for different customer segments, which itself is useful prioritization information.
+5. Prioritize investment: protect Must-be attributes at the baseline customers require, invest proportionally in Performance attributes competitors are also racing on, and place a small number of deliberate bets on Attractive attributes for differentiation.
+6. Re-survey periodically — attribute migration means a feature classified as Attractive two years ago may have quietly become Performance or Must-be as the market caught up.
+
+## Example
+
+For a note-taking app, reliable sync across devices is likely Must-be — nobody praises it for working, but its failure is a dealbreaker. Faster search is likely Performance — better search meaningfully increases satisfaction, proportionally. An AI feature that surfaces a relevant old note unprompted, before the user thought to search for it, is a candidate Attractive attribute — until competitors ship it too, at which point it starts sliding toward Performance.
+
+## Common mistakes
+
+- **Skipping the dysfunctional question**: asking only "how would you feel if this were present?" can't distinguish a Must-be attribute from a Performance one — the dysfunctional half of the pair is what reveals whether absence causes real dissatisfaction.
+- **Treating classification as permanent**: attribute migration is a core part of the model; a roadmap built on a three-year-old Kano survey is prioritizing against a market that's moved on.
+- **Over-investing in Must-be attributes past their ceiling**: satisfaction on a Must-be attribute plateaus quickly — continuing to pour effort there past the baseline customers require is often a worse use of the same budget than a Performance or Attractive investment.
+- **Running the survey with too small or unrepresentative a sample**: the classification depends on aggregate patterns across real customers; a handful of internal stakeholder guesses standing in for the survey defeats the method's purpose.
+
+## Limitations
+
+- **Requires real survey data, which takes time and a real sample**: unlike a scoring framework you can run in an afternoon (rice, ice), a proper Kano survey needs enough respondents to produce a reliable classification.
+- **Doesn't produce a rank-ordered backlog on its own**: it classifies attributes by satisfaction *type*, not by numeric priority — teams still need a separate step (often rice or moscow) to sequence work within and across categories.
+- **Category boundaries can be fuzzy**: an attribute right on the line between Performance and Attractive gets classified differently depending on exact question wording and sample composition, which makes the model less precise than its clean quadrant diagram suggests.
+
+## Tips
+
+Run the Kano survey on a specific, well-defined customer segment rather than "all users" — an attribute that's Attractive for a power-user segment can be Indifferent or even mildly negative (perceived clutter) for a casual-user segment, and averaging across both erases the more useful signal.
+
+## Using AI
+
+**Where it helps**
+- Drafting paired functional/dysfunctional survey questions for a list of candidate attributes, for a researcher to review and tighten before fielding.
+- Tabulating and visualizing survey response data once collected, speeding up the classification step across a long attribute list.
+
+**Where it fails**
+- Guessing an attribute's Kano classification from general product intuition instead of real survey data. A model can produce a confident-sounding guess ("this is probably an Attractive feature") that reads like the output of the method without any of the actual customer evidence the classification is supposed to rest on.

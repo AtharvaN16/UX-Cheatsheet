@@ -1,0 +1,91 @@
+---
+id: moscow
+title: MoSCoW
+aka: ["MoSCoW Method", "MoSCoW Prioritization", "MoSCoW Analysis", "Must Should Could Won't"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: qualitative
+effort: low
+timeframe: hours
+needs:
+  - A backlog or feature list to sort
+  - Stakeholders who can agree on what "must" ship actually means
+  - A fixed release or timebox to prioritize against
+useInstead:
+  - when: You need a numeric score to rank many similar-sized items, not just four buckets
+    method: rice
+related:
+  alongside: [impact-effort-matrix, cost-vs-value]
+sources:
+  - title: "What is MoSCoW Prioritisation?"
+    author: Agile Business Consortium
+    url: https://www.agilebusiness.org/resource/what-is-moscow-prioritization/
+    type: standard
+    seminal: true
+  - title: "MoSCoW Prioritization"
+    author: ProductPlan
+    url: https://www.productplan.com/glossary/moscow-prioritization/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+Sorts backlog items into four buckets — Must have, Should have, Could have, Won't have (this time) — instead of ranking them on a continuous scale.
+
+## Purpose
+
+Gives a team a fast, low-friction way to agree on scope for a release without pretending to have the precision a numeric score implies. It forces a specific, uncomfortable conversation — "what actually breaks the release if it's missing" — rather than letting everything default to important.
+
+## When to use
+
+- Scoping a release or sprint where the real question is inclusion/exclusion, not fine-grained rank order
+- Stakeholders are more likely to agree on rough categories than on a shared 1-10 scale
+- You need a decision fast and don't have the appetite for a scoring workshop
+- Working inside a fixed timebox, where "Must" capacity has to fit inside what the team can actually deliver
+
+## Structure
+
+- **Must have**: Non-negotiable. The release has no value, or is illegal or unsafe, without it. DSDM's own guidance caps Must Haves at roughly 60% of total effort in a timebox, specifically to leave room for the categories below.
+- **Should have**: Important but not vital; painful to leave out, survivable if you do.
+- **Could have**: Desirable, low impact if left out — DSDM treats this as the deliberate ~20% contingency buffer that gets cut first when a timebox is at risk.
+- **Won't have (this time)**: Explicitly descoped for this round — the parenthetical matters, since it keeps the door open without reopening the debate.
+
+## How to use
+
+1. List every candidate item for the release.
+2. Have the group assign each item to one of the four buckets — independently first, then reconcile disagreements out loud.
+3. Check the Must Have pile against real delivery capacity. If Musts alone exceed what the team can build in the timebox, the prioritization has failed and needs redoing, not the schedule.
+4. Treat Could Haves as the buffer: the first things dropped if a Should or Must runs long.
+5. Revisit the categorization at each release checkpoint — MoSCoW is a snapshot for one timebox, not a permanent classification.
+
+## Example
+
+A checkout redesign: two-factor fraud checks and functioning payment are Must; saved payment methods are Should; guest-checkout order history is Could; a full loyalty-points redesign is Won't (this release).
+
+## Common mistakes
+
+- **Letting "Must" mean "important"**: almost anything can be argued as important. Must should mean the release fails without it — that's a much smaller set than teams initially propose.
+- **Skipping the reconciliation step**: if everyone privately ranks and no one has to defend a Must publicly, the buckets balloon.
+- **No capacity check**: MoSCoW tells you relative priority, not whether the Musts actually fit — pair it with an honest estimate of what the team can ship.
+- **Treating buckets as permanent**: what's a Must for this release can be a Could for the next; re-run the exercise per timebox.
+
+## Limitations
+
+- **No ranking within a bucket**: everything in "Must" is equally must — if you need to know which Must ships first when time runs out, MoSCoW alone won't tell you.
+- **Vulnerable to bucket inflation**: without discipline, most items end up Must or Should, which defeats the purpose.
+- **No cost or effort dimension**: MoSCoW prioritizes by necessity, not by cost — a cheap Should and an expensive Should get sorted identically.
+
+## Tips
+
+Run the Must-Have capacity check before you finalize the list, not after — teams that skip this end up cutting scope under deadline pressure instead of by design.
+
+## Using AI
+
+**Where it helps**
+- Drafting a first-pass MoSCoW split from a raw backlog or PRD as a starting point for the group to argue over
+- Flagging items where the written justification for "Must" doesn't actually describe a release-breaking condition
+
+**Where it fails**
+- Substituting a model's guess for the stakeholder negotiation that MoSCoW is designed to force — the value of the exercise is in exposing where people actually disagree about what's essential, which a single AI-generated categorization skips entirely.

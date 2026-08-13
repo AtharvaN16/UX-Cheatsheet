@@ -1,0 +1,91 @@
+---
+id: opportunity-solution-tree
+title: Opportunity Solution Tree
+aka: ["OST"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: qualitative
+effort: medium
+timeframe: ongoing
+needs:
+  - A stated, outcome-level goal at the root — not a solution
+  - A continuous stream of customer interviews to populate the opportunity space
+useInstead:
+  - when: You need a fast numeric score to rank an existing flat backlog, not a structured discovery map
+    method: rice
+related:
+  before: [jobs-to-be-done]
+  alongside: [continuous-discovery, assumption-mapping]
+  after: [story-mapping]
+sources:
+  - title: "Opportunity Solution Trees: Visualize Your Discovery to Stay Aligned and Drive Outcomes"
+    author: Teresa Torres
+    url: https://www.producttalk.org/opportunity-solution-trees/
+    type: article
+    year: 2016
+    seminal: true
+  - title: "Continuous Discovery Habits: Discover Products that Create Customer Value and Business Value"
+    author: Teresa Torres
+    url: https://www.producttalk.org/2021/05/continuous-discovery-habits/
+    type: book
+    year: 2021
+    seminal: true
+---
+
+## What is it
+
+A visual structure connecting a single desired outcome at the root to a branching space of customer opportunities, then candidate solutions beneath each opportunity, then assumption tests beneath each solution. Laying discovery out this way makes visible how much opportunity space a team never explored.
+
+## When to use
+
+- A team keeps generating solutions ("add a search bar," "build a dashboard") without having named the underlying opportunity those solutions would address
+- You're running continuous discovery — weekly customer touchpoints — and need a living structure to organize what you're learning, rather than a one-off research report that goes stale
+- Multiple solutions are competing for the same slot on a roadmap and you need to see whether they actually address the same opportunity or different ones
+- You want to make a team's assumptions about a solution explicit and testable before committing engineering time to build it
+
+## Structure
+
+- **Outcome (root)**: a measurable change in customer or business behavior — never a solution. This is usually the metric a north-star-metric or a specific OKR is meant to move.
+- **Opportunities**: unmet customer needs, pain points, or desires that, if addressed, would drive the outcome — stated as problems, sourced from real interviews, never as a feature.
+- **Solutions**: candidate products, features, or changes that could address a given opportunity — multiple solutions can and should compete under the same opportunity branch.
+- **Assumption tests**: the smallest experiments that could show a belief underneath a solution is false, prioritized toward whatever is simultaneously most load-bearing and least evidenced.
+
+## How to use
+
+1. Write the outcome at the root in outcome language, not solution language — "increase weekly active users of feature X" is a stated outcome; "build feature X" already skipped the tree.
+2. Run continuous customer interviews (weekly, with a cross-functional trio, per Torres's Continuous Discovery Habits) and add newly surfaced opportunities to the tree as branches under the outcome, rather than treating research as a one-time phase.
+3. Resist collapsing straight from outcome to a single opportunity — deliberately map several plausible opportunities before picking which to pursue, so the choice is visible and comparative rather than the first idea that arrived.
+4. Under a chosen opportunity, generate multiple competing solutions rather than committing to the first one anyone proposes.
+5. For the solution the team leans toward, list the assumptions that must be true for it to work, and design the cheapest test for the assumption that's both most load-bearing and least evidenced.
+6. Keep the tree alive as a living artifact — update it every week as interviews surface new opportunities or kill old assumptions, rather than building it once for a kickoff deck.
+
+## Example
+
+A team whose outcome is "reduce time-to-first-value for new signups" might interview recently onboarded users and surface three distinct opportunities — confusion about where to start, too many required setup steps, and unclear value before the first real use — each of which could spawn several different solutions; without the tree, a team tends to jump straight to "simplify the setup wizard" and never notices the other two branches existed.
+
+## Common mistakes
+
+- **Starting the tree from a solution instead of an outcome**: if the root is already "redesign onboarding," the tree just organizes justifications for a decision already made rather than genuinely exploring the opportunity space.
+- **Mapping only one opportunity before jumping to solutions**: the tree's actual value is comparative — seeing several opportunities side by side is what reveals you picked the easiest one to talk about, not the highest-leverage one.
+- **Treating it as a one-time diagram for a deck**: Torres's framing is explicitly continuous — a tree built once for a kickoff and never revisited stops reflecting what the team has actually learned.
+- **Skipping assumption tests and going straight to building**: the leaves of the tree exist specifically to catch the load-bearing, least-evidenced beliefs before they get expensive to be wrong about.
+
+## Limitations
+
+- **Requires a genuinely continuous interview cadence to stay accurate**: without a weekly rhythm of real customer contact, the opportunity space calcifies and the tree becomes a static snapshot pretending to be current.
+- **Doesn't itself prioritize across trees**: if a team has outcomes for three different initiatives, the framework doesn't tell you which outcome to invest in this quarter — that's a separate strategic call.
+- **Can become a compliance artifact rather than a thinking tool**: teams asked to "have an OST" without buying into continuous discovery sometimes produce a tree-shaped document once and never touch it again, missing the entire point.
+
+## Tips
+
+Make the tree visible to the whole team, not just the researcher or PM who built it — its real power is letting an engineer or designer see, at a glance, which opportunities and solutions were considered and rejected, and why, so debates don't restart from zero every time someone proposes an old idea.
+
+## Using AI
+
+**Where it helps**
+- Clustering raw interview notes into candidate opportunity statements as a starting draft for the team to validate against the actual transcripts.
+- Generating a wider set of candidate solutions under a chosen opportunity branch, to counteract the human tendency to stop at the first workable idea.
+
+**Where it fails**
+- Populating the opportunity space from synthetic or imagined customer input instead of real interviews. The entire mechanism depends on opportunities being sourced from actual conversations with actual customers — a model asked to "generate likely opportunities" for a persona will produce plausible-sounding branches that were never actually said by anyone, which defeats the method's purpose of surfacing what a team doesn't yet know.

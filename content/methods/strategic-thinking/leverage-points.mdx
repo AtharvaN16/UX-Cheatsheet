@@ -1,0 +1,86 @@
+---
+id: leverage-points
+title: Leverage Points
+aka: ["Places to Intervene in a System", "Points of Leverage"]
+category: strategic-thinking
+alsoIn: []
+kind: concept
+gives: conceptual
+effort: medium
+timeframe: hours
+needs:
+  - A mapped-out system, or at least a rough model of its feedback loops and rules, to search for intervention points in
+  - Familiarity with feedback-loops and stocks-and-flows
+useInstead:
+  - when: You need a structured, multi-session artifact mapping every actor and relationship before you can even see where the leverage might be
+    method: system-mapping
+  - when: You need to trace one specific decision's downstream consequences, not rank intervention points across a whole system
+    method: second-order-effects
+related:
+  before: [feedback-loops, stocks-and-flows]
+  alongside: [system-mapping, second-order-effects]
+sources:
+  - title: "Leverage Points: Places to Intervene in a System"
+    author: Donella Meadows
+    url: http://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/
+    type: article
+    year: 1999
+    seminal: true
+  - title: "Thinking in Systems: A Primer"
+    author: Donella Meadows
+    url: https://www.chelseagreen.com/product/thinking-in-systems/
+    type: book
+    year: 2008
+    seminal: true
+  - title: "Russell L. Ackoff"
+    author: Wikipedia
+    url: https://en.wikipedia.org/wiki/Russell_L._Ackoff
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A place in a system where a small shift produces a large, durable change in behavior, ranked from weakest (adjusting a **parameter**) to strongest (changing the underlying **paradigm**) — most teams only ever touch parameters.
+
+## Why it matters
+
+A roadmap full of parameter tweaks — a button color, a threshold, a discount percentage — can absorb a team's entire quarter and move nothing durable, because parameters are the weakest rung on Meadows' ladder. Knowing the hierarchy exists is what lets a designer say, in a prioritization debate, "this is a parameter-level fix for what's actually a rules-level problem" — and be taken seriously, because the claim is falsifiable, not just a hunch.
+
+## Key ideas
+
+- **Parameters are the leverage everyone reaches for first, and the weakest**: they're visible, easy to change, and safe to propose — which is exactly why teams over-invest here relative to the size of change they produce.
+- **Rules outrank parameters**: who is allowed to do what, who gets access to what information, what the default is — changing a rule reshapes every parameter decision downstream of it, rather than adjusting one at a time.
+- **Goals outrank rules**: a system optimizing for "time on app" will keep re-generating the same engagement patterns no matter how many individual rules you tune, because the goal itself is what's producing the behavior (see POSIWID: the purpose of a system is what it actually does).
+- **Ackoff's version of the same idea**: you can improve every individual part of a system and still make the whole worse, because performance is a property of the relationships between parts — which is exactly why chasing parameter-level local optimizations can leave (or make) the whole system worse even as every dashboard metric ticks up.
+- **The paradigm is the point almost nobody touches**: the shared, often unstated belief that makes the current goal seem obviously correct in the first place — "fewer steps is always better UX" is a paradigm-level belief, not a rule, and it's rarely questioned in a design review because it doesn't look like a decision at all.
+
+## Example
+
+A marketplace with a trust problem can raise the review-flagging threshold (parameter — weak), change who's allowed to review without prior purchase (rule — stronger), change what the platform actually optimizes matching for — volume vs. trust (goal — very strong), or challenge the assumption that more transactions is inherently good for the marketplace (paradigm — strongest, and the one nobody proposes in a sprint planning meeting).
+
+## Application
+
+- **Name the rung before proposing the fix**: forcing a "parameter, rule, goal, or paradigm" label onto a proposed change turns a vague debate about priority into a specific claim about where the real leverage is.
+- **Expect resistance to scale with the rung**: paradigm- and goal-level changes are the ones that actually move outcomes and the ones organizations resist hardest, because they threaten the stated purpose people have already committed to.
+- **Use it to explain a small change's outsized effect**: a single default flip that moves a KPI more than a quarter of parameter tuning did is not luck — it's evidence the default was operating at the rules level, not the parameter level everyone assumed.
+
+## Limitations
+
+- **Higher leverage means higher risk and slower feedback**: a paradigm-level change can take a year to show its effect and is much harder to reverse than a parameter tweak — leverage and reversibility trade off against each other.
+- **The ranking is a heuristic, not a formula**: Meadows herself warned leverage points are "not intuitive," and in practice which specific change is highest-leverage in a given system still requires real knowledge of that system, not just the category label.
+- **Political reality often overrides theoretical leverage**: the highest-leverage point (the goal, the paradigm) is frequently the one with the least organizational appetite to touch, which is why so many teams settle for parameter-level work even when they can correctly diagnose the real leverage point.
+
+## Common misconceptions
+
+- **"Bigger effort means bigger leverage"**: leverage is about *where* you intervene, not how hard — a single default change can outperform months of parameter tuning, and a massive rebuild can still be a parameter-level fix in disguise if it doesn't touch a rule or a goal.
+- **"Leverage points are obvious once you see the system"**: Meadows explicitly noted the opposite — organizations often already have significant attention on their real leverage point and are pushing it in the wrong direction, mistaking effort for correctness.
+
+## Using AI
+
+**Where it helps**
+- Sorting a list of proposed fixes by which rung of the ladder each one actually sits on — parameter, rule, goal, paradigm — as a structured first pass before a prioritization debate.
+- Generating candidate rule- or goal-level reframings of a problem that's been stuck at the parameter level for several sprints, to widen the option set under consideration.
+
+**Where it fails**
+- Confidently ranking which leverage point is "the" highest-impact one for your specific system without real data — the ranking of leverage-point *categories* is Meadows' contribution; identifying which specific rule or goal is the actual lever in your product still requires domain knowledge a model doesn't have and will happily fabricate anyway.

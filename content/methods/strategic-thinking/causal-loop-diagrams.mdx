@@ -1,0 +1,85 @@
+---
+id: causal-loop-diagrams
+title: Causal Loop Diagrams
+aka: ["CLD", "Loop Diagram"]
+category: strategic-thinking
+alsoIn: []
+kind: method
+gives: qualitative
+effort: medium
+timeframe: hours
+needs:
+  - A specific dynamic you suspect is a feedback loop, with at least a rough hypothesis of the variables involved
+  - A whiteboard, Kumu, Miro, or similar — pen and paper works fine too
+  - One or more people who know the system well enough to name the actual variables, not textbook placeholders
+useInstead:
+  - when: You need to map the broader set of actors, relationships, and stakeholders, not a focused cause-effect polarity diagram
+    method: system-mapping
+  - when: You need actual numeric simulation of the loop's behavior over time, not just its qualitative shape
+    method: stocks-and-flows
+related:
+  before: [feedback-loops, stocks-and-flows]
+  alongside: [system-mapping]
+sources:
+  - title: "Guidelines for Drawing Causal Loop Diagrams"
+    author: Daniel H. Kim
+    url: https://www.cs.toronto.edu/~sme/SystemsThinking/GuidelinesforDrawingCausalLoopDiagrams.pdf
+    type: article
+    year: 1992
+    seminal: true
+  - title: "Thinking in Systems: A Primer"
+    author: Donella Meadows
+    url: https://www.chelseagreen.com/product/thinking-in-systems/
+    type: book
+    year: 2008
+    seminal: true
+  - title: "What are loops?"
+    author: Kumu
+    url: https://docs.kumu.io/guides/what-are-loops
+    type: tool
+    seminal: false
+---
+
+## What is it
+
+A specific notation for showing cause-and-effect relationships between variables — arrows connecting them, each marked with a polarity (+ if cause and effect move together, − if opposite), and closed chains labeled as reinforcing (R) or balancing (B) loops.
+
+## Purpose
+
+Turns a vague, verbal claim about a dynamic — "engagement feeds on itself" — into a specific, checkable diagram naming which variables are involved and whether each link amplifies or dampens the next. It's the tool for making a team's mental model of a feedback loop explicit enough to argue about, instead of everyone privately assuming a different mechanism while agreeing on the label.
+
+## When to use
+
+- You suspect a specific reinforcing or balancing dynamic is driving a metric and need to pin down exactly which variables are involved
+- A team disagrees about *why* a pattern is happening, and the disagreement is really about which causal links exist or which direction they run
+- You want to communicate a systemic explanation to stakeholders who default to event-level thinking, and a picture will land faster than a paragraph
+- You're about to propose an intervention and need to check whether it targets the loop itself or just one visible symptom of it
+
+## How to do it
+
+1. Name the variables in plain language, each one able to increase or decrease — "user trust," not "trust is good," and "signups per week," not "our great acquisition strategy." Vague variable names produce vague diagrams.
+2. Draw an arrow from each cause to its direct effect. Don't skip steps to save space — a missing intermediate variable is often where the real disagreement lives.
+3. Mark each arrow's polarity: + if the two variables move the same direction (more of the cause means more of the effect), − if they move opposite (more of the cause means less of the effect).
+4. Trace closed chains of arrows back to their starting variable. Multiply the polarities around the loop: an even number of minus signs makes it reinforcing (R); an odd number makes it balancing (B).
+5. Label each identified loop with a short, memorable name — "the trust spiral," "the support-load brake" — so the team can refer to it by name in later conversations instead of re-describing it each time.
+6. Check the diagram against at least one person who knows the real system well: does every variable correspond to something actually measurable or observable, or did the diagram drift into abstractions nobody could verify?
+
+## Common mistakes
+
+- **Vague variable names**: "quality," "engagement," and "growth" mean different things to different people in the room — force each variable into something you could plausibly point at a number for.
+- **Skipping the polarity marks**: a diagram of arrows with no + / − signs looks systemic but tells you nothing about whether a loop reinforces or balances — the polarity is the entire analytical payload of the notation.
+- **Drawing the loop you expect instead of the one that's real**: it's easy to sketch a clean, textbook-looking reinforcing loop that confirms a pre-existing hypothesis; the discipline is checking each individual link against what you actually know, not what would make a satisfying diagram.
+- **Treating the diagram as proof instead of a hypothesis**: a causal loop diagram encodes a claim about mechanism — it still needs to be checked against real data, not accepted because it's visually persuasive.
+
+## Tips
+
+Draw the diagram with the people who actually run the system, not just about them — a support lead or an ops person will catch a wrong-direction arrow or a missing variable that someone reasoning from the dashboard alone will miss every time.
+
+## Using AI
+
+**Where it helps**
+- Drafting a first-pass diagram from a written description of a suspected dynamic, as a starting point for a human with real system knowledge to correct.
+- Checking the polarity arithmetic on a complex diagram with several nested loops — a mechanical check a model does reliably once the variables and individual link directions are supplied by a human.
+
+**Where it fails**
+- Inventing plausible-sounding variables and links when the underlying system knowledge isn't actually available to it — a model will produce a clean, confident-looking causal loop diagram for a system it knows nothing about, and the diagram's visual polish gives it more credibility than the guesswork behind it deserves.

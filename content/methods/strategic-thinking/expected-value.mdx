@@ -1,0 +1,77 @@
+---
+id: expected-value
+title: Expected Value
+aka: ["EV", "Probability-Weighted Value"]
+category: strategic-thinking
+alsoIn: []
+kind: concept
+gives: quantitative
+effort: low
+timeframe: hours
+needs:
+  - Estimated probabilities for each possible outcome
+  - Estimated values (cost or benefit) for each outcome
+useInstead:
+  - when: The probabilities themselves are genuinely unknown, not just uncertain — you're facing Knightian uncertainty, not risk
+    method: pre-mortem
+  - when: You need to map a full sequence of dependent decisions and chance events, not evaluate a single bet
+    method: decision-trees
+related:
+  alongside: [opportunity-cost, decision-trees]
+sources:
+  - title: "Fermat and Pascal on Probability"
+    author: Blaise Pascal & Pierre de Fermat (1654 correspondence)
+    url: https://www.york.ac.uk/depts/maths/histstat/pascal.pdf
+    type: paper
+    seminal: true
+  - title: "Thinking in Bets"
+    author: Annie Duke
+    url: https://www.annieduke.com/books/
+    type: book
+    year: 2018
+    seminal: false
+---
+
+## What is it
+
+The probability-weighted average of every possible outcome of a decision. A bet with a 30% chance of gaining $300 and a 70% chance of losing $50 has an expected value of $55 — positive, even though losing is the more likely single outcome.
+
+## Why it matters
+
+Expected value is the tool for making decisions by their probability-weighted outcome rather than by their most likely single outcome — and the two can point in opposite directions. A decision with positive expected value should generally be taken even when any individual instance of it produces a bad outcome; a decision with negative expected value is a bad bet even if it happens to pay off once. Annie Duke's framing — thinking in bets rather than certainties — is the practical translation of this into everyday judgment.
+
+## Key ideas
+
+- **Weight outcomes by probability, not vividness**: a rare catastrophic outcome and a common mild one both belong in the calculation, weighted by how likely each actually is — not by how memorable or scary they feel.
+- **Positive EV can still lose; negative EV can still win**: any single instance of a bet is one draw from a distribution. Evaluating a past decision by whether that one draw went well is the resulting error — judging decision quality by outcome quality.
+- **Variance matters alongside expected value**: two bets with the same expected value can have very different spreads of possible outcomes; a decision-maker also needs to ask whether they can survive the worst case, not just whether the average case is favorable.
+
+## Example
+
+A designer is deciding whether to ship a risky redesign before a big launch event. Estimated: 40% chance it lifts conversion by an amount worth $200K, 60% chance it causes a regression costing $60K in lost conversion during the launch window. EV = (0.4 × $200K) − (0.6 × $60K) = $80K − $36K = $44K positive — a case for shipping, even though the more likely single outcome (60%) is the loss.
+
+## Application
+
+- Use it explicitly when comparing two product bets with different upside/downside profiles, rather than defaulting to whichever has the more likely single outcome.
+- Push a stakeholder conversation from "will this work?" to "what's the probability-weighted value across how it could go?" — this reframes disagreements about a single guess into disagreements about specific probabilities and payoffs, which are easier to debate productively.
+- Pair it with a gut check on variance: a positive-EV bet that could bankrupt the team if it goes wrong may not be worth taking regardless of the average.
+
+## Limitations
+
+- **Garbage-in, garbage-out**: the calculation is only as good as the probability and value estimates feeding it, and those are often the most contested and least certain part of the whole exercise.
+- **Doesn't capture risk tolerance**: a positive expected value doesn't mean a decision-maker should always take the bet — an asymmetric downside that's unrecoverable can outweigh a favorable average.
+- **Assumes probabilities are knowable at all**: many real product and career decisions involve genuine uncertainty (Frank Knight's distinction) rather than known-probability risk, and forcing a false precision onto unknown probabilities produces misplaced confidence.
+
+## Common misconceptions
+
+- **"Negative outcome means it was a bad decision"**: this is resulting — the outcome of one instance of a positive-EV bet tells you little about whether the decision itself was sound.
+- **"EV requires exact numbers"**: rough probability ranges are usually enough to compare two options meaningfully; the value of the exercise is forcing explicit estimates, not achieving false precision.
+
+## Using AI
+
+**Where it helps**
+- Structuring the calculation itself — laying out outcomes, probabilities, and values in a clear table and doing the arithmetic correctly and quickly.
+- Stress-testing whether your probability estimates are internally consistent (e.g., do they sum to 100% across mutually exclusive outcomes).
+
+**Where it fails**
+- A model has no privileged access to the actual probabilities of your specific business or design outcome — a fluent, precise-looking EV calculation built on invented or unverified probability estimates gives false confidence in a number that's only as good as guesses dressed up as data.

@@ -1,0 +1,86 @@
+---
+id: ice
+title: ICE
+aka: ["ICE Score", "ICE Scoring Model", "Impact Confidence Ease"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: quantitative
+effort: low
+timeframe: hours
+needs:
+  - A list of candidate experiments or ideas to rank against each other
+useInstead:
+  - when: You need a more rigorous, reach-weighted score for roadmap-level initiatives rather than fast growth experiments
+    method: rice
+related:
+  alongside: [rice, impact-effort-matrix]
+sources:
+  - title: "The Original Growth Hacker Reveals His Secrets"
+    author: Sean Ellis (Lenny's Newsletter podcast)
+    url: https://www.lennysnewsletter.com/p/the-original-growth-hacker-sean-ellis
+    type: video
+    year: 2024
+    seminal: false
+  - title: "What Is the ICE Scoring Model? Definition, Origin, & FAQ"
+    author: airfocus
+    url: https://airfocus.com/glossary/what-is-the-ice-scoring-model/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A three-factor scoring model — Impact × Confidence × Ease, each rated 1-10 — used to rank growth experiments fast, when a team needs to decide what to test next without a lengthy debate. It's deliberately the "minimum viable" version of a scoring framework: three numbers, multiplied, ranked.
+
+## When to use
+
+- You're running a high-velocity experimentation program (growth, marketing, conversion) and need to pick the next test from a long backlog quickly
+- The team generates more experiment ideas than it can run, and the bottleneck is choosing, not sourcing
+- You want something lighter than rice for ideas that are inherently short-lived and low-cost to test, where a heavier scoring exercise would cost more than the experiment itself
+- You need a fast, repeatable ritual for a recurring backlog-grooming session rather than a one-off roadmap decision
+
+## Structure
+
+- **Impact**: how much this experiment could move the metric you care about if it works, scored 1-10.
+- **Confidence**: how sure you are that it will actually produce that impact, scored 1-10 — the factor that keeps Impact honest by discounting pure hope.
+- **Ease**: how simple the experiment is to implement, scored 1-10 (high score = easy), which functions as an inverse effort estimate baked directly into the same 1-10 scale as the other two.
+
+## How to use
+
+1. List every candidate experiment or idea you're comparing, keeping the list to things that are genuinely comparable in scope (an afternoon's A/B test, not a multi-quarter build).
+2. Score Impact for each — how much would this plausibly move the target metric if the hypothesis is right.
+3. Score Confidence for each — how much evidence (past data, similar tests elsewhere, prior experience) backs the belief that it'll work, independent of how good the idea sounds.
+4. Score Ease for each — how quickly and cheaply it can actually be implemented and measured.
+5. Multiply the three scores, rank the list, and run experiments top-down — treating the ranking as a starting queue you can still reorder for practical reasons (a dependency, a seasonal window).
+6. Re-score periodically as you learn more — an idea's Confidence should rise or fall as related experiments produce results, not stay fixed forever.
+
+## Example
+
+Testing a new subject line for an existing onboarding email might score Impact 4, Confidence 8 (you've run similar subject-line tests before with predictable results), Ease 10 (a copy change, shippable same day) — ICE score 320. Building a referral program from scratch might score Impact 9, Confidence 3 (no prior data on whether users would actually refer), Ease 2 (multi-week build) — ICE score 54. The email test wins the queue not because it matters more, but because it's a much better bet on speed-adjusted learning.
+
+## Common mistakes
+
+- **Scoring Impact optimistically and letting it dominate**: because ICE multiplies rather than weights, an inflated Impact score for a favored idea can drown out honest Confidence and Ease scores — the same bias risk RICE tries to control for with a fixed multiplier scale, but ICE's freeform 1-10 range makes it easier to fudge.
+- **Treating Ease as effort without inverting it**: scoring Ease the same direction as effort (high number = high effort) silently flips the formula's intent — Ease should mean "easy," high is good.
+- **Using it for roadmap-level initiatives instead of fast experiments**: ICE has no Reach factor, so it can rank a niche idea above a broad-impact one if the niche idea just happens to be easier and feels more confident — fine for a growth-experiment queue, misleading for a strategic roadmap.
+- **Never revisiting scores as evidence accumulates**: a static ICE backlog stops reflecting what the team has actually learned from prior tests.
+
+## Limitations
+
+- **No Reach factor**: unlike rice, ICE doesn't explicitly weight how many people an idea touches, which is a deliberate simplification for speed but means it can misrank a low-reach idea above a high-reach one.
+- **Coarser, more subjective scale than RICE**: 1-10 free-form scoring for all three factors invites more inconsistency across scorers than RICE's fixed Impact multipliers and percentage-based Confidence.
+- **Best suited to reversible, cheap experiments**: applying ICE to a large, hard-to-reverse initiative treats a strategic bet like a quick growth test, which understates the real cost of getting Confidence wrong.
+
+## Tips
+
+Have the same person or small group score every item in a single session, rather than letting different people score different rows — cross-scorer inconsistency on a 1-10 free scale is the single biggest source of a misleading rank order.
+
+## Using AI
+
+**Where it helps**
+- Drafting a first-pass ICE table across a long list of raw experiment ideas, to speed up a backlog-grooming session before the team debates and corrects the scores.
+- Flagging inconsistent scoring patterns across a large backlog (e.g., one scorer's Impact scores running systematically higher than another's).
+
+**Where it fails**
+- Assigning Confidence scores without access to a team's actual prior experiment results. Confidence is supposed to encode real evidence a team has accumulated about what tends to work for their specific product and audience — a model estimating Confidence from general plausibility, without that history, produces a number that looks like the real thing but carries none of the calibration the score depends on.

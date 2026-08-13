@@ -1,0 +1,79 @@
+---
+id: google-design-sprint
+title: Google Design Sprint
+aka: ["Design Sprint", "GV Sprint", "5-Day Sprint"]
+category: strategic-thinking
+alsoIn: []
+kind: method
+gives: qualitative
+effort: high
+timeframe: days
+needs:
+  - A single, well-defined problem and a Decider empowered to commit to a direction
+  - A cross-functional team blocked off full-time for 4-5 consecutive days
+  - 5 target customers lined up to test the prototype on the final day
+useInstead:
+  - when: You don't have a full week to block off, or need an ongoing cadence instead of a one-off event
+    method: continuous-discovery
+  - when: The problem is too broad or under-researched to converge on a testable prototype within days
+    method: double-diamond
+related:
+  before: [design-thinking]
+  after: [story-mapping]
+  alongside: []
+sources:
+  - title: "The Design Sprint"
+    author: Jake Knapp, John Zeratsky & Braden Kowitz (GV)
+    url: https://www.gv.com/sprint/
+    type: book
+    year: 2016
+    seminal: true
+  - title: "Design Sprint Kit"
+    author: Google
+    url: https://designsprintkit.withgoogle.com/
+    type: tool
+    seminal: false
+---
+
+## What is it
+
+A rigid, time-boxed 5-day process that takes a team from a big, ambiguous question to a tested prototype and real customer reactions in one work week. Each day has a fixed agenda, removing the "endless debate" that normally stretches this over months.
+
+## Purpose
+
+Forces a fast, cheap answer to "is this worth building" before a team commits real engineering time. It compresses map-making, ideation, decision-making, prototyping, and user testing — normally spread across weeks of meetings — into five structured days with one clear decision-maker, trading breadth of exploration for speed of validated learning.
+
+## When to use
+
+- Leadership is stuck debating a big, ambiguous product direction and needs a fast, evidence-backed answer rather than another round of opinions
+- The problem is specific and well-scoped enough to converge on in days — not a broad "figure out our whole strategy" ask
+- You can get a real Decider (not a committee) and the full team in a room, full-time, for the week
+- You need customer reactions to a concrete prototype fast, before investing in a build
+
+## How to do it
+
+1. **Monday — Map**: start from the long-term goal, map the problem, and pick a specific target moment to solve for. Interview available experts.
+2. **Tuesday — Sketch**: individually generate solutions by remixing existing ideas ("lightning demos") into detailed, self-explanatory sketches.
+3. **Wednesday — Decide**: critique sketches as a group, then have the Decider — one person, not a vote — pick which solution(s) get prototyped, and storyboard the winning idea into a testable flow.
+4. **Thursday — Prototype**: build a realistic-looking "fake it" prototype — good enough to react to, not production-ready — and write the Friday interview script.
+5. **Friday — Test**: run five 1-on-1 interviews with target customers reacting to the prototype, and watch as a team; five is the number Knapp settled on as enough to spot patterns without overkill.
+
+## Common mistakes
+
+- **Running it without a real Decider** — group consensus on Wednesday defeats the purpose; the sprint's speed comes from one person owning the call, informed by but not outsourced to the room.
+- **Choosing a problem that's too big or too vague** — "figure out our five-year strategy" doesn't converge in a week; sprints work on a specific, bounded decision.
+- **Skipping the Friday test** — a prototype nobody outside the team reacted to is just an expensive sketch; the whole method's value is the real customer signal on day five.
+- **Treating the sprint's output as a finished feature** — the prototype is a "fake it" facade built to elicit reactions, not code to ship; teams that try to productionize it directly skip the actual build-and-validate work still ahead.
+
+## Tips
+
+Protect the calendar ruthlessly — pull every participant out of their normal meetings for the full week; a sprint with people half-attending from their desks between other obligations loses the focused-room energy that makes the fast convergence possible.
+
+## Using AI
+
+**Where it helps**
+- Drafting the Friday interview script and consent/logistics materials ahead of the sprint week, freeing sprint time for the actual work
+- Synthesizing patterns across the five Friday interview notes into a shared readout for the team
+
+**Where it fails**
+- Substituting for the Tuesday individual-sketching step. The method's ideation quality comes specifically from each person independently producing a detailed, self-contained solution before anyone sees anyone else's — a model generating "sketch ideas" on someone's behalf collapses that independence and just produces one more voice's opinion in the room, disguised as several.

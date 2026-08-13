@@ -1,0 +1,89 @@
+---
+id: ooda-loop
+title: OODA Loop
+aka: ["Observe Orient Decide Act", "Boyd Cycle"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: conceptual
+effort: medium
+timeframe: ongoing
+needs:
+  - A fast-changing or competitive environment where reacting faster than the other side matters
+  - A real-time information flow to observe and re-observe as the situation changes
+useInstead:
+  - when: The question is who has decision authority on a slower-moving cross-functional call, not how fast to cycle
+    method: rapid
+  - when: The decision is a one-time strategic call with quantifiable probabilities, not a repeating tempo
+    method: decision-trees
+related:
+  alongside: [rapid, daci]
+sources:
+  - title: "A Discourse on Winning and Losing"
+    author: John Boyd (ed. Grant T. Hammond)
+    url: https://www.coljohnboyd.com/static/documents/2018-03__Boyd_John_R__edited_Hammond_Grant_T__A_Discourse_on_Winning_and_Losing.pdf
+    type: book
+    year: 2018
+    seminal: true
+  - title: "OODA Loop: What You Can Learn From Fighter Pilots About Making Fast and Accurate Decisions"
+    author: Farnam Street
+    url: https://fs.blog/ooda-loop/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A four-stage decision cycle — Observe, Orient, Decide, Act. The strategic claim isn't the four stages themselves; it's that cycling through them faster than your opponent produces a compounding advantage.
+
+## Overview & Purpose
+
+Boyd built the model studying why US pilots in Korean-War-era F-86s consistently beat MiG-15s that outperformed them on paper. His answer: the F-86's better visibility and controls let pilots complete the observe-orient-decide-act cycle faster, so they were repeatedly acting on more current information than their opponents — who were still orienting to the previous move. The framework generalizes past aerial combat to any competitive situation where speed and accuracy of the decision cycle matter more than the "quality" of any single decision in isolation.
+
+## When to use
+
+- You're in a genuinely adversarial or fast-moving competitive situation — a live incident, a fast-moving market, a competitor response — where the cost of a slow cycle compounds each round.
+- You need a framework for tempo, not for getting to the single best answer — OODA is about relative speed and adaptability, not optimality.
+- The situation changes fast enough that a decision made five minutes ago may already be stale.
+
+## Structure
+
+1. **Observe**: gather raw information from the environment — competitor moves, user behavior, system signals — without filtering it through existing assumptions yet.
+2. **Orient**: the hardest and most important stage. Filter the observations through your mental models, current constraints, and prior experience to form a situational picture. Boyd considered this the stage most vulnerable to bias and most valuable to get right.
+3. **Decide**: select a course of action from the oriented picture — not the theoretically optimal action, but the best available action given the time pressure.
+4. **Act**: execute, which immediately changes the situation and feeds back into the next Observe stage.
+
+## How to use
+
+- Run the loop explicitly and fast: the entire value is in cycling through all four stages repeatedly, not stopping to perfect any single stage.
+- Invest disproportionately in Orient — this is where stale assumptions and cognitive bias corrupt the whole cycle, and where Boyd's own emphasis was strongest.
+- Deliberately try to disrupt an opponent's or a competitor's OODA loop: introduce ambiguity, act unpredictably, or move fast enough that their orientation is always based on stale information — this was Boyd's operational point, not just the "loop faster" framing that gets popularized.
+- Treat each Act as also an experiment that generates new Observations, not a final move.
+
+## Example
+
+An incident-response team observes a spike in error rates, orients by mapping it against recent deploys and known failure patterns, decides to roll back the most recent deploy, and acts. The rollback immediately produces new signals (does the error rate drop?) that start the next loop — rather than the team stopping to build a complete root-cause analysis before acting once.
+
+## Common mistakes
+
+- **Treating "loop faster" as the whole idea** — the popularized version drops Boyd's actual emphasis on Orient, and on disrupting the *opponent's* loop, reducing a strategic framework to generic advice about moving quickly.
+- **Applying it to non-competitive, non-adversarial decisions** — OODA's value comes from a competitive tempo dynamic; a slow, low-stakes, non-adversarial decision doesn't benefit from being framed as a "loop" at all.
+- **Skipping Orient** — jumping from raw observation straight to a decision skips exactly the stage where situational awareness actually gets built, and is the fastest way to act confidently on a wrong picture.
+
+## Limitations
+
+- **Doesn't model decision quality directly** — a team can cycle very fast and still make bad decisions each time; speed is not a substitute for having good judgment inside each stage.
+- **Assumes a genuinely adversarial or fast-feedback environment** — in a low-validity environment with delayed, noisy feedback, cycling faster mostly means acting on noise faster.
+
+## Tips
+
+Use OODA as the tempo layer on top of other tools, not as a replacement for them — pair fast Observe/Orient/Decide/Act cycles with a slower-cadence tool (a pre-mortem, a risk matrix) for the genuinely high-stakes, low-frequency decisions embedded inside the fast-moving situation.
+
+## Using AI
+
+**Where it helps**
+- Compressing the Observe stage — summarizing incoming signals, competitor moves, or monitoring data fast enough to keep the cycle's tempo up.
+- Flagging when the Orient stage may be running on stale assumptions by surfacing what's changed since the last loop.
+
+**Where it fails**
+- Orient is the stage that requires genuine situational judgment built from experience in the specific domain — a model can summarize information quickly but can't substitute for the pattern-recognition a team builds from having lived through similar situations before, which is exactly what Boyd identified as the decisive stage.

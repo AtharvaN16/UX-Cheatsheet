@@ -1,0 +1,88 @@
+---
+id: cynefin-framework
+title: Cynefin Framework
+aka: ["Cynefin", "Snowden's Sense-Making Framework"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - A decision or problem to categorize
+  - Enough context on the problem to judge whether cause and effect are knowable in advance, knowable only in hindsight, or not knowable at all
+useInstead:
+  - when: You've already categorized the problem as complex or chaotic and need a concrete action-execution loop, not another sense-making pass
+    method: ooda-loop
+  - when: The problem is simple or complicated enough that a straightforward prioritization framework beats a five-domain sense-making exercise
+    method: eisenhower-matrix
+related:
+  alongside: [ooda-loop, first-principles]
+sources:
+  - title: "A Leader's Framework for Decision Making"
+    author: David J. Snowden & Mary E. Boone
+    url: https://hbr.org/2007/11/a-leaders-framework-for-decision-making
+    type: article
+    year: 2007
+    seminal: true
+  - title: "About the Cynefin Framework"
+    author: The Cynefin Co
+    url: https://thecynefin.co/about-us/about-cynefin-framework/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A sense-making model that sorts a problem into one of five domains — Clear, Complicated, Complex, Chaotic, and Confusion — based on how knowable the relationship between cause and effect is. The right response differs by domain, so diagnosing which one you're in comes before choosing how to act.
+
+## Purpose
+
+Stops a team from applying the wrong category of response to a problem — running a best-practices checklist on a genuinely complex, unprecedented situation, or over-analyzing a chaotic one that needs immediate action first and analysis second. Snowden and Boone's 2007 HBR article was written explicitly for leaders who default to one comfortable mode (usually "analyze more") regardless of which domain the actual problem sits in.
+
+## When to use
+
+- A team is stuck disagreeing on approach, and the real disagreement is actually about which domain the problem is in, not about the solution itself
+- You're about to apply a "best practice" or "proven playbook" to a situation and want to check whether cause-and-effect in this case is actually knowable in advance
+- A crisis or incident response needs a fast read on whether the situation is complicated (expert-solvable) or chaotic (act-now, analyze-later)
+- You're designing a novel product or feature in genuinely unprecedented territory and want a language for why "look at what competitors did" (a Complicated-domain move) won't reliably work here
+
+## Structure
+
+The five domains sit on a rough spectrum from most to least orderly, with Confusion/Disorder as the default state before diagnosis:
+
+- **Clear**: cause and effect are obvious to everyone. Response: sense, categorize, respond — apply the known best practice.
+- **Complicated**: cause and effect exist but require expertise or analysis to see. Response: sense, analyze, respond — bring in the right expert, apply good practice.
+- **Complex**: cause and effect are real but only visible in retrospect; the same action can produce different outcomes depending on conditions you can't fully see in advance. Response: probe, sense, respond — run small, safe-to-fail experiments and let the pattern reveal itself.
+- **Chaotic**: no discernible cause-effect relationship; the priority is stopping the bleeding, not understanding it yet. Response: act, sense, respond — act first to establish some order, then start sense-making.
+- **Confusion/Disorder**: the domain nobody starts in on purpose — you don't yet know which of the other four you're actually facing, and diagnosing that is the first move.
+
+## How to use
+
+1. Resist the instinct to jump straight to a response — the framework's entire value is in the diagnosis step, and skipping it is the most common failure.
+2. Ask whether the relationship between cause and effect is obvious, knowable with analysis, only knowable in hindsight, or absent entirely — that answer places you in Clear, Complicated, Complex, or Chaotic respectively.
+3. In Clear situations, apply the known best practice — and stay alert, since a Clear domain that's misdiagnosed (it's actually Complex, and the "obvious" pattern has changed) is Snowden's specific warning about complacency.
+4. In Complicated situations, bring in genuine domain expertise or rigorous analysis before acting — the answer exists, it just isn't obvious without digging.
+5. In Complex situations, don't analyze your way to certainty before acting — you can't. Run small, genuinely safe-to-fail probes, observe what emerges, and let the results tell you what pattern is actually there.
+6. In Chaotic situations, act immediately to stabilize the situation before trying to fully understand it — waiting for clarity in a genuinely chaotic domain means the situation gets worse while you wait.
+7. If you're not sure which domain you're in, name that explicitly as Confusion/Disorder and treat "figure out which domain this is" as the actual next task, rather than defaulting to whichever domain your team is most comfortable operating in.
+
+## Common mistakes
+
+- **Defaulting to "Complicated" because that's the comfortable, analysis-friendly domain**: teams with strong analytical cultures often misdiagnose a genuinely Complex problem as Complicated, and then over-invest in analysis that will never converge because the cause-effect relationship simply isn't knowable in advance for this problem.
+- **Applying a Clear-domain best practice to a Complex problem**: "this worked for our last three launches" is a Clear-domain move; a genuinely novel market or user base is often actually Complex, where the same playbook can produce a different result for reasons only visible after the fact.
+- **Freezing in Chaotic situations waiting for more data**: the Chaotic domain specifically calls for acting first — an incident response team that keeps analyzing while a chaotic situation is actively unfolding is applying the wrong domain's response.
+- **Treating the five domains as a maturity ladder**: Cynefin's domains aren't stages of improvement — a genuinely Complex problem doesn't "graduate" to Complicated once you understand it better; some problems are structurally Complex and stay that way.
+
+## Tips
+
+Run the categorization as an explicit, named step in the meeting — "before we discuss what to do, let's agree on which domain this is" — rather than letting people implicitly argue past each other from different assumed domains.
+
+## Using AI
+
+**Where it helps**
+- Drafting the case for which domain a described problem most likely sits in, as a structured starting point for a team debate — a model can lay out the argument for "Complicated" vs. "Complex" cleanly, which is often enough to get a stuck team unstuck on the actual disagreement.
+- Generating candidate safe-to-fail probes for a problem diagnosed as Complex, since the probe-sense-respond move benefits from a wide set of small experiments to choose from.
+
+**Where it fails**
+- Confidently declaring which domain a real, high-stakes situation is in without the messy organizational context that actually determines the answer — the categorization depends on real knowledge of whether cause and effect are genuinely knowable here, which a model has no privileged access to, and a wrong domain call (especially Complex misdiagnosed as Complicated) leads directly to the over-analysis failure mode the framework exists to prevent.

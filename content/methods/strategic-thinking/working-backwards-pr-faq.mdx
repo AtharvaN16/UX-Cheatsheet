@@ -1,0 +1,79 @@
+---
+id: working-backwards-pr-faq
+title: Working Backwards / PR-FAQ
+aka: ["Working Backwards", "PR/FAQ", "Press Release FAQ", "Amazon Working Backwards"]
+category: strategic-thinking
+alsoIn: []
+kind: method
+gives: qualitative
+effort: high
+timeframe: weeks
+needs:
+  - A single owner willing to draft and repeatedly redraft the narrative themselves
+  - Enough access to real customer problems to write an honest, specific problem paragraph
+  - Stakeholders willing to review a written narrative before any deck or roadmap exists
+useInstead:
+  - when: You need an ongoing weekly cadence of customer contact, not an upfront planning artifact
+    method: continuous-discovery
+  - when: You need a fast, collaborative exercise to converge on a UI-level solution, not a strategic go/no-go narrative
+    method: google-design-sprint
+related:
+  before: []
+  after: [story-mapping]
+  alongside: [product-strategy]
+sources:
+  - title: "Working Backwards: Insights, Stories, and Secrets from Inside Amazon"
+    author: Colin Bryar & Bill Carr
+    url: https://www.workingbackwards.com/
+    type: book
+    year: 2021
+    seminal: true
+  - title: "The Amazon Working Backwards PR/FAQ Process"
+    author: Colin Bryar & Bill Carr (Working Backwards)
+    url: https://workingbackwards.com/concepts/working-backwards-pr-faq-process/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+Amazon's practice of writing a mock press release and FAQ for a product *before* building it, forcing the team to articulate the customer benefit in plain language before any roadmap or spec exists.
+
+## Purpose
+
+Kills weak ideas cheaply, in writing, before they cost engineering time. A press release forces specificity: if the "benefits" listed wouldn't actually excite a real customer reading them, that's a signal to rework or kill the idea now, while a redraft costs an afternoon — not after months of building. The FAQ half does the same for internal risk: it front-loads the hard questions (cost, feasibility, competitive response, legal) that would otherwise surface piecemeal during execution.
+
+## When to use
+
+- You're deciding whether a significant new product or feature is worth building at all — not refining something already greenlit
+- Leadership keeps approving ideas based on decks and roadmap slides that never state a concrete, falsifiable customer benefit
+- Multiple teams or stakeholders need to align on what's being built and why before any design or engineering work starts
+- You want a written artifact that forces rigor through repeated drafting, not a single meeting's worth of discussion
+
+## How to do it
+
+1. Write the press release first, as if the product has already launched: headline and subheading naming the product and the specific customer it's for; a summary paragraph with the (hypothetical) launch date; a problem paragraph describing the customer pain point in their terms; a solution paragraph explaining how the product solves it and how it's meaningfully better than alternatives; and a quote plus a "getting started" line.
+2. Write the FAQ in two parts: **external FAQs** anticipate what customers and press would ask (pricing, availability, how it works); **internal FAQs** anticipate what executives and stakeholders will ask (cost, technical risk, market size, why now).
+3. Circulate the PR-FAQ for written or in-meeting feedback and revise — expect many drafts; the rigor comes from the redrafting, not the first version.
+4. Use the document as the actual go/no-go artifact: if the press release doesn't sound genuinely exciting to a real customer, that's the signal to change the idea or kill it, not to polish the writing.
+5. Once approved, keep the PR-FAQ as the north-star reference during build — teams periodically re-check "are we building what's in the press release?" and treat drift as something to explain, not ignore.
+
+## Common mistakes
+
+- **Writing the press release after the product is basically built** — at that point it's marketing copy, not a planning tool; the entire value is catching a weak idea before resources are committed.
+- **Skipping the internal FAQ** — a press release alone reads well but hides the hard operational and financial questions; the internal FAQ is where those get forced into the open early.
+- **Treating the first draft as final** — Amazon's own practice depends on brutal, repeated rewriting; a single draft rubber-stamped in one meeting defeats the purpose.
+- **Writing benefits nobody would actually care about and shipping anyway** — the whole diagnostic value of the exercise is killing ideas that don't survive being stated plainly; overriding that signal because the roadmap slot is already committed defeats the method.
+
+## Tips
+
+Write the press release from the customer's vocabulary, not the company's — if a benefit only makes sense to someone who already knows the internal roadmap or tech stack, it will fail the "would a real customer find this exciting" test that makes the exercise useful in the first place.
+
+## Using AI
+
+**Where it helps**
+- Drafting the first pass of the FAQ's likely internal questions (cost, risk, competitive response) as a checklist for the actual owner to answer with real numbers
+- Tightening press-release prose across redrafts once the substantive customer benefit and problem framing are already settled by a human
+
+**Where it fails**
+- Writing the problem and solution paragraphs from scratch without firsthand customer knowledge. A fluent, specific-sounding press release is exactly what this method uses as a go/no-go signal — a model can produce one that reads convincingly without any of the underlying customer insight, which defeats the entire diagnostic point of the exercise and risks green-lighting an idea on the strength of good prose alone.

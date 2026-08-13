@@ -1,0 +1,95 @@
+---
+id: story-mapping
+title: Story Mapping
+aka: ["User Story Mapping", "Story Map", "Backbone and Ribs"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: conceptual
+effort: low
+timeframe: days
+needs:
+  - A rough set of user stories or backlog items already gathered
+  - A clear sense of the end-to-end user activities the product supports
+  - Wall space or a shared canvas the whole team can see at once
+useInstead:
+  - when: You need to decide what to build next from customer evidence, not visualize a backlog you've already gathered
+    method: continuous-discovery
+  - when: You need a numeric prioritization score for individual backlog items, not a two-dimensional map of the whole product
+    method: moscow
+related:
+  before: [continuous-discovery]
+  after: [google-design-sprint]
+  alongside: []
+sources:
+  - title: "User Story Mapping: Discover the Whole Story, Build the Right Product"
+    author: Jeff Patton
+    url: https://jpattonassociates.com/jeff-pattons-book-released-user-story-mapping/
+    type: book
+    year: 2014
+    seminal: true
+  - title: "The New User Story Backlog is a Map"
+    author: Jeff Patton
+    url: https://jpattonassociates.com/the-new-backlog/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A technique for arranging user stories in two dimensions instead of one flat list: a **backbone** of high-level activities runs left to right across the top, and supporting stories hang beneath each as **ribs**, prioritized top to bottom.
+
+## Overview & Purpose
+
+A conventional backlog strips out the context that made each story make sense in the first place — Patton's own image is pulling all the leaves off a tree and bagging them, then cutting down the tree. A story map keeps the narrative shape visible so the team can see the whole product at a glance, spot gaps, and decide what a genuinely minimal end-to-end release looks like, instead of just working top-down through an undifferentiated list.
+
+## When to use
+
+- The backlog has grown into a long flat list and nobody can see the shape of the product anymore, only the next ticket
+- You're planning a first release and need to define a true walking skeleton — the smallest slice that works end to end — rather than an arbitrary subset of high-priority tickets
+- Multiple stakeholders keep talking past each other about scope because there's no shared visual of how the pieces relate
+- You need to explain what the product does to someone unfamiliar with it, using the stories themselves as the explanation
+
+## Structure
+
+- **Backbone**: the big user activities (not features), arranged left to right in the order a user would actually encounter or perform them — this row doesn't get prioritized away, it's the spine.
+- **Ribs**: the specific stories that fulfill each backbone activity, stacked vertically beneath it, with the most essential stories at the top of each stack.
+- **Horizontal slices**: cutting across the ribs at a given height produces a release — the top slice across every activity is the walking skeleton, the smallest possible system with real end-to-end functionality (borrowing Alistair Cockburn's term).
+
+## How to use
+
+1. Write out the big activities a user goes through, left to right, in the order they'd naturally happen — this becomes the backbone.
+2. Underneath each activity, write the individual stories needed to support it, without worrying about order yet.
+3. As a group, re-sort each activity's stories vertically by priority/necessity — most essential at top.
+4. Draw a horizontal line across the top of every column: that's your walking skeleton, the minimum viable release. Check it actually delivers a complete (if narrow) user outcome — not, in Patton's example, a car with no brakes.
+5. Keep the map visible throughout the project as a live reference, not a one-time planning artifact — update it as you learn.
+
+## Example
+
+For an e-commerce checkout, the backbone might read: Browse → Add to Cart → Enter Shipping → Pay → Confirm. Under "Enter Shipping," the top-priority rib is "enter a single address"; lower-priority ribs below it include "save multiple addresses" and "apply address autofill." The walking skeleton takes the top rib from every column — a real if bare-bones purchase flow — and ships that first.
+
+## Common mistakes
+
+- **Building the map once and never touching it again** — a static story map is just a fancier one-time diagram; its value is as a living reference the team keeps updating as priorities and understanding shift.
+- **Mistaking the backbone for a prioritized list** — the backbone represents the shape of the whole product and generally isn't optional or cuttable; confusing it with "high priority stories" leads teams to cut activities that were structurally necessary.
+- **Slicing releases vertically instead of horizontally** — shipping one whole activity fully before starting the next (instead of a thin horizontal slice across all activities) usually produces an unusable release; users need the whole journey, even a narrow one, not one perfect step and four missing ones.
+- **Skipping the walking-skeleton check** — assuming the top row of ribs automatically forms a coherent release without verifying it actually functions end to end.
+
+## Limitations
+
+- **Doesn't tell you which activities matter more than others at the strategic level** — it visualizes and sequences stories you've already decided belong in the product; it's not a discovery or prioritization method on its own.
+- **Gets unwieldy at large scale** — a story map for a sprawling product with dozens of activities becomes hard to keep on one wall or screen; it works best scoped to a single product or major workflow.
+- **Requires the team to already have a reasonably clear picture of user activities** — if the activities themselves are still unknown, discovery work needs to happen first.
+
+## Tips
+
+Do the initial mapping in person around a physical wall if you can — Patton built the technique around sticky notes and a wall specifically because the whole team seeing the whole shape at once, and physically moving stories between rows, surfaces gaps that a spreadsheet backlog hides.
+
+## Using AI
+
+**Where it helps**
+- Converting a messy flat backlog export into a first-pass backbone/ribs structure for the team to correct and rearrange together
+- Drafting candidate story text under each rib once the team has agreed on the activities and priority order
+
+**Where it fails**
+- Generating the backbone itself without the team in the room. The activities that make up the backbone come from a shared understanding of how real users actually move through the product — a model inferring that structure from ticket titles alone will miss the domain judgment the mapping session is supposed to surface, and produce a plausible-looking map nobody actually agreed to.

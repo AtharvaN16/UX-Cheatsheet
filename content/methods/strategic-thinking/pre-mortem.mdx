@@ -1,0 +1,78 @@
+---
+id: pre-mortem
+title: Pre-mortem
+aka: ["Project Premortem", "Prospective Hindsight"]
+category: strategic-thinking
+alsoIn: []
+kind: method
+gives: qualitative
+effort: low
+timeframe: hours
+needs:
+  - A specific decision or plan that hasn't been fully committed to yet
+  - A team willing to imagine failure concretely, including the person who proposed the plan
+useInstead:
+  - when: You want one person actively arguing against the plan from an adversarial stance, not a team generating hypothetical failure reasons
+    method: red-teaming
+  - when: You need to score already-identified risks by likelihood and severity, not generate the initial list
+    method: risk-matrix
+related:
+  before: [inversion]
+  alongside: [red-teaming, assumption-mapping]
+sources:
+  - title: "Performing a Project Premortem"
+    author: Gary Klein
+    url: https://hbr.org/2007/09/performing-a-project-premortem
+    type: article
+    year: 2007
+    seminal: true
+  - title: "The Pre-Mortem Method"
+    author: Gary Klein / Psychology Today
+    url: https://www.psychologytoday.com/us/blog/seeing-what-others-dont/202101/the-pre-mortem-method
+    type: article
+    year: 2021
+    seminal: false
+---
+
+## What is it
+
+Before committing to a decision, the team assumes it's one year later and the project has already failed — then generates specific, concrete reasons why. This "prospective hindsight" — imagining the failure as already real — produces far more honest risk assessments than asking "what could go wrong?"
+
+## Purpose
+
+Most planning discussions suppress dissent — the person with doubts about a plan is reluctant to speak up mid-planning, especially once the group has converged on enthusiasm. A pre-mortem exists specifically to make dissent safe and structured: everyone is asked to imagine failure, so raising a concern isn't a personal objection to the plan, it's simply doing the assigned exercise. It's cheap to run and disproportionately valuable for important, hard-to-reverse decisions.
+
+## When to use
+
+- Before committing to a decision that's expensive or hard to reverse — a launch, an architecture choice, a hire, a major redesign.
+- When a team has converged quickly on a plan and you suspect enthusiasm, not scrutiny, is driving the consensus.
+- As a lower-cost alternative or complement to red-teaming, when you want the whole team's honest doubts rather than one adversarial reviewer's case.
+
+## How to do it
+
+1. State the plan clearly, as if it were already final.
+2. Ask the team: "It's one year from now. This project failed. Write down, individually and silently, the specific reasons why." Prospective hindsight — treating the failure as an already-real fact, not a hypothetical — is what makes people specific instead of vague.
+3. Collect every reason individually before discussing as a group, for the same reason heuristic evaluation collects findings independently first: open discussion collapses the range of concerns people are willing to name.
+4. Go around and have each person read their top reasons aloud; capture every one, without judging or debating yet.
+5. Group similar reasons, then rank by how likely and how damaging each failure mode seems given current evidence.
+6. For the highest-priority failure modes, decide now what to change about the plan to reduce their probability — this step is the actual payoff; a pre-mortem that stops at a list of fears has done half the exercise.
+
+## Common mistakes
+
+- **Treating it as a one-time formality** — running it after the decision is effectively already locked in produces the appearance of scrutiny without the ability to act on what's found.
+- **Discussing findings before collecting them individually** — group discussion before individual writing reintroduces the exact social pressure the technique is designed to bypass.
+- **Stopping at the list of failure reasons** — the exercise is only useful if it changes the plan; a pre-mortem with no follow-up action is a documented list of ignored warnings.
+- **Running it only with people invested in the plan succeeding** — including someone with less stake in the outcome tends to surface concerns insiders won't voice.
+
+## Tips
+
+Make it genuinely safe to name reasons that implicate the plan's leadership or its most enthusiastic advocates — a pre-mortem where the obvious failure modes go unsaid because they'd embarrass the project's champion isn't doing its job.
+
+## Using AI
+
+**Where it helps**
+- Generating an initial, broader list of plausible failure modes than a team might produce unprompted, as raw material for the team's own individual pre-mortem writing — not a replacement for it.
+- Helping cluster and prioritize a long list of team-submitted failure reasons quickly once they've been collected.
+
+**Where it fails**
+- The technique's power comes specifically from a real team, with real stakes and real domain knowledge, confronting concrete failure — a model's imagined failure modes are generic pattern-matches from similar-sounding projects, not evidence grounded in this team's actual blind spots, and substituting them for the team's own reasoning defeats the purpose.

@@ -1,0 +1,69 @@
+---
+id: actor-network
+title: Actor-Network Theory
+aka: ["ANT", "Actor Network"]
+category: strategic-thinking
+alsoIn: []
+kind: concept
+gives: conceptual
+effort: medium
+timeframe: hours
+needs:
+  - Willingness to treat non-human elements — an algorithm, a default setting, a device, a form field — as having their own agency in the network, not just as passive tools
+useInstead:
+  - when: You need a faster, non-academic way to map stakeholders and relationships for an actual product decision this week
+    method: system-mapping
+  - when: You want to trace one specific feedback loop's cause-effect shape, not an ontological account of every actor's agency
+    method: causal-loop-diagrams
+related:
+  alongside: [system-mapping]
+sources:
+  - title: "Reassembling the Social: An Introduction to Actor-Network-Theory"
+    author: Bruno Latour
+    url: https://www.bruno-latour.fr/node/70.html
+    type: book
+    year: 2005
+    seminal: true
+  - title: "Actor-Network Theory for Designers and Futurists"
+    author: Julian Scaff
+    url: https://medium.com/the-futureplex/actor-network-theory-for-designers-and-futurists-3119b55533b0
+    type: article
+    year: 2024
+    seminal: false
+---
+
+## What is it
+
+A sociological framework that treats non-human "actants" — algorithms, devices, defaults, documents — as having genuine agency in a network alongside human actors, rather than as passive tools humans simply use. It traces the concrete associations between human and non-human actants that produce an outcome.
+
+## Why it matters
+
+This is a distinct, more academic lens than most of the systems-thinking toolkit, and it's worth knowing specifically because it corrects a habit designers fall into by default: treating the interface, the algorithm, or the default setting as a neutral instrument the human actors act *through*, rather than as something with its own effect on the outcome. A recommendation algorithm isn't just executing human intent — it's an actant reshaping what associations are even possible, and Actor-Network Theory is the framework built specifically to take that seriously rather than flatten it back into "the humans decided this."
+
+## Key ideas
+
+- **Actants, not just actors**: anything that "modifies a state of affairs by making a difference" counts as having agency in the network — a paywall, a default setting, and a support agent are all actants, on the same analytical footing, even though only one of them is a person.
+- **The network is traced, not assumed**: ANT's method is to follow the actual, concrete connections between actants that produced a given outcome, rather than starting from a pre-built social category ("users," "the algorithm," "the company") and explaining behavior by appeal to it.
+- **Symmetry between human and non-human**: this is ANT's most distinctive and contested move — refusing to grant humans a privileged explanatory status over the objects and systems they build and use, on the argument that the object's design is doing real causal work too.
+- **Punctualization**: a network of many actants can, once stabilized, be treated as a single black-boxed actor from the outside — "the app," "the platform" — which is convenient for conversation but can hide the actual distributed network of human and non-human actants doing the real work underneath that label.
+
+## Example
+
+A checkout abandonment problem, read through ANT, isn't just "users decided not to buy" — it's a network including the user, the payment form's specific field order, the device's autofill behavior, a fraud-detection algorithm silently declining certain card types, and the merchant's return policy displayed (or not) at that step. Each of those non-human actants is doing real work in producing the abandonment, not merely transmitting a human decision that was already made elsewhere (Scaff, 2024, translates this framing for design and futures practice specifically).
+
+## Application
+
+- **Use it sparingly, as a deliberate corrective**: reach for ANT specifically when a team's habit of saying "the user chose to leave" is masking that a form field, an algorithm, or a default did real causal work in that outcome — not as a everyday working framework for routine product decisions.
+- **Name the non-human actants explicitly in a retro**: listing the algorithm, the default, and the device alongside the human actors in a postmortem is often enough of the ANT move to surface a cause the team was about to attribute entirely to user behavior.
+- **Expect pushback on the symmetry claim**: granting an algorithm "agency" alongside a person is a genuinely unusual framing for most product conversations — introduce it as a deliberate lens for a specific stuck problem, not as a house vocabulary everyone needs to adopt.
+
+## Limitations
+
+- **Genuinely more academic and less directly actionable than the rest of this toolkit**: ANT was built for sociology and science-and-technology studies, not for a product roadmap — translating it into a design decision context, as this entry does, is an honest stretch, not a native fit.
+- **The symmetry claim is contested even within its own field**: critics argue treating human intent and object behavior as equivalent obscures real differences in responsibility and moral status — worth knowing before deploying the framing in a room that hasn't opted into the theory.
+- **Doesn't tell you what to do about the network you trace**: like emergent-behavior, ANT is a descriptive and analytical lens, not an intervention method — pair it with something like system-mapping or leverage-points once you've traced the actual network.
+
+## Common misconceptions
+
+- **"This is just system-mapping with extra jargon"**: system-mapping is a faster, practitioner-grade tool for mapping actors and relationships to find leverage; ANT is a distinct academic ontology about what counts as having agency at all — related in spirit, not interchangeable in rigor or purpose.
+- **"Granting an algorithm 'agency' means excusing human responsibility for it"**: ANT's claim is about causal contribution to an outcome, not about who is accountable for designing and shipping the actant in the first place — those remain separate questions.

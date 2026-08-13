@@ -1,0 +1,78 @@
+---
+id: buy-a-feature
+title: Buy-a-Feature
+aka: ["Buy a Feature", "Feature Buy", "Innovation Game: Buy a Feature"]
+category: strategic-thinking
+alsoIn: []
+kind: method
+gives: qualitative
+effort: medium
+timeframe: days
+needs:
+  - A candidate list of features, each with a realistic relative price tag
+  - A representative group of real customers or stakeholders, not just internal staff
+  - A facilitator to run the session and enforce the game's rules
+useInstead:
+  - when: You don't have access to real customers or stakeholders to run a live session
+    method: moscow
+  - when: You need a fast internal numeric prioritization without organizing a group exercise
+    method: ice
+related:
+  alongside: [kano-model]
+sources:
+  - title: "Innovation Games: Creating Breakthrough Products Through Collaborative Play"
+    author: Luke Hohmann
+    url: https://www.lukehohmann.com/innovation-games
+    type: book
+    year: 2006
+    seminal: true
+  - title: "Buy a Feature"
+    author: Luke Hohmann
+    url: https://www.lukehohmann.com/innovation-games/buy-a-feature
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A prioritization exercise where real customers or stakeholders are given a fixed amount of play money and a priced list of candidate features, and have to pool their money and negotiate to "buy" the ones they want most — revealing genuine priority through spending decisions instead of survey answers.
+
+## Purpose
+
+Gets past the problem that people rate almost everything "important" when just asked directly. Forcing a real trade-off — a fixed budget, real prices, and the need to cooperate with other players to afford anything expensive — surfaces which features people actually value enough to sacrifice for, and which ones they'll say they want but won't spend on.
+
+## When to use
+
+- You have access to real customers or informed stakeholders and want their input on feature priority, not just internal opinion
+- Direct survey questions ("how important is X?") have produced flat, unhelpfully-high ratings for everything
+- You want to see negotiation and coalition-forming happen live — which features get bundled together in players' minds is itself useful data
+- Pricing candidate features realistically, relative to actual build cost, is feasible for your backlog
+
+## How to do it
+
+1. Select a shortlist of candidate features — Hohmann's guidance is roughly 8-12, enough to force real choices without overwhelming players.
+2. Price each feature with a play-money cost that roughly reflects its real development cost — pricier features should actually cost more to build.
+3. Give each player (or small team of players) a fixed budget that's deliberately less than the cost of all features combined, and set the total price of "everything" meaningfully above what any single player can afford alone.
+4. Run the session: players can pool money with others to jointly buy an expensive feature, but no one can unilaterally buy everything they want.
+5. Track what actually gets bought, what gets left on the table, and — just as informative — which features players negotiate to bundle together.
+6. Debrief with players on their reasoning, not just the purchase list; the negotiation conversation often surfaces the "why" behind a priority more clearly than the spend itself.
+
+## Common mistakes
+
+- **Recruiting internal staff instead of real customers/stakeholders**: the exercise's value comes from revealing genuine customer trade-offs; running it with your own team just produces an internal opinion poll with extra theater.
+- **Pricing features arbitrarily instead of by real cost**: if price doesn't roughly track actual build effort, the "purchase" signal doesn't map back to a real cost/value trade-off.
+- **Giving everyone enough budget to buy what they want alone**: the forced cooperation is the mechanism — a budget too generous defeats the whole point.
+- **Treating the purchase list as the final backlog**: it's a strong signal of priority, not a commitment — validate surprising results before committing engineering time.
+
+## Tips
+
+Watch the negotiation, not just the final purchases — which players team up to buy which features, and what they argue about while doing it, often reveals segment differences (who wants what, and why) that the spending data alone won't show.
+
+## Using AI
+
+**Where it helps**
+- Drafting a first-pass feature price list from rough effort estimates, as a starting point for the team to sanity-check before a session
+- Summarizing session notes and purchase patterns across multiple groups into a comparable report
+
+**Where it fails**
+- Simulating players to skip running the actual session. The entire value of Buy-a-Feature is real people making a real trade-off with real (if play) money and negotiating with other real people — a model's simulated "purchase" isn't evidence of anything, since there's no genuine scarcity or social negotiation behind it.

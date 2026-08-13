@@ -1,0 +1,86 @@
+---
+id: impact-effort-matrix
+title: Impact/Effort Matrix
+aka: ["Impact-Effort Matrix", "Impact vs Effort Matrix", "Value vs Effort Matrix"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: qualitative
+effort: low
+timeframe: hours
+needs:
+  - A candidate list of ideas, features, or fixes
+  - A rough shared sense of user/business impact per item
+  - A rough shared sense of implementation effort per item
+useInstead:
+  - when: You need a single weighted numeric score across more than two factors
+    method: rice
+  - when: You specifically want to separate development cost/risk from a broader effort estimate
+    method: cost-vs-value
+related:
+  alongside: [cost-vs-value, moscow]
+sources:
+  - title: "5 Prioritization Methods in UX Roadmapping"
+    author: Nielsen Norman Group
+    url: https://www.nngroup.com/articles/prioritization-methods/
+    type: article
+    seminal: false
+  - title: "Impact Effort Matrix & How to Use One + Examples"
+    author: Product School
+    url: https://productschool.com/blog/product-fundamentals/impact-effort-matrix
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A 2x2 matrix that plots candidate ideas by expected impact against required implementation effort, sorting them into quick wins, big bets, fill-ins, and money pits.
+
+## Purpose
+
+Gives a room a fast, visual way to separate "do this now" from "don't bother" without a scoring model — useful precisely because it's cheap to run and easy for a mixed group (design, product, eng) to fill in together from shared intuition.
+
+## When to use
+
+- Early triage of a long list of ideas, bugs, or improvement candidates, before investing time in a heavier scoring method
+- A workshop or roadmap session where you need visible, fast alignment rather than a precise rank order
+- You want a shared artifact that non-specialists can read at a glance — the quadrant names alone communicate the decision
+- As a first pass before a smaller, higher-stakes shortlist gets a more rigorous method like RICE
+
+## Structure
+
+- **Quick wins** (high impact, low effort): do these first — the obvious priority.
+- **Big bets** (high impact, high effort): worth pursuing, but sequence deliberately against capacity.
+- **Fill-ins** (low impact, low effort): fine for slack time, never the main focus.
+- **Money pits** (low impact, high effort): avoid — the quiet roadmap-killers if no one flags them.
+
+NN/g's version of this is flexible by design: swap either axis for other criteria, or run multiple matrices, if impact/effort specifically isn't the right pair of dimensions for the decision at hand.
+
+## How to use
+
+1. List every candidate item.
+2. Estimate impact: the expected user or business benefit if built, ideally anchored to a specific outcome rather than a gut "this feels important."
+3. Estimate effort: rough implementation complexity and time, at a level of precision matched to how early-stage this triage actually is.
+4. Plot each item on the grid and read off the quadrant.
+5. Sequence quick wins first, negotiate big bets against actual roadmap capacity, and use the exercise itself as the argument for cutting money pits.
+
+## Example
+
+A support team's backlog of small product complaints: adding inline validation to a form that generates a large share of support tickets is a quick win (high impact, low effort); rebuilding the whole account settings flow is a big bet (high impact, high effort, worth scheduling deliberately); adding a rarely-used export format is a fill-in; rewriting a legacy integration used by almost no one is a money pit.
+
+## Common mistakes
+
+- **Skipping a real impact definition**: without anchoring impact to something specific (tickets reduced, conversion moved, retention affected), "impact" collapses into whoever argues most persuasively.
+- **Effort estimated by one person's gut, not the team building it**: engineers systematically see effort differently than product or design; skipping their input skews placement.
+- **Using it for a decision that deserves more rigor**: it's a fast triage tool, not a substitute for RICE or real data when the stakes or ambiguity are high enough to warrant one.
+- **Never revisiting placement**: like any prioritization snapshot, both impact and effort estimates decay as you learn more — treat the matrix as disposable, not permanent.
+
+## Limitations
+
+- **Only two dimensions**: strategic fit, dependencies, and urgency don't appear on the grid at all.
+- **Estimates are opinion, not measurement**: without real data behind either axis, this formalizes a group's current beliefs, not the truth.
+- **Blurs into Cost vs Value**: "effort" here is closer to raw implementation work than the broader cost concept (including risk, maintenance) used in a Cost vs Value matrix, and "impact" is closer to user-facing benefit than the business-value framing Cost vs Value uses — don't treat the two matrices as interchangeable or the axes as meaning the same thing.
+
+## Tips
+
+Timebox the estimation step deliberately — the whole value of this method is speed; a team that spends an hour precisely calibrating "effort" has defeated the purpose and should have used a heavier method instead.

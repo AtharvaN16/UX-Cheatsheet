@@ -1,0 +1,98 @@
+---
+id: jobs-to-be-done
+title: Jobs To Be Done
+aka: ["JTBD", "Jobs Theory", "Jobs-to-be-Done Theory"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: qualitative
+effort: medium
+timeframe: weeks
+needs:
+  - Access to customers who recently "hired" or "fired" a solution for the job in question
+  - Interviewing skill focused on past behavior, not stated preference (see contextual-inquiry, user-interviews)
+useInstead:
+  - when: You need the raw behavioral evidence a jobs theory is built from, not the theory itself
+    method: contextual-inquiry
+  - when: You need to talk to customers about their situation without leading them toward validating your idea
+    method: user-interviews
+related:
+  alongside: [opportunity-solution-tree, product-strategy]
+  after: [story-mapping]
+sources:
+  - title: "Marketing Malpractice: The Cause and the Cure"
+    author: Clayton M. Christensen, Scott Cook & Taddy Hall
+    url: https://hbr.org/2005/12/marketing-malpractice-the-cause-and-the-cure
+    type: article
+    year: 2005
+    seminal: true
+  - title: "Competing Against Luck: The Story of Innovation and Customer Choice"
+    author: Clayton M. Christensen, Karen Dillon, Taddy Hall & David S. Duncan
+    url: https://www.amazon.com/Competing-Against-Luck-Innovation-Customer/dp/0062435612
+    type: book
+    year: 2016
+    seminal: true
+  - title: "Intercom on Jobs-to-be-Done"
+    author: Intercom
+    url: https://www.intercom.com/blog/jobs-to-be-done-book/
+    type: article
+    year: 2016
+    seminal: false
+---
+
+## What is it
+
+A theory of causation for why customers buy: people don't buy products, they "hire" them to make progress on a specific job, and "fire" whatever they used before for whatever does the job better. The job stays stable even as the products competing to do it change completely.
+
+## When to use
+
+- You're trying to understand why a product is or isn't being adopted, and demographic/persona-based explanations keep coming up empty
+- You're exploring a new market and need to find the actual job being poorly served today, rather than starting from a feature idea
+- Growth has stalled and you suspect the product has drifted away from the job that originally got it hired
+- You want the causal "why" underneath the "what" that discovery interviews or opportunity-solution-tree work surfaces
+
+## Structure
+
+- **The job**: the progress a customer is trying to make in a given circumstance — stated as a struggle, not a demographic ("get through a boring commute without getting hungry," not "male, 25-34, commuter").
+- **The circumstance**: jobs are triggered by situation, not identity — the same person hires different things for the same underlying job depending on context (time pressure, who else is around, what's already failed).
+- **Hiring and firing**: every purchase is a substitution decision against whatever was doing the job before, including "doing nothing" — competitors are defined by the job, not the product category.
+- **Functional, social, and emotional dimensions**: the job usually has more than a purely functional component — how the customer wants to feel or be seen while getting it done matters as much as the mechanical outcome.
+
+## How to use
+
+1. Pick a recent purchase or switch — someone who just started using (or just abandoned) a product in your category — and interview them about that specific event, not their general opinions.
+2. Reconstruct the timeline: what was happening right before they went looking for something, what alternatives they considered (including doing nothing), and what tipped the decision.
+3. Separate the functional job from the social and emotional dimensions — ask what would have made them feel foolish or smart, not just what technically worked.
+4. Write the job statement at the level of the struggle, deliberately excluding your product category, so it stays stable even if your product changes entirely.
+5. Map current alternatives against the job, including non-obvious competitors (a whiteboard competing with project management software for "get everyone aligned in the room").
+6. Use the job, not a persona, as the unit you design and prioritize against — features get evaluated by how much better they do the job versus the best current alternative.
+
+## Example
+
+Christensen's milkshake study found that most milkshakes were sold in the morning, to solo commuters who weren't buying anything else. The job wasn't "satisfy a craving for a milkshake" — it was "give me something to do with my one free hand that's filling, takes a long time to consume, and doesn't make a mess on the dashboard." That reframing changed the real competitive set from other desserts to bananas, bagels, and boredom, and pointed at a completely different set of product improvements (thicker shake, harder straw-resistance) than a taste-preference survey ever would have.
+
+## Common mistakes
+
+- **Writing the job as a feature request in disguise** — "the job is to have a search bar" is a solution wearing a job's clothes; the job is the underlying struggle the search bar would resolve.
+- **Segmenting by demographics instead of circumstance** — two people with identical demographics can be hiring completely different things for completely different jobs; the job, not the persona, is the stable unit.
+- **Only asking about the functional dimension** — ignoring the social and emotional job (wanting to look competent, avoid a fight, feel in control) misses why two functionally identical products succeed and fail.
+- **Treating the theory as a replacement for evidence** — jobs theory is a lens for interpreting real interviews about real past behavior, not a brainstorming technique performed from an armchair.
+
+## Limitations
+
+- **Requires real interviews about real past events** — done as a desk exercise with imagined customers, it produces plausible-sounding job statements with no evidentiary grounding.
+- **Doesn't prioritize for you** — it tells you what job to design for, not which of several underserved jobs is worth pursuing first; that's a separate strategic call.
+- **Hard to falsify cleanly** — because job statements are somewhat interpretive, two researchers can read the same interview and write different job statements, which makes JTBD easy to do badly while feeling rigorous.
+
+## Tips
+
+Interview about the last time the switch actually happened, not about general habits or hypotheticals — "walk me through the last time you needed to do this" produces concrete, checkable detail; "how do you usually handle this?" produces a flattering summary.
+
+## Using AI
+
+**Where it helps**
+- Drafting candidate job statements from a batch of raw interview transcripts, as a starting point for a human to check against the actual quotes.
+- Spotting patterns across many interviews — recurring triggering circumstances, recurring "fired" alternatives — that are tedious to hold in working memory across a long study.
+
+**Where it fails**
+- Generating job statements without underlying interview data. A model will happily produce a fluent, specific-sounding job statement ("the job is to feel in control during a stressful commute") for a product it has never seen real customers use — the theory's entire value is that the job statement is extracted from what actually happened in someone's life, and a model's guess, however well-phrased, isn't that.

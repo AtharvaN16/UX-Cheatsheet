@@ -1,0 +1,96 @@
+---
+id: rapid
+title: RAPID
+aka: ["Bain RAPID Framework", "Who Has the D"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: conceptual
+effort: medium
+timeframe: days
+needs:
+  - A cross-functional decision where it's genuinely unclear who has final say
+  - Enough organizational authority to actually assign and enforce the roles
+useInstead:
+  - when: The question is how fast to iterate under time pressure, not who decides
+    method: ooda-loop
+  - when: You want a simpler four-role version for a single project decision rather than an organization-wide decision-rights model
+    method: daci
+related:
+  alongside: [daci, ooda-loop]
+sources:
+  - title: "Who Has the D? How Clear Decision Roles Enhance Organizational Performance"
+    author: Paul Rogers & Marcia Blenko
+    url: https://hbr.org/2006/01/who-has-the-d-how-clear-decision-roles-enhance-organizational-performance
+    type: article
+    year: 2006
+    seminal: true
+  - title: "Who Has the 'D'?"
+    author: Bain & Company
+    url: https://www.bain.com/insights/who-has-the-d/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A decision-rights model that assigns five roles to a decision — Recommend, Agree, Perform, Input, Decide — so a group knows exactly who proposes, who can veto, who executes, and who ultimately decides. The natural flow is Recommend → Input → Agree → Decide → Perform.
+
+## Overview & Purpose
+
+Rogers and Blenko's research (Bain, published in HBR 2006) found that unclear decision rights — not unclear strategy — were the more common cause of organizational slowness. RAPID exists to answer "who has the D?" (who actually decides) before a decision process starts, rather than discovering the answer through conflict partway through it. Its distinguishing move versus similar frameworks is making veto rights (Agree) explicit and separate from advisory input, and insisting on exactly one Decider.
+
+## When to use
+
+- A decision repeatedly stalls or gets re-litigated because nobody agrees who has final say.
+- Multiple stakeholders each believe they have veto power, and the resulting negotiation is slowing the org down more than the decision itself warrants.
+- You're designing a recurring decision process (e.g., quarterly roadmap prioritization) and want the roles fixed in advance rather than re-negotiated every cycle.
+
+## Structure
+
+- **Recommend**: owns the process — gathers facts, evaluates options, and proposes a course of action.
+- **Agree**: holds veto power; must sign off before the recommendation proceeds. Distinct from Input — Agree can block, Input can only advise.
+- **Perform**: responsible for executing the decision once made — included because decisions frequently fail at implementation, not framing.
+- **Input**: provides facts, data, and judgment on the proposal, but has no veto.
+- **Decide**: the single person accountable for committing the organization to the final call.
+
+## How to use
+
+1. Before the decision process starts, explicitly assign each role to a named person or small group — not a department, a person.
+2. Keep Decide to exactly one person. This is the single most load-bearing rule in the framework — diffusing "Decide" across a committee recreates the exact ambiguity RAPID exists to remove.
+3. Distinguish Agree from Input clearly and communicate it: Agree-holders can block; Input-holders cannot, and treating an Input-holder's objection as a veto reintroduces the ambiguity.
+4. Confirm Perform is represented before the decision is finalized, not after — teams who will implement the decision but weren't consulted tend to implement it poorly or slowly.
+5. Document the assignment somewhere visible so it survives beyond the meeting where it was agreed.
+
+## Example
+
+A product org repeatedly re-argues pricing changes because engineering, sales, and finance each act as if they have a veto. Applying RAPID: the pricing PM Recommends, Finance and Legal Agree (real veto, kept to two parties), the pricing and billing engineering teams Perform, Sales provides Input (their objections are heard but don't block), and the VP of Product Decides if Agree-holders disagree with each other.
+
+## Common mistakes
+
+- **Making Decide a group** — the single point of accountability is the entire mechanism; splitting it recreates committee paralysis under a different name.
+- **Confusing Input with Agree** — giving every stakeholder veto power under the guise of "getting their input" produces the same gridlock RAPID was built to solve.
+- **Skipping Perform** — deciding without involving whoever has to execute produces technically-correct decisions that die in implementation.
+- **Assigning roles after conflict starts** — RAPID's value is front-loaded; assigning roles mid-argument is far less effective than assigning them before the decision process begins.
+
+## Limitations
+
+- Requires enough organizational authority to actually assign and enforce roles — in a flat or highly political org, "who has the D" can itself become contested.
+- Doesn't help decide *what* the right call is — it only clarifies *who* decides, which is necessary but not sufficient for a good decision.
+
+## Variations
+
+DACI is a simpler four-role variant (Driver, Approver, Contributor, Informed) more common in software/product teams for single-project decisions; RAPID is Bain's five-role version more common in larger cross-functional or strategic organizational decisions.
+
+## Tips
+
+Introduce RAPID for a decision *before* it becomes contentious — retrofitting it onto an already-heated disagreement tends to look like a power play rather than a process fix.
+
+## Using AI
+
+**Where it helps**
+- Drafting a first-pass RAPID role assignment from a description of stakeholders and their stakes, for a human to adjust and confirm.
+- Summarizing a messy decision thread into who currently appears to be playing each role, surfacing where the ambiguity actually is.
+
+**Where it fails**
+- Assigning the roles is itself a political and organizational judgment call, not a factual one — a model can propose a plausible split but has no authority to make it stick, and treating its output as the final assignment skips the actual negotiation the framework is meant to force.

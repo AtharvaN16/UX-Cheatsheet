@@ -1,0 +1,89 @@
+---
+id: heart
+title: HEART
+aka: ["HEART Framework", "Google HEART Framework"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: mixed
+effort: medium
+timeframe: weeks
+needs:
+  - A clear product goal to map metrics against before picking any numbers
+  - Survey capability for Happiness plus behavioral analytics for the other four categories
+useInstead:
+  - when: You need a growth/lifecycle funnel model rather than a UX-quality metrics model
+    method: pirate-metrics-aarrr
+related:
+  alongside: [north-star-metric]
+  before: [usability-testing]
+sources:
+  - title: "Measuring the User Experience on a Large Scale: User-Centered Metrics for Web Applications"
+    author: Kerry Rodden, Hilary Hutchinson & Xin Fu
+    url: https://research.google/pubs/measuring-the-user-experience-on-a-large-scale-user-centered-metrics-for-web-applications/
+    type: paper
+    year: 2010
+    seminal: true
+  - title: "The HEART Framework for UX Metrics"
+    author: Kerry Rodden
+    url: https://kerryrodden.com/heart/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A framework for choosing large-scale, quantitative UX metrics along five categories — Happiness, Engagement, Adoption, Retention, Task success — paired with a Goals-Signals-Metrics process for deriving the actual numbers from a stated product goal, instead of grabbing whatever's easiest to instrument.
+
+## When to use
+
+- You need to report on UX quality with real numbers, at a scale where individual usability tests or interviews can't cover enough users
+- Stakeholders keep asking for "the UX metric" and you need a structured way to pick one that isn't an arbitrary engagement number
+- You're setting product goals and want metrics that are demonstrably tied to user experience, not just business output
+- You need to track whether a redesign actually improved the experience over time, not just whether it shipped
+
+## Structure
+
+- **Happiness**: attitudinal — satisfaction, perceived ease of use, likelihood to recommend. Usually gathered via surveys (SEQ, NPS-style items), because it can't be inferred from behavior alone.
+- **Engagement**: level, depth, or frequency of use — sessions per user, features used, time spent on a specific meaningful action (not just raw time-on-site).
+- **Adoption**: how many new users start using a product or feature, in a given time period.
+- **Retention**: how many existing users come back over time — the closest thing to a truth signal, since retention can't be gamed the way self-reported satisfaction can.
+- **Task success**: efficiency, effectiveness, and error rate for specific tasks — completion rate, time on task, or error frequency, usually gathered from instrumented behavioral data rather than a lab study.
+
+## How to use
+
+1. Start from the product goal, not the metric — the paper's key insight is that HEART categories are a menu, not a checklist; most products don't need all five tracked at once.
+2. Use the Goals-Signals-Metrics process: state the goal in plain language, list the signals that would indicate progress (things you could plausibly observe), then pick the specific metric that operationalizes each signal.
+3. Assign each goal to the HEART category it actually belongs to — a "make onboarding smoother" goal is Task success, not Engagement, and picking the wrong category leads to tracking the wrong signal.
+4. Instrument the metric and set a baseline before changing anything, so a later comparison is meaningful.
+5. Revisit the mapping when the product goal changes — a metric that made sense for last quarter's goal can quietly become the wrong thing to optimize once priorities shift.
+
+## Example
+
+A team redesigning a checkout flow might state the goal as "reduce friction in checkout," derive the signal "fewer users abandon partway through," and land on the metric "cart-to-purchase completion rate" under Task success — rather than defaulting to a generic Engagement number like "time spent on the checkout page," which would actually reward a worse, slower checkout.
+
+## Common mistakes
+
+- **Picking a metric first and reverse-engineering the goal**: the paper's whole structure exists to prevent this — start from the goal, or you end up optimizing whatever was easiest to instrument.
+- **Using Happiness data alone as "the UX metric"**: satisfaction surveys miss the behavioral truth serum that Retention provides; a product can score well on Happiness while quietly losing users.
+- **Trying to track all five categories for every project**: HEART was explicitly designed as a menu you select from per-goal, not a mandatory five-part dashboard for every team.
+- **Confusing Engagement with a business vanity metric**: raw session count or page views can rise while genuine experience quality falls — the framework asks for engagement metrics tied to meaningful use, not just volume.
+
+## Limitations
+
+- **Requires enough scale to be statistically meaningful**: it was built for products with large user bases generating continuous behavioral data; small products or early-stage prototypes don't have the volume to make HEART metrics stable.
+- **Happiness still relies on self-report**: the one category that captures attitude, not behavior, inherits all the usual limitations of survey data (response bias, small sample sizes relative to the behavioral metrics).
+- **Doesn't diagnose *why* a metric moved**: a dropping Task success rate tells you something broke, not what — it still needs qualitative methods (usability-testing, heuristic-evaluation) to explain the number.
+
+## Tips
+
+Write the Goals-Signals-Metrics table out loud with the team before touching an analytics tool — the discipline of naming the signal in plain language, separately from the metric, is what catches a mismatched category before it becomes a quarter of tracking the wrong thing.
+
+## Using AI
+
+**Where it helps**
+- Drafting candidate Goals-Signals-Metrics mappings from a written product goal, as a starting proposal for the team to argue over and refine.
+- Summarizing large volumes of open-text Happiness survey responses into themes that complement the quantitative score.
+
+**Where it fails**
+- Selecting the final metric without a human confirming it can't be gamed. A model can produce a plausible signal-to-metric mapping that sounds rigorous, but whether a given metric actually reflects the stated goal in this specific product — versus something correlated but gameable — is a judgment call the paper explicitly treats as a team discussion, not a formula.

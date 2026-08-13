@@ -1,0 +1,85 @@
+---
+id: feedback-loops
+title: Feedback Loops
+aka: ["Reinforcing Loop", "Balancing Loop", "Positive Feedback", "Negative Feedback"]
+category: strategic-thinking
+alsoIn: []
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - A system or product behavior you can trace over time, not a single point-in-time snapshot
+useInstead:
+  - when: You need to quantify the actual accumulation and rate of change over time, not just identify that a loop exists
+    method: stocks-and-flows
+  - when: You're sizing a single, one-off decision rather than diagnosing an ongoing dynamic
+    method: expected-value
+related:
+  after: [stocks-and-flows, leverage-points]
+  alongside: [second-order-effects, habit-loop]
+sources:
+  - title: "Thinking in Systems: A Primer"
+    author: Donella Meadows
+    url: https://www.chelseagreen.com/product/thinking-in-systems/
+    type: book
+    year: 2008
+    seminal: true
+  - title: "Leverage Points: Places to Intervene in a System"
+    author: Donella Meadows
+    url: http://donellameadows.org/archives/leverage-points-places-to-intervene-in-a-system/
+    type: article
+    year: 1999
+    seminal: true
+  - title: "Hooked: How to Build Habit-Forming Products"
+    author: Nir Eyal
+    url: https://www.nirandfar.com/hooked/
+    type: book
+    year: 2014
+    seminal: false
+---
+
+## What is it
+
+A closed chain of cause and effect where a system's own output feeds back in as its input. It comes in exactly two flavors: **reinforcing** (an effect amplifies its own cause) and **balancing** (an effect opposes its own cause and pushes toward a limit). Almost nothing dynamic in a product happens without one.
+
+## Why it matters
+
+Most people explain a metric with the last thing that changed — an event. Feedback loops are the structure producing the pattern *behind* that event, and structure is what actually determines behavior over time (Meadows, 2008). A designer who can name "this is a reinforcing loop with no balancing mechanism yet" is diagnosing something a "growth is up this month" headline never will — and can predict where it breaks before it does.
+
+## Key ideas
+
+- **Reinforcing loops never stabilize on their own**: left unchecked, they either run away (viral growth) or collapse (churn spiral) — something else in the system has to bound them, or they hit a wall on their own (see Limits to Growth in the glossary).
+- **Balancing loops are why systems don't explode**: a moderation queue that grows staff attention as reports rise, a paywall that softens conversion pressure as revenue targets are hit — these are the loops that keep a reinforcing loop from consuming the whole system.
+- **A flywheel is a reinforcing loop engineered on purpose**: Amazon's low prices → more traffic → more sellers → more selection → lower prices is the textbook version — a naturally occurring reinforcing loop, deliberately designed so each turn makes the next cheaper.
+- **The Hook Model is a reinforcing loop built directly into a product's interaction design**: Trigger → Action → Variable Reward → Investment, engineered so each cycle increases the odds of the next (Eyal, 2014). Naming it as a loop is also how you evaluate whether it *should* exist, not just whether it works.
+
+## Example
+
+A social feed's engagement loop is reinforcing: more time spent → more signal for the ranking model → more relevant content → more time spent. Left alone it will keep tightening — which is exactly why it needs a deliberate balancing counterpart (a break reminder, a diversity injection in ranking) or it will optimize itself into something addictive rather than merely engaging, regardless of what anyone intended (see POSIWID).
+
+## Application
+
+- **Name the loop before you propose the fix**: "retention is down" is an event; "the loop that used to bring lapsed users back has weakened" is a structure you can actually intervene on.
+- **Look for the missing balancing loop**: if a reinforcing dynamic (referrals, notifications, streaks) has no counterpart pulling it back toward a sustainable rate, that absence is itself the finding — not a stable system, a ticking one.
+- **Check whether silence is a broken loop, not a healthy one**: if a change should be generating feedback (support tickets, complaints, churn signals) and isn't, the feedback loop that should be informing you is broken, not absent because things are fine.
+
+## Limitations
+
+- **Identifying a loop qualitatively doesn't tell you its strength**: two systems can have the same loop topology and wildly different real-world dynamics depending on the magnitude and delay of each link — that requires stocks-and-flows thinking, not loop-spotting alone.
+- **Real systems have many loops interacting**: isolating "the" loop responsible for an outcome is often a simplification; several reinforcing and balancing loops are usually fighting for control simultaneously.
+- **Delays make loops deceptive**: a loop's effect can take weeks to show up, which is exactly what causes teams to overshoot — pushing harder because they can't yet see the consequence of what they already did.
+
+## Common misconceptions
+
+- **"Reinforcing = good, balancing = bad"**: reinforcing loops are exactly as likely to produce a death spiral (churn feeding more churn) as growth; balancing loops are exactly what keeps a system from destroying itself. Neither valence is inherently good.
+- **"A feedback loop is the same thing as a funnel"**: a funnel is linear and leaks — it has to be refilled from outside. A loop closes on itself and can sustain or grow without new external input. Conflating the two leads teams to treat a broken loop as a top-of-funnel problem.
+
+## Using AI
+
+**Where it helps**
+- Drafting candidate loops from a description of a system, as starting hypotheses for a human to check against real data — "here's what I know about this feature, propose three feedback loops that could explain this metric's shape."
+- Generating the second- and third-order consequences a loop might produce if left running unchecked, to pressure-test whether a reinforcing loop actually needs a balancing counterpart before it ships.
+
+**Where it fails**
+- A model will produce a fluent, well-structured causal loop diagram for almost any metric you describe, whether or not that loop is real — this is exactly the failure mode the glossary calls hallucinated structure. A confident AI-drawn loop is not evidence the loop exists; it's a hypothesis that still needs real usage data behind it.

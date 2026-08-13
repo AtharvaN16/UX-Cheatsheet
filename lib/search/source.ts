@@ -27,7 +27,7 @@ const POPULAR_DEFAULTS = [
   'strategic-thinking',
   'research-synthesis',
   'kano-model',
-  'jtbd',
+  'jobs-to-be-done',
   'ia-structure',
   'interaction-design',
   'evaluation',

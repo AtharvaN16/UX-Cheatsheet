@@ -1,0 +1,80 @@
+---
+id: product-market-fit
+title: Product-Market Fit
+aka: ["PMF", "Product/Market Fit"]
+category: strategic-thinking
+alsoIn: []
+kind: concept
+gives: mixed
+effort: medium
+timeframe: ongoing
+needs:
+  - A live product with real usage data
+  - A defined target market/ICP to assess fit against
+useInstead:
+  - when: You need a single measurable metric to align a team day-to-day, not a state assessment
+    method: north-star-metric
+related:
+  before: [jobs-to-be-done]
+  alongside: [north-star-metric]
+  after: [product-strategy]
+sources:
+  - title: "Part 4: The Only Thing That Matters"
+    author: Marc Andreessen
+    url: https://pmarchive.com/guide_to_startups_part4.html
+    type: article
+    year: 2007
+    seminal: true
+  - title: "How Superhuman Built an Engine to Find Product/Market Fit"
+    author: Rahul Vohra (First Round Review)
+    url: https://review.firstround.com/how-superhuman-built-an-engine-to-find-product-market-fit/
+    type: article
+    year: 2018
+    seminal: false
+---
+
+## What is it
+
+The state where a market pulls a product out of a company faster than it can supply it — growth stops depending on constant pushing because the product satisfies real demand.
+
+## Why it matters
+
+Every other product decision — what to build next, how to price, whether to invest in growth — is a bet made cheaper or more expensive by whether fit already exists. Before fit, growth spend is mostly wasted because there's nothing durable to amplify; after fit, the same spend compounds. Designers get pulled into fit-adjacent decisions constantly (onboarding, activation, retention loops) without anyone naming whether fit is actually there yet, which is how teams end up polishing a funnel for a product nobody wants.
+
+## Key ideas
+
+- **It's a property of the pair, not the product**: fit is between a specific product and a specific market segment. A product with strong fit for freelance designers can have zero fit for enterprise IT — "product-market fit" without a named market is a category error.
+- **Detected by behavior, not stated preference**: retention curves that flatten, unprompted usage, and organic word-of-mouth are evidence; satisfaction surveys and "would you use this?" answers are not. Andreessen's own list of fit symptoms is behavioral: customers buying as fast as you can make it, press calling you, sales cycles collapsing.
+- **The Sean Ellis test as a leading indicator**: survey active users with "how would you feel if you could no longer use this product?" — if 40%+ answer "very disappointed," that's historically correlated with companies that go on to find durable fit. It's a signal to act on, not a certificate.
+- **Fit can be lost**: because it's a property of the pair, a moving market (new competitor, shifting user expectations, a platform change) can erode fit that was previously real. Treat it as a state you monitor, not a milestone you achieve once.
+
+## Example
+
+Superhuman used the 40% test as a running scorecard: below 40%, the team treated the number itself as the top-priority metric to move, re-interviewing the "very disappointed" cohort to find the specific hook (speed, keyboard shortcuts) driving their enthusiasm and building more of exactly that, rather than averaging feedback across everyone.
+
+## Application
+
+- **Segment before you average**: pull apart "very disappointed," "somewhat disappointed," and "not disappointed" cohorts and study what the first group has in common — averaging across all three erases the signal.
+- **Look for pull, not push**: word-of-mouth referrals, unprompted feature requests from a specific segment, and usage that grows without proportional acquisition spend are stronger fit signals than any survey.
+- **Narrow the market before declaring no-fit**: a flat 40% score often means fit exists for a sub-segment that's being diluted by a broader, wrong-fit audience in the sample — narrow the ICP before concluding the product is the problem.
+
+## Limitations
+
+- **No universal threshold**: the 40% figure is a pattern Sean Ellis observed across companies he worked with, not a proven causal cutoff — treat it as a useful heuristic, not a certified score.
+- **Lagging by nature**: most reliable fit signals (retention curves, organic growth) take months to show up, so PMF assessment tends to confirm what already happened more than it predicts what's about to.
+- **Doesn't tell you what to fix**: a low score says fit is weak; it says nothing about whether the fix is positioning, a different segment, or the product itself — that diagnosis still requires separate work (often jobs-to-be-done).
+
+## Common misconceptions
+
+- **"PMF is a one-time milestone"**: because it's a property of a product-market pair, it can degrade as the market shifts even with an unchanged product — treat it as continuously monitored, not checked off.
+- **"High satisfaction scores mean fit"**: satisfaction is stated preference; fit is demonstrated behavior. Users can rate a product highly and still churn the moment a better option appears.
+- **"More features closes the gap"**: teams below the fit threshold often respond by adding breadth, which usually dilutes the thing the smallest enthusiastic segment actually loved.
+
+## Using AI
+
+**Where it helps**
+- Clustering open-text survey responses from the "very disappointed" segment to surface the shared theme behind their enthusiasm faster than manual read-through.
+- Drafting the specific follow-up interview questions for that segment once the cluster is identified.
+
+**Where it fails**
+- Inferring fit from qualitative chat transcripts or feature-request volume alone. A model can produce a confident-sounding narrative about "strong signals of fit" from thin, unrepresentative text data — the concept is explicitly about behavioral evidence at scale (retention, organic growth), and no amount of fluent summarization of a handful of quotes substitutes for that.

@@ -1,0 +1,94 @@
+---
+id: eisenhower-matrix
+title: Eisenhower Matrix
+aka: ["Urgent-Important Matrix", "Time Management Matrix"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - A list of tasks or decisions to sort
+  - Honesty about what's actually important versus what merely feels urgent
+useInstead:
+  - when: You're prioritizing a backlog of product work by effort and impact, not personal or team task load
+    method: impact-effort-matrix
+  - when: You need a numeric prioritization score across many competing items, not a quick sort into four buckets
+    method: rice
+related:
+  alongside: [impact-effort-matrix, pareto-principle]
+sources:
+  - title: "The 7 Habits of Highly Effective People"
+    author: Stephen Covey
+    url: https://www.franklincovey.com/the-7-habits/
+    type: book
+    year: 1989
+    seminal: true
+  - title: "Introduction to the Eisenhower Matrix: How to Prioritize Urgent Tasks"
+    author: Airtable
+    url: https://www.airtable.com/articles/eisenhower-matrix
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A 2×2 grid that sorts tasks by urgency and importance into four quadrants, each with a default action: do, schedule, delegate, delete.
+
+## Overview & Purpose
+
+The matrix exists to break a specific, well-documented failure mode: treating urgency as a proxy for importance. Urgent tasks announce themselves — a ping, a deadline, a request — and importance rarely does, so without a deliberate framework, urgent-but-unimportant work crowds out important-but-not-urgent work indefinitely. The matrix forces a second axis onto every task before it gets acted on.
+
+## When to use
+
+- Your task list or inbox is dominated by things that feel urgent, and you suspect (correctly, usually) that the important work isn't getting done because of it.
+- You're trying to explain to a stakeholder or a junior designer why you're deprioritizing something that feels pressing.
+- You need a fast, low-overhead sort — this is a triage tool, not a rigorous prioritization method for competing product bets.
+
+## Structure
+
+- **Urgent + Important (Do)**: crises, deadlines, genuinely time-critical problems. Handle immediately.
+- **Important, Not Urgent (Schedule)**: strategic work, skill-building, relationship-building, long-term design quality — the quadrant most people under-invest in because nothing forces it onto the calendar.
+- **Urgent, Not Important (Delegate)**: interruptions, most meetings, other people's urgent requests that don't require your specific judgment.
+- **Not Urgent, Not Important (Delete)**: busywork and distractions with no real payoff either way.
+
+## How to use
+
+1. List everything currently competing for your time or your team's time — don't pre-filter yet.
+2. Score each item on urgency and importance separately and honestly; the failure mode is scoring urgency and calling it importance.
+3. Sort into the four quadrants.
+4. Apply the default action per quadrant — but treat "Schedule" as the quadrant requiring deliberate calendar time, since nothing else will surface it.
+5. Revisit regularly; what's urgent changes daily, what's important changes far less often, and re-running the sort catches drift.
+
+## Example
+
+A designer's week: a stakeholder's "can you look at this by EOD" request (urgent, often not important — delegate or timebox it), a long-overdue accessibility audit of the core flow (important, not urgent — the thing that keeps sliding), a fire-drill bug affecting checkout (urgent and important — do it now), and an optional internal newsletter (neither — delete it from the list).
+
+## Common mistakes
+
+- **Scoring urgency as importance** — the entire point of the matrix collapses if "someone is asking for this right now" gets treated as evidence of importance rather than urgency.
+- **Never actually scheduling the important-not-urgent quadrant** — sorting a task into "Schedule" and then never blocking calendar time for it is the most common way this framework fails in practice.
+- **Using it for every decision** — running a full quadrant sort on trivial choices burns more time than the choices themselves warrant.
+
+## Limitations
+
+- **Binary axes flatten real nuance** — urgency and importance are usually continuous and correlated with confidence, not clean binary splits; the four-box version is a simplification that trades precision for speed.
+- **Doesn't help with competing important-and-urgent items** — when everything genuinely lands in the top-left quadrant, the matrix gives no further guidance on sequencing.
+- **Says nothing about effort or cost** — a low-effort important task and a high-effort important task get the same "Do" treatment, which the impact-effort-matrix handles better for product prioritization.
+
+## Variations
+
+Some versions add a fifth category for delegatable-but-important work, or replace "Delegate" with "Automate" for individual contributors without a team to delegate to.
+
+## Tips
+
+Use it as a personal or team triage habit run weekly, not as a one-time exercise — its value compounds from catching the important-not-urgent slide before it becomes a crisis.
+
+## Using AI
+
+**Where it helps**
+- Sorting a long, messy task list into the four quadrants quickly as a first draft, especially useful when the list is too long to eyeball.
+
+**Where it fails**
+- A model has no access to what's actually strategically important to you or your org — it can guess plausibly from task descriptions, but the importance axis specifically requires judgment about your actual priorities, which is exactly the part a fluent-sounding sort can get wrong while looking confident.

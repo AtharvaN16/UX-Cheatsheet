@@ -1,0 +1,80 @@
+---
+id: lean-ux
+title: Lean UX
+aka: ["Lean User Experience", "Lean UX Canvas"]
+category: strategic-thinking
+alsoIn: []
+kind: method
+gives: mixed
+effort: medium
+timeframe: ongoing
+needs:
+  - A cross-functional team (design, product, engineering) able to ship in short cycles
+  - Willingness to treat every design as a hypothesis, not a deliverable
+  - An existing or emerging build-measure-learn cadence to plug into
+useInstead:
+  - when: You're structuring a one-off project with a clear discovery-then-delivery arc, not an ongoing agile cadence
+    method: double-diamond
+  - when: You need a standing, every-week customer-contact habit rather than a build-measure-learn cycle organized around shipping increments
+    method: continuous-discovery
+related:
+  before: [design-thinking]
+  after: []
+  alongside: [continuous-discovery, double-diamond]
+sources:
+  - title: "Lean UX: Creating Great Products with Agile Teams"
+    author: Jeff Gothelf & Josh Seiden
+    url: https://leanuxbook.com/
+    type: book
+    year: 2021
+    seminal: true
+  - title: "Books"
+    author: Jeff Gothelf
+    url: https://jeffgothelf.com/books/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A practice of applying Lean Startup's build-measure-learn loop and Agile's short cycles to UX work — treating every design as a falsifiable hypothesis instead of a polished deliverable. The unit of work shifts from "the mockup" to "the assumption being tested this cycle."
+
+## Purpose
+
+Fixes the mismatch between long, deliverable-heavy UX processes (personas decks, comprehensive wireframe sets, sign-off rounds) and agile engineering teams that ship every one to two weeks. Lean UX gives design a cadence and an artifact — the Lean UX Canvas — that fits inside that loop instead of running a parallel, slower track that becomes a bottleneck.
+
+## When to use
+
+- Design sits inside (or needs to sit inside) an agile/scrum team already shipping in short cycles, and the old deliverable-first process is the bottleneck
+- The team keeps building based on unstated assumptions about users, business outcomes, or the market that nobody has written down or tested
+- You need a lightweight way to align design, product, and engineering on what's actually being validated this sprint, not just what's being built
+- Leadership is asking for less time spent on comprehensive documentation and more on validated learning per cycle
+
+## How to do it
+
+1. Fill in a Lean UX Canvas per initiative: business outcome, users, user outcomes, the assumptions underlying all of it, and the riskiest ones to test first.
+2. State the riskiest assumptions explicitly as hypotheses: "We believe [outcome] will happen if [these users] have [this experience]. We'll know we're right when we see [signal]."
+3. Design the smallest thing — a sketch, a prototype, sometimes real shipped code — that can produce evidence for or against the riskiest hypothesis, not the most complete version of the feature.
+4. Build, ship, or test it fast enough to fit inside the team's existing sprint cadence.
+5. Measure against the signal you defined upfront, not a vaguer "did it feel good" check.
+6. Feed what you learned back into the canvas — update or discard the assumption — and repeat for the next-riskiest one.
+
+## Common mistakes
+
+- **Skipping straight to "make an MVP" without stating the hypothesis first** — an MVP without a defined assumption and success signal is just a smaller feature, not an experiment; you learn nothing you can act on.
+- **Running it as a solo-designer practice instead of a team one** — Lean UX's whole premise is collapsing the handoff between design, product, and engineering; a designer quietly adopting the canvas alone doesn't get the collaboration benefit.
+- **Treating "lean" as "less design"** — the method reduces upfront deliverables, not user research or design rigor; teams that use it as cover to skip research end up building fast in the wrong direction.
+- **Never revisiting the canvas** — treating it as a one-time kickoff document rather than a living artifact updated every cycle as assumptions get validated or killed.
+
+## Tips
+
+Start with the outcome, not the feature — Gothelf and Seiden's core argument is that teams anchor too fast on a specific solution; forcing the canvas to open with a business and user outcome (not a feature name) keeps the riskiest-assumption exercise honest.
+
+## Using AI
+
+**Where it helps**
+- Drafting hypothesis statements ("We believe... we'll know we're right when...") from a rough feature idea, as a starting point for the team to sharpen
+- Summarizing evidence across multiple small experiments into a single canvas update between cycles
+
+**Where it fails**
+- Generating the assumptions themselves without real user or usage data behind them. The entire method depends on ranking assumptions by actual risk to the business and actual uncertainty about users — a model asked to "list our riskiest assumptions" without that grounding will produce plausible-sounding guesses dressed up as prioritized risk.

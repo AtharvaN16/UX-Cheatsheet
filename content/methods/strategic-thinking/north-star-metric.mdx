@@ -1,0 +1,78 @@
+---
+id: north-star-metric
+title: North Star Metric
+aka: ["NSM", "One Metric That Matters", "OMTM"]
+category: strategic-thinking
+alsoIn: []
+kind: concept
+gives: quantitative
+effort: medium
+timeframe: ongoing
+needs:
+  - Reliable product analytics/instrumentation
+  - Organizational agreement on what "value delivered to the customer" actually means
+useInstead:
+  - when: You need a full goal-setting system with objectives and measurable results, not a single alignment metric
+    method: okrs
+related:
+  alongside: [okrs, heart]
+  before: [product-market-fit]
+sources:
+  - title: "Hacking Growth: How Today's Fastest-Growing Companies Drive Breakout Success"
+    author: Sean Ellis & Morgan Brown
+    url: https://www.goodreads.com/book/show/31625067-hacking-growth
+    type: book
+    year: 2017
+    seminal: true
+  - title: "North Star Playbook: The Guide to Discovering Your Product's North Star"
+    author: Amplitude (John Cutler et al.)
+    url: https://amplitude.com/books/north-star/about-north-star-framework
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A single metric, chosen so that moving it reliably moves the business, that captures the core value a product delivers to customers. Its job is alignment, not measurement — it tells a hundred people what "better" means without a meeting, the way Airbnb's "nights booked" does.
+
+## Why it matters
+
+Without a shared metric, every team quietly optimizes something different — support minimizes tickets, growth maximizes signups, design maximizes engagement — and the sum of everyone locally winning can be a product nobody actually gets more value from. A well-chosen North Star gives a designer a concrete tiebreaker in a roadmap debate: does this flow move the metric that represents real customer value, or does it just move a number that's easy to move?
+
+## Key ideas
+
+- **It represents value delivered, not company health**: revenue, DAU, and signups are business or vanity metrics that can rise while the product gets worse for users (more ads, more dark patterns); a good North Star is chosen so it can only go up if customers are genuinely getting more value.
+- **One level removed from directly controllable**: John Cutler's framing is that if you can move it directly, it's probably not a good North Star — the team should be asking *why* it's moving, which keeps attention on the underlying drivers rather than gaming the number.
+- **It needs input metrics underneath it**: a North Star alone is too coarse to act on day to day; teams break it into 3-5 input metrics (the things that actually drive it) that are close enough to act on directly.
+- **Correlates with revenue but usually isn't revenue** — Sean Ellis's framing is that revenue is a lagging outcome of value delivered, not the value itself; a metric that IS revenue tends to pull teams toward monetization tactics rather than product improvement.
+
+## Example
+
+Facebook's early growth team famously converged on "7 friends in 10 days" as the input metric behind their North Star — not because 7 was a magic number on its own, but because retained users overwhelmingly cleared that threshold early, which turned an abstract "increase engagement" goal into a concrete design target (get people connected fast) that every team, from onboarding to notifications, could build toward.
+
+## Application
+
+- **Test it against a counter-metric before adopting it**: check whether the North Star could rise while something users clearly care about (trust, satisfaction, actual usage quality) falls — if so, it's not isolating value correctly yet.
+- **Keep it to one, not a dashboard**: a North Star that's really three metrics stapled together stops functioning as a tiebreaker, because it can't answer "which of these two designs is better" with one number.
+- **Revisit it when the product's core value proposition changes**: a North Star chosen for an early-stage feature set can become the wrong metric once the product has matured into something customers use differently.
+
+## Limitations
+
+- **Single-metric focus can hide system-level trade-offs**: Casey Winters and others have criticized "one metric that matters" thinking specifically because complex products have multiple interacting value flows that one number collapses — teams that steer only by the North Star can miss damage happening elsewhere.
+- **Easy to pick a metric that's actually a vanity metric wearing a North Star's clothes**: total registered users or total content created can rise for years while genuine per-user value stays flat.
+- **Says nothing about *why* it's moving**: a rising North Star with no visibility into which input metric is driving it gives false confidence — it needs the input-metric tree underneath it to be actionable.
+
+## Common misconceptions
+
+- **"It's the same as a business KPI"**: a North Star is chosen specifically to represent customer value, not business health; revenue, MRR, and headcount-adjacent metrics are the wrong shape for this role even when they matter enormously to the business.
+- **"More metrics is more rigorous"**: teams that can't agree on one North Star often default to tracking everything, which produces the opposite of alignment — nobody can tell you what "better" means anymore.
+- **"North Star and OKRs are the same tool"**: a North Star is one number for ongoing alignment; OKRs are a periodic (usually quarterly) goal-setting system with multiple objectives and measurable key results. Teams often set OKRs *about* moving the North Star's input metrics.
+
+## Using AI
+
+**Where it helps**
+- Mining usage data for candidate input metrics that correlate with retention, as a starting hypothesis set for a team to debate and validate.
+- Drafting the "why this metric, why not that one" rationale document that makes a North Star's trade-offs legible to a broader team.
+
+**Where it fails**
+- Picking the North Star itself from a data dump without a human deciding what "value delivered" means for this specific product. A model can produce a statistically plausible-sounding metric recommendation; whether that metric actually represents customer value rather than a correlated vanity signal is a judgment call about the business, not a pattern in the data.

@@ -1,0 +1,83 @@
+---
+id: first-principles
+title: First Principles
+aka: ["First-Principles Thinking", "Reasoning from First Principles"]
+category: strategic-thinking
+alsoIn: []
+kind: concept
+gives: conceptual
+effort: medium
+timeframe: hours
+needs:
+  - Genuine domain knowledge deep enough to verify what's actually true, not just assumed
+  - Willingness to spend more time than reasoning by analogy would take
+useInstead:
+  - when: The problem is routine and well-precedented — reasoning by analogy from known solutions is faster and just as reliable
+    method: pareto-principle
+  - when: You need to know whether this problem even rewards ground-up reasoning before investing the time
+    method: cynefin-framework
+related:
+  before: [cynefin-framework]
+  alongside: [inversion, second-order-effects]
+sources:
+  - title: "Metaphysics"
+    author: Aristotle (Stanford Encyclopedia of Philosophy)
+    url: https://plato.stanford.edu/entries/aristotle-metaphysics/
+    type: article
+    seminal: true
+  - title: "First Principles Thinking"
+    author: Shane Parrish / Farnam Street
+    url: https://fs.blog/first-principles/
+    type: article
+    seminal: false
+  - title: "Poor Charlie's Almanack"
+    author: Charlie Munger / ed. Peter Kaufman
+    url: https://www.stripe.press/poor-charlies-almanack
+    type: book
+    year: 2005
+    seminal: false
+---
+
+## What is it
+
+Reasoning from verified, foundational truths — built up from the ground — instead of by analogy to what others have already done. The question shifts from "how do people normally solve this?" to "what is actually true here, and what follows from it?"
+
+## Why it matters
+
+Most decisions are made by pattern-matching to precedent, which is fast and usually fine — but precedent inherits every wrong assumption baked into it. First-principles reasoning is the tool for the cases where precedent is the thing that's actually wrong: a "best practice" nobody has re-examined in a decade, a technical constraint that no longer holds, a business model everyone imitates without checking whether its underlying economics still apply.
+
+## Key ideas
+
+- **Separate facts from assumptions**: Aristotle's original sense of *archai* — first principles — are the foundational, self-evident truths a domain rests on. Everything else is inference or convention, and conventions are exactly what's worth re-checking.
+- **Decompose before you rebuild**: break the problem into its component claims, verify each one independently, then reconstruct a solution from the parts that actually hold.
+- **Cost is the classic decomposition target**: Elon Musk's SpaceX example — reasoning from the raw material cost of a rocket (a few percent of the purchase price) rather than from "rockets cost what rockets cost" — is the canonical modern illustration (Farnam Street).
+
+## Example
+
+A designer told "users won't scroll past the fold" (industry folklore from the early 2000s) can either accept it or check it against current scroll-depth data, device usage, and their own product's context. First-principles thinking means checking; most of the time the folklore turns out to be a stale generalization from a different era of the web.
+
+## Application
+
+- **Question inherited patterns before shipping them**: an onboarding tutorial, a five-star rating widget, a hamburger menu — ask what user need each one actually serves here, not whether it's common.
+- **Use it on high-leverage, low-precedent decisions**: a novel product category, an unusual technical constraint, a "why does this cost so much" question — not on decisions where convention is convention because it works.
+- **Pair it with domain expertise**: first-principles reasoning without real knowledge of the domain just produces confident-sounding guesses dressed up as rigor.
+
+## Limitations
+
+- **Expensive**: it takes real time and real domain knowledge to verify foundational claims; most decisions don't warrant the investment.
+- **Requires the humility to be wrong about "obvious" things**: the whole method depends on genuinely re-examining assumptions you'd otherwise take for granted, which is uncomfortable and easy to fake.
+- **Doesn't replace testing**: rebuilding a solution from verified fundamentals still produces a hypothesis, not a validated answer — it still needs to meet reality.
+
+## Common misconceptions
+
+- **"First-principles thinking always beats convention"**: most decisions are reversible, low-stakes, and already well-solved by existing patterns — re-deriving everything from scratch is wasted effort, not rigor.
+- **"It's just being contrarian"**: distrust of convention isn't the method — verifying what's actually true is. A first-principles conclusion that happens to match convention is still a valid outcome.
+
+## Using AI
+
+**Where it helps**
+- Decomposing a stated problem into its component claims and assumptions as a starting checklist — "what would have to be true for X" — for a human to verify against real domain knowledge.
+- Running Socratic-style question chains ("why is that true? what does that assume?") to surface unexamined premises faster than doing it solo.
+
+**Where it fails**
+- A model has no privileged access to ground truth — it will restate conventional wisdom fluently and it can read exactly like a first-principles derivation, when it's actually just well-phrased precedent. The verification step against real facts still has to happen outside the model.

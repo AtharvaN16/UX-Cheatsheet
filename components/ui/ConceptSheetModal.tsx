@@ -521,7 +521,7 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
               {/* If written method details exist, render flat editorial sections */}
               {item.method ? (
                 <div className="space-y-10">
-                  {/* Editorial Sections: Filter out redundant "What is it" and "Tips", make "How to do it" a collapsible dropdown */}
+                  {/* Editorial Sections: Filter out redundant "What is it" and "Tips", make "How to do it" (methods) / "How to use" (frameworks) a collapsible dropdown */}
                   {Object.entries(item.method.sections)
                     .filter(
                       ([title]) =>
@@ -529,9 +529,10 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
                         title.toLowerCase().trim() !== 'tips'
                     )
                     .map(([sectionTitle, sectionContent]) => {
-                      const isHowToDoIt = sectionTitle.toLowerCase().trim() === 'how to do it';
+                      const normalizedTitle = sectionTitle.toLowerCase().trim();
+                      const isCollapsible = normalizedTitle === 'how to do it' || normalizedTitle === 'how to use';
 
-                      if (isHowToDoIt) {
+                      if (isCollapsible) {
                         return (
                           <CollapsibleSection
                             key={sectionTitle}

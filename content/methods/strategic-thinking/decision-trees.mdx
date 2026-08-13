@@ -1,0 +1,91 @@
+---
+id: decision-trees
+title: Decision Trees
+aka: ["Decision Tree Analysis"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: quantitative
+effort: medium
+timeframe: days
+needs:
+  - A sequence of decisions and/or chance events with estimable probabilities
+  - Estimated payoffs or costs at each possible end state
+useInstead:
+  - when: You're evaluating a single bet with known probabilities, not a branching sequence of decisions and chance events
+    method: expected-value
+  - when: The uncertainty is qualitative and the failure modes matter more than the probabilities, not the reverse
+    method: pre-mortem
+related:
+  alongside: [expected-value, risk-matrix]
+sources:
+  - title: "Decision Trees for Decision Making"
+    author: John F. Magee
+    url: https://hbr.org/1964/07/decision-trees-for-decision-making
+    type: article
+    year: 1964
+    seminal: true
+  - title: "Decision Tree Analysis: 5 Steps with Expected Value"
+    author: Asana
+    url: https://asana.com/resources/decision-tree-analysis
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A branching diagram that maps a sequence of decisions and uncertain events, with a probability attached to each chance branch and a payoff attached to each end state — letting you calculate and compare the expected value of each path.
+
+## Overview & Purpose
+
+Most consequential decisions aren't a single bet — they're a sequence: choose an option, observe what happens, choose again based on what you learned. A decision tree exists to make that sequence explicit and quantify it, rather than relying on best-case narrative reasoning about a multi-step decision under uncertainty. It's the tool for "if we do A and it works, then B; if it doesn't, then C" reasoning, done with actual numbers instead of hand-waving.
+
+## When to use
+
+- The decision has multiple sequential stages, where a later choice depends on the outcome of an earlier uncertain event.
+- You have — or can reasonably estimate — probabilities and payoffs for each branch; without those, the tree becomes an org chart of options rather than an analytical tool.
+- You need to compare the expected value of genuinely different strategies (e.g., "build now" vs. "run a pilot first, then decide") rather than a single one-shot bet.
+
+## Structure
+
+- **Decision nodes** (usually drawn as squares): points where you choose between options — these are under your control.
+- **Chance nodes** (usually drawn as circles): points where an uncertain event happens, each outgoing branch carrying a probability.
+- **End states** (leaves): the final outcome of each complete path through the tree, each carrying a payoff or cost.
+- **Expected value per branch**: calculated by working backward from the leaves — "folding back" the tree — multiplying probabilities and payoffs at each chance node and choosing the higher-expected-value option at each decision node.
+
+## How to use
+
+1. Lay out the sequence of decisions and uncertain events as they'd actually unfold, in order.
+2. Assign a probability to every branch out of each chance node — the probabilities out of any single chance node must sum to 100%.
+3. Assign a payoff or cost to every end state.
+4. Fold the tree back from the leaves toward the root: at each chance node, compute the expected value across its branches; at each decision node, take the branch with the higher expected value.
+5. The expected value at the root is the expected value of the overall strategy, and the path chosen at each decision node along the way is the optimal policy given your estimates.
+
+## Example
+
+A team deciding whether to build a feature outright or run a $20K pilot first: building outright has a 50% chance of a $300K payoff and 50% chance of a $150K loss (EV = $75K). Running the pilot first costs $20K, and gives better information before the bigger build decision, changing the probabilities on the subsequent branch — the tree makes it possible to compare the two strategies' expected values directly instead of arguing about which "feels" safer.
+
+## Common mistakes
+
+- **Skipping probability estimation and just listing options** — without probabilities and payoffs at each branch, this is a flowchart, not a decision tree, and it can't produce a comparable expected value.
+- **Treating the calculated expected value as certain** — the output is only as reliable as the probability and payoff estimates that fed it; a precise-looking number from rough inputs is still a rough estimate.
+- **Building an overly granular tree** — every additional branch adds estimation burden; most real decisions are usefully modeled with a handful of key branches, not an exhaustive enumeration of every possibility.
+
+## Limitations
+
+- **Requires probabilities that are often genuinely unknown, not just uncertain** — forcing a number onto a Knightian-uncertainty situation (a novel market, an unprecedented technology) creates false precision.
+- **Doesn't handle continuous variables well** — trees work best with a manageable number of discrete branches; heavily continuous uncertainty is usually better modeled with simulation.
+- **Can undersell qualitative risk**: a tree comparing expected values doesn't automatically surface which path has an unrecoverable worst case, unless variance is examined separately alongside the expected value.
+
+## Tips
+
+Fold the tree back and sanity-check the answer against intuition before presenting it — if the "optimal" path from the calculation feels obviously wrong to people with real domain context, the probability or payoff estimates are usually where the mismatch lives, not the math.
+
+## Using AI
+
+**Where it helps**
+- Doing the arithmetic — folding back a moderately complex tree correctly and quickly — and checking a hand calculation against a second one.
+- Helping structure a messy, verbally-described sequence of decisions and contingencies into an explicit tree shape as a starting draft.
+
+**Where it fails**
+- The probabilities and payoffs are the part that requires real domain knowledge; a model asked to "estimate" them will produce plausible-sounding numbers with no actual grounding in your market or data, and a correctly-computed expected value built on invented inputs is precisely engineered nonsense.

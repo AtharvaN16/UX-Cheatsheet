@@ -1,0 +1,76 @@
+---
+id: red-teaming
+title: Red Teaming
+aka: ["Red Team Review", "Adversarial Review"]
+category: strategic-thinking
+alsoIn: []
+kind: method
+gives: qualitative
+effort: medium
+timeframe: days
+needs:
+  - A plan, system, or decision concrete enough to attack, not just a rough idea
+  - At least one reviewer genuinely willing to argue against the plan, not soften their critique to be polite
+useInstead:
+  - when: You want the whole team's honest doubts collected individually, not one adversarial reviewer's sustained case against the plan
+    method: pre-mortem
+  - when: You need six people to deliberately switch between different thinking modes, not one team arguing the opposing case
+    method: six-thinking-hats
+related:
+  alongside: [pre-mortem, six-thinking-hats]
+sources:
+  - title: "Red team"
+    author: Wikipedia (history from Prussian Kriegsspiel wargaming through RAND Corporation Cold War simulations)
+    url: https://en.wikipedia.org/wiki/Red_team
+    type: article
+    seminal: true
+  - title: "Red Teaming AI Red Teaming"
+    author: arXiv (AI safety red-teaming survey)
+    url: https://arxiv.org/pdf/2507.05538
+    type: paper
+    year: 2025
+    seminal: false
+---
+
+## What is it
+
+A dedicated person or group deliberately plays the adversary against a plan or system — actively trying to break it or prove it wrong — rather than passively reviewing it for flaws.
+
+## Purpose
+
+A regular review asks "is this plan good?" A red team asks "how would I defeat this plan if I were actively trying to?" — a different and often more revealing question, because it removes the reviewer's incentive to be constructive or diplomatic and replaces it with an incentive to win. In security and AI safety specifically, red teaming exists because the people who'll actually try to exploit a system don't share the builders' assumptions about how it'll be used, and only an adversarial stance reliably finds what those assumptions miss.
+
+## When to use
+
+- Before a launch, security release, or policy where real adversaries (attackers, competitors, bad actors, or users acting in bad faith) will actively try to find weaknesses.
+- When you suspect your own team's proximity to the plan is making them too generous in reviewing it — a fresh, adversarial outside perspective breaks that.
+- For AI systems specifically, before release, to probe for jailbreaks, harmful outputs, or unintended behaviors under deliberately hostile input — now standard practice at major AI labs and referenced in the EU AI Act and US executive orders on AI risk.
+
+## How to do it
+
+1. Assign a red team — ideally people not invested in the plan's success, with enough context to attack it credibly.
+2. Give the red team explicit permission and a mandate to try to break, exploit, or disprove the plan — ambiguity about whether critique is welcome undermines the exercise before it starts.
+3. Have the red team operate somewhat independently, developing their attack or critique without being talked out of it by the plan's owners mid-exercise.
+4. Reconvene and have the red team present specific findings: what they broke, exploited, or found unconvincing, with concrete evidence, not general impressions.
+5. Treat every finding as real input to the plan, not as a personal attack on whoever built it — this requires deliberate cultural work, since adversarial critique reads as hostile even when it's doing exactly its job.
+6. Fix what's fixable before launch; explicitly accept and document what isn't, rather than letting it quietly disappear.
+
+## Common mistakes
+
+- **Choosing red-team members who are too invested in the plan succeeding** — the adversarial stance requires genuine distance; a red team staffed by the plan's own advocates tends to pull its punches.
+- **Treating findings as attacks on people rather than the plan** — this is the fastest way to make future red-teaming exercises less honest, as reviewers learn that harsh findings cost them socially.
+- **Running it too late to act on findings** — red teaming a launch the week before it ships, with no time to fix what's found, converts a useful exercise into theater.
+- **Confusing a red team with a general QA pass** — QA checks whether the thing works as specified; a red team checks whether the specification itself has exploitable gaps.
+
+## Tips
+
+Give the red team a genuinely adversarial goal, not just "find problems" — "get this AI system to say something harmful" or "get unauthorized access to this flow" produces sharper findings than a generic request to critique.
+
+## Using AI
+
+**Where it helps**
+- Generating candidate attack vectors or exploit attempts at scale — especially useful in AI safety red-teaming, where a model can probe another model's outputs across a huge range of adversarial prompts faster than a human team could alone.
+- Simulating a first pass of adversarial user behavior against a flow, as a starting point for a human red team to refine and pursue further.
+
+**Where it fails**
+- A model red-teaming its own or a similar system inherits blind spots correlated with its own training and reasoning patterns — the most dangerous exploits are often the ones a model wouldn't think to try because they're outside its own failure modes, which is exactly why human adversarial creativity remains necessary alongside automated red-teaming, not instead of it.

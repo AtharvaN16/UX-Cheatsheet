@@ -1,0 +1,73 @@
+---
+id: opportunity-cost
+title: Opportunity Cost
+aka: ["Alternative Cost"]
+category: strategic-thinking
+alsoIn: []
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - A clear list of realistic alternative uses of the same time, money, or attention
+useInstead:
+  - when: You need to compare specific competing bets by their probability-weighted payoff, not just name the best alternative
+    method: expected-value
+  - when: You're prioritizing many competing backlog items, not evaluating a single decision against its next-best alternative
+    method: rice
+related:
+  alongside: [expected-value, pareto-principle]
+sources:
+  - title: "Friedrich von Wieser"
+    author: Friedrich von Wieser (originated the concept in "Der Natürliche Werth," 1889)
+    url: https://en.wikipedia.org/wiki/Friedrich_von_Wieser
+    type: article
+    seminal: true
+  - title: "Opportunity Cost - Overview, Formula, Use"
+    author: Corporate Finance Institute
+    url: https://corporatefinanceinstitute.com/resources/economics/opportunity-cost/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+The value of the best alternative given up by making a particular choice — the true cost of any choice isn't just what you spend, but the next-best thing you could have done with the same resources instead.
+
+## Why it matters
+
+Every decision has an opportunity cost, and it's almost always the most important cost that never appears on a budget line, a roadmap, or a time-tracking sheet. Asking "is this worth doing?" is the wrong question because almost anything is worth doing in isolation; the right question is "is this the best use of this time, money, or attention, given everything else currently available?"
+
+## Key ideas
+
+- **Cost isn't just what you spend, it's what you give up**: a "free" internal project still costs whatever the team would otherwise have built.
+- **It's relative to the actual next-best alternative, not to doing nothing**: comparing a decision only against inaction understates its real cost when a better alternative was genuinely available.
+- **It applies to attention as much as money**: a designer's time in a low-value meeting has an opportunity cost measured in whatever design work didn't happen instead — this is often invisible precisely because it never shows up as a line-item loss.
+
+## Example
+
+A design team spends a sprint building a highly-requested but low-usage settings page instead of fixing a checkout flow with a known 3% drop-off. The settings page "worked" — it shipped, it functions — but its real cost was the checkout fix that didn't happen, which is the actual opportunity cost of the decision, independent of whether the settings page itself succeeded.
+
+## Application
+
+- Reframe roadmap debates from "should we build this?" to "is this the best use of this team's time right now, given what else is on the list?" — the second question surfaces trade-offs the first one hides.
+- When a stakeholder pushes for a "quick" feature, ask what it displaces, not just what it costs to build — the displaced work is often the larger cost.
+- Use it explicitly when defending a "no" — naming the specific alternative use of the resources makes a rejection concrete rather than seeming arbitrary.
+
+## Limitations
+
+- **Requires a genuinely comparable alternative to name**: opportunity cost is meaningless as a critique if there's no realistic next-best use of the same resources — "we could have done anything" isn't a specific alternative.
+- **Hard to quantify precisely**: unlike a cash cost, the value of a foregone alternative is usually an estimate, not a measured number, which makes it easy to inflate or dismiss depending on the argument someone wants to win.
+
+## Common misconceptions
+
+- **"Opportunity cost only applies to money"**: it applies to any scarce resource — attention, calendar time, design capacity, political capital — and is often larger for these than for direct cash cost.
+- **"If something has value, it's worth doing"**: almost everything has some value in isolation; the question that matters is whether it has more value than the next-best alternative use of the same resource.
+
+## Using AI
+
+**Where it helps**
+- Generating a list of plausible alternative uses of a given resource (time, budget, team capacity) as a starting point for a real trade-off conversation.
+
+**Where it fails**
+- A model can name generic-sounding alternatives fluently, but it doesn't know your organization's actual backlog, capacity, or strategic priorities — the real opportunity cost is specific to context a model doesn't have, and a plausible-sounding "what you gave up" answer can be entirely wrong for your situation.

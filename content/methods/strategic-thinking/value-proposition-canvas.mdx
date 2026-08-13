@@ -1,0 +1,85 @@
+---
+id: value-proposition-canvas
+title: Value Proposition Canvas
+aka: ["VPC", "Value Prop Canvas"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: qualitative
+effort: medium
+timeframe: days
+needs:
+  - A specific customer segment to design for, not "users" in general
+  - Research inputs on that segment's jobs, pains, and desired gains
+  - A candidate product or feature set to map against those inputs
+useInstead:
+  - when: You need to map the whole business model, not just the customer value exchange
+    method: business-model-canvas
+related:
+  before: [jobs-to-be-done]
+  alongside: [business-model-canvas]
+sources:
+  - title: "Value Proposition Design: How to Create Products and Services Customers Want"
+    author: "Alexander Osterwalder, Yves Pigneur, Gregory Bernarda, Alan Smith"
+    url: https://www.strategyzer.com/library/value-proposition-design
+    type: book
+    year: 2014
+    seminal: true
+  - title: "The Value Proposition Canvas"
+    author: Strategyzer
+    url: https://www.strategyzer.com/library/the-value-proposition-canvas
+    type: tool
+    seminal: false
+---
+
+## What is it
+
+A two-sided canvas that maps a specific customer segment's jobs, pains, and gains on one side against your product's pain relievers, gain creators, and features on the other — designed to check for fit between what you're building and what the customer actually needs, before you build more of it.
+
+## Purpose
+
+Forces the value proposition into two separate, checkable halves instead of one vague pitch. It's the tool for the specific question "does what we're building actually relieve this segment's real pains," answered by matching two lists against each other rather than by conviction.
+
+## When to use
+
+- Before committing design or engineering time to a new feature or product line, to check the value case is grounded in a real customer profile
+- A team disagrees about whether a proposed feature actually matters to customers — the canvas forces both sides to state their case in the same structure
+- You have real research inputs (interviews, support tickets, sales call notes) and need a place to organize them against what you're proposing to build
+- As a companion to the Business Model Canvas, when you need to zoom into the customer relationship specifically
+
+## Structure
+
+Two halves, each with three parts:
+
+- **Customer Profile** (the circle): Customer jobs (what they're trying to get done — functional, social, emotional), Pains (obstacles, risks, frustrations they face), Gains (outcomes and benefits they want).
+- **Value Map** (the square): Products & Services (what you offer), Pain Relievers (how those offerings address specific pains), Gain Creators (how those offerings produce specific gains).
+- Fit is achieved when Pain Relievers and Gain Creators map directly onto the highest-priority Pains and Gains in the Customer Profile — not when every box is merely filled in.
+
+## How to use
+
+1. Pick one specific customer segment. A canvas that tries to describe "all users" produces mush on both sides.
+2. Fill the Customer Profile from research, not assumption — real interview notes, support tickets, and observed behavior, ranked by how important and how severe each job/pain/gain actually is.
+3. Fill the Value Map with what you offer or plan to offer.
+4. Draw the lines: for each Pain Reliever and Gain Creator, point to the specific Pain or Gain it addresses. Anything on the Value Map with no line back to the Customer Profile is a feature nobody asked for.
+5. Check for unaddressed high-priority Pains and Gains — that's your gap, and usually your next design problem.
+
+## Example
+
+For an expense-reporting tool aimed at busy field sales reps: a top Pain is "losing paper receipts before month-end," a top Gain is "getting reimbursed fast." A Pain Reliever — photo-capture receipt scanning at time of purchase — maps directly to the Pain; a Gain Creator — same-day reimbursement approval — maps directly to the Gain. A planned "custom report builder" feature, by contrast, doesn't connect to any Pain or Gain on the canvas — a signal to cut it or go find the customer segment it's actually for.
+
+## Common mistakes
+
+- **Skipping the customer profile side and jumping to features**: the canvas's whole value is forcing the customer side to exist independently before you check fit against it.
+- **Writing generic pains and gains**: "wants to save time" fits every product ever built and proves nothing. Push for the specific version — save time on what, compared to what.
+- **Never drawing the connecting lines**: without explicitly mapping relievers/creators to pains/gains, teams fill in both sides and declare fit without ever checking it.
+- **One canvas for multiple segments**: different segments have different jobs and pains; blending them produces a value proposition that's vague for everyone.
+
+## Limitations
+
+- **Says nothing about willingness to pay or business viability**: a strong customer fit doesn't guarantee the business model behind it works; that's what the Business Model Canvas is for.
+- **Only as good as the research behind the Customer Profile**: filled in from internal assumption rather than real customer input, it just formalizes existing bias.
+- **Static snapshot**: customer jobs and pains shift as markets and competitors change; a canvas from a year ago may no longer describe the segment accurately.
+
+## Tips
+
+Rank pains and gains by severity and importance before mapping relievers and creators against them — a canvas with ten equally-weighted pains hides which one actually matters, which is the whole point of doing this exercise instead of just brainstorming features.

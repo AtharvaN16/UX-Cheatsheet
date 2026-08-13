@@ -1,0 +1,74 @@
+---
+id: pareto-principle
+title: Pareto Principle
+aka: ["80/20 Rule", "Vital Few and Trivial Many"]
+category: strategic-thinking
+alsoIn: []
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - Enough data on where results actually come from to identify the "vital few" contributors
+useInstead:
+  - when: You need an actual ranked, weighted prioritization across many items, not a rough heuristic
+    method: rice
+  - when: The distribution of causes and effects in your specific case is closer to even than skewed — the heuristic doesn't hold everywhere
+    method: impact-effort-matrix
+related:
+  alongside: [first-principles]
+sources:
+  - title: "Pareto principle"
+    author: Vilfredo Pareto (original 1896 observation)
+    url: https://en.wikipedia.org/wiki/Pareto_principle
+    type: article
+    seminal: true
+  - title: "A Guide to the Pareto Principle (80/20 Rule) & Pareto Analysis"
+    author: Juran Institute
+    url: https://www.juran.com/blog/a-guide-to-the-pareto-principle-80-20-rule-pareto-analysis/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+The observation that a small share of causes tends to produce a large share of effects — commonly generalized to "80% of outcomes come from 20% of causes," though the exact split varies by context and isn't literally 80/20 in most real cases.
+
+## Why it matters
+
+It's a heuristic for where to look first, not a law. Vilfredo Pareto observed in 1896 that roughly 20% of Italy's population owned roughly 80% of the land, and found similar skew across other countries and time periods. Quality-management pioneer Joseph Juran generalized it in the 1940s into the "vital few and trivial many" — the claim that this kind of unequal distribution shows up far outside economics, in defect causes, customer complaints, and feature usage alike. For a designer, it's permission to stop treating every input as equally worth your attention.
+
+## Key ideas
+
+- **Skewed distributions are common, not exceptional**: usage, revenue, support tickets, and bug reports in most real products cluster heavily on a small number of causes — a small set of screens gets most traffic, a small set of bugs generates most complaints.
+- **The 80/20 split is illustrative, not literal**: the actual ratio in any given dataset might be 90/10 or 70/30 — the point is the skew exists, not that it's exactly four-fifths.
+- **Juran's real contribution was generalizing it**: Pareto observed the pattern in wealth distribution; Juran's insight was that the same shape recurs across unrelated domains, which is what makes it a reusable heuristic rather than a one-off historical fact.
+
+## Example
+
+A design team reviewing a quarter of support tickets finds that four of forty reported issues account for most ticket volume. Fixing those four — rather than working the backlog in the order it arrived — resolves most of the pain with a fraction of the effort, because the underlying distribution was already skewed that way.
+
+## Application
+
+- Use it to decide where to look first when auditing usage data, bug reports, or user complaints — check whether a small number of causes dominate before assuming effort should be spread evenly.
+- Use it to push back on "treat every feature/bug/segment equally" instincts, which implicitly assume a flat distribution that's rarely the real shape of the data.
+- Don't use it to justify ignoring the "trivial many" entirely — it's a prioritization lens, not a license to discard the long tail.
+
+## Limitations
+
+- **Not every distribution is Pareto-shaped** — some causes really are evenly distributed, and forcing an 80/20 frame onto flat data produces false confidence about where to focus.
+- **Correlation isn't the same as leverage** — the 20% of causes producing 80% of effects aren't necessarily the 20% that are cheapest or fastest to address; the principle identifies where the mass is, not where the easiest wins are.
+- **Can be used to rationalize neglect** — "this is the trivial 80%" is sometimes used to justify ignoring real user needs that just haven't been measured well.
+
+## Common misconceptions
+
+- **"It's always exactly 80/20"**: the numbers are a mnemonic for "unequal," not a precise ratio you should expect to measure in your own data.
+- **"Pareto invented the business rule"**: Pareto observed the wealth-distribution pattern; Juran named it and generalized it to quality and business contexts decades later — the "principle" as used in product and design work is largely Juran's framing.
+
+## Using AI
+
+**Where it helps**
+- Scanning a dataset (tickets, bug reports, usage logs) for the small set of items that account for a disproportionate share of volume — a genuinely fast way to find candidate leverage points.
+
+**Where it fails**
+- A model asked to "find the 80/20" on a dataset that isn't actually skewed will often still produce a confident-sounding 80/20 split, because the framing itself suggests one exists — check whether the underlying distribution is actually skewed before trusting the output.

@@ -1,0 +1,87 @@
+---
+id: pirate-metrics-aarrr
+title: Pirate Metrics (AARRR)
+aka: ["AARRR", "AARRR Framework", "Pirate Funnel", "Startup Metrics for Pirates"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: quantitative
+effort: medium
+timeframe: weeks
+needs:
+  - Analytics instrumentation across the full funnel, from acquisition channel through payment
+useInstead:
+  - when: You need a UX-quality metrics model rather than a growth-funnel stage model
+    method: heart
+related:
+  alongside: [north-star-metric]
+sources:
+  - title: "Startup Metrics for Pirates"
+    author: Dave McClure
+    url: https://www.slideshare.net/dmc500hats/startup-metrics-for-pirates-long-version
+    type: article
+    year: 2007
+    seminal: true
+  - title: "AARRR! Dave McClure's 'Pirate Metrics' and the Only Five Numbers That Really Matter"
+    author: Walter Chen (Inc.)
+    url: https://www.inc.com/walter-chen/aarrr-dave-mcclure-s-pirate-metrics-and-the-only-five-numbers-that-matter.html
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A five-stage model of the customer lifecycle — Acquisition, Activation, Retention, Referral, Revenue (the acronym reads "AARRR," hence "pirate metrics") — giving startups a shared vocabulary for which numbers actually matter, stage by stage, instead of tracking everything and understanding nothing.
+
+## When to use
+
+- You're diagnosing where a product is losing people and need to isolate which stage of the lifecycle is actually broken, rather than treating "growth" as one undifferentiated problem
+- You're setting up analytics for a new product and need a starting structure rather than instrumenting everything indiscriminately
+- Different teams (marketing, onboarding, retention, monetization) need a shared frame that shows how their individual metrics connect into one lifecycle
+- You want a fast, standard vocabulary for a metrics review without inventing a bespoke framework from scratch
+
+## Structure
+
+- **Acquisition**: how users arrive — channel, source, and cost per channel (SEO, paid, referral, PR).
+- **Activation**: whether a new user has a "happy" first experience — usually defined as reaching a specific in-product moment, not just signing up.
+- **Retention**: whether users come back — measured over a time window appropriate to the product's natural usage cadence.
+- **Referral**: whether users like the product enough to bring others — organic sharing, invites, word-of-mouth.
+- **Revenue**: whether any of the above converts to monetization — purchase, subscription, upgrade.
+
+## How to use
+
+1. Map your product's actual user journey onto the five stages before picking metrics — a B2B tool's "activation" moment looks nothing like a consumer app's, and forcing a generic definition produces meaningless numbers.
+2. Pick one or two metrics per stage, not a dashboard's worth — McClure's own point was to focus attention, not create a wall of charts.
+3. Instrument conversion rate *between* stages, not just volume within a stage — the drop-off from Activation to Retention is usually more diagnostic than either number alone.
+4. Diagnose stage by stage: a product with strong Acquisition and weak Activation has a different problem (and a different owner) than one with strong Activation and weak Retention.
+5. Treat Referral and Revenue as downstream of the first three — pushing referral incentives on a product with weak Retention just accelerates churn of the referred users too.
+
+## Example
+
+A product with healthy signups (Acquisition) but a steep drop before users complete a key first action (Activation) has a design problem in onboarding, not a marketing problem — pirate metrics forces that distinction instead of lumping both under a vague "growth is slow."
+
+## Common mistakes
+
+- **Treating it as a strict funnel instead of a lifecycle**: real users loop back through the stages (a retained user refers a friend, who needs their own activation) — modeling it as one-directional hides where loops could be reinforcing growth.
+- **Copying generic stage definitions instead of mapping your own journey**: "Activation = signup" for a product whose real value only shows up three steps later produces a number that looks fine while users are actually failing.
+- **Overloading each stage with too many metrics**: the framework's value is focus; five stages with ten metrics each recreates the "track everything, understand nothing" problem it was built to solve.
+- **Ignoring Referral and Revenue until later**: teams that only track Acquisition and Activation build a product that gets people in the door without ever learning whether it's actually monetizable or worth talking about.
+
+## Limitations
+
+- **A linear model applied to what's often a compounding system**: growth-loops thinking (Balfour, Winters, Kwok, Chen) argues that funnels leak and need constant top-of-funnel spend, while the strongest growth today comes from loops where output reinvests into input — pirate metrics doesn't model that reinvestment on its own.
+- **Says nothing about UX quality within a stage**: two products can have identical Activation rates for completely different reasons (one is genuinely delightful, one just has a low bar); it's a lifecycle-stage model, not a UX-quality model.
+- **Stage boundaries get fuzzy in complex, multi-sided products**: marketplaces and platforms with two or more distinct user types (supply and demand sides) need the framework applied separately per side, which the original five-word acronym doesn't hint at.
+
+## Tips
+
+Use it as a diagnostic map to locate *where* to look, then bring in a stage-appropriate method for *why* — heuristic-evaluation or usability-testing for a broken Activation stage, contextual-inquiry for a weak Retention stage — rather than expecting the five letters alone to explain the cause.
+
+## Using AI
+
+**Where it helps**
+- Summarizing funnel-stage analytics into a plain-language diagnosis of where the steepest drop-off sits, as a starting hypothesis for a team to investigate further.
+- Drafting stage-specific metric definitions tailored to a specific product's actual user journey, for a human to sanity-check against real behavior.
+
+**Where it fails**
+- Assuming the five generic stage labels map cleanly onto any product without someone first defining what each stage concretely means for that specific journey. A model asked to "set up AARRR tracking" will confidently propose generic events (signup = Acquisition, first login = Activation) that can be badly wrong for the actual value moment in your product.

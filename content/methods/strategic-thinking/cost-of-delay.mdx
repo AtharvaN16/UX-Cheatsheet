@@ -1,0 +1,74 @@
+---
+id: cost-of-delay
+title: Cost of Delay
+aka: ["CoD"]
+category: strategic-thinking
+alsoIn: []
+kind: concept
+gives: quantitative
+effort: medium
+timeframe: days
+needs:
+  - A specific initiative or backlog item whose delay has a describable business consequence
+  - A rough model of how value or urgency changes over time for that item
+  - Comfort putting a number, even an estimated one, on something usually left implicit
+useInstead:
+  - when: You need a ready-made ranking formula that uses Cost of Delay as an input, not just the underlying concept
+    method: wsjf
+related:
+  alongside: [wsjf]
+sources:
+  - title: "The Principles of Product Development Flow: Second Generation Lean Product Development"
+    author: Donald G. Reinertsen
+    url: https://books.google.com/books/about/The_Principles_of_Product_Development_Fl.html?id=5ayA0QEACAAJ
+    type: book
+    year: 2009
+    seminal: true
+  - title: "Cost of Delay"
+    author: Scaled Agile Framework
+    url: https://framework.scaledagile.com/blog/glossary_term/cost-of-delay
+    type: standard
+    seminal: false
+---
+
+## What is it
+
+Cost of Delay is the money or value lost for every unit of time an initiative is delayed. It reframes "how important is this" as "what does waiting on this actually cost us per week" — a number, not a feeling.
+
+## Why it matters
+
+Reinertsen's core observation, made explicit in *The Principles of Product Development Flow*, is that most product managers can't answer "what would it cost us to delay this a few months" — and without that number, prioritization defaults to whoever argues loudest or whichever backlog item feels most urgent that week. Almost every other economic prioritization trade-off in product development can be traced back to managing delay cost, which is why it's the single input WSJF is built around.
+
+## Key ideas
+
+- **Delay has a shape, not just a size**: value lost isn't always linear — some initiatives lose value slowly and steadily, others fall off a cliff after a fixed date (a regulatory deadline, a seasonal window), and others lose almost nothing for a while and then compound.
+- **It's a rate, not a total**: Cost of Delay is expressed per unit time (per week, per month), which is what makes it comparable across initiatives of different sizes and what makes dividing it by job duration, as WSJF does, meaningful.
+- **Silence isn't zero cost**: not quantifying Cost of Delay doesn't mean delay is free — it means the cost is being paid without being named, which is worse for decision-making, not neutral.
+- **It applies to sequencing, not just scoping**: Cost of Delay is as much an argument for *when* to do something relative to other work as it is for *whether* to do it at all.
+
+## Example
+
+A payments feature that unblocks a partnership with a hard contractual go-live date has a Cost of Delay shaped like a cliff — near-zero cost until the deadline, then a large one-time cost (the lost partnership) if missed. A gradual UX improvement to checkout, by contrast, has a steadily accruing Cost of Delay — every week it's not shipped, the business loses some estimable amount of conversion, but there's no hard cliff. Sequencing the cliff-shaped item ahead of the steadily-accruing one, even if the UX improvement's total value is larger over a year, reflects the actual cost of getting the timing wrong.
+
+## Application
+
+- **Feed it into WSJF**: Cost of Delay is the numerator SAFe's WSJF formula divides by job size — you can use the concept standalone even without adopting the full formula.
+- **Use it to break sequencing ties**: when two initiatives seem similarly valuable, comparing their delay-cost shapes (cliff vs. gradual) often reveals which should go first.
+- **Use it to argue against a delay, not just for a priority**: "this costs us roughly $X per month we don't ship it" is a much stronger argument in a roadmap debate than "this is important."
+- **Use it to catch false urgency**: forcing a number onto a claimed deadline often reveals the "urgent" item has a flatter delay-cost curve than the person requesting it assumed.
+
+## Limitations
+
+- **Estimates are often rough and can be gamed**: anyone motivated to get their initiative prioritized has an incentive to overstate its Cost of Delay; treat the numbers as directional, and be suspicious of suspiciously precise ones.
+- **Hard to model for genuinely novel or exploratory work**: Cost of Delay assumes you have some idea what the value curve looks like, which is a bad assumption for a true discovery-stage bet.
+- **Doesn't capture non-economic costs**: regulatory, reputational, or team-morale costs of delay don't fit neatly into a value-per-week number.
+
+## Common misconceptions
+
+- **"If we haven't calculated it, it must be low"**: the absence of a Cost of Delay estimate says nothing about its actual size — it usually means the cost is invisible, not small.
+- **"Cost of Delay is the same as urgency"**: urgency is a symptom; Cost of Delay is trying to quantify why something is or isn't actually urgent, and forcing the estimate often shows that a "loud" item has a lower Cost of Delay than a quiet one.
+- **"It has to be precise to be useful"**: a rough, order-of-magnitude estimate that lets you compare two initiatives is far more useful than no estimate — precision isn't the point, comparability is.
+
+## Tips
+
+Sketch the shape of the delay-cost curve (flat, gradual, cliff, compounding) before trying to put a number on it — the shape alone often changes the sequencing decision, even before you've nailed the size.

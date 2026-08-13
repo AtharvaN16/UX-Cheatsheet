@@ -1,0 +1,90 @@
+---
+id: rice
+title: RICE
+aka: ["RICE Score", "RICE Framework", "Reach Impact Confidence Effort"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: quantitative
+effort: low
+timeframe: hours
+needs:
+  - A backlog of comparable initiatives to score
+  - Rough usage/analytics data to estimate reach
+useInstead:
+  - when: You need a simpler three-factor score for fast-moving growth experiments rather than roadmap-level initiatives
+    method: ice
+  - when: You need to weight urgency and cost of delay against job size instead of a static score
+    method: wsjf
+related:
+  alongside: [ice, moscow, impact-effort-matrix, cost-vs-value]
+sources:
+  - title: "RICE: Simple Prioritization for Product Managers"
+    author: Sean McBride (Intercom)
+    url: https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/
+    type: article
+    year: 2018
+    seminal: true
+  - title: "The RICE Framework: Prioritization Made Simple"
+    author: LogRocket
+    url: https://blog.logrocket.com/product-management/rice-framework-prioritization-made-simple/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A four-factor scoring formula — Reach × Impact × Confidence ÷ Effort — used to settle roadmap arguments with a comparable number instead of whoever argued loudest. Each initiative gets a score; ranking scores high to low gives a prioritized order.
+
+## When to use
+
+- Several unrelated initiatives are competing for the same roadmap slot and the debate keeps coming down to opinion rather than a comparable measure
+- Decision-making has been skewing toward pet ideas or whoever has the most seniority in the room, and you need a structure that surfaces reach and effort explicitly
+- You have at least rough usage data to estimate how many people an initiative touches — RICE degrades fast without it
+- You want a single score you can defend in a prioritization review, while still reserving room to override it for strategic reasons
+
+## Structure
+
+- **Reach**: how many people the initiative will affect within a set time period (e.g., customers per quarter) — a concrete number, not a vague "a lot of users."
+- **Impact**: how much it affects each person who's reached, usually scored on a multiplier scale (McBride's original: 3 = massive, 2 = high, 1 = medium, 0.5 = low, 0.25 = minimal).
+- **Confidence**: how reliable your Reach and Impact estimates are, expressed as a percentage (100%, 80%, 50%) — a deliberate check against overconfident guessing.
+- **Effort**: total time investment across the team, usually in person-months, used as the denominator so smaller lifts rank higher for the same value.
+
+## How to use
+
+1. List every initiative you're comparing on the same footing — mixing a two-week fix and a two-quarter platform investment in one ranked list is a common source of RICE producing a misleading order.
+2. Estimate Reach concretely — pull from analytics where possible ("customers who hit this flow per quarter") rather than a felt sense of "most people."
+3. Score Impact using the fixed multiplier scale, not a free-form number — the discrete scale (3, 2, 1, 0.5, 0.25) forces a real choice instead of false precision.
+4. Score Confidence honestly — if you're guessing at Reach or Impact, that should show up as a lower Confidence percentage, not get baked silently into an optimistic Impact score.
+5. Estimate Effort as total team-time, not just engineering time — design, research, and QA effort belongs in the denominator too.
+6. Compute (Reach × Impact × Confidence) ÷ Effort for each initiative and rank; treat the ranking as a strong input to the roadmap conversation, not an automatic verdict.
+
+## Example
+
+A checkout bug fix affecting 500 customers/quarter (Reach 500), rated high Impact (2), at 90% Confidence, taking 0.5 person-months of Effort scores (500 × 2 × 0.9) ÷ 0.5 = 1,800. A flashy new integration reaching only 50 customers/quarter (Reach 50), rated massive Impact (3), at 50% Confidence (nobody's built it before, so the team is guessing), taking 3 person-months scores (50 × 3 × 0.5) ÷ 3 = 25. The unglamorous bug fix wins on the numbers — which is often exactly the debate RICE exists to settle.
+
+## Common mistakes
+
+- **Padding Confidence to make a favored idea's score look better**: RICE is only as honest as its inputs; a team that inflates Confidence on ideas it already likes gets a number that launders bias rather than removing it.
+- **Estimating Reach as "everyone" by default**: vague Reach estimates flatten the whole point of the formula — Reach is supposed to differentiate a niche fix from a broad-impact change.
+- **Treating the score as the final decision**: RICE doesn't know about strategic bets, regulatory deadlines, or technical dependencies — a low-scoring initiative can still be the right call for reasons outside the formula, and the formula should be overridden transparently, not silently.
+- **Comparing initiatives at wildly different scopes**: a two-day tweak and a two-quarter rebuild rarely belong on the same RICE-ranked list; scope mismatches distort the Effort denominator's meaning.
+
+## Limitations
+
+- **Garbage in, garbage out on Reach and Impact**: the formula's output is only as trustworthy as the two hardest-to-estimate inputs; teams without good analytics are essentially scoring guesses with false numeric precision.
+- **Multiplying four uncertain estimates compounds the uncertainty**: a small error in each of four inputs can produce a final score that looks precise (a specific number) while carrying much more error than it appears to.
+- **Says nothing about sequencing or dependencies**: two initiatives can both score well independently while one is a prerequisite for the other — RICE ranks in isolation, not as a dependency-aware roadmap.
+
+## Tips
+
+Score initiatives in a group, with each dimension discussed out loud before a number goes down — the value of RICE is often less the final score and more the structured argument about Reach, Impact, Confidence, and Effort that happens on the way to it.
+
+## Using AI
+
+**Where it helps**
+- Pulling Reach estimates from raw analytics exports quickly across a long list of initiatives, standardizing the "customers per quarter" figure so it's comparable.
+- Drafting a first-pass RICE table from a written list of initiative descriptions, as a starting point for the team to argue over and correct.
+
+**Where it fails**
+- Assigning Impact or Confidence scores without a human who actually knows the product and the data behind the estimate. A model will readily produce a full RICE table with plausible-looking numbers for every field, but Impact and Confidence are specifically meant to encode a team's real, checkable judgment about their own product — a model's guess at those numbers just launders uncertainty into false precision, which is the exact failure mode RICE was built to prevent.

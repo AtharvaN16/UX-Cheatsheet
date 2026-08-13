@@ -1,0 +1,98 @@
+---
+id: system-mapping
+title: System Mapping
+aka: ["Systems Mapping", "Ecosystem Mapping", "Stakeholder System Map"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: mixed
+effort: high
+timeframe: weeks
+needs:
+  - Access to the actual actors/stakeholders in the system, not just secondhand descriptions of them
+  - A working boundary — a provisional answer to what counts as "inside" this system for now
+  - Enough time for more than one mapping session; a system map is rarely right on the first pass
+useInstead:
+  - when: You already know the system's actors and just need to trace one specific feedback loop's polarity
+    method: causal-loop-diagrams
+  - when: The decision is small and well-bounded enough that a fast prioritization pass beats a multi-week mapping exercise
+    method: ice
+related:
+  before: [feedback-loops, leverage-points]
+  alongside: [causal-loop-diagrams, actor-network]
+sources:
+  - title: "Systems Practice"
+    author: The Omidyar Group / Acumen Academy
+    url: https://acumenacademy.org/course/systems-practice/
+    type: tool
+    seminal: false
+  - title: "Thinking in Systems: A Primer"
+    author: Donella Meadows
+    url: https://www.chelseagreen.com/product/thinking-in-systems/
+    type: book
+    year: 2008
+    seminal: true
+  - title: "What are loops?"
+    author: Kumu
+    url: https://docs.kumu.io/guides/what-are-loops
+    type: tool
+    seminal: false
+---
+
+## What is it
+
+The broader practice of mapping a system's actors, relationships, incentives, and boundary before trying to change it — closer to a stakeholder or ecosystem map than a single causal-loop diagram. It shows who and what is actually in the system, and where your drawn boundary might be hiding the real cause.
+
+## Purpose
+
+Answers "who and what is actually in this system, and how does it hang together" before you try to answer "what should we change." Most product teams jump straight to a fix without ever drawing the actors and relationships the fix will actually move through — a system map forces that step, and frequently reveals that the real structural cause sits outside the boundary the team had implicitly assumed (a sales team's incentive plan, a partner's SLA, a regulator's rule), not inside the product they were about to redesign.
+
+## When to use
+
+- A problem keeps recurring despite fixes that should have worked, which usually means the real structure lives outside the boundary you've been drawing around the problem
+- Multiple teams or external parties (support, sales, a partner, regulators) are each rational actors whose incentives you haven't laid out explicitly
+- You're about to make a leverage-point bet and need to see the actors and relationships that bet will actually move through before committing
+- Stakeholders disagree about what's even "in scope," and the disagreement needs to be made visible rather than argued in the abstract
+
+## Structure
+
+A system map typically layers: the **actors** (people, teams, algorithms, external parties with agency in the system), the **relationships** between them (information flow, dependency, influence, money), and an explicit, chosen **boundary** — a line around what counts as "inside" the analysis, drawn deliberately rather than by default. Systems Practice adds a fourth layer on top: identified leverage points once the map is stable enough to search it for them.
+
+## How to use
+
+1. Draft a provisional boundary first — name what's in scope and what isn't, and expect to redraw it once the map surfaces a relationship that crosses it.
+2. List every actor with real agency in the system, including non-obvious ones: an algorithm, a default setting, a regulator, a competitor. If an entity's behavior changes based on what happens in the system, it belongs on the map.
+3. Draw the relationships between actors, favoring real information and influence flows over org-chart proximity — two teams that never actually talk are not meaningfully connected on this map even if they report to the same VP.
+4. Run the map past someone from each represented actor group, not just your own team — a map built entirely from one team's vantage point will systematically miss relationships that team doesn't experience directly.
+5. Revisit the boundary explicitly: did anything the map surfaced live just outside the line you drew? That's usually where the real leverage point turns out to be.
+6. Only once the map is reasonably stable, layer in candidate leverage points — searching for leverage on an unstable map just produces confident answers about the wrong system.
+
+## Example
+
+A team investigating "why do enterprise customers keep churning after onboarding" might start with a map bounded around "our onboarding flow" — and discover, once the customer success team and the sales team are added as actors, that sales is incentivized to close deals against a customer profile onboarding was never designed for. The real leverage point was outside the original boundary the design team drew around their own tool.
+
+## Common mistakes
+
+- **Drawing the boundary too tight around "the product"**: the most common failure mode — it hides that the real structure often lives in a sales team's compensation plan, a partner's contract terms, or a regulator's rule that the product team has no visibility into.
+- **Mapping only the actors your own team interacts with directly**: a map built by one function will be blind to relationships that function doesn't experience, which is exactly the gap a cross-functional review session is meant to close.
+- **Treating the first draft as final**: a system map that hasn't been redrawn at least once after real pushback almost always has its boundary in the wrong place.
+- **Skipping straight to leverage points before the map is stable**: finding leverage on a map that's still missing key actors or relationships produces a confident answer to a question about the wrong system.
+
+## Limitations
+
+- **Expensive relative to its payoff on small, well-bounded problems**: multi-session stakeholder mapping is overkill for a decision that a fast prioritization framework would resolve just as well.
+- **The boundary choice is inherently subjective**: two competent teams can draw defensible but different boundaries around the same problem and reach different conclusions — there's no purely objective way to settle where the line goes.
+- **A map is a snapshot, not a live model**: relationships and incentives shift, especially across a reorg or a new competitor entering; a system map from a year ago can be actively misleading if treated as current.
+
+## Tips
+
+Bring in at least one person from outside your own team or function to draw the map with you — a system map built solely by the team that owns the problem tends to unconsciously draw the boundary in whatever way keeps the cause inside someone else's territory.
+
+## Using AI
+
+**Where it helps**
+- Drafting a first-pass list of actors and relationships from a written description of a problem, as a checklist for a human to confirm, expand, or correct against real knowledge of the system.
+- Generating alternative boundary framings — "redraw this system assuming the boundary includes the partner's support team" — to pressure-test whether the chosen boundary is hiding the real cause.
+
+**Where it fails**
+- Substituting for the actual stakeholder conversations the method depends on. A system map's value comes specifically from confronting your own team's blind spots against other actors' real incentives and knowledge — a model can draft a plausible-looking map of relationships it has no actual visibility into, and that map will be wrong in exactly the ways your team was already wrong, since it's built from the same secondhand description.

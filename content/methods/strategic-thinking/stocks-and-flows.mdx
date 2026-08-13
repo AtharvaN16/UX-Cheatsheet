@@ -1,0 +1,79 @@
+---
+id: stocks-and-flows
+title: Stocks & Flows
+aka: ["Stock and Flow", "Accumulations and Rates"]
+category: strategic-thinking
+alsoIn: []
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - A metric or system that accumulates or drains over time, rather than a one-off event
+useInstead:
+  - when: You only need to show causal direction and loop polarity, not track actual quantities over time
+    method: causal-loop-diagrams
+  - when: The system doesn't actually accumulate anything — you're sizing a single, one-off decision
+    method: expected-value
+related:
+  before: [feedback-loops]
+  after: [leverage-points]
+  alongside: [causal-loop-diagrams]
+sources:
+  - title: "Thinking in Systems: A Primer"
+    author: Donella Meadows
+    url: https://www.chelseagreen.com/product/thinking-in-systems/
+    type: book
+    year: 2008
+    seminal: true
+  - title: "Jay Wright Forrester"
+    author: Wikipedia
+    url: https://en.wikipedia.org/wiki/Jay_Wright_Forrester
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A **stock** is anything that accumulates and can be measured at a point in time — users, cash, trust, technical debt: the thing you'd see if you paused the system and photographed it. A **flow** is the rate at which a stock changes. Most dashboards quietly conflate the two.
+
+## Why it matters
+
+This is the vocabulary Jay Forrester built System Dynamics on and Donella Meadows made legible to a general reader (Meadows, 2008) — and it's the single most common category error in a metrics review: reading a flow (signups this week) as if it were a stock (total addressable engaged users), or vice versa. Get the category wrong and you'll draw the wrong conclusion from a chart that's technically accurate.
+
+## Key ideas
+
+- **A stock only changes through its flows**: the only way to change "active users" is to change the inflow (acquisition, reactivation) or the outflow (churn) — there's no third lever. Naming both explicitly stops a roadmap conversation from vaguely proposing to "grow users" without saying which flow it's actually touching.
+- **Delay is the hidden variable**: the gap between an action and its visible effect on a stock is why systems overshoot — teams keep pushing a lever because they can't yet see the stock respond to what they already changed, and then overcorrect once it finally does.
+- **A stock is a buffer against a flow's volatility**: cash reserves absorb a bad revenue month; a queue absorbs a spike in support tickets. The size of the buffer, not the average flow rate, is often the real resilience question.
+- **Overshoot is a stocks-and-flows pattern, not a mystery**: a system pushes past its sustainable limit before the balancing feedback catches up, almost always because of a delay between the action and the stock's visible response — the pattern behind "why did engagement collapse right after it peaked?"
+
+## Example
+
+"Monthly active users" is a stock. Signups and reactivations are inflows; churned and dormant users are outflows. A team that sees MAU flatten and concludes "growth has stalled" is often looking at a healthy, rising inflow being exactly offset by a rising outflow — two flows that need entirely different fixes, invisible if you only look at the stock's net level.
+
+## Application
+
+- **Separate the dashboard by stock vs. flow before debating it**: a metrics review that argues about "users" without specifying whether the disagreement is about the stock's level or one of its flows is arguing about two different things.
+- **Ask which flow a proposed fix actually targets**: "reduce churn" and "increase reactivation" both raise the same stock, but they're different flows requiring different interventions — conflating them in a roadmap doc hides that a team is actually solving two different problems.
+- **Watch for delay before declaring a fix worked or failed**: if the flow you changed has a multi-week lag before it shows up in the stock, judging the fix at week one is judging noise, not signal.
+
+## Limitations
+
+- **Doesn't model *why* a flow is what it is**: stocks-and-flows describes structure and quantity, not motivation — pair it with feedback-loops or actor-level analysis to explain why a flow rate is what it is, not just that it is.
+- **Real systems have far more stocks and flows than fit on a whiteboard**: a full accounting of every accumulation in even a modest product is impractical; the skill is picking the two or three stocks that actually matter to the decision at hand.
+- **Precision is easy to fake**: drawing a clean box-and-arrow diagram creates a false sense of rigor if the actual flow rates behind it are guesses rather than measured data.
+
+## Common misconceptions
+
+- **"A flat trend line means nothing is happening"**: a flat stock can hide two large, opposing flows perfectly canceling out — the least stable-looking situation is sometimes the most stable, and the flattest-looking one can be the most fragile.
+- **"More inflow is always the fix for a shrinking stock"**: a shrinking stock with a healthy inflow and a broken outflow needs the outflow fixed; pouring more into the top of a leaking bucket is a slower, more expensive version of the same failure.
+
+## Using AI
+
+**Where it helps**
+- Sorting a messy list of dashboard metrics into "stock" or "flow" buckets fast, as a first pass before a human confirms which category error, if any, is distorting the team's read of a chart.
+- Drafting a stock-and-flow diagram from a verbal description of a system, as a structured starting point to correct against real instrumentation.
+
+**Where it fails**
+- Assigning plausible-sounding numeric flow rates or delay lengths without real data behind them — a diagram with invented numbers looks exactly as authoritative as one built from actual measurement, and the two are not remotely equivalent for making a decision.

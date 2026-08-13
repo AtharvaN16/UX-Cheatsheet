@@ -1,0 +1,90 @@
+---
+id: assumption-mapping
+title: Assumption Mapping
+aka: ["Assumptions Map", "Leap of Faith Assumptions"]
+category: strategic-thinking
+alsoIn: []
+kind: framework
+gives: mixed
+effort: low
+timeframe: hours
+needs:
+  - A stated idea, feature, or strategy whose underlying beliefs can be named
+  - A group willing to write down what they're assuming, not just what they're proposing
+useInstead:
+  - when: You've already identified the riskiest assumption and need to structure how to test it, not just find it
+    method: opportunity-solution-tree
+  - when: You need to catalog specific failure scenarios for a whole decision, not rank individual assumptions
+    method: pre-mortem
+related:
+  before: [opportunity-solution-tree]
+  alongside: [pre-mortem, risk-matrix]
+sources:
+  - title: "Testing Business Ideas: A Field Guide for Rapid Experimentation"
+    author: David J. Bland & Alexander Osterwalder
+    url: https://www.wiley.com/en-us/Testing+Business+Ideas:+A+Field+Guide+for+Rapid+Experimentation-p-9781119551447
+    type: book
+    year: 2019
+    seminal: true
+  - title: "Assumption Testing: Everything You Need to Know to Get Started"
+    author: Teresa Torres / Product Talk
+    url: https://www.producttalk.org/2020/07/assumption-testing/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A team exercise that writes down every belief an idea depends on, then plots each one on a 2×2 grid of importance against evidence. The top-right quadrant — important and unproven — holds the "leap of faith" assumptions that would kill the idea if wrong.
+
+## Overview & Purpose
+
+David Bland and Alexander Osterwalder formalized the technique in *Testing Business Ideas* as a way to stop teams from either testing everything (slow, wasteful) or testing nothing (risky, blind). Teresa Torres and Product Talk apply the same underlying logic inside continuous discovery: before committing engineering time to a solution, surface what has to be true for it to work, and test the shakiest, highest-stakes assumptions first — not the easiest ones to test.
+
+## When to use
+
+- Before committing real engineering time to a new feature, product, or strategic bet — while changing course is still cheap.
+- When a team is confidently moving forward on an idea and you suspect the confidence is coming from momentum, not evidence.
+- Alongside an opportunity solution tree, specifically at the point where a candidate solution needs its riskiest assumptions identified before testing.
+
+## Structure
+
+- **Assumption list**: every belief the idea rests on, written as a specific, falsifiable claim — not a hope or a plan.
+- **Importance axis**: how much the idea's success depends on this specific assumption being true.
+- **Evidence axis**: how much real evidence (not intuition) currently supports it.
+- **Leap-of-faith quadrant**: high importance, low evidence — the assumptions to test immediately, before building anything further on top of them.
+
+## How to use
+
+1. Gather the team and write down every assumption the idea depends on — commonly grouped into desirability (do people want this?), feasibility (can we build it?), viability (does the business model work?), and usability.
+2. Plot each assumption on the importance/evidence grid, independently at first to avoid groupthink collapsing the range of assumptions surfaced.
+3. Identify the two or three assumptions in the leap-of-faith quadrant — most important, least evidence.
+4. Design the cheapest, fastest test that could produce real evidence for each one — an interview, a smoke test, a data pull, a prototype — before committing further resources.
+5. Re-run the mapping as evidence comes in; an assumption that gets tested moves from low-evidence to high-evidence, and the next round surfaces whatever's now the biggest remaining unknown.
+
+## Example
+
+A team wants to build a recommendation feature. Assumptions surfaced: "users want personalized recommendations" (important, currently just a hunch — leap of faith), "our data is clean enough to power this" (important, actually already validated by an earlier audit — not a leap of faith), "users will notice the feature without onboarding" (moderately important, untested). The team tests the first assumption with a fake-door experiment before writing any recommendation logic.
+
+## Common mistakes
+
+- **Mapping assumptions after building, not before** — the entire value is front-loaded; mapping assumptions on a feature that's already shipped is a post-mortem, not a risk-reduction tool.
+- **Testing the easiest assumption instead of the riskiest one** — teams gravitate toward what's cheap to test, which is often not what's most important to know.
+- **Treating "we're confident" as evidence** — confidence born from repetition or consensus in the room isn't the same as evidence from outside the team, and the grid is meant to force that distinction.
+
+## Limitations
+
+- **The grid is a prioritization tool, not a validation tool** — plotting an assumption doesn't test it; it only tells you which ones are worth testing first.
+- **Importance and evidence are still judgment calls** — the placement on the grid depends on the team's own estimate of both axes, which can be as biased as the assumption itself if the team doesn't seek outside perspective.
+
+## Tips
+
+Revisit the map after every test, not just once at the start — the riskiest unknown changes as soon as you resolve the previous one, and a map that's never updated stops reflecting where the real risk is.
+
+## Using AI
+
+**Where it helps**
+- Prompting a team to generate a more complete first-draft list of assumptions than they'd surface unprompted, across desirability, feasibility, viability, and usability categories.
+
+**Where it fails**
+- Placement on the importance/evidence grid requires real knowledge of your specific market, users, and technical constraints — a model can suggest plausible-sounding assumptions and even plausible-sounding placements, but it has no actual evidence about your users, and treating its guess at "how much evidence we have" as the real answer defeats the purpose of the exercise.
