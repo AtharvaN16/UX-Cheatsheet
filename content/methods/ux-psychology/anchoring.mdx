@@ -1,0 +1,84 @@
+---
+id: anchoring
+title: "Anchoring"
+aka: ["Anchoring Effect", "Anchoring Bias", "Focalism", "First Impression Bias", "Anchor Effect", "Anchoring"]
+category: ux-psychology
+alsoIn: ["strategic-thinking"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Pricing table or value presentation"
+  - "Negotiation or offer presentation"
+useInstead:
+  - when: "You need to test pricing points statistically"
+    method: "usability-testing"
+related:
+  alongside: ["loss-aversion", "framing-effect"]
+sources:
+  - title: "Judgment under Uncertainty: Heuristics and Biases"
+    author: "Amos Tversky & Daniel Kahneman"
+    url: "https://doi.org/10.1126/science.185.4157.1124"
+    type: "paper"
+    year: 1974
+    seminal: true
+  - title: "Anchoring Effect in UX"
+    author: "Nielsen Norman Group"
+    url: "https://www.nngroup.com/articles/anchoring-bias-ux/"
+    type: "article"
+---
+
+## What is it
+
+People rely disproportionately on the first piece of information encountered (the "anchor") when making subsequent decisions and price evaluations.
+
+## Why it matters
+
+In digital product pricing, landing pages, and value propositions, the first number a user sees sets their baseline perception of expense. Displaying a $200/month enterprise plan first makes a $49/month pro plan feel like an inexpensive bargain.
+
+## Key ideas
+
+- **First Impression Benchmark**: The initial value fixes a reference point in working memory.
+- **Relative Valuation**: Humans judge prices and metrics relatively against the anchor rather than objectively in isolation.
+- **Crossed-out Price Anchors**: Displaying original strike-through prices ($99 $49) anchors valuation to the higher original figure.
+
+## How it works
+
+Perceived Value Transformation:
+
+$$\text{Perceived Bargain Magnitude} = \text{Initial Anchor Value} - \text{Current Offered Price}$$
+
+```
+[ High Initial Anchor ($200/mo) ] ──► [ Current Offered Price ($49/mo) ] ──► Perceived High Value & Low Risk
+```
+
+## Example
+
+1. **Strike-Through E-Commerce Pricing**: Displaying ~~$120~~ **$79** on product pages anchors the user's value perception to $120, making $79 feel like a clear saving.
+2. **Enterprise Pricing Tier Sequence**: Placing the high-tier *"Enterprise Plan ($299/mo)"* on the far-left of pricing tables anchors customer expectations, increasing conversion on the middle *"Pro Plan ($79/mo)"*.
+
+## Application
+
+- **Display High-Value Tiers First**: List premium packages first in pricing tables to set a high anchor value.
+- **Show Struck-Through Original Prices**: Display pre-discount prices clearly during sales promotions.
+- **Provide Suggested Donation / Tip Anchors**: Pre-select tier buttons ($25, $50, $100) instead of presenting a blank custom input field.
+
+## Limitations
+
+- **Absurd Unrealistic Anchors**: Setting an outrageously inflated anchor (e.g., ~~$10,000~~ **$19**) triggers user skepticism and loss of brand credibility.
+- **Repeated Purchase Context**: Frequent buyers who know true market prices bypass anchoring bias.
+
+## Common misconceptions
+
+- **"Anchors must be prices"**: Star ratings, initial review counts, download numbers, and default numbers all serve as anchors.
+- **"Anchoring deceives users"**: Highlighting true original value helps users evaluate real cost savings.
+
+## Using AI
+
+**Where it helps**
+- Evaluating pricing page layouts to ensure optimal visual placement of value anchors.
+- Generating A/B test variations for donation and tier anchor values based on user segment data.
+
+**Where it fails**
+- Determining moral and legal thresholds for fair pricing anchors without human review.

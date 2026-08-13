@@ -18,8 +18,12 @@ const cache = new Map<string, Method[]>();
  * of a different directory.
  */
 export function getAllMethods(dir: string = CONTENT_DIR): Method[] {
+  if (process.env.NODE_ENV === 'development') {
+    cache.delete(dir);
+  }
   const cached = cache.get(dir);
   if (cached) return cached;
+
   const { methods, errors } = loadMethods(dir);
   if (errors.length > 0) {
     throw new Error(`Invalid content:\n${errors.map((e) => `  ${e}`).join('\n')}`);

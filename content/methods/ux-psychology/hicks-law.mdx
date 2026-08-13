@@ -1,0 +1,87 @@
+---
+id: hicks-law
+title: Hick's Law
+aka: ["Hick Law", "Hicks Law", "Hick-Hyman Law", "Hick Hyman Law", "Choice Time Law"]
+category: ux-psychology
+alsoIn: [interaction-design]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - A choice architecture or navigation menu to analyze
+useInstead:
+  - when: You need to organize content semantically rather than just limiting choices
+    method: card-sorting
+related:
+  after: [fitts-law]
+  alongside: [jakobs-law]
+sources:
+  - title: "On the rate of gain of information"
+    author: W. E. Hick
+    url: https://doi.org/10.1080/17470215208416600
+    type: paper
+    year: 1952
+    seminal: true
+  - title: "Hick's Law: Making Choice Easier for Users"
+    author: Nielsen Norman Group
+    url: https://www.nngroup.com/articles/hicks-law/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+The time it takes to make a decision increases logarithmically with the number and complexity of choices ($T = b \cdot \log_2(n+1)$).
+
+## Why it matters
+
+Minimizing decision time and cognitive friction is critical for user onboarding, checkout conversion, and high-velocity workflows. When interfaces overwhelm users with options, decision fatigue and bounce rates surge.
+
+## Key ideas
+
+- **Logarithmic Growth**: Adding options initially increases decision time steeply, but the rate of increase slows down as options multiply.
+- **Categorization & Hierarchies**: Grouping options into clear sub-categories reduces logarithmic search time by allowing users to eliminate entire branches at once.
+- **Progressive Disclosure**: Breaking complex multi-step choices into sequential steps prevents choice paralysis.
+
+## How it works
+
+Mathematical formula derived from information theory:
+
+$$T = b \cdot \log_2(n + 1)$$
+
+Where:
+- $T$ is decision reaction time.
+- $n$ is the number of equiprobable choices.
+- $b$ is an empirical constant representing cognitive processing rate per bit of information.
+
+Because processing scales logarithmically ($\log_2$), doubling choices from 2 to 4 adds one unit of decision time, while doubling from 32 to 64 adds the exact same single unit.
+
+## Example
+
+A software settings screen that presents 45 flat checkboxes in a single column causes severe decision paralysis. Reorganizing those 45 settings into 5 tabbed categories (General, Account, Security, Notifications, Billing) allows users to immediately narrow their search space from 45 items to ~9 items.
+
+## Application
+
+- **Simplify Onboarding**: Limit initial choices to a single primary Call-to-Action (CTA).
+- **Use Smart Defaults**: Pre-select common recommendations so users perform verification rather than full evaluation.
+- **Chunk Complex Lists**: Break long dropdowns or navigation menus into labeled visual groups.
+
+## Limitations
+
+- **Expert / Power-User Search**: Hick's Law applies primarily to visual scanning of unfamiliar choices. Expert users relying on muscle memory or muscle-driven keyboard shortcuts process choices rapidly without logarithmic delay.
+- **Complex Decision Making**: Hick's Law models simple choice reaction time, not deep cognitive reasoning (e.g., evaluating home mortgage offers or technical architecture options).
+
+## Common misconceptions
+
+- **"Always reduce choices to 3 items"**: Hick's Law does not demand arbitrary reduction of features; it demands visual structure and progressive disclosure.
+- **"Fewer options are always better"**: Forcing users through 10 sequential screens to choose 10 options can create worse task duration than a well-structured single screen with progressive categories.
+
+## Using AI
+
+**Where it helps**
+- Scanning complex navigation trees or form fields to flag high-density choice nodes that violate Hick's Law.
+- Suggesting semantic category groupings for long lists of options.
+
+**Where it fails**
+- Determining real user familiarity with domain terms—only user testing reveals if a category label enables immediate elimination.

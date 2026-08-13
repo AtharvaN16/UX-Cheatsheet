@@ -1,0 +1,88 @@
+---
+id: choice-overload
+title: "Choice Overload"
+aka: ["Paradox of Choice", "Overchoice", "Choice Paralysis", "Decision Paralysis", "Choice Overload"]
+category: ux-psychology
+alsoIn: ["strategic-thinking"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Product pricing table, catalog, or option selection screen"
+  - "Feature tier structuring"
+useInstead:
+  - when: "You are analyzing navigation menu trees"
+    method: "tree-testing"
+related:
+  alongside: ["hicks-law", "default-effect"]
+sources:
+  - title: "When Choice is Demotivating: Can One Desire Too Much of a Good Thing?"
+    author: "Sheena S. Iyengar & Mark R. Lepper"
+    url: "https://doi.org/10.1037/0022-3514.79.6.995"
+    type: "paper"
+    year: 2000
+    seminal: true
+  - title: "The Paradox of Choice"
+    author: "Barry Schwartz"
+    url: "https://www.harpercollins.com/products/the-paradox-of-choice-barry-schwartz"
+    type: "book"
+    year: 2004
+    seminal: true
+---
+
+## What is it
+
+Having too many options leads to decision paralysis, cognitive fatigue, and lower post-choice satisfaction.
+
+## Why it matters
+
+Product teams often assume that adding more options, configuration toggles, or pricing tiers satisfies more customers. In reality, presenting users with an overwhelming array of choices causes anxiety, fear of making the wrong choice (FOMO), and task abandonment.
+
+## Key ideas
+
+- **Decision Paralysis**: Excessive choices exhaust working memory, causing users to defer decisions entirely.
+- **Post-Choice Regret**: The more alternatives available, the easier it is to imagine a non-selected option was better, decreasing satisfaction.
+- **Information Fatigue**: Evaluating 20 items requires System 2 analytical effort, triggering mental exhaustion.
+
+## How it works
+
+Option Count vs Conversion Rate:
+
+```
+Conversion Rate (%)
+   High ┼───────────── [Optimal Choices (3-4)]
+        │            /                               │           /                             Low ┼──────────/                           ─── [Choice Overload (24+ Choices)]
+        └──────────┴────────────────────────────┴──────────────────────────►
+                   Small Choice Set             Large Choice Set
+```
+
+## Example
+
+1. **Netflix & Content Paralysis**: Browsing hundreds of movie titles on Netflix often leads to 30 minutes of scrolling without selecting anything, prompting Netflix to launch the *"Play Something"* automated recommendation feature.
+2. **SaaS Pricing Tiers**: Successful SaaS platforms limit public pricing options to 3 clear tiers (e.g., Starter, Pro, Enterprise) with one highlighted default recommendation.
+
+## Application
+
+- **Limit Core Options to 3–4 Recommendations**: Curate catalog views and pricing tables into a small number of distinct packages.
+- **Use Wizard Questionnaire Filters**: Guide users through 3 progressive questions to narrow large product catalogs down to 2 top matches.
+- **Provide Smart Defaults**: Pre-select the recommended plan or shipping option to eliminate decision effort.
+
+## Limitations
+
+- **Categorized Search Catalogs**: E-commerce platforms like Amazon can host millions of SKUs without choice overload as long as robust search filters and categories exist.
+- **Expert Domain Needs**: Power users comparing technical equipment require dense specification tables and broad configuration choices.
+
+## Common misconceptions
+
+- **"Customers always want more choices"**: Customers want the *right* choice made effortless, not an exhaustive list of possibilities.
+- **"Choice overload means removing features"**: It means structuring choice presentation through progressive disclosure, not stripping core capabilities.
+
+## Using AI
+
+**Where it helps**
+- Analyzing large product inventories to recommend automated curation and category clustering strategies.
+- Generating personalized recommendation shortlists tailored to individual user behavior history.
+
+**Where it fails**
+- Predicting exact subjective taste preferences across diverse cultural demographics.

@@ -507,7 +507,7 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
 
             {/* Scrollable Content Body (Flat Laws of UX Layout) */}
             <div className="flex-1 overflow-y-auto px-8 sm:px-14 pt-2 pb-10 space-y-16 bg-surface">
-              {/* Overview Paragraph: Strictly 28px Semibold */}
+              {/* Overview Paragraph: Strictly 28-30px Semibold Lead */}
               <div className="pb-8 border-b border-border/40">
                 <FormattedText
                   content={item.description}
@@ -515,6 +515,8 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
                   className="text-primary tracking-tight"
                 />
               </div>
+
+
 
               {/* If written method details exist, render flat editorial sections */}
               {item.method ? (

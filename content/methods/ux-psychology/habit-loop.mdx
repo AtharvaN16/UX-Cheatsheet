@@ -1,0 +1,86 @@
+---
+id: habit-loop
+title: "Habit Loop"
+aka: ["Cue Routine Reward", "Habit Loop Model", "Habit Formation", "Habit Loop"]
+category: ux-psychology
+alsoIn: ["interaction-design"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "User activity logs or behavioral trigger points"
+  - "Engagement loop architecture"
+useInstead:
+  - when: "You need to analyze one-off decision speed"
+    method: "hicks-law"
+related:
+  alongside: ["hook-model", "fogg-behavior-model"]
+sources:
+  - title: "The Power of Habit"
+    author: "Charles Duhigg"
+    url: "https://www.randomhousebooks.com/books/202677/"
+    type: "book"
+    year: 2012
+    seminal: true
+  - title: "Designing for Behavior Change"
+    author: "Stephen Wendel"
+    url: "https://www.oreilly.com/library/view/designing-for-behavior/9781449367701/"
+    type: "book"
+    year: 2020
+---
+
+## What is it
+
+A neurological loop governing automatic behavior, consisting of three core stages: Cue, Routine, and Reward.
+
+## Why it matters
+
+When an action becomes a habit, it requires zero cognitive effort (System 1 execution). Designing product habit loops creates organic, self-reinforcing user engagement that drives high retention without requiring ongoing ad campaigns or push notification re-targeting.
+
+## Key ideas
+
+- **1. Cue (Trigger)**: The internal emotional state (boredom, stress) or external sensory prompt (notification, visual cue) that initiates behavior.
+- **2. Routine (Action)**: The physical, cognitive, or emotional action performed in response to the cue.
+- **3. Reward (Satisfier)**: The positive neurological stimulus (dopamine hit, social validation) that satisfies craving and encodes the habit loop in long-term memory.
+- **Craving Reinforcement**: Repeated cycling creates a anticipatory craving whenever the Cue is encountered.
+
+## How it works
+
+Neurological Habit Cycle:
+
+```
+[ 1. CUE (Trigger) ] ──► [ Anticipatory Craving ] ──► [ 2. ROUTINE (Behavior) ] ──► [ 3. REWARD (Satisfier) ]
+          ▲                                                                                   │
+          └───────────────────────────── [ Habit Encoded in Brain ] ──────────────────────────┘
+```
+
+## Example
+
+1. **Social App Checking**: Feeling bored in an elevator (Cue) $ightarrow$ Pulling out phone and opening Instagram (Routine) $ightarrow$ Seeing novel likes and messages (Reward), satisfying boredom and reinforcing the loop.
+2. **Fitness Tracking (Apple Watch)**: Haptic notification ping (Cue) $ightarrow$ Completing a 30-minute workout (Routine) $ightarrow$ Ring completion fireworks animation (Reward).
+
+## Application
+
+- **Establish Consistent Visual Cues**: Place high-priority actions in fixed UI locations (e.g., bottom navigation bars) to build muscle memory cues.
+- **Minimize Routine Friction**: Make target routine actions effortless (e.g., 1-click execution, pre-saved passwords).
+- **Deliver Immediate Variable Rewards**: Provide feedback, badges, or celebratory micro-interactions within 100ms of action completion.
+
+## Limitations
+
+- **Risk of Dark Patterns & Addiction**: Designing compulsive habit loops for predatory gambling or low-utility products harms users and triggers regulatory backlash.
+- **Habit Decay**: If the reward stops being satisfying or novel, the habit loop decays rapidly.
+
+## Common misconceptions
+
+- **"Habits form in 21 days"**: Empirical research shows habit formation requires an average of **66 consecutive repetitions**.
+- **"Rewards must be financial"**: Emotional satisfaction, social approval, and progress completion are stronger habit drivers than monetary rewards.
+
+## Using AI
+
+**Where it helps**
+- Identifying contextual cue opportunities by analyzing user app entry timestamps and navigation pathways.
+- Personalizing notification cue copy to match individual user routine schedules.
+
+**Where it fails**
+- Substituting for genuine product utility and human emotional satisfaction.

@@ -1,0 +1,90 @@
+---
+id: goal-gradient-effect
+title: Goal Gradient Effect
+aka: ["Goal Distance Effect", "Progress Acceleration", "Endowed Progress Effect", "Goal Gradient"]
+category: ux-psychology
+alsoIn: [interaction-design]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - Multi-step signup, onboarding, or task completion flow
+useInstead:
+  - when: You need to evaluate overall task difficulty rather than motivation acceleration
+    method: usability-testing
+related:
+  before: [zeigarnik-effect]
+  alongside: [peak-end-rule]
+sources:
+  - title: "The Goal-Gradient Hypothesis and Its Application to Human Behavior"
+    author: Clark L. Hull
+    url: https://doi.org/10.1037/h0054049
+    type: paper
+    year: 1932
+    seminal: true
+  - title: "The Goal-Gradient Hypothesis Resurrected: Purchase Acceleration, Illusionary Goal Progress, and Customer Retention"
+    author: Joseph C. Nunes & Xavier Drèze
+    url: https://doi.org/10.1509/jmkr.43.2.185
+    type: paper
+    year: 2006
+    seminal: true
+---
+
+## What is it
+
+Users accelerate their effort and velocity as they get closer to achieving a goal.
+
+## Why it matters
+
+Motivation is not constant throughout a workflow. By providing clear visual progress indicators and artificial initial progress (the endowed progress effect), completion rates increase significantly.
+
+## Key ideas
+
+- **Accelerated Motivation**: The closer a user perceives themselves to the finish line, the faster they work to complete the remaining steps.
+- **Endowed Progress Effect**: Giving users artificial credit toward a goal upfront (e.g., a 10-stamp loyalty card pre-stamped twice) yields faster completion than an un-stamped 8-stamp card.
+- **Visual Feedback**: Clear progress bars transform abstract effort into tangible proximity to completion.
+
+## How it works
+
+Perceived proximity vs effort curve:
+
+```
+User Velocity / Motivation
+        │                                  /  [GOAL COMPLETED]
+        │                                 /
+        │                                /
+        │                      /─────────
+        │             /────────
+        └─────────────┴────────────────────────────►
+            Step 1        Step 2       Step 3 (Near Goal)
+```
+
+## Example
+
+LinkedIn's profile strength meter awards users immediate progress (e.g., "50% Complete!") simply for creating an account, which motivates users to add skills and education to reach "100% All-Star Status."
+
+## Application
+
+- **Endow Initial Progress**: Start progress indicators at 10–20% complete rather than 0% on step 1 of onboarding.
+- **Display Clear Steps**: Use numbered progress bars (e.g., "Step 3 of 4") so users realize how close they are to finishing.
+- **Chunk Long Forms**: Break 15 input fields into 3 short steps to show rapid movement through early stages.
+
+## Limitations
+
+- **Post-Goal Slump**: Immediately after reaching a goal, user motivation drops sharply (post-completion fatigue).
+- **False Progress Backlash**: If users realize artificial progress was misleading or that hidden surprise steps exist, trust is lost.
+
+## Common misconceptions
+
+- **"Completion meters work for everything"**: Showing a progress bar on routine daily actions creates unnecessary visual noise.
+- **"0% progress is honest so it's best"**: Starting at 0% activates cold-start friction, whereas framing registration as Step 1 of 4 endows immediate progress.
+
+## Using AI
+
+**Where it helps**
+- Analyzing onboarding funnels to determine optimal step counts and progress placement.
+- Generating motivational microcopy for milestone completion screens.
+
+**Where it fails**
+- Determining if users feel manipulated by aggressive gamification or progress meters.

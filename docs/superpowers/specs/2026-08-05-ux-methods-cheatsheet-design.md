@@ -89,33 +89,31 @@ sources:                            # min 2
     seminal: false                  # true = timeless bucket, see §11.1
 ```
 
-### 3.3 Body sections
+### 3.3 Knowledge Object Types & Modular Semantic Blocks
 
-Fixed `##` headings, validated by the loader. Order is fixed; a missing required section fails the build.
+The cheatsheet content architecture models entry topics as three distinct knowledge objects, each tailored to answer a specific primary reader intent:
 
-| Heading | Required | Notes |
-|---|---|---|
-| `## What is it` | yes | 2–4 sentences, no jargon, no entry's own name in the first sentence |
-| `## Purpose` | yes | The problem it solves. One paragraph. |
-| `## When to use` | yes | Bullets. Situational, not abstract. |
-| `## How to do it` | yes | Numbered steps someone could follow — see the `kind` flex below |
-| `## Common mistakes` | yes | Bullets, each `**Mistake** — the fix` |
-| `## Tips` | yes | Practitioner advice, not restated steps |
-| `## Using AI` | yes | Two halves — see §3.4 |
-| `## Notes` | no | Anything that doesn't fit above |
+| Type | Reader Intent | Primary Focus Section | Key Value |
+|---|---|---|---|
+| **Method** | *"How do I do this?"* | `## How to do it` / Process | Actionable, step-by-step execution & real-world trade-offs |
+| **Framework** | *"How is this structured?"* | `## Structure` | Scaffolding, matrices, stages, or dimensional breakdown |
+| **Concept** | *"What does this mean?"* | `## How it works` / Key Ideas | Mental representation, mechanisms, & principles |
 
-`When not to use`, `Use instead`, `Prerequisites`, `Related methods`, and `Further reading` are **rendered from frontmatter**, not written as prose. This is deliberate: it makes them queryable, guarantees they exist, and lets the site build a method-relationship graph for free.
+#### Canonical Section Orderings
 
-**`## How to do it` flexes by `kind`, not the entries.** The heading, its position, and its required status never change — the validator only checks the heading exists. What changes is what the writer puts under it:
+- **Method**: Definition → Purpose → When to use → How to do it → Common mistakes → Using AI → Limitations → Alternatives → Tips → Notes
+- **Framework**: Definition → Overview & Purpose → When to use → Structure → How to use → Example → Common mistakes → Limitations → Variations → Using AI → Tips → Notes
+- **Concept**: Definition → Overview & Why it matters → Key ideas → How it works → Example → Application → Limitations → Common misconceptions → Using AI → Tips → Notes
 
-- `kind: framework | method` — a structured tool with defined parts (Kano Model, RICE, Governance Models) or a technique you run to produce research/design output (Tree Testing, User Interviews, A/B Testing). Both have a real, followable procedure — numbered steps someone could literally do, start to finish.
-- `kind: concept` — laws, effects, and mental models (Hick's Law, Peak-End Rule, Loss Aversion) have no start-to-finish procedure to number — you don't "run" Hick's Law. For these, `## How to do it` means *how to recognize and apply it*: the situations where it kicks in, and what to do differently because of it. Forcing a fake numbered procedure onto a law is worse than writing prose that's honest about what the entry actually is.
+#### Modular Block System
 
-This is a one-line authoring judgment call, not a schema fork — deliberately, so the site keeps its "same twelve questions in the same order" comparability (§1) and a single validator/page template for all ~310 entries.
+Rather than forcing every entry into a rigid mandatory set of headings, the CMS supports composable semantic blocks. Minimum required headings are enforced per `kind` (e.g., an intro/definition section and primary focus section), while optional blocks (e.g., `Structure`, `Example`, `Limitations`, `Variations`, `Misconceptions`, `Using AI`) are rendered when present.
 
 ### 3.4 The `## Using AI` section
 
-Every method carries an AI section with a fixed two-part shape:
+The `## Using AI` section is an **optional block across all 3 content types** (Methods, Frameworks, and Concepts). Authors make a genuine effort to identify practical AI use-cases (where it helps / where it fails), but if a topic has no genuine need or application for AI, the section is omitted rather than forced.
+
+When written, `## Using AI` carries a two-part shape:
 
 ```markdown
 ## Using AI
@@ -129,9 +127,6 @@ Every method carries an AI section with a fixed two-part shape:
   the median of its training data — the opposite of why you interview…
 ```
 
-The second half is not a disclaimer, it is the more valuable half. The dominant 2026 failure mode in UX is a model producing fluent, plausible, *unfalsifiable* research output — synthetic personas, invented quotes, themes that read well and describe nobody. A reference that only lists AI's uses would make the reader worse at their job.
-
-Both halves are required and validated. Where a method genuinely has no good AI application, the first half says so in one line rather than inventing one.
 
 ### 3.5 Build-time validation
 

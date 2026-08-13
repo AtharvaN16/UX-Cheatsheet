@@ -1,0 +1,104 @@
+---
+id: hook-model
+title: "Hook Model"
+aka: ["Hook Framework", "Nir Eyal Hook", "Trigger Action Reward Investment", "Hooked", "Hook Model"]
+category: ux-psychology
+alsoIn: ["interaction-design"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Habit-forming feature design or engagement loop strategy"
+  - "Retention loop architecture"
+useInstead:
+  - when: "You are analyzing navigation menu IA"
+    method: "tree-testing"
+related:
+  alongside: ["habit-loop", "fogg-behavior-model"]
+sources:
+  - title: "Hooked: How to Build Habit-Forming Products"
+    author: "Nir Eyal"
+    url: "https://www.nirandfar.com/hooked/"
+    type: "book"
+    year: 2014
+    seminal: true
+  - title: "The Hook Model in Product Design"
+    author: "Nielsen Norman Group"
+    url: "https://www.nngroup.com/articles/hook-model/"
+    type: "article"
+---
+
+## What is it
+
+A 4-step iterative framework—Trigger, Action, Variable Reward, and Investment—designed to build habit-forming products.
+
+## Why it matters
+
+Building organic product habits lowers customer acquisition costs (CAC) and drives long-term customer lifetime value (LTV). Products that form habits become non-conscious daily routines, making them immune to competitor displacement.
+
+## Key ideas
+
+- **1. Trigger**: External cue (push notification, email) that transitions over time into an internal emotional trigger (boredom, anxiety, FOMO).
+- **2. Action**: The simplest behavior done in anticipation of a reward (e.g., tapping an app icon, scrolling a feed).
+- **3. Variable Reward**: Unpredictable rewards (social validation, novel content, achievement) that satisfy craving while leaving users wanting more.
+- **4. Investment**: User effort stored in the product (data, followers, content, settings) that improves the next loop.
+
+## How it works
+
+The 4-Step Hook Cycle:
+
+```
+┌───────────────────────────────────────────────────────────┐
+│                      1. TRIGGER                           │
+│           (External Push ──► Internal Emotion)            │
+└─────────────────────────────┬─────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────┴─────────────────────────────┐
+│                      2. ACTION                            │
+│              (Simple Low-Friction Behavior)               │
+└─────────────────────────────┬─────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────┴─────────────────────────────┐
+│                  3. VARIABLE REWARD                       │
+│           (Social / Content / Mastery Craving)            │
+└─────────────────────────────┬─────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────┴─────────────────────────────┐
+│                     4. INVESTMENT                         │
+│           (Stored Data / Content / Connections)           │
+└───────────────────────────────────────────────────────────┘
+```
+
+## Example
+
+1. **Instagram Engagement Loop**: Internal boredom (Trigger) $ightarrow$ Tap app icon and scroll (Action) $ightarrow$ Unpredictable photo feed and likes (Variable Reward) $ightarrow$ Post a photo and tag friends (Investment).
+2. **Slack Workspace Loop**: Push notification ping (Trigger) $ightarrow$ Open channel (Action) $ightarrow$ Unpredictable team updates (Variable Reward) $ightarrow$ Reply and upload file (Investment).
+
+## Application
+
+- **Minimize Action Friction**: Reduce the physical and cognitive steps required to reach the reward to the absolute minimum.
+- **Incorporate Variable Rewards**: Use dynamic feeds, unexpected achievements, and social feedback rather than static predictable responses.
+- **Prompt Early Investment**: Ask users to store data, customize preferences, or invite colleagues before ending a session.
+
+## Limitations
+
+- **Ethical & Dark Pattern Risks**: Designing addictive habit loops for low-utility applications can lead to user harm, screen addiction, and regulatory backlash.
+- **Utility First Requirement**: A product with zero core utility cannot be rescued by adding artificial habit hooks.
+
+## Common misconceptions
+
+- **"Variable rewards must be financial"**: Social rewards (validation, status) and self-rewards (mastery, completion) are significantly stronger habit drivers than money.
+- **"Habit loops form in 3 days"**: Habit formation requires an average of 66 consecutive loop cycles depending on task complexity.
+
+## Using AI
+
+**Where it helps**
+- Mapping user engagement telemetry to identify drop-off gaps across Trigger, Action, Reward, and Investment stages.
+- Personalizing notification trigger timing based on individual user activity patterns.
+
+**Where it fails**
+- Ensuring ethical boundaries in habit design to prevent predatory tech addiction.

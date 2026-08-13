@@ -1,0 +1,83 @@
+---
+id: zeigarnik-effect
+title: "Zeigarnik Effect"
+aka: ["Ziegarnik Effect", "Zeigarnic Effect", "Incomplete Task Bias", "Unfinished Task Tension"]
+category: ux-psychology
+alsoIn: ["interaction-design"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Task tracking, onboarding, or profile setup flow"
+  - "Engagement loop design"
+useInstead:
+  - when: "You need to measure task success rates quantitatively"
+    method: "usability-testing"
+related:
+  alongside: ["goal-gradient-effect", "progress-principle"]
+sources:
+  - title: "Über das Behalten von erledigten und unerledigten Handlungen"
+    author: "Bluma Zeigarnik"
+    url: "https://doi.org/10.1007/BF00409754"
+    type: "paper"
+    year: 1927
+    seminal: true
+  - title: "Zeigarnik Effect in UX"
+    author: "Laws of UX"
+    url: "https://lawsofux.com/zeigarnik-effect/"
+    type: "article"
+---
+
+## What is it
+
+People remember uncompleted or interrupted tasks significantly better than completed tasks.
+
+## Why it matters
+
+Unfinished workflows create psychological momentum. By visually signaling incomplete tasks (e.g., profile progress bars, unread indicators, saved draft states), digital products tap into natural human desire for cognitive closure, driving users to return and complete setup processes.
+
+## Key ideas
+
+- **Task Tension**: Initiating an action creates task-specific cognitive tension that persists until completion.
+- **Desire for Closure**: Completing a task releases mental tension and produces a sense of psychological relief.
+- **Endowed Task Initiation**: Simply starting a multi-step task (Step 1 of 4) activates the Zeigarnik Effect, making abandonment uncomfortable.
+
+## How it works
+
+Cognitive Loop State:
+
+```
+[Task Initiated] ──► [Active Unfinished Tension State] ──► [Task Completed] ──► [Cognitive Closure & Release]
+                         (High Memory Presence)
+```
+
+## Example
+
+1. **LinkedIn Profile Strength Meter**: Displaying *"Your profile is 70% complete — Add 2 skills to reach All-Star status"* keeps the incomplete task active in memory until completed.
+2. **Duolingo Daily Streaks & Unfinished Lessons**: Reminding users of un-finished daily practice goals creates tension that encourages opening the app before the day ends.
+
+## Application
+
+- **Display Incomplete Progress Badges**: Show visual progress indicators for onboarding, document setup, or account verification.
+- **Auto-save Draft States**: Save form drafts and display *"Resume your application"* prompts when users return.
+- **Break Workflows into Steps**: Allow users to complete Step 1 easily to trigger Zeigarnik activation before presenting complex steps.
+
+## Limitations
+
+- **Nagging & User Anxiety**: Overloading users with dozens of red badge notifications for minor incomplete items leads to notification fatigue and app uninstalls.
+- **Task Overwhelm**: If an incomplete task feels impossibly long or difficult, psychological tension turns into paralysis and abandonment.
+
+## Common misconceptions
+
+- **"Task interruptions are always bad"**: Planned micro-interruptions during learning can actually improve long-term material recall.
+- **"Users want empty todo lists instantly"**: Users enjoy the process of completing visible tasks; clearing items one by one provides rewarding dopamine hits.
+
+## Using AI
+
+**Where it helps**
+- Identifying high-drop-off points in multi-step funnels to insert smart resume triggers.
+- Writing personalized email nudge copy for users with abandoned carts or incomplete profiles.
+
+**Where it fails**
+- Distinguishing between healthy task motivation and toxic user anxiety induced by spammy progress notifications.

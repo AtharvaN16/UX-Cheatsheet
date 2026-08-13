@@ -1,0 +1,83 @@
+---
+id: survivorship-bias
+title: "Survivorship Bias"
+aka: ["Survival Bias", "Wald Armor Principle", "Survivor Bias", "Survivorship Bias"]
+category: ux-psychology
+alsoIn: ["qualitative-research"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "User feedback analysis or analytics review"
+  - "Research cohort selection"
+useInstead:
+  - when: "You need quantitative funnel drop-off metrics"
+    method: "usability-testing"
+related:
+  alongside: ["availability-bias", "confirmation-bias"]
+sources:
+  - title: "A Method of Estimating Plane Vulnerability Based on Damage of Returning Planes"
+    author: "Abraham Wald"
+    url: "https://www.ams.org/publicoutreach/feature-column/fc-2016-06"
+    type: "paper"
+    year: 1943
+    seminal: true
+  - title: "Survivorship Bias in UX Research"
+    author: "Nielsen Norman Group"
+    url: "https://www.nngroup.com/articles/survivorship-bias-ux/"
+    type: "article"
+---
+
+## What is it
+
+The logical error of focusing strictly on successful outcomes ("survivors") while ignoring failures, leading to false conclusions.
+
+## Why it matters
+
+In UX research and analytics, product teams frequently survey active, happy power users while ignoring churned users who encountered bugs and left. Designing product features based solely on feedback from surviving active users results in optimizing for niche power users while failing to fix the barriers causing churn.
+
+## Key ideas
+
+- **The Missing Data Fallacy**: Non-responders, churned trialists, and dropped-off users possess the critical diagnostic failure data.
+- **Wald's Armor Principle**: The areas without complaints in active user surveys often represent where failed users died silently.
+- **Distorted Success Metrics**: Copying successful unicorn app UI layouts without understanding market context leads to false UX strategies.
+
+## How it works
+
+Data Sampling Distortions:
+
+```
+Total User Base ──► [Funnel Drop-offs (Silent Non-Survivors)] ──► IGNORED
+                 ──► [Active Users (Survivors)]              ──► SURVEYED ──► Flawed Roadmap
+```
+
+## Example
+
+1. **Feature Request Surveys**: Surveying active daily users about what features to build next yields requests for complex power-user options, while completely missing why 80% of trial users drop off on day 1 due to confusing onboarding.
+2. **Copying Successful App Layouts**: Replicating Spotify's dark UI or Airbnb's search layout assuming their success is caused by those visual choices, ignoring thousands of failed apps that used identical layouts.
+
+## Application
+
+- **Recruit Churned Users for Research**: Specifically source and interview users who canceled subscriptions or abandoned onboarding.
+- **Analyze Abandoned Funnel Analytics**: Focus quantitative heatmaps and session recordings on the drop-off step rather than successful completions.
+- **Audit Survey Sample Biases**: Ensure research panels include new, casual, and inactive users alongside power users.
+
+## Limitations
+
+- **Difficulty Recruiting Non-Survivors**: Users who churned or bounced off a landing page rarely respond to interview requests, making data collection hard.
+- **Outlier Feedback Risk**: Over-indexing on complaints from users who were never in your target market can derail core product focus.
+
+## Common misconceptions
+
+- **"Active user feedback represents the full customer base"**: Active users are survivors who tolerated your product's usability bugs; non-survivors left.
+- **"Net Promoter Score (NPS) measures overall market health"**: NPS surveys sent via in-app popups only reach active survivors currently logged in.
+
+## Using AI
+
+**Where it helps**
+- Detecting sampling bias in research survey datasets by comparing respondent cohorts against overall database telemetry.
+- Clustering drop-off patterns across thousands of anonymous user session logs.
+
+**Where it fails**
+- Sourcing qualitative interviews with non-responding churned users without human outreach incentives.

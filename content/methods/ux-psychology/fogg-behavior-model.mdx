@@ -1,0 +1,93 @@
+---
+id: fogg-behavior-model
+title: "Fogg Behavior Model"
+aka: ["Fogg Model", "BJ Fogg Model", "B=MAP", "Behavior Model", "Fogg Behavior Model"]
+category: ux-psychology
+alsoIn: ["strategic-thinking"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Behavioral design, habit feature, or notification trigger"
+  - "Conversion funnel optimization"
+useInstead:
+  - when: "You need to test step-by-step UI interaction steps"
+    method: "usability-testing"
+related:
+  alongside: ["habit-loop", "hook-model", "com-b"]
+sources:
+  - title: "A Behavior Model for Persuasive Design"
+    author: "BJ Fogg"
+    url: "https://doi.org/10.1145/1541948.1541999"
+    type: "paper"
+    year: 2009
+    seminal: true
+  - title: "Tiny Habits: The Small Changes That Change Everything"
+    author: "BJ Fogg"
+    url: "https://www.tinyhabits.com/"
+    type: "book"
+    year: 2019
+    seminal: true
+---
+
+## What is it
+
+Behavior occurs when Motivation, Ability, and a Prompt converge at the exact same moment ($B = MAP$).
+
+## Why it matters
+
+When users fail to complete an action (e.g., failing to complete sign-up or abandoning a feature), product teams often wrongly assume users lack motivation and respond by sending aggressive marketing emails. 
+
+Fogg's model proves that **increasing Ability (making the action radically simpler) is far more effective than trying to boost user Motivation**.
+
+## Key ideas
+
+- **The Action Line**: A prompt only triggers behavior if user Motivation and Ability place them *above* the curved Action Line.
+- **Ability Trumps Motivation**: High motivation is rare and fleeting; making an action effortless (High Ability) guarantees high execution rate even when motivation is low.
+- **Prompts (Triggers)**: Without a timely prompt (notification, CTA, cue), behavior will not occur regardless of motivation levels.
+- **Sub-components of Ability**: Time, Money, Physical Effort, Brain Cycles (Cognitive Load), Social Deviance, Non-Routine.
+
+## How it works
+
+The Fogg Behavior Graph:
+
+```
+Motivation (High) ┼        * (Behavior Occurs - Above Action Line)
+                  │       /
+                  │      /  [ACTION LINE]
+                  │     /
+Motivation (Low)  ┼────/──────────────────── * (Prompt Fails - Below Action Line)
+                  └──────────────────────────┴───────────────────────────────►
+                  Hard to Do (Low Ability)    Easy to Do (High Ability)
+```
+
+## Example
+
+1. **One-Click Social Sign-in (Google / Apple)**: Traditional sign-up requires typing email, creating a password, and verifying inbox (Low Ability). One-Click Sign-in makes Ability instantaneous—allowing registration even when user Motivation is low.
+2. **Instagram Like Double-Tap**: Liking a photo requires a simple double-tap anywhere on the image (High Ability), yielding high engagement even for casual browsers.
+
+## Application
+
+- **Simplify Target Actions**: Reduce form fields from 8 to 3 to maximize user Ability.
+- **Trigger Prompts When Motivation Peaks**: Display upgrade prompts immediately after a user achieves a major milestone (e.g., publishing a project).
+- **Default to Tiny Habits**: Ask users to commit to 1-minute daily practice sessions before introducing advanced workflows.
+
+## Limitations
+
+- **High Friction Essential Actions**: High-risk financial or legal transactions require deliberate friction (lowering Ability) to prevent accidental execution.
+- **Fleeting Motivation Spikes**: Relying on high user motivation (e.g., New Year's resolutions) leads to high initial signups followed by massive 30-day churn.
+
+## Common misconceptions
+
+- **"Increasing motivation is the best way to drive behavior"**: Boosting motivation is difficult and expensive; simplifying ability (reducing friction) yields 10x higher conversion.
+- **"Prompts work anytime"**: Prompts delivered when a user is below the Action Line cause frustration and prompt-blindness.
+
+## Using AI
+
+**Where it helps**
+- Auditing UI workflows to identify friction barriers (time, cognitive load, steps) that diminish user Ability.
+- Generating personalized prompt timing schedules based on individual app usage telemetry.
+
+**Where it fails**
+- Predicting real-time human emotional motivation shifts during external real-world stress.

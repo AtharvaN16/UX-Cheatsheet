@@ -1,0 +1,85 @@
+---
+id: millers-law
+title: Miller's Law
+aka: ["Miller Law", "Millers Law", "Miller's Law", "Chunking", "Magical Number Seven", "7 Plus Minus 2"]
+category: ux-psychology
+alsoIn: [ia-structure]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - Complex information display or data list to structure
+useInstead:
+  - when: You need to minimize decision reaction time across choices
+    method: hicks-law
+related:
+  before: [cognitive-load]
+  alongside: [hicks-law]
+sources:
+  - title: "The Magical Number Seven, Plus or Minus Two: Some Limits on Our Capacity for Processing Information"
+    author: George A. Miller
+    url: https://doi.org/10.1037/h0043158
+    type: paper
+    year: 1956
+    seminal: true
+  - title: "Miller's Law: Chunking Information for UI Design"
+    author: Nielsen Norman Group
+    url: https://www.nngroup.com/articles/chunking/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+The average human working memory can hold approximately 7 (plus or minus 2) items or chunks of information.
+
+## Why it matters
+
+Understanding working memory capacity prevents visual clutter and cognitive overload, ensuring users can parse, retain, and act on information without forgetting key details mid-task.
+
+## Key ideas
+
+- **Working Memory Bounds**: Immediate recall degrades sharply when users are required to hold more than 5–9 un-chunked items in short-term memory.
+- **Chunking**: Grouping individual bits of data into higher-level meaningful units (chunks) allows users to process significantly more total information.
+- **Recognition over Recall**: Displaying information on-screen eliminates the need to rely on working memory altogether.
+
+## How it works
+
+Information capacity model:
+
+```
+[Raw Data Stream] ──► [Chunking Engine (Grouping)] ──► [Working Memory (7 ± 2 Chunks)]
+```
+
+Without chunking: 10 digit string `4158923011` = 10 separate items (overloads memory).  
+With chunking: `(415) 892-3011` = 3 distinct chunks (easily retained).
+
+## Example
+
+Phone numbers and credit card inputs chunk long strings of digits into formatted groups of 3–4 numbers. Similarly, complex dashboard navigation groups 20 sub-pages into 4 high-level categories.
+
+## Application
+
+- **Format Data Inputs**: Automatically format credit cards, phone numbers, and IBANs into visual chunks as users type.
+- **Group Menu Options**: Limit navigation clusters to 5–7 main items per group.
+- **Use Progressive Disclosure**: Reveal secondary details only when needed so users focus on a small working set.
+
+## Limitations
+
+- **Doesn't Limit Page Items**: Miller's Law does NOT mean a web page can only have 7 elements; it applies strictly to items users must *hold in memory*.
+- **Varies by Domain Expertise**: Domain experts can create larger, denser chunks than novices because of deep background knowledge.
+
+## Common misconceptions
+
+- **"Never show more than 7 options on a screen"**: A list of 20 items visible on screen requires zero working memory because users can read it passively; Miller's Law only applies when users must remember items across screens or steps.
+- **"7 is a hard ceiling"**: Working memory limits depend heavily on item complexity and presentation clarity (often closer to 4±1 for complex visual items).
+
+## Using AI
+
+**Where it helps**
+- Identifying un-formatted long strings or dense lists in UI text fields and recommending optimal chunking masks.
+- Organizing unstructured feature lists into 4–6 semantic groups.
+
+**Where it fails**
+- Determining the conceptual chunk size for domain-specific technical jargon.

@@ -1,0 +1,87 @@
+---
+id: fitts-law
+title: Fitts's Law
+aka: ["Fitts Law", "Fitt Law", "Fitts' Law", "Target Acquisition Time"]
+category: ux-psychology
+alsoIn: [interaction-design]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - An interactive UI layout or target placement model
+useInstead:
+  - when: You need to observe physical interaction and task success on visual components
+    method: usability-testing
+related:
+  before: [hicks-law]
+  alongside: [jakobs-law]
+sources:
+  - title: "The information capacity of the human motor system in controlling the amplitude of movement"
+    author: Paul M. Fitts
+    url: https://doi.org/10.1037/h0055392
+    type: paper
+    year: 1954
+    seminal: true
+  - title: "Fitts's Law: The Importance of Size and Distance in UI Design"
+    author: Nielsen Norman Group
+    url: https://www.nngroup.com/articles/fitts-law/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+The time required to rapidly move to a target area is a function of the ratio between the distance to the target and the width of the target.
+
+## Why it matters
+
+Target size and distance dictate physical user effort, pointer accuracy, touch precision, and error rates across desktop and mobile devices.
+
+## Key ideas
+
+- **Target Size Matters**: Larger click/touch targets are faster and easier to acquire.
+- **Distance Matters**: Targets placed closer to the user's current cursor/finger location take less time to hit.
+- **Infinite Outer Boundaries**: Screen edges and corners have infinite effective target size because the cursor cannot overshoot them.
+
+## How it works
+
+Mathematical formula:
+
+$$MT = a + b \cdot \log_2 \left( \frac{2D}{W} \right)$$
+
+Where:
+- $MT$ is Movement Time.
+- $D$ is Distance to the target center.
+- $W$ is Width of the target along the axis of motion.
+- $a$ and $b$ are empirical constants.
+- $\log_2(2D/W)$ is the Index of Difficulty ($ID$).
+
+## Example
+
+Mobile navigation bars fixed to the bottom of the smartphone screen leverage Fitts's Law because they reside directly under the user's thumb, minimizing distance $D$ and maximizing interactive surface area $W$.
+
+## Application
+
+- **Expand Touch Targets**: Ensure minimum interactive touch areas of 44×44 pt (iOS) / 48×48 dp (Android).
+- **Position Actions Near Context**: Place contextual action menus (like hover actions or context menus) directly next to the triggering item.
+- **Leverage Edges**: Place primary controls at screen boundaries or corners on desktop interfaces.
+
+## Limitations
+
+- **Doesn't Model Multi-Touch Gestures**: Fitts's Law models linear pointing movements; it does not accurately model complex gestures like pinch-to-zoom or multi-finger swipes.
+- **Overly Large Targets Diminish Hierarchy**: Making everything huge to maximize target size degrades visual hierarchy and layout efficiency.
+
+## Common misconceptions
+
+- **"Only the visual button size counts"**: The hit area (clickable padding) is what determines $W$, not just the visible icon or label text.
+- **"Fitts's Law applies identically to touch and mouse"**: Finger touch targets require larger margins due to thumb occlusion and lower pointing precision compared to sub-pixel mouse cursors.
+
+## Using AI
+
+**Where it helps**
+- Auditing UI design files to detect undersized touch targets (e.g., buttons under 44px).
+- Simulating mouse movement distance maps across high-frequency task flows.
+
+**Where it fails**
+- Accounting for physical ergonomic comfort (e.g., one-handed thumb reachability zones on varying mobile screen sizes).

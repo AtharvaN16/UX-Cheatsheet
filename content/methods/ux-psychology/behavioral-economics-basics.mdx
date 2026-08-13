@@ -1,0 +1,84 @@
+---
+id: behavioral-economics-basics
+title: "Behavioral Economics Basics"
+aka: ["Behavioral Economics", "Choice Architecture", "Predictably Irrational", "Nudge Theory", "Behavioral Economics Basics"]
+category: ux-psychology
+alsoIn: ["strategic-thinking"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Product strategy or pricing architecture"
+  - "Choice architecture planning"
+useInstead:
+  - when: "You are organizing content topics into categories"
+    method: "card-sorting"
+related:
+  alongside: ["loss-aversion", "default-effect", "anchoring"]
+sources:
+  - title: "Nudge: Improving Decisions About Health, Wealth, and Happiness"
+    author: "Richard H. Thaler & Cass R. Sunstein"
+    url: "https://www.penguinrandomhouse.com/books/304624/nudge-by-richard-h-thaler-and-cass-r-sunstein/"
+    type: "book"
+    year: 2008
+    seminal: true
+  - title: "Predictably Irrational"
+    author: "Dan Ariely"
+    url: "https://www.harpercollins.com/products/predictably-irrational-dan-ariely"
+    type: "book"
+    year: 2008
+    seminal: true
+---
+
+## What is it
+
+Combines psychology and economics to explain why humans make predictably irrational decisions rather than optimal economic choices.
+
+## Why it matters
+
+Traditional economics assumes users are rational actors who calculate total utility before acting. Designing software interfaces under that assumption leads to failure. Behavioral economics provides the framework for designing choice environments ("Nudges") that align with real human decision-making behavior.
+
+## Key ideas
+
+- **Bounded Rationality**: Cognitive processing limits prevent humans from evaluating all available information.
+- **Choice Architecture**: The design of environments in which choices are presented fundamentally dictates decision outcomes.
+- **Predictable Irrationality**: Human cognitive biases are non-random and can be predicted and designed for.
+
+## How it works
+
+Decision Environment Influence:
+
+```
+[ Choice Architecture (Defaults, Framing, Anchors) ] ──► [ Cognitive Heuristics ] ──► Predictably Irrational Choice
+```
+
+## Example
+
+1. **Opt-Out Retirement Savings (401k)**: Changing employee enrollment from opt-in to automatic opt-out default increased participation from 37% to 86%.
+2. **Decoy Pricing Tier (Dan Ariely)**: Offering Digital ($59), Print ($125), and Print + Digital ($125). Adding the "Print-Only" decoy option made the joint subscription look like an irresistible deal, shifting 84% of purchases to the highest price tier.
+
+## Application
+
+- **Architect Smart Defaults**: Pre-select beneficial options for users (e.g., annual billing, default security settings).
+- **Structure Choice Presentation**: Curate options into distinct tiers to prevent choice overload.
+- **Use Ethical Nudges**: Guide users toward beneficial actions (saving money, protecting accounts) without restricting freedom.
+
+## Limitations
+
+- **Manipulative Dark Patterns**: Using behavioral insights to trick users into unwanted recurring subscriptions triggers severe regulatory fines and brand destruction.
+- **Domain Context Bounds**: Complex B2B financial negotiations involve institutional reviews that temper emotional heuristics.
+
+## Common misconceptions
+
+- **"Users always act logically to save money"**: Users regularly pay higher prices for convenience, status, and emotional comfort.
+- **"Nudges force user behavior"**: True nudges preserve user freedom of choice, making beneficial actions simpler without banning alternatives.
+
+## Using AI
+
+**Where it helps**
+- Auditing pricing tables and product flows for choice architecture alignment.
+- Generating decision tree simulations based on behavioral economic principles.
+
+**Where it fails**
+- Ensuring moral integrity and ethical boundaries in nudge design.

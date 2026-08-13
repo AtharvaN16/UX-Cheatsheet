@@ -1,0 +1,82 @@
+---
+id: sunk-cost-fallacy
+title: "Sunk Cost Fallacy"
+aka: ["Sunk Cost Bias", "Escalation of Commitment", "Sunk Cost Effect", "Sunk Cost Fallacy"]
+category: ux-psychology
+alsoIn: ["strategic-thinking"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Product migration flow or cancellation workflow"
+  - "Offboarding flow design"
+useInstead:
+  - when: "You are testing quantitative user satisfaction"
+    method: "usability-testing"
+related:
+  alongside: ["loss-aversion", "endowment-effect"]
+sources:
+  - title: "The Psychology of Sunk Cost"
+    author: "Hal R. Arkes & Catherine Blumer"
+    url: "https://doi.org/10.1016/0749-5978(85)90049-4"
+    type: "paper"
+    year: 1985
+    seminal: true
+  - title: "Sunk Cost Fallacy in Product Design"
+    author: "Nielsen Norman Group"
+    url: "https://www.nngroup.com/articles/sunk-cost-fallacy/"
+    type: "article"
+---
+
+## What is it
+
+The tendency to continue an endeavor once time, effort, or money has been invested, even when continuing is clearly irrational.
+
+## Why it matters
+
+In digital product design, sunk cost inertia creates switching barriers. Users stay with inefficient legacy software because they spent months setting it up. Conversely, during onboarding, encouraging users to invest small amounts of effort early on creates sunk cost motivation to complete account creation.
+
+## Key ideas
+
+- **Unrecoverable Cost Bias**: Past non-refundable investments of time or money improperly dictate future decisions.
+- **Escalation of Commitment**: Doubling down on a failing task to justify previous effort.
+- **Investment Momentum**: Accumulated setup effort makes product switching feel like giving up personal property.
+
+## How it works
+
+Decision Trajectory:
+
+```
+[Past Unrecoverable Effort (Sunk Cost)] ──► [Emotional Hesitation to Abandon] ──► [Irrational Continued Usage]
+```
+
+## Example
+
+1. **Legacy Enterprise Software Retention**: Companies continuing to pay $100k/year for outdated software because they spent $500k configuring it 5 years ago.
+2. **Progressive Profile Setup**: Showing users *"You've already completed 4 of 5 setup steps — don't lose your progress!"* when they attempt to exit onboarding.
+
+## Application
+
+- **Build Smooth Data Import Tools**: Lower switching barriers for new customers by offering one-click data migration from competitor tools.
+- **Encourage Early Micro-Investments**: Prompt new users to upload an avatar or connect an integration on day 1 to establish sunk cost momentum.
+- **Provide Unsaved Work Warnings**: Alert users when navigating away from a form (*"You have unsaved changes that will be lost"*).
+
+## Limitations
+
+- **Hostage UX Retention**: Trapping users via artificial sunk costs or complex cancellation flows builds intense resentment and bad publicity.
+- **Product Sunset Obstacles**: Users suffering from sunk cost fallacy will aggressively resist product deprecations or UI redesigns.
+
+## Common misconceptions
+
+- **"Sunk costs should factor into future rational planning"**: Economically, sunk costs are unrecoverable and should be completely ignored when deciding future actions.
+- **"Only money creates sunk costs"**: Time, emotional energy, and personal learning effort create even stronger sunk cost inertia than dollars.
+
+## Using AI
+
+**Where it helps**
+- Automating complex data migration transformations to eliminate competitor lock-in sunk costs.
+- Identifying high-effort friction steps that cause users to abandon onboarding flows.
+
+**Where it fails**
+- Evaluating human emotional attachment to legacy workflows and personal habits.

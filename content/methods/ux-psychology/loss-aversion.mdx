@@ -1,0 +1,92 @@
+---
+id: loss-aversion
+title: Loss Aversion
+aka: ["Loss Aversion Bias", "Prospect Theory Loss Aversion", "Fear of Loss"]
+category: ux-psychology
+alsoIn: [strategic-thinking]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - Value proposition messaging, pricing structure, or feature retention flows
+useInstead:
+  - when: You need to evaluate real user behavior when facing interface friction
+    method: usability-testing
+related:
+  before: [mental-models]
+  alongside: [hicks-law]
+sources:
+  - title: "Prospect Theory: An Analysis of Decision under Risk"
+    author: Daniel Kahneman & Amos Tversky
+    url: https://doi.org/10.2307/1914185
+    type: paper
+    year: 1979
+    seminal: true
+  - title: "Thinking, Fast and Slow"
+    author: Daniel Kahneman
+    url: https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555
+    type: book
+    year: 2011
+    seminal: true
+---
+
+## What is it
+
+The pain of losing something is psychologically twice as powerful as the pleasure of gaining an equivalent item.
+
+## Why it matters
+
+Understanding loss aversion helps designers craft ethical retention flows, pricing plans, trial experiences, and confirmation dialogs that respect user motivation without resorting to deceptive dark patterns.
+
+## Key ideas
+
+- **Asymmetric Valuation**: Losing $100 feels roughly twice as painful as gaining $100 feels rewarding.
+- **Status Quo Bias**: Users tend to stick with current settings or plans because switching risk feels like a potential loss.
+- **Endowment Connection**: Once users spend time configuring a product or trial, losing access feels like a personal asset loss.
+
+## How it works
+
+Asymmetric Value Function curve:
+
+```
+                  Symmetrical Gain (+)
+                       │        /
+                       │       /
+  ── Loss (-) ─────────┼──────/── Gain (+)
+             \         │
+              \        │
+               \       │
+     Stronger Pain (-) │
+```
+
+The value function is steeper in the domain of losses than in the domain of gains.
+
+## Example
+
+Free trial strategies that allow users to customize their workspace during a 14-day window leverage loss aversion. Rather than trying to "sell" features, ending the trial threatens the loss of the personalized workflow the user has already built.
+
+## Application
+
+- **Highlight Avoided Costs**: Frame features by showing what users save or avoid losing (e.g., "Prevent data loss with automatic backups").
+- **Preserve User Effort**: Ensure draft states, incomplete forms, and work-in-progress are automatically saved to protect users against accidental loss.
+- **Frame Upgrades Thoughtfully**: Focus upgrade messaging on losing access to specialized tools users have come to rely on.
+
+## Limitations
+
+- **Risk of Dark Patterns**: Overusing loss aversion (e.g., guilt-tripping cancellation screens or fake countdown timers) destroys brand trust and violates ethical design standards.
+- **Diminishing Impact**: Repeated false warnings or loss threats lead to user habituation and eventual abandonment.
+
+## Common misconceptions
+
+- **"Loss aversion means users never risk anything"**: Users will actually take significant risks to *avoid* a guaranteed loss.
+- **"Loss framing is always superior to gain framing"**: Positive gain framing builds long-term brand affinity, whereas aggressive loss framing induces anxiety.
+
+## Using AI
+
+**Where it helps**
+- Analyzing copy options to ensure value propositions highlight risk prevention cleanly.
+- Reviewing cancellation or offboarding copy to identify manipulative or overly punitive phrasing.
+
+**Where it fails**
+- Determining the exact threshold where loss framing turns into user resentment or perceived dark patterns.

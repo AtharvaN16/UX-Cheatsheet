@@ -81,8 +81,9 @@ export function loadMethods(dir: string): { methods: Method[]; errors: string[] 
     const fm = parsed.data;
 
     const sections = parseSections(content);
-    const missing = missingSections(sections);
+    const missing = missingSections(sections, fm.kind);
     if (missing.length > 0) {
+
       errors.push(`${rel}: sections — missing ${missing.join(', ')}`);
     }
 

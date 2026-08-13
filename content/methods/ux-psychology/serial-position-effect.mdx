@@ -1,0 +1,88 @@
+---
+id: serial-position-effect
+title: "Serial Position Effect"
+aka: ["Primacy Effect", "Recency Effect", "Primacy and Recency", "Serial Position", "Sequence Recall Bias"]
+category: ux-psychology
+alsoIn: ["content-design"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Navigation list, feature list, or presentation sequence"
+  - "Onboarding carousel design"
+useInstead:
+  - when: "You are evaluating decision speed across choices"
+    method: "hicks-law"
+related:
+  alongside: ["millers-law", "von-restorff-effect"]
+sources:
+  - title: "The Serial Position Effect in Free Recall"
+    author: "Bennet B. Murdock Jr."
+    url: "https://doi.org/10.1037/h0045106"
+    type: "paper"
+    year: 1962
+    seminal: true
+  - title: "Serial-Position Effect: How to Structure Lists in UI"
+    author: "Nielsen Norman Group"
+    url: "https://www.nngroup.com/articles/serial-position-effect/"
+    type: "article"
+---
+
+## What is it
+
+People recall the first (Primacy) and last (Recency) items in a series best, while middle items are easily forgotten.
+
+## Why it matters
+
+In navigation design, landing pages, and multi-step workflows, information order dictates user recall and action rates. Placing critical navigation items or primary value propositions in the middle of a long list guarantees low engagement, whereas placing them at the beginning or end ensures maximum retention.
+
+## Key ideas
+
+- **Primacy Effect**: Items at the beginning of a list are rehearsed and transferred into long-term memory.
+- **Recency Effect**: Items at the end of a list are still fresh in active short-term working memory.
+- **The Middle Trough**: Information presented in the middle of a sequence suffers from high cognitive interference and lowest recall.
+
+## How it works
+
+The Serial Position Recall Curve:
+
+```
+Memory Recall (%)
+ 100% ┼─── [Primacy]                                         [Recency] ───┼
+      │                                                        /         │
+  50% │                                                       /          │
+      │         ─────────────── [Middle Trough] ─────────────/           │
+   0% └───────────────────────────────────────────────────────────────────┴
+      First Item                     Middle Items               Last Item
+```
+
+## Example
+
+1. **Mobile Bottom Navigation Bars**: Apps like Instagram place *Home* at the far-left (first position - Primacy) and *Profile* at the far-right (last position - Recency), placing less critical tabs like Search and Reels in the middle.
+2. **E-Commerce Product Features**: Highlighting top differentiators in bullet points #1 and #2, followed by secondary specs in the middle, and ending with warranty/guarantee details in the final bullet.
+
+## Application
+
+- **Position Key Navigation Items**: Place critical destinations (Home, Search, Account) at the extreme ends of navigation menus and tab bars.
+- **Optimize Onboarding Carousels**: Show the main value proposition on slide 1 and the primary sign-up CTA on the final slide.
+- **Structure Sales Copy**: Put compelling benefits at the top of landing pages and repeat strong CTA summaries at the very bottom.
+
+## Limitations
+
+- **Visual Contrast Override**: A middle list item that features strong visual isolation (Von Restorff Effect) will break the serial position trough and achieve high recall.
+- **Domain Familiarity**: Power users who know a list by heart bypass position bias and scan directly for specific targets.
+
+## Common misconceptions
+
+- **"Middle items are never read"**: Middle items are scanned and processed; they simply suffer from lower spontaneous retrospective memory recall.
+- **"Lists should only have 3 items"**: Longer lists are fine as long as critical items occupy the primary anchor slots.
+
+## Using AI
+
+**Where it helps**
+- Reordering navigation menus and bullet points based on click-stream conversion analytics.
+- Summarizing long document content into structured key takeaways framed with strong primacy and recency anchors.
+
+**Where it fails**
+- Predicting user intent when items have equal situational importance.

@@ -1,0 +1,88 @@
+---
+id: peak-end-rule
+title: Peak-End Rule
+aka: ["Peak-End Memory Bias", "Peek End Rule", "Peek-End Rule", "Peak End", "Peak End Effect"]
+
+category: ux-psychology
+alsoIn: [interaction-design]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - An end-to-end user journey or service flow to evaluate
+useInstead:
+  - when: You need to map quantitative user journey touchpoint analytics over time
+    method: usability-testing
+
+related:
+  before: [loss-aversion]
+  alongside: [zeigarnik-effect]
+sources:
+  - title: "More Painful Differences: The Peak-End Rule in Retrospective Evaluations"
+    author: Daniel Kahneman, Barbara L. Fredrickson, Charles A. Schreiber & Donald A. Redelmeier
+    url: https://doi.org/10.1111/j.1467-9280.1993.tb00589.x
+    type: paper
+    year: 1993
+    seminal: true
+  - title: "The Peak-End Rule: How Impressions Are Formed"
+    author: Nielsen Norman Group
+    url: https://www.nngroup.com/articles/peak-end-rule/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+People judge an experience based almost entirely on how they felt at its peak and at its end, rather than the total sum or average.
+
+## Why it matters
+
+Users do not average their experiences mathematically. A journey with 9 neutral steps and 1 delightful final touchpoint creates a vastly higher retrospective rating than a journey that was mildly good throughout but ended on a frustrating bug.
+
+## Key ideas
+
+- **Peak Intensity**: The highest positive or negative emotional moment dominates memory encoding.
+- **Final Impression (The End)**: The closing moments of a session or workflow heavily influence whether a user returns or recommends the product.
+- **Duration Neglect**: The actual length of an experience has minimal impact on how it is recalled.
+
+## How it works
+
+Retrospective Evaluation Model:
+
+```
+[Start] ────► [Step 1] ────► [PEAK MOMENT (High Impact)] ────► [Step 3] ────► [THE END (High Impact)]
+                                       │                                              │
+                                       └──────────────────────┬───────────────────────┘
+                                                              ▼
+                                               Retrospective Memory Evaluation
+```
+
+## Example
+
+Rideshare applications like Uber turn a potentially stressful payment step into a seamless background event at the end of the trip, leaving the passenger with a delightful final impression as they exit the vehicle.
+
+## Application
+
+- **Celebrate Accomplishments**: Design delight into success screens (e.g., confetti animations, positive confirmation copy upon completing a major project).
+- **Graceful Error Recovery**: Turn negative peaks (system errors or failed payments) into helpful, empathetic recovery flows.
+- **Smooth Offboarding**: Ensure sign-out, task completion, and subscription management end on a clear, reassuring note.
+
+## Limitations
+
+- **Does Not Substitute for Core Functionality**: A great final animation cannot rescue a product that is fundamentally broken or useless.
+- **Negative Peaks Distort Memory**: A single severe security or data-loss peak can permanently ruin brand perception regardless of how delightful the end step is.
+
+## Common misconceptions
+
+- **"Every single screen must be delightful"**: Trying to make every screen a peak causes design fatigue. Reserve peak moments for key milestones.
+- **"Length of workflow matters most"**: Reducing a flow from 4 steps to 3 matters less than ensuring the final step feels fast and rewarding.
+
+## Using AI
+
+**Where it helps**
+- Analyzing user sentiment across journey touchpoints to identify emotional peaks and drop-off points.
+- Generating empathetic error recovery copy for high-friction moments.
+
+**Where it fails**
+- Predicting exact human emotional peaks without real qualitative observations.

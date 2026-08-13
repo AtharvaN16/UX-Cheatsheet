@@ -1,0 +1,82 @@
+---
+id: default-effect
+title: "Default Effect"
+aka: ["Default Bias", "Default Option Bias", "Status Quo Option", "Default Setting", "Default Effect"]
+category: ux-psychology
+alsoIn: ["interaction-design"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Form design, setting screen, or permission flow"
+  - "Choice architecture design"
+useInstead:
+  - when: "You need to test user menu sorting preference"
+    method: "card-sorting"
+related:
+  alongside: ["behavioral-economics-basics", "choice-overload"]
+sources:
+  - title: "Do Defaults Save Lives?"
+    author: "Eric J. Johnson & Daniel Goldstein"
+    url: "https://doi.org/10.11646/science.1091721"
+    type: "paper"
+    year: 2003
+    seminal: true
+  - title: "The Power of Defaults"
+    author: "Nielsen Norman Group"
+    url: "https://www.nngroup.com/articles/power-of-defaults/"
+    type: "article"
+---
+
+## What is it
+
+The tendency for users to accept pre-set default options rather than taking active effort to change them.
+
+## Why it matters
+
+Changing a default setting requires cognitive effort, decision risk, and physical interaction. Most users assume that pre-selected options represent expert recommendations, safety standards, or optimal configurations, leaving factory settings unchanged indefinitely.
+
+## Key ideas
+
+- **Status Quo Bias**: Humans naturally stick with current conditions to avoid cognitive effort and decision regret.
+- **Implicit Expert Endorsement**: Users interpret pre-selected options as the recommended best practice.
+- **Inertia Leverage**: Setting beneficial defaults drives high adoption without restricting user freedom of choice.
+
+## How it works
+
+Choice Execution Path:
+
+```
+[Pre-Selected Default Option] ──► [User Status Quo Inertia] ──► [90%+ Default Acceptance Rate]
+```
+
+## Example
+
+1. **Apple iOS Dark Mode & Privacy Settings**: Setting Location Services permission prompts to *"Ask Next Time"* or *"While Using App"* by default protects user privacy without requiring manual configuration.
+2. **SaaS Annual Billing Defaults**: Pre-selecting annual billing (with a *"Save 20%"* badge) in checkout flows boosts annual recurring revenue (ARR) adoption significantly.
+
+## Application
+
+- **Set Privacy-Preserving Defaults**: Default all user privacy settings to maximum protection (Opt-in analytics, disabled tracking).
+- **Pre-select Safe Form Inputs**: Pre-fill common form fields with sensible defaults (e.g., standard shipping rate, current user country).
+- **Default to Recommended Workflows**: Provide standard project templates pre-configured for 80% of routine use cases.
+
+## Limitations
+
+- **Dark Pattern Backlash**: Pre-checking spam newsletter boxes or hidden add-on insurance fees destroys user trust and violates regulations like GDPR.
+- **Incorrect Default Assumptions**: Setting an inappropriate default forces users to fix erroneous system assumptions, causing frustration.
+
+## Common misconceptions
+
+- **"Users evaluate every setting on first app launch"**: Over 95% of users never open the settings tab in software products.
+- **"Defaults restrict user freedom"**: Defaults guide choices while leaving users 100% free to select alternative options if desired.
+
+## Using AI
+
+**Where it helps**
+- Analyzing user demographic data to infer intelligent contextual default settings.
+- Auditing app setting configurations for dark pattern defaults and regulatory compliance.
+
+**Where it fails**
+- Determining ethical boundaries for monetized default selections without human review.

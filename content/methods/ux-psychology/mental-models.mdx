@@ -1,0 +1,88 @@
+---
+id: mental-models
+title: Mental Models
+aka: ["Mental Model", "Conceptual Models", "User Mental Models", "System Model vs User Model"]
+category: ux-psychology
+alsoIn: [ia-structure]
+kind: concept
+gives: conceptual
+effort: medium
+timeframe: days
+needs:
+  - Qualitative research or domain observation to map user expectations
+useInstead:
+  - when: You need to observe physical step-by-step user interaction with an existing interface
+    method: usability-testing
+related:
+  after: [jakobs-law]
+  alongside: [hicks-law]
+sources:
+  - title: "The Design of Everyday Things"
+    author: Don Norman
+    url: https://www.nngroup.com/books/design-everyday-things-revised/
+    type: book
+    year: 2013
+    seminal: true
+  - title: "Mental Models"
+    author: Jakob Nielsen / Nielsen Norman Group
+    url: https://www.nngroup.com/articles/mental-models/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+An internal explanation of someone's thought process about how something works in the real world.
+
+## Why it matters
+
+When a digital product's implementation model diverges from the user's mental model, friction, confusion, and catastrophic user error inevitably occur.
+
+## Key ideas
+
+- **Mental Model vs Implementation Model**: Users care about how a system behaves conceptually, not how software engineers architected the backend database or microservices.
+- **Formed by Prior Experience**: Users transfer expectations from existing software, physical tools, and industry conventions.
+- **Evolving & Malleable**: Mental models update gradually as users gain experience with new interface paradigms.
+
+## How it works
+
+The relationship between user perception, system model, and interface:
+
+```
+[User's Prior Knowledge & Real-world Experience] ──► [User's Mental Model]
+                                                             │
+                                                  Expectation vs Reality Gap
+                                                             ▼
+[System Architecture / Code Base] ─────────────► [Designer's Conceptual UI]
+```
+
+When the conceptual UI matches the user's mental model, interactions feel intuitive and self-explanatory.
+
+## Example
+
+The "e-commerce shopping cart" metaphor leverages users' physical supermarket experience. Users expect to add items, view a running total, edit item quantities, and proceed to a "checkout counter" to pay.
+
+## Application
+
+- **Research Existing Conventions**: Conduct domain research and user interviews before introducing novel navigation or interaction paradigms.
+- **Use Familiar Analogies & Metaphors**: Anchor new features to concepts users already master.
+- **Bridge Mental Gaps with Microcopy**: Provide clear visual feedback and contextual microcopy when system behavior must diverge from standard expectations.
+
+## Limitations
+
+- **Mental Models Are Inferred, Not Directly Observable**: You cannot directly view a mental model; you deduce it by listening to users think aloud during research.
+- **Can Perpetuate Legacy Anti-Patterns**: Relying exclusively on legacy mental models can restrict product innovation and prevent better digital-native interactions.
+
+## Common misconceptions
+
+- **"All users share the same mental model"**: Novices, power users, and domain experts often possess fundamentally different mental representations of the exact same workflow.
+- **"Mental models are static"**: Onboarding and progressive disclosure can reshape a user's mental model over time.
+
+## Using AI
+
+**Where it helps**
+- Summarizing common user expectations and domain analogies across competitor products.
+- Analyzing interview transcripts to identify recurring user metaphors and conceptual misunderstandings.
+
+**Where it fails**
+- Predicting unique domain-specific mental models without real empirical qualitative research.

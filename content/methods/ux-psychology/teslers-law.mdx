@@ -1,0 +1,88 @@
+---
+id: teslers-law
+title: "Tesler's Law"
+aka: ["Tesler Law", "Teslers Law", "Tesler's Law", "Conservation of Complexity", "Complexity Law"]
+category: ux-psychology
+alsoIn: ["interaction-design"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Complex software workflow simplification"
+  - "System architecture planning"
+useInstead:
+  - when: "You are assessing touch target distances"
+    method: "fitts-law"
+related:
+  alongside: ["hicks-law", "postels-law"]
+sources:
+  - title: "The Law of Conservation of Complexity"
+    author: "Larry Tesler"
+    url: "http://www.nomodes.com/teslerism.html"
+    type: "article"
+    year: 2005
+    seminal: true
+  - title: "Tesler's Law: Complexity Cannot Be Removed"
+    author: "Nielsen Norman Group"
+    url: "https://www.nngroup.com/articles/teslers-law/"
+    type: "article"
+---
+
+## What is it
+
+Every system has an inherent amount of complexity that cannot be removed—it can only be shifted between the user and the system.
+
+## Why it matters
+
+Product designers often strive to eliminate all friction and complexity from user workflows. However, attempting to remove inherent domain complexity entirely can cripple functionality or force users into confusing workarounds. 
+
+The goal of UX engineering is to absorb as much inherent complexity as possible into software code, smart defaults, and automation, leaving the user with only essential decision-making choices.
+
+## Key ideas
+
+- **Inherent Domain Complexity**: Certain workflows (e.g., tax filing, aviation control, enterprise resource planning) contain unavoidable real-world business logic.
+- **Shift of Responsibility**: Software applications must absorb technical burden (address parsing, payment routing, timezone math) so users don't have to calculate it manually.
+- **Over-Simplification Warning**: Stripping too many controls from an interface can hide vital information or prevent power users from executing specialized tasks.
+
+## How it works
+
+Conservation Equation:
+
+$$\text{Total Complexity} = \text{System Complexity} + \text{User Complexity} = \text{Constant } K$$
+
+```
+Complexity Trade-off:
+  Legacy System:  [Low System Code Complexity]  ──►  [High User Manual Burden]
+  Modern Product: [High System Code Complexity] ──►  [Low User Mental Burden]
+```
+
+## Example
+
+1. **E-Commerce Address Autocomplete**: In legacy forms, users manually typed Street, City, State, County, and Postal Code. Modern checkout uses Google Places API to absorb complexity—users type 4 letters, and the system populates all 5 fields accurately.
+2. **Uber Ride Dispatch**: Matching a rider with a nearby driver involves real-time GPS tracking, traffic routing algorithms, supply-demand surge pricing, and automatic payment capture. All of this immense backend complexity is condensed into a single user action: tapping *"Confirm Ride"*.
+
+## Application
+
+- **Automate Repetitive Data Entry**: Use IP lookup, browser geolocation, and device metadata to pre-select country, language, currency, and address details.
+- **Hide Advanced Settings Behind Smart Defaults**: Expose 80% of routine controls by default while placing 20% of edge-case configurations in an *"Advanced Options"* drawer.
+- **Absorb Multi-step Calculations**: Build real-time calculators for complex pricing models, taxes, and shipping rates instead of requiring users to consult external tables.
+
+## Limitations
+
+- **The Automation Fallacy**: If a system attempts to absorb complexity by making decisions automatically without high confidence, users lose control and must undo unwanted system actions.
+- **Power User Constraints**: Professional creative and engineering tools (e.g., Photoshop, CAD, IDEs) require higher interface density because reducing user control limits expressiveness.
+
+## Common misconceptions
+
+- **"Complexity can be engineered to zero"**: Inherent business logic cannot be erased; hiding it entirely without automation just pushes it into hidden user confusion.
+- **"Simple software requires less code"**: Building seamless, intuitive, frictionless software requires significantly more complex algorithms, state management, and edge-case handling behind the scenes.
+
+## Using AI
+
+**Where it helps**
+- Absorbing unstructured data formatting complexity by using LLM function-calling to transform freeform user notes into database records.
+- Predicting optimal default settings by analyzing user behavior clusters.
+
+**Where it fails**
+- Assuming the system knows user intent with 100% accuracy without offering override controls.

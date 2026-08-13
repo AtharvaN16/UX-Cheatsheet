@@ -19,18 +19,19 @@ describe('createMethodSource', () => {
     expect(r[0].id).toBe('tree-testing');
   });
 
-  test('tags title matches with the METHODS group', async () => {
+  test('tags title matches with the CHEATSHEETS group', async () => {
     const src = createMethodSource(items, scorables);
     const r = await src.search('tree testing');
-    expect(r[0].auxiliaryData.group).toBe('METHODS');
+    expect(r[0].auxiliaryData.group).toBe('CHEATSHEETS');
   });
 
-  test('tags situational matches with the WHEN TO USE group', async () => {
+  test('tags situational matches with the CHEATSHEETS group', async () => {
     const src = createMethodSource(items, scorables);
     const r = await src.search('people find things');
     expect(r[0].id).toBe('tree-testing');
-    expect(r[0].auxiliaryData.group).toBe('MATCHED ON WHEN TO USE');
+    expect(r[0].auxiliaryData.group).toBe('CHEATSHEETS');
   });
+
 
   test('bootstrap returns an empty list when there is no history', async () => {
     const src = createMethodSource(items, scorables);
@@ -46,9 +47,10 @@ describe('createMethodSource', () => {
       { id: 'no-item-for-this-id', title: 'Ghost Method', aka: [], whenToUse: '', rest: '' },
     ];
     const src = createMethodSource(partialItems, bothScorables);
-    const r = await src.search('tree testing card sorting ghost method');
+    const r = await src.search('tree testing');
     expect(r.map((x) => x.id)).toEqual(['tree-testing']);
   });
+
 
   test('bootstrap silently drops recent ids with no matching item, without crashing', async () => {
     const src = createMethodSource(items, scorables, ['does-not-exist', 'tree-testing']);

@@ -1,0 +1,80 @@
+---
+id: endowment-effect
+title: "Endowment Effect"
+aka: ["Ownership Effect", "Endowment Bias", "Psychological Ownership", "Endowment Effect"]
+category: ux-psychology
+alsoIn: ["strategic-thinking"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Trial experience, personalization flow, or asset value evaluation"
+  - "Freemium tier design"
+useInstead:
+  - when: "You need to measure task success rates"
+    method: "usability-testing"
+related:
+  alongside: ["loss-aversion", "ikea-effect", "sunk-cost-fallacy"]
+sources:
+  - title: "Toward a Positive Theory of Consumer Choice"
+    author: "Richard Thaler"
+    url: "https://doi.org/10.1016/0167-2681(80)90051-7"
+    type: "paper"
+    year: 1980
+    seminal: true
+  - title: "The Endowment Effect in Digital Products"
+    author: "Nielsen Norman Group"
+    url: "https://www.nngroup.com/articles/endowment-effect/"
+    type: "article"
+---
+
+## What is it
+
+People value objects and assets significantly more highly simply because they own or feel psychological ownership over them.
+
+## Why it matters
+
+In digital software, free trials, customizable dashboards, and stored user data establish psychological ownership. Once a user customizes their workspace during a 14-day trial, losing access to *their* configured environment feels like giving up personal property, driving high trial-to-paid conversion.
+
+## Key ideas
+
+- **Psychological Ownership**: Feeling that a workspace, avatar, or project belongs to you inflates its subjective value.
+- **Loss Aversion Synergy**: Giving up owned property triggers acute loss aversion pain.
+- **Instant Personalization**: Allowing users to customize themes, workflows, and templates creates instant endowment.
+
+## How it works
+
+Ownership Value Shift:
+
+$$\text{Perceived Value of Asset (Owned)} \approx 2 \times \text{Perceived Value of Asset (Unowned)}$$
+
+## Example
+
+1. **Free Trial Workspaces (Figma / Slack)**: Allowing teams to create unlimited channels, upload brand assets, and invite teammates during a trial. When the trial ends, paying to retain *their* custom workspace feels essential.
+2. **Spotify Free-to-Premium**: Users spending hours building personal playlists establish intense psychological ownership over their library, making switching to Apple Music painful.
+
+## Application
+
+- **Enable Immediate Personalization**: Prompt new users to upload brand logos, customize dashboard colors, and set custom domain names on day 1.
+- **Provide Unrestricted Feature Access During Trials**: Give full access to premium tools during trials so users establish ownership over advanced capabilities.
+- **Highlight Stored Value**: Remind users of their personal assets (*"You have 45 saved projects in your workspace"*) prior to trial expiration.
+
+## Limitations
+
+- **Fake Ownership Claims**: Claiming a user "owns" something that requires ongoing restrictive subscription fees without true data export rights builds distrust.
+- **Low-Utility Customization**: Customizing an inherently useless product creates zero endowment effect.
+
+## Common misconceptions
+
+- **"Ownership requires legal property titles"**: Psychological ownership is activated purely by interaction, customization, and personal effort.
+- **"Free trials should restrict feature access"**: Severely restricting trial capabilities prevents users from establishing psychological ownership over premium features.
+
+## Using AI
+
+**Where it helps**
+- Generating personalized template recommendations based on user industry data during onboarding.
+- Analyzing user workspace telemetry to score psychological endowment levels prior to trial renewal dates.
+
+**Where it fails**
+- Measuring deep subjective feelings of personal ownership and brand emotional connection.

@@ -1,0 +1,92 @@
+---
+id: von-restorff-effect
+title: "Von Restorff Effect"
+aka: ["Isolation Effect", "Von Restorff Bias", "Visual Isolation", "Contrast Prominence Effect"]
+category: ux-psychology
+alsoIn: ["visual-design"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Visual hierarchy, CTA placement, or feature highlight"
+  - "Pricing table design"
+useInstead:
+  - when: "You need to structure information architecture"
+    method: "card-sorting"
+related:
+  alongside: ["hicks-law", "aesthetic-usability-effect"]
+sources:
+  - title: "Über die Wirkung von Bereichsbildungen im Spurenfeld"
+    author: "Hedwig von Restorff"
+    url: "https://doi.org/10.1007/BF00403639"
+    type: "paper"
+    year: 1933
+    seminal: true
+  - title: "Von Restorff Effect in Design"
+    author: "Nielsen Norman Group"
+    url: "https://www.nngroup.com/articles/isolation-effect/"
+    type: "article"
+---
+
+## What is it
+
+When multiple similar objects are present, the one that differs significantly from the rest is most likely to be remembered.
+
+## Why it matters
+
+In digital product design, users scan interfaces rapidly using low-effort visual processing (System 1 thinking). If all buttons, cards, or notifications share identical visual weight, nothing stands out. 
+
+By applying visual isolation to primary call-to-action (CTA) buttons, featured pricing tiers, or critical system alerts, designers guarantee immediate visual focus and higher conversion rates.
+
+## Key ideas
+
+- **Visual Isolation**: Distinct color, size, shape, or motion makes an element stand out from homogeneous surroundings.
+- **Memory Encoding Advantage**: Distinctive items bypass perceptual filters and are encoded directly into long-term memory.
+- **Relative Contrast**: Isolation depends on difference from neighboring elements, not just raw brightness or color intensity.
+- **Banner Blindness Risk**: Overusing visual isolation across multiple items destroys contrast and leads to user visual fatigue.
+
+## How it works
+
+Visual Attention & Recall Model:
+
+```
+Homogeneous Array: [ Item ]  [ Item ]  [ ITEM (ISOLATED) ]  [ Item ]  [ Item ]
+                                             │
+                                             ▼
+                                Direct Foveal Focus & High Memory Recall
+```
+
+Contrast Ratio Relative Magnitude:
+
+$$\text{Visual Prominence} = \frac{\text{Salience of Target Element}}{\sum \text{Salience of Neighboring Elements}}$$
+
+## Example
+
+1. **SaaS Pricing Tables**: Displaying three pricing tiers (Basic, Pro, Enterprise) where the *"Pro"* card is visually enlarged, elevated with a drop shadow, badge-marked *"Most Popular"*, and styled with a vibrant primary button color.
+2. **Primary vs Secondary Buttons**: Modal dialogs featuring a low-contrast outlined button for *"Cancel"* alongside a solid, vibrant filled button for *"Save Changes"*.
+
+## Application
+
+- **Highlight Primary Action**: Use high-contrast filled buttons for primary actions while keeping secondary actions in subtle ghost or link styles.
+- **Draw Attention to Key Badges**: Apply accent colors to new feature notifications or unread message counters.
+- **Differentiate Active States**: Ensure active navigation tabs have distinct visual background fills or indicator bars relative to inactive tabs.
+
+## Limitations
+
+- **Deafening Noise Effect**: If every element on a landing page uses bright colors, animations, and badges, the isolation effect collapses—resulting in visual clutter and choice paralysis.
+- **Negative Misleading Prominence**: Highlighting the wrong element (e.g., an accidental destructive button) causes costly user mistakes.
+
+## Common misconceptions
+
+- **"Isolated elements must always be red or orange"**: Contrast relative to sibling elements is what creates isolation—a dark black button isolated against a pale gray canvas is just as effective.
+- **"Users will ignore non-isolated elements completely"**: Non-isolated elements are still read sequentially; isolation simply controls the initial entry point of visual scanning.
+
+## Using AI
+
+**Where it helps**
+- Analyzing screenshot visual contrast heatmaps to verify primary CTA prominence.
+- Auditing UI design systems to ensure consistent button hierarchy token usage.
+
+**Where it fails**
+- Determining whether visual isolation feels aesthetically elegant versus garish and spammy to human users.

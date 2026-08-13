@@ -80,6 +80,7 @@ export function scoreMethods(query: string, methods: ScorableMethod[]): ScoredMe
   if (qt.length === 0) return [];
 
   const rawQuery = query.toLowerCase().trim();
+  const normQuery = normalize(query);
   const scored: ScoredMethod[] = [];
 
   for (const m of methods) {
@@ -87,9 +88,17 @@ export function scoreMethods(query: string, methods: ScorableMethod[]): ScoredMe
     const normTitle = normalize(titleText);
     const titleWords = normTitle.split(' ');
 
-    // 1. Check Title Matches first
-    const isTitleExact = normTitle === rawQuery || titleWords.some((w) => w === rawQuery);
-    const isTitlePrefix = titleWords.some((w) => w.startsWith(rawQuery)) || normTitle.includes(rawQuery);
+    // 1. Check Title Matches first (comparing normalized query against normalized title/aliases)
+    const isTitleExact =
+      normTitle === normQuery ||
+      titleWords.some((w) => w === normQuery) ||
+      m.aka.some((a) => normalize(a) === normQuery) ||
+      normalize(m.title) === normQuery;
+
+    const isTitlePrefix =
+      titleWords.some((w) => w.startsWith(normQuery)) ||
+      normTitle.includes(normQuery) ||
+      m.aka.some((a) => normalize(a).includes(normQuery));
 
     if (isTitleExact) {
       scored.push({ id: m.id, score: 100, matchedOn: 'title' });
@@ -100,6 +109,7 @@ export function scoreMethods(query: string, methods: ScorableMethod[]): ScoredMe
       scored.push({ id: m.id, score: 50, matchedOn: 'title' });
       continue;
     }
+
 
     // 2. Check Description & Content fields with strict word-prefix matching
     const whenToUseRes = evaluateFieldMatch(qt, m.whenToUse);

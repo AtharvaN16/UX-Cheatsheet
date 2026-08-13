@@ -1,0 +1,96 @@
+---
+id: postels-law
+title: "Postel's Law"
+aka: ["Postel Law", "Postels Law", "Robustness Principle", "Postel's Law", "Liberal Input Conservative Output"]
+category: ux-psychology
+alsoIn: ["interaction-design"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Form validation or data entry interface"
+  - "API integration layer or data parsing pipeline"
+useInstead:
+  - when: "You need to organize category structure"
+    method: "card-sorting"
+related:
+  alongside: ["jakobs-law", "teslers-law"]
+sources:
+  - title: "Transmission Control Protocol Specification (RFC 793)"
+    author: "Jon Postel"
+    url: "https://datatracker.ietf.org/doc/html/rfc793"
+    type: "standard"
+    year: 1981
+    seminal: true
+  - title: "Postel's Law in UX Design"
+    author: "Nielsen Norman Group"
+    url: "https://www.nngroup.com/articles/postels-law-ux/"
+    type: "article"
+---
+
+## What is it
+
+Be conservative in what you do, be liberal in what you accept from others.
+
+## Why it matters
+
+Humans are naturally non-standardized. When filling out forms or entering data, users type telephone numbers with dashes, spaces, parentheses, or country codes based on personal habit and regional standards. Demanding that users conform to a single rigid input format causes friction, high input error rates, and task abandonment.
+
+By shifting format normalization from the user's brain to system code, products eliminate unnecessary error dialogs, shorten completion times, and convey a feeling of empathetic intelligence.
+
+## Key ideas
+
+- **Liberal Acceptance**: Design input handlers to ingest diverse data formats without throwing validation errors as long as the intent is clear.
+- **Conservative Output**: Clean, sanitize, and standardize accepted data internally before saving to database records or transmitting to APIs.
+- **Forgiving Input Architecture**: Strip non-essential formatting characters (spaces, dashes, parentheses) automatically on input blur or submission.
+- **Anticipatory Parsing**: Predict common user typing variations and parse date formats (e.g., `10/24/2026`, `Oct 24 2026`, `2026-10-24`) seamlessly.
+
+## How it works
+
+Input Processing Pipeline:
+
+```
+[User Varied Inputs] ──► [Permissive Parser (Liberal Ingest)] ──► [Sanitizer / Standardizer] ──► [Strict Output Storage]
+  (415) 892-3011             Strips () and -                    Produces +14158923011            Database Record
+  415.892.3011
+  4158923011
+```
+
+
+Mathematical Formulation of Robustness:
+
+$$\text{Input Acceptance Range} \gg \text{Output Emission Format}$$
+
+## Example
+
+1. **Stripe Checkout & Credit Cards**: Stripe accepts credit card numbers pasted with or without spaces, automatically formats the number into standard 4-digit groups, and correctly infers card provider (Visa, Mastercard, Amex) without asking the user to manually select a card brand dropdown.
+2. **Google Search Bar**: Google accepts misspelled queries, missing accents, informal slang, and partial phrases, instantly returning relevant results along with a subtle *"Showing results for..."* correction rather than throwing a blank error page.
+
+## Application
+
+- **Format Phone Numbers Permissively**: Allow users to type `(415) 892-3011`, `4158923011`, or `415-892-3011`, normalizing the string to E.164 format (`+14158923011`) on the server.
+- **Flexible Date & Time Inputs**: Accept natural language dates like *"Next Tuesday"*, *"10/24/26"*, or *"October 24"* and parse them reliably into ISO 8601 strings.
+- **Auto-trim Whitespace**: Automatically strip leading and trailing whitespace from email fields and coupon codes during input processing.
+- **Case-Insensitive Match**: Treat promo codes, search queries, and login identifiers as case-insensitive on submission.
+
+## Limitations
+
+- **Security & Sanitization Risks**: Being overly liberal without input sanitization can introduce security vulnerabilities like SQL Injection, Cross-Site Scripting (XSS), or command injection.
+- **Ambiguous Data Inputs**: If input is genuinely ambiguous (e.g., `01/02/03`—is it Jan 2, 2003 or Feb 1, 2003?), liberal guessing can store corrupted data; explicit clarification or locale context is required.
+
+## Common misconceptions
+
+- **"Postel's Law means no validation errors at all"**: Invalid or impossible inputs (e.g., a 4-digit phone number or invalid email domain) still require helpful, inline validation messages.
+- **"Form fields should format strictly as the user types"**: Forcing raw input fields to reject characters mid-keystroke often prevents users from pasting or editing content fluidly.
+
+## Using AI
+
+**Where it helps**
+- Writing natural language parsers that convert freeform user text into structured JSON payloads.
+- Generating comprehensive regex test suites to cover edge-case input string variations.
+- Auto-correcting minor typos in address search and form input fields in real time.
+
+**Where it fails**
+- Substituting for secure server-side input validation and SQL/HTML sanitization rules.
+- Guaranteeing correct resolution of ambiguous date formats across international locales without explicit user context.

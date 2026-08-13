@@ -1,0 +1,87 @@
+---
+id: weber-fechner-law
+title: "Weber–Fechner Law"
+aka: ["Weber Fechner Law", "Weber Law", "Fechner Law", "Just Noticeable Difference", "JND", "Weber-Fechner Law"]
+category: ux-psychology
+alsoIn: ["visual-design"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Pricing update, visual redesign, or notification threshold"
+  - "Typography scale planning"
+useInstead:
+  - when: "You are testing visual contrast ratio standards"
+    method: "usability-testing"
+related:
+  alongside: ["von-restorff-effect", "aesthetic-usability-effect"]
+sources:
+  - title: "Elemente der Psychophysik"
+    author: "Gustav Theodor Fechner"
+    url: "https://archive.org/details/elementederpsycho01fech"
+    type: "book"
+    seminal: true
+  - title: "Weber-Fechner Law in Product Design"
+    author: "Nielsen Norman Group"
+    url: "https://www.nngroup.com/articles/weber-fechner-law/"
+    type: "article"
+---
+
+## What is it
+
+The Just Noticeable Difference (JND) in sensory stimulus is directly proportional to the initial magnitude of the stimulus.
+
+## Why it matters
+
+A $5 price increase on a $10 item feels huge (50% increase), triggering intense user outrage. However, a $5 increase on a $1,000 laptop is completely unnoticeable (0.5% increase). 
+
+Similarly in UI design, increasing font size from 12px to 14px (+16%) creates a striking visual difference, whereas increasing font size from 48px to 50px (+4%) goes completely unnoticed. Visual scales and price adjustments must follow proportional ratios rather than fixed mathematical steps.
+
+## Key ideas
+
+- **Just Noticeable Difference (JND)**: The minimal change in stimulus magnitude required for human senses to perceive a difference.
+- **Logarithmic Human Perception**: Perception scales exponentially; equal physical increments produce diminishing perceived differences at higher baseline values.
+- **Proportional Redesign Thresholds**: Incremental UI changes below the JND pass unnoticed; major redesigns exceeding JND require careful change management.
+
+## How it works
+
+Mathematical Formulation:
+
+$$\Delta I = k \cdot I_0 \quad \implies \quad S = k \cdot \ln(I)$$
+
+Where:
+- $\Delta I$ is the Just Noticeable Difference (JND)
+- $I_0$ is the initial stimulus intensity
+- $k$ is the Weber constant for a specific sensory domain
+- $S$ is perceived sensation
+
+## Example
+
+1. **Typography Modular Scales**: UI design systems use proportional scales (e.g., Major Third 1.25x or Perfect Fourth 1.33x: 12px, 16px, 21px, 28px, 37px, 50px) to ensure every font step exceeds the perceptual JND threshold.
+2. **SaaS Price Tiering**: Raising a $15/mo plan to $18/mo (+20%) requires announcing new feature value to offset perceived JND shock, whereas raising an enterprise contract from $50,000 to $51,000 (+2%) passes without friction.
+
+## Application
+
+- **Use Proportional Typography Scales**: Define font sizes using geometric ratios rather than fixed +2px increments.
+- **Package Price Increases Proportionally**: Keep subscription price updates under the 5–8% JND threshold to minimize customer churn.
+- **Design High-Contrast Visual States**: Ensure hover, active, and focus states exceed the visual JND color contrast threshold.
+
+## Limitations
+
+- **Complex Cognitive Choices**: The law applies directly to sensory perception (brightness, sound, weight, price); complex multidimensional choices involve higher cognitive heuristics.
+- **Individual Sensory Threshold Variance**: JND thresholds vary slightly between users with visual impairments or color blindness.
+
+## Common misconceptions
+
+- **"Fixed linear increments produce equal visual steps"**: Adding 2px to a 10px font is noticeable; adding 2px to a 60px headline is invisible.
+- **"Users notice every minor design tweak"**: Subtle UI tweaks under the JND threshold pass completely unnoticed by end users.
+
+## Using AI
+
+**Where it helps**
+- Calculating proportional typography, spacing, and elevation scale tokens for design systems automatically.
+- Auditing UI screens for color contrast shifts that fall below visual JND accessibility thresholds.
+
+**Where it fails**
+- Predicting human emotional outrage triggered by perceived unfair price changes.

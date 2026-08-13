@@ -1,0 +1,93 @@
+---
+id: doherty-threshold
+title: "Doherty Threshold"
+aka: ["Doherty Rule", "400ms Rule", "400ms Response Time", "Response Latency Threshold", "Doherty Threshold"]
+category: ux-psychology
+alsoIn: ["interaction-design"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "System response time and performance budgeting"
+  - "Feedback and state indicator design"
+useInstead:
+  - when: "You are measuring visual button touch targets"
+    method: "fitts-law"
+related:
+  alongside: ["fitts-law", "teslers-law"]
+sources:
+  - title: "The Economic Value of Rapid Response Time"
+    author: "Walter J. Doherty & Athanasios J. Thadhani"
+    url: "https://dl.acm.org/doi/10.1145/800175.805406"
+    type: "paper"
+    year: 1982
+    seminal: true
+  - title: "Doherty Threshold in UX"
+    author: "Laws of UX"
+    url: "https://lawsofux.com/doherty-threshold/"
+    type: "article"
+---
+
+## What is it
+
+Productivity increases exponentially when system response time is kept under 400 milliseconds.
+
+## Why it matters
+
+When system response time exceeds 400ms, the human brain enters a brief mental pause—attentional drift begins, working memory deteriorates, and task execution speed slows dramatically. 
+
+In modern web and mobile application design, keeping feedback under 400ms creates an interface that feels instantaneous, responsive, and reliable, directly improving conversion rates and user retention.
+
+## Key ideas
+
+- **The 400ms Boundary**: Response times under 400ms maintain continuous human thought flow and prevent attention wandering.
+- **Optimistic UI**: Rendering success states in the interface immediately on user action—before the server network request completes—ensures feedback stays well under 100ms.
+- **Skeleton Screens**: Displaying animated skeleton loader shapes during asynchronous data fetches reduces perceived waiting time compared to static spinners.
+- **Intentional Delays**: For high-consequence operations (e.g., security checks, money transfers), responses faster than 100ms can trigger user distrust, making deliberate delays useful.
+
+## How it works
+
+Response Latency vs Human Attentional State:
+
+$$\text{Response Latency (ms)} \le 400\text{ms} \implies \text{Uninterrupted Flow & Continuous Productivity}$$
+
+```
+Latency Spectrum:
+  0ms ────────► 100ms: Perceived as Instantaneous (Immediate feedback)
+  100ms ──────► 400ms: Doherty Threshold Zone (Flow State Maintained)
+  400ms ──────► 1000ms: Cognitive Delay Begins (User notices delay)
+  > 1000ms ──────────► Loss of Focus (Mind wanders, task switches)
+```
+
+## Example
+
+1. **Figma & Notion Optimistic Updates**: When dragging canvas elements in Figma or toggling checkboxes in Notion, the client UI updates at 60 FPS (16ms) instantly, syncing changes to cloud servers in the background without blocking the user.
+2. **Skeleton UI in LinkedIn & YouTube**: Loading feed items displays shimmer skeleton cards immediately on page open, giving the perception of rapid response even while network payloads are downloading.
+
+## Application
+
+- **Set Performance Budgets**: Enforce strict Web Vitals thresholds (e.g., Interaction to Next Paint INP $< 200\text{ms}$).
+- **Use Optimistic Updates**: Immediately mutate client UI state for likes, bookmarks, and text edits, rolling back only if backend request fails.
+- **Animate Loading States**: Render skeleton screens within 100ms for data fetches exceeding 400ms.
+- **Preload Data on Hover**: Trigger network prefetching for navigation links when user cursor hovers over buttons.
+
+## Limitations
+
+- **Network Infrastructure Bounds**: Real-world mobile networks (e.g., high latency 3G/4G connections) make absolute backend response times under 400ms impossible without aggressive client caching and offline storage.
+- **Artificial Suspense in Financial UX**: Users doubt security checks or loan algorithms that return results in under 50ms; artificial 1.5-second processing animations build trust in high-stakes financial calculations.
+
+## Common misconceptions
+
+- **"Server processing must finish in under 400ms"**: As long as the *visual interface feedback* responds under 100–400ms (via loaders or optimistic states), the backend processing can take longer.
+- **"Faster is ALWAYS better"**: Instantaneous 10ms execution for irreversible actions (e.g., deleting a database or transferring money) feels alarming; deliberate micro-delays add weight.
+
+## Using AI
+
+**Where it helps**
+- Automated performance profiling of JavaScript bundle execution and layout reflow delays.
+- Predicting optimal prefetch strategies based on historical user navigation paths.
+- Automatically generating CSS skeleton loader components matching component tree structures.
+
+**Where it fails**
+- Overcoming physical network bandwidth limits and geographic latency constraints without edge computing deployment.

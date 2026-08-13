@@ -1,0 +1,82 @@
+---
+id: confirmation-bias
+title: "Confirmation Bias"
+aka: ["Selective Perception", "Confirmation Effect", "Selective Hearing", "Confirmation Bias"]
+category: ux-psychology
+alsoIn: ["qualitative-research"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Research study design or hypothesis testing plan"
+  - "User interview protocol"
+useInstead:
+  - when: "You are testing a structural navigation hypothesis"
+    method: "tree-testing"
+related:
+  alongside: ["availability-bias", "survivorship-bias"]
+sources:
+  - title: "Confirmation Bias: A Ubiquitous Phenomenon in Many Guises"
+    author: "Raymond S. Nickerson"
+    url: "https://doi.org/10.1037/1089-2680.2.2.175"
+    type: "paper"
+    year: 1998
+    seminal: true
+  - title: "Confirmation Bias in UX Research"
+    author: "Nielsen Norman Group"
+    url: "https://www.nngroup.com/articles/confirmation-bias-ux-research/"
+    type: "article"
+---
+
+## What is it
+
+The tendency to search for, interpret, and recall information that confirms prior beliefs while ignoring contradictory evidence.
+
+## Why it matters
+
+Designers and UX researchers frequently fall prey to confirmation bias when testing their own feature designs. Researchers ask leading questions (e.g., *"Was this new navigation easier to use?"*) or interpret ambiguous participant hesitations as validation of their own design ideas, leading to shipping flawed products.
+
+## Key ideas
+
+- **Selective Observation**: Noticing user actions that agree with your design hypothesis while dismissing mistakes as "user error."
+- **Leading Question Formatting**: Structuring research questions to steer participants toward desired responses.
+- **Hypothesis Attachment**: Falling in love with your design solution makes critical feedback feel like a personal attack.
+
+## How it works
+
+Filtered Research Cycle:
+
+```
+[ Prior Design Hypothesis ] ──► [ Filtered Observation (Ignore Flaws) ] ──► False Research Validation
+```
+
+## Example
+
+1. **Leading Usability Testing Questions**: Asking a participant *"Did you like how simple that checkout was?"* instead of open-ended neutral prompting like *"How was your experience completing that purchase?"*
+2. **Feature Analytics Cherry-Picking**: Focusing on a 5% increase in button clicks while ignoring a 15% drop in total checkout completion on the same page.
+
+## Application
+
+- **Write Open-Ended Test Protocols**: Use neutral phrasing (*"Walk me through what you are thinking as you look at this screen"*).
+- **Formulate Falsifiable Hypotheses**: State upfront what quantitative metric result would *disprove* your design hypothesis.
+- **Conduct Blind Peer Synthesis**: Have an independent researcher who did not build the prototype code and analyze user interview recordings.
+
+## Limitations
+
+- **Subconscious Vulnerability**: Knowing confirmation bias exists does not make researchers immune to it—formal structural protocols are mandatory.
+- **Over-Correction Risk**: Dismissing valid positive user feedback out of fear of confirmation bias can derail successful product launches.
+
+## Common misconceptions
+
+- **"Senior researchers don't suffer from confirmation bias"**: Seniority increases confidence, which can actually strengthen confirmation bias unless peer protocols are enforced.
+- **"Data analytics eliminates confirmation bias"**: Analysts can easily select time windows or metrics that confirm their pre-existing opinions.
+
+## Using AI
+
+**Where it helps**
+- Auditing user interview scripts for leading phrasing and biased question structures.
+- Synthesizing qualitative transcript sentiment using neutral objective classification models.
+
+**Where it fails**
+- Replacing human researcher self-awareness and ethical research rigor.

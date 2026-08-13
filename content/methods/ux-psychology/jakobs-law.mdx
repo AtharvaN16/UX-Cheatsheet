@@ -1,0 +1,89 @@
+---
+id: jakobs-law
+title: Jakob's Law
+aka: ["Jakob Law", "Jakobs Law", "Nielsen Law", "Internet UX Law", "Jakob's Law"]
+category: ux-psychology
+alsoIn: [interaction-design]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - Navigation design, layout structure, or component pattern evaluation
+useInstead:
+  - when: You are testing a novel interaction pattern to evaluate usability performance
+    method: usability-testing
+related:
+  before: [mental-models]
+  alongside: [hicks-law]
+sources:
+  - title: "Jakob's Law of Internet User Experience"
+    author: Jakob Nielsen / Nielsen Norman Group
+    url: https://www.nngroup.com/articles/jakobs-law-internet-user-experience/
+    type: article
+    year: 2000
+    seminal: true
+  - title: "Laws of UX: Using Psychology to Design Better Products"
+    author: Jon Yablonski
+    url: https://lawsofux.com/jakobs-law/
+    type: book
+    year: 2020
+    seminal: false
+---
+
+## What is it
+
+Users spend most of their time on other sites, so they expect your site to work the same way as all the others.
+
+## Why it matters
+
+Sticking to established conventions reduces cognitive load, speeds up task completion, and allows users to focus on their primary tasks rather than learning a new UI language.
+
+## Key ideas
+
+- **Cumulative Experience**: Users transfer their expectations from popular platforms (Google, Apple, Amazon, SaaS conventions) directly to your product.
+- **Cognitive Conservation**: Familiar layouts require less mental energy to interpret.
+- **Strategic Innovation**: Novel patterns should be reserved for core product differentiators, not standardized UI chrome like search bars, profile menus, or shopping carts.
+
+## How it works
+
+When users encounter a familiar design pattern:
+
+```
+[Familiar UI Pattern] ──► [Instant Pattern Recognition] ──► [Zero Friction Action]
+```
+
+When users encounter an eccentric, non-standard pattern:
+
+```
+[Non-standard Pattern] ──► [Cognitive Pause] ──► [Confusion / Error] ──► [Task Drop-off]
+```
+
+## Example
+
+Placing the primary navigation bar across the top or left rail, positioning the user profile avatar in the top-right corner, and using a magnifying glass icon for search leverage Jakob's Law across millions of web applications.
+
+## Application
+
+- **Adopt Standard Interaction Patterns**: Use standard form controls, modal behaviors, and keyboard shortcuts.
+- **Maintain Consistency Across Devices**: Ensure responsive mobile and desktop variants preserve identical mental expectations.
+- **Test Intentional Disruptions**: If you innovate on a standard pattern, validate it with rigorous usability testing before deployment.
+
+## Limitations
+
+- **Doesn't Mean Design Stagnation**: Jakob's Law is not a rule against innovation; it advises against needless originality in baseline interaction mechanics.
+- **Domain Context Matters**: Specialized domain tools (e.g., audio editing suites, 3D CAD software) follow their own professional standards that differ from consumer web patterns.
+
+## Common misconceptions
+
+- **"All websites will end up looking identical"**: Visual branding, typography, color, and unique features still differentiate products even when foundational interaction models are standardized.
+- **"Never invent new UI patterns"**: New patterns are necessary when legacy patterns fail to solve emerging technological capabilities or user needs.
+
+## Using AI
+
+**Where it helps**
+- Benchmarking interface components against top industry design systems to confirm pattern alignment.
+- Auditing UI designs for non-standard icon usages or unexpected component placements.
+
+**Where it fails**
+- Determining when a novel design pattern provides enough value to justify breaking established user habits.

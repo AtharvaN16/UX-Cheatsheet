@@ -1,0 +1,92 @@
+---
+id: dual-process-theory
+title: "Dual Process Theory"
+aka: ["System 1 and System 2", "System 1 System 2", "Fast and Slow Thinking", "Dual Process", "Dual Process Theory"]
+category: ux-psychology
+alsoIn: ["strategic-thinking"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Complex decision or checkout flow"
+  - "Information hierarchy design"
+useInstead:
+  - when: "You are measuring physical touch targets"
+    method: "fitts-law"
+related:
+  alongside: ["cognitive-load", "hicks-law"]
+sources:
+  - title: "Thinking, Fast and Slow"
+    author: "Daniel Kahneman"
+    url: "https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555"
+    type: "book"
+    year: 2011
+    seminal: true
+  - title: "Dual-Process Theories in Social Psychology"
+    author: "Shelly Chaiken & Yaacov Trope"
+    url: "https://www.guilford.com/books/Dual-Process-Theories-in-Social-Psychology/Chaiken-Trope/9781572304215"
+    type: "book"
+    year: 1999
+    seminal: true
+---
+
+## What is it
+
+Human thought operates across two modes: System 1 (fast, automatic, intuitive) and System 2 (slow, deliberate, analytical).
+
+## Why it matters
+
+Users interact with websites and apps primarily via System 1—scanning visual shapes, recognizing familiar icons, and relying on muscle memory. Forcing users into unnecessary System 2 analytical thinking (e.g., unformatted feature tables, ambiguous button labels) causes cognitive strain and drop-off.
+
+## Key ideas
+
+- **System 1 (The Intuitive Processor)**: Operates automatically with high speed, low effort, and emotional pattern recognition.
+- **System 2 (The Analytical Processor)**: Allocates conscious attention to effortful mental operations, calculations, and logical choices.
+- **Cognitive Strain Intervention**: When System 1 encounters confusion or unfamiliar patterns, it hands control over to System 2, causing mental fatigue.
+
+## How it works
+
+Dual Processing Hierarchy:
+
+```
+[ User Input Stimulus ]
+         │
+         ▼
+[ SYSTEM 1 (Fast & Automatic) ] ──► [ High Familiarity ] ──► Immediate Action / Decision
+         │
+  (Friction / Confusion Encountered)
+         │
+         ▼
+[ SYSTEM 2 (Slow & Analytical) ] ──► Deep Evaluation ──► Effortful Action / Cognitive Strain
+```
+
+## Example
+
+1. **Recognizing a Green "Buy" Button**: System 1 instantly recognizes green + button shape + familiar placement as "Purchase" without reading label text.
+2. **Comparing Enterprise Pricing Tier Tables**: Comparing 45 feature rows across 4 subscription columns forces System 2 analytical processing.
+
+## Application
+
+- **Design for System 1 Defaults**: Use standard UI conventions (Jakob's Law), intuitive icons, and clear visual hierarchy to enable effortless scanning.
+- **Reserve System 2 for High-Consequence Actions**: Force System 2 deliberate processing for destructive actions (e.g., typing *"DELETE"* to confirm account destruction).
+- **Reduce Extraneous Cognitive Load**: Eliminate ambiguous jargon, cluttered layouts, and competing visual callouts.
+
+## Limitations
+
+- **System 1 Vulnerability to Biases**: System 1 relies on cognitive shortcuts (heuristics) that make users susceptible to impulse mistakes and dark patterns.
+- **Complex Domain Needs**: Technical tools (financial trading, code editors) inherently require System 2 analytical depth.
+
+## Common misconceptions
+
+- **"System 2 is better than System 1"**: Both systems are essential; System 1 enables human survival and fluid everyday navigation.
+- **"Users read web pages thoroughly"**: Users scan web pages using System 1 visual pattern matching, reading word-for-word only when interested.
+
+## Using AI
+
+**Where it helps**
+- Auditing UI microcopy and layout designs for ambiguous wording that triggers unnecessary System 2 cognitive strain.
+- Generating simplified summary cards for complex technical data tables.
+
+**Where it fails**
+- Replicating human intuitive visual recognition and subconscious emotional processing.

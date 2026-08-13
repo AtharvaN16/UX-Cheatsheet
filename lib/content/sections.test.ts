@@ -136,17 +136,17 @@ describe('missingSections', () => {
     const s = parseSections('## What is it\nx\n');
     const missing = missingSections(s);
     expect(missing).toContain('Purpose');
-    expect(missing).toContain('Using AI');
     expect(missing).not.toContain('What is it');
   });
 
   test('returns required sections in spec order', () => {
     const s = parseSections('## What is it\nx\n');
     const missing = missingSections(s);
-    // Missing sections should be in REQUIRED_SECTIONS order
-    const expected = REQUIRED_SECTIONS.filter((sec) => sec !== 'What is it');
+    // Missing sections should be in REQUIRED_SECTIONS order (excluding optional Using AI)
+    const expected = REQUIRED_SECTIONS.filter((sec) => sec !== 'What is it' && sec !== 'Using AI');
     expect(missing).toEqual(expected);
   });
+
 
   test('never reports optional sections as missing', () => {
     const withoutNotes = `
