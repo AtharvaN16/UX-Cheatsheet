@@ -36,6 +36,9 @@ export function CategoryTopicGrid({
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedConcept, setSelectedConcept] = useState<CategoryItem | null>(null);
   const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set());
+  const [showBookmarkedOnly, setShowBookmarkedOnly] = useState(false);
+  const [sortSectionOpen, setSortSectionOpen] = useState(true);
+  const [typeSectionOpen, setTypeSectionOpen] = useState(true);
 
   // Load bookmarks from localStorage
   useEffect(() => {
@@ -150,6 +153,11 @@ export function CategoryTopicGrid({
       });
     }
 
+    // Filter down to bookmarked items only
+    if (showBookmarkedOnly) {
+      result = result.filter((item) => bookmarkedIds.has(item.id));
+    }
+
     // Filter by search query
     if (searchQuery.trim().length > 0) {
       const q = searchQuery.toLowerCase().trim();
@@ -166,7 +174,7 @@ export function CategoryTopicGrid({
     }
 
     return result;
-  }, [allItems, activeTab, kindFilter, searchQuery, sortOrder]);
+  }, [allItems, activeTab, kindFilter, searchQuery, sortOrder, showBookmarkedOnly, bookmarkedIds]);
 
   const isModalOpen = selectedConcept !== null;
 
@@ -225,8 +233,51 @@ export function CategoryTopicGrid({
             </nav>
           </div>
 
-          {/* Control Bar: Filter & Sort Floating Popover Dropdown on Right */}
-          <div className="flex items-center justify-end py-1">
+          {/* Control Bar: Local Search on Left, Bookmark Toggle & Filter/Sort on Right */}
+          <div className="flex items-center justify-between gap-3 py-1">
+            {/* Local Search Input */}
+            <div className="relative w-full max-w-xs">
+              <svg
+                className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8C887E]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+              </svg>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search this category..."
+                className="w-full rounded-full border border-[#E5E2D9] bg-white pl-10 pr-4 py-2.5 text-sm text-[#1A1A1A] placeholder:text-[#8C887E] focus:outline-none focus:ring-1 focus:ring-black"
+              />
+            </div>
+
+            <div className="flex items-center gap-3 shrink-0">
+            {/* Bookmarked-Only Toggle */}
+            <button
+              onClick={() => setShowBookmarkedOnly((v) => !v)}
+              className={`inline-flex items-center justify-center rounded-full border w-10 h-10 shrink-0 transition-colors ${
+                showBookmarkedOnly
+                  ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
+                  : 'bg-white text-[#1A1A1A] border-[#E5E2D9] hover:bg-[#F0EDE6]'
+              }`}
+              aria-label={showBookmarkedOnly ? 'Show all topics' : 'Show bookmarked topics only'}
+              aria-pressed={showBookmarkedOnly}
+            >
+              <svg
+                className="w-4 h-4"
+                viewBox="0 0 256 256"
+                fill={showBookmarkedOnly ? 'currentColor' : 'none'}
+                stroke="currentColor"
+                strokeWidth={showBookmarkedOnly ? 0 : 20}
+              >
+                <path d="M192,224a8,8,0,0,1-11.84,7.06L128,200.43,75.84,231.06A8,8,0,0,1,64,224V48A16,16,0,0,1,80,32H176a16,16,0,0,1,16,16Z" />
+              </svg>
+            </button>
+
             {/* Filter & Sort Popover Dropdown Trigger */}
             <div className="relative">
               <button
@@ -275,66 +326,91 @@ export function CategoryTopicGrid({
 
                     {/* Section 1: Sort by */}
                     <div className="border-b border-[#E6E3DA] pb-4 space-y-3">
-                      <div className="flex items-center justify-between">
+                      <button
+                        type="button"
+                        onClick={() => setSortSectionOpen((v) => !v)}
+                        className="w-full flex items-center justify-between"
+                      >
                         <span className="text-base font-semibold text-[#3A3834]">Sort by</span>
-                        <svg className="w-4 h-4 text-[#737067]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <svg
+                          className={`w-4 h-4 text-[#737067] transition-transform duration-200 ${sortSectionOpen ? 'rotate-180' : ''}`}
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                        >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
-                      </div>
+                      </button>
 
-                      <div className="relative">
-                        <select
-                          value={sortOrder}
-                          onChange={(e) => setSortOrder(e.target.value as 'default' | 'a-z' | 'z-a')}
-                          className="w-full appearance-none rounded-2xl border border-[#E6E3DA] bg-white px-5 py-3 text-base font-medium text-[#1A1A1A] pr-10 focus:outline-none focus:ring-1 focus:ring-black cursor-pointer shadow-xs"
-                        >
-                          <option value="default">Default Order</option>
-                          <option value="a-z">Alphabetical (A – Z)</option>
-                          <option value="z-a">Alphabetical (Z – A)</option>
-                        </select>
-                        <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#1A1A1A]">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                          </svg>
+                      {sortSectionOpen && (
+                        <div className="relative">
+                          <select
+                            value={sortOrder}
+                            onChange={(e) => setSortOrder(e.target.value as 'default' | 'a-z' | 'z-a')}
+                            className="w-full appearance-none rounded-2xl border border-[#E6E3DA] bg-white px-5 py-3 text-base font-medium text-[#1A1A1A] pr-10 focus:outline-none focus:ring-1 focus:ring-black cursor-pointer shadow-xs"
+                          >
+                            <option value="default">Default Order</option>
+                            <option value="a-z">Alphabetical (A – Z)</option>
+                            <option value="z-a">Alphabetical (Z – A)</option>
+                          </select>
+                          <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#1A1A1A]">
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
 
                     {/* Section 2: Type Filter */}
                     <div className="pb-1 space-y-3">
-                      <div className="flex items-center justify-between">
+                      <button
+                        type="button"
+                        onClick={() => setTypeSectionOpen((v) => !v)}
+                        className="w-full flex items-center justify-between"
+                      >
                         <span className="text-base font-semibold text-[#3A3834]">Type</span>
-                        <svg className="w-4 h-4 text-[#737067]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <svg
+                          className={`w-4 h-4 text-[#737067] transition-transform duration-200 ${typeSectionOpen ? 'rotate-180' : ''}`}
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                        >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                         </svg>
-                      </div>
+                      </button>
 
-                      <div className="space-y-2.5">
-                        {[
-                          { id: 'all', label: 'All Types' },
-                          { id: 'method', label: 'Methods' },
-                          { id: 'framework', label: 'Frameworks' },
-                          { id: 'concept', label: 'Concepts' },
-                        ].map((t) => (
-                          <label
-                            key={t.id}
-                            className="flex items-center gap-3 cursor-pointer group text-base font-medium text-[#1A1A1A] hover:text-black"
-                          >
-                            <input
-                              type="radio"
-                              name="kindFilter"
-                              checked={kindFilter === t.id}
-                              onChange={() => setKindFilter(t.id as any)}
-                              className="w-5 h-5 border-[#D1CEC4] text-[#1A1A1A] focus:ring-0 cursor-pointer"
-                            />
-                            <span>{t.label}</span>
-                          </label>
-                        ))}
-                      </div>
+                      {typeSectionOpen && (
+                        <div className="space-y-2.5">
+                          {[
+                            { id: 'all', label: 'All Types' },
+                            { id: 'method', label: 'Methods' },
+                            { id: 'framework', label: 'Frameworks' },
+                            { id: 'concept', label: 'Concepts' },
+                          ].map((t) => (
+                            <label
+                              key={t.id}
+                              className="flex items-center gap-3 cursor-pointer group text-base font-medium text-[#1A1A1A] hover:text-black"
+                            >
+                              <input
+                                type="radio"
+                                name="kindFilter"
+                                checked={kindFilter === t.id}
+                                onChange={() => setKindFilter(t.id as any)}
+                                className="w-5 h-5 border-[#D1CEC4] text-[#1A1A1A] focus:ring-0 cursor-pointer"
+                              />
+                              <span>{t.label}</span>
+                            </label>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </>
               )}
+            </div>
             </div>
           </div>
 

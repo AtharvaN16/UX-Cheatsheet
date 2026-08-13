@@ -1,6 +1,9 @@
 import { CategoryDashboardGrid } from '@/components/ui/CategoryDashboardGrid';
+import { getAllMethods } from '@/lib/content';
 
 export default function IndexPage() {
+  const allMethods = getAllMethods();
+
   return (
     <div className="w-full min-h-screen pb-16">
       <div className="w-full px-8 sm:px-12 lg:px-16 pt-6 sm:pt-8">
@@ -11,7 +14,7 @@ export default function IndexPage() {
           </h1>
         </div>
 
-        <CategoryDashboardGrid />
+        <CategoryDashboardGrid allMethods={allMethods} />
       </div>
     </div>
   );
