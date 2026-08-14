@@ -48,6 +48,34 @@ export const TAXONOMY_USE_CASES: Record<string, string[]> = {
 
   // Quantitative Research — Pricing
   'van-westendorp': ['determine-pricing'],
+
+  // Qualitative Research — Interview Research
+  'expert-interviews': ['discover-needs', 'understand-mental-models'],
+  'focus-groups': ['understand-users', 'generate-ideas'],
+
+  // Qualitative Research — Contextual Research
+  ethnography: ['understand-behavior', 'understand-mental-models'],
+  observation: ['understand-behavior'],
+  shadowing: ['understand-behavior', 'discover-needs'],
+  'fly-on-the-wall-observation': ['understand-behavior'],
+  'diary-studies': ['understand-behavior', 'discover-needs'],
+
+  // Qualitative Research — Participatory Research
+  'participatory-design': ['generate-ideas', 'understand-users', 'change-behavior'],
+  'co-design-workshops': ['generate-ideas', 'understand-users', 'change-behavior'],
+  'cultural-probes': ['understand-behavior', 'discover-needs'],
+
+  // Qualitative Research — Behavioral Science
+  'think-aloud': ['understand-mental-models'],
+  'retrospective-think-aloud': ['understand-mental-models'],
+
+  // Qualitative Research — Research Analysis
+  'grounded-theory': ['analyze-findings'],
+
+  // Qualitative Research — Research Rigor
+  triangulation: ['validate-research', 'reduce-bias'],
+  'mixed-methods-design': ['validate-research', 'reduce-bias'],
+  'inter-rater-reliability': ['reduce-bias', 'validate-research'],
 };
 
 export function getStubUseCases(id: string): string[] {

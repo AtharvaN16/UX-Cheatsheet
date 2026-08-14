@@ -13,6 +13,7 @@ export interface UseCase {
 }
 
 export const USE_CASES: readonly UseCase[] = [
+  // Quantitative Research
   { id: 'understand-behavior', label: 'Understand behavior' },
   { id: 'identify-problems', label: 'Identify problems' },
   { id: 'measure-usability', label: 'Measure usability' },
@@ -22,6 +23,24 @@ export const USE_CASES: readonly UseCase[] = [
   { id: 'validate-design', label: 'Validate a design' },
   { id: 'understand-preferences', label: "Understand users' preferences" },
   { id: 'determine-pricing', label: 'Determine pricing' },
+
+  // Qualitative Research (understand-behavior above is shared/reused, not duplicated)
+  { id: 'understand-users', label: 'Understand users' },
+  { id: 'discover-needs', label: 'Discover needs' },
+  { id: 'understand-mental-models', label: 'Understand mental models' },
+  { id: 'generate-ideas', label: 'Generate ideas' },
+  { id: 'change-behavior', label: 'Change behavior' },
+  { id: 'analyze-findings', label: 'Analyze findings' },
+  { id: 'validate-research', label: 'Validate research' },
+  { id: 'reduce-bias', label: 'Reduce bias' },
+
+  // Evaluation (measure-usability and validate-design above are shared/reused)
+  { id: 'diagnose-usability', label: 'Diagnose usability' },
+  { id: 'compare-designs', label: 'Compare designs' },
+  { id: 'evaluate-accessibility', label: 'Evaluate accessibility' },
+  { id: 'evaluate-navigation', label: 'Evaluate navigation' },
+  { id: 'predict-performance', label: 'Predict performance' },
+  { id: 'track-usability-over-time', label: 'Track usability over time' },
 ] as const;
 
 const USE_CASE_MAP = new Map(USE_CASES.map((u) => [u.id, u]));

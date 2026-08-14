@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef, useLayoutEffect, type RefObject } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
@@ -24,6 +25,142 @@ interface CategoryTopicGridProps {
 }
 
 /**
+ * Renders a popover through a portal straight into `document.body`, positioned from the
+ * trigger's actual screen coordinates via `position: fixed`. Every dropdown on this page
+ * sits inside the sheet-modal background wrapper, which has `overflow-hidden` (needed for
+ * its scale/blur-on-open animation) — an ordinary `absolute`-positioned popover gets
+ * silently clipped by that ancestor regardless of z-index, since overflow-hidden clips
+ * based on the ancestor's own box, not the popover's stacking order. Escaping via a portal
+ * sidesteps that entirely instead of touching the animation wrapper.
+ */
+function DropdownPortal({
+  open,
+  triggerRef,
+  align = 'left',
+  width,
+  onClose,
+  children,
+}: {
+  open: boolean;
+  triggerRef: RefObject<HTMLElement | null>;
+  align?: 'left' | 'right';
+  width?: number;
+  onClose: () => void;
+  children: React.ReactNode;
+}) {
+  const [coords, setCoords] = useState<{ top: number; left?: number; right?: number } | null>(null);
+
+  useLayoutEffect(() => {
+    if (!open) {
+      setCoords(null);
+      return;
+    }
+    const update = () => {
+      const el = triggerRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      setCoords(
+        align === 'right'
+          ? { top: rect.bottom + 12, right: window.innerWidth - rect.right }
+          : { top: rect.bottom + 12, left: rect.left }
+      );
+    };
+    update();
+    window.addEventListener('resize', update);
+    window.addEventListener('scroll', update, true);
+    return () => {
+      window.removeEventListener('resize', update);
+      window.removeEventListener('scroll', update, true);
+    };
+  }, [open, triggerRef, align]);
+
+  if (!open || !coords || typeof document === 'undefined') return null;
+
+  return createPortal(
+    <>
+      <div className="fixed inset-0 z-40" onClick={onClose} />
+      <div
+        style={{ position: 'fixed', top: coords.top, left: coords.left, right: coords.right, width }}
+        className="z-50"
+      >
+        {children}
+      </div>
+    </>,
+    document.body
+  );
+}
+
+/**
+ * Shared pill trigger for Category/UseCase — a container `<div>` (the ref target for
+ * DropdownPortal) holding two buttons: label+chevron toggles the dropdown, and — only
+ * once there's an active selection — a small X that clears it directly. Split into two
+ * real `<button>`s rather than one, since nesting a clickable X inside a single button
+ * is invalid HTML and makes stopping the open/close toggle from also firing unreliable.
+ */
+function PillTrigger({
+  label,
+  open,
+  hasSelection,
+  onToggle,
+  onClear,
+  triggerRef,
+}: {
+  label: string;
+  open: boolean;
+  hasSelection: boolean;
+  onToggle: () => void;
+  onClear: () => void;
+  triggerRef: RefObject<HTMLDivElement | null>;
+}) {
+  const isDark = open || hasSelection;
+
+  return (
+    <div
+      ref={triggerRef}
+      className={`inline-flex items-center overflow-hidden rounded-full border transition-colors ${
+        isDark
+          ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
+          : 'bg-white text-[#1A1A1A] border-[#E5E2D9] hover:bg-[#F0EDE6]'
+      }`}
+    >
+      <button type="button" onClick={onToggle} className="flex items-center py-2.5 pl-4 pr-1.5 text-sm font-medium">
+        <span>{label}</span>
+      </button>
+      {hasSelection && (
+        <button
+          type="button"
+          onClick={onClear}
+          aria-label="Clear selection"
+          className="flex items-center justify-center w-6 h-6 rounded-full hover:bg-white/20 transition-colors"
+        >
+          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+      )}
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-label="Toggle dropdown"
+        className={`flex items-center py-2.5 pl-2.5 pr-4 transition-colors ${
+          isDark ? 'bg-white/10 hover:bg-white/15' : 'hover:bg-black/5'
+        }`}
+      >
+        <svg
+          className={`w-4 h-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+    </div>
+  );
+}
+
+/**
  * Single-select "what is it" facet — replaces the tab row for categories with use-case
  * data. Built as a custom button+popover (not a native `<select>`) so it renders pixel-
  * identical to `UseCaseFilter` — a native select's padding/font metrics are browser-
@@ -41,6 +178,7 @@ function CategoryDropdown({
   allItems: CategoryItem[];
 }) {
   const [open, setOpen] = useState(false);
+  const triggerRef = useRef<HTMLDivElement>(null);
   const currentLabel = value === 'all' ? 'Category: All' : value;
 
   const select = (tab: string) => {
@@ -50,68 +188,54 @@ function CategoryDropdown({
 
   return (
     <div className="relative">
-      <button
-        onClick={() => setOpen((v) => !v)}
-        className={`inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium transition-colors ${
-          open || value !== 'all'
-            ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
-            : 'bg-white text-[#1A1A1A] border-[#E5E2D9] hover:bg-[#F0EDE6]'
-        }`}
-      >
-        <span>{currentLabel}</span>
-        <svg
-          className={`w-4 h-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+      <PillTrigger
+        triggerRef={triggerRef}
+        label={currentLabel}
+        open={open}
+        hasSelection={value !== 'all'}
+        onToggle={() => setOpen((v) => !v)}
+        onClear={() => select('all')}
+      />
 
-      {open && (
-        <>
-          <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 mt-3 z-50 w-64 rounded-2xl border border-[#E5E2D9] bg-[#FAF8F5] p-4 shadow-2xl">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-semibold text-[#1A1A1A]">Category</span>
-              {value !== 'all' && (
-                <button
-                  onClick={() => select('all')}
-                  className="text-xs font-semibold text-[#737067] hover:text-[#1A1A1A] underline"
-                >
-                  Clear
-                </button>
-              )}
-            </div>
-            <div className="space-y-2">
-              {tabs.map((tab) => {
-                const isAll = tab === 'all';
-                const count = isAll ? allItems.length : allItems.filter((i) => i.topicTitle === tab).length;
-                return (
-                  <label
-                    key={tab}
-                    className="flex items-center justify-between gap-3 cursor-pointer text-sm font-medium text-[#1A1A1A] hover:text-black py-0.5"
-                  >
-                    <span className="flex items-center gap-3">
-                      <input
-                        type="radio"
-                        name="category-dropdown"
-                        checked={value === tab}
-                        onChange={() => select(tab)}
-                        className="w-4 h-4 border-[#D1CEC4] text-[#1A1A1A] focus:ring-0 cursor-pointer"
-                      />
-                      <span>{isAll ? 'All' : tab}</span>
-                    </span>
-                    <span className="text-xs text-[#8C887E]">{count}</span>
-                  </label>
-                );
-              })}
-            </div>
+      <DropdownPortal open={open} triggerRef={triggerRef} onClose={() => setOpen(false)} width={256}>
+        <div className="rounded-2xl border border-[#E5E2D9] bg-[#FAF8F5] p-4 shadow-2xl">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-semibold text-[#1A1A1A]">Category</span>
+            {value !== 'all' && (
+              <button
+                onClick={() => select('all')}
+                className="text-xs font-semibold text-[#737067] hover:text-[#1A1A1A] underline"
+              >
+                Clear
+              </button>
+            )}
           </div>
-        </>
-      )}
+          <div className="space-y-2">
+            {tabs.map((tab) => {
+              const isAll = tab === 'all';
+              const count = isAll ? allItems.length : allItems.filter((i) => i.topicTitle === tab).length;
+              return (
+                <label
+                  key={tab}
+                  className="flex items-center justify-between gap-3 cursor-pointer text-sm font-medium text-[#1A1A1A] hover:text-black py-0.5"
+                >
+                  <span className="flex items-center gap-3">
+                    <input
+                      type="radio"
+                      name="category-dropdown"
+                      checked={value === tab}
+                      onChange={() => select(tab)}
+                      className="w-4 h-4 border-[#D1CEC4] text-[#1A1A1A] focus:ring-0 cursor-pointer"
+                    />
+                    <span>{isAll ? 'All' : tab}</span>
+                  </span>
+                  <span className="text-xs text-[#8C887E]">{count}</span>
+                </label>
+              );
+            })}
+          </div>
+        </div>
+      </DropdownPortal>
     </div>
   );
 }
@@ -130,6 +254,7 @@ function UseCaseFilter({
   onChange: (ids: string[]) => void;
 }) {
   const [open, setOpen] = useState(false);
+  const triggerRef = useRef<HTMLDivElement>(null);
 
   if (options.length === 0) return null;
 
@@ -141,60 +266,46 @@ function UseCaseFilter({
 
   return (
     <div className="relative">
-      <button
-        onClick={() => setOpen((v) => !v)}
-        className={`inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium transition-colors ${
-          open || selected.length > 0
-            ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]'
-            : 'bg-white text-[#1A1A1A] border-[#E5E2D9] hover:bg-[#F0EDE6]'
-        }`}
-      >
-        <span>{label}</span>
-        <svg
-          className={`w-4 h-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+      <PillTrigger
+        triggerRef={triggerRef}
+        label={label}
+        open={open}
+        hasSelection={selected.length > 0}
+        onToggle={() => setOpen((v) => !v)}
+        onClear={() => onChange([])}
+      />
 
-      {open && (
-        <>
-          <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
-          <div className="absolute left-0 mt-3 z-50 w-64 rounded-2xl border border-[#E5E2D9] bg-[#FAF8F5] p-4 shadow-2xl">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-semibold text-[#1A1A1A]">Use case</span>
-              {selected.length > 0 && (
-                <button
-                  onClick={() => onChange([])}
-                  className="text-xs font-semibold text-[#737067] hover:text-[#1A1A1A] underline"
-                >
-                  Clear
-                </button>
-              )}
-            </div>
-            <div className="space-y-2">
-              {options.map((opt) => (
-                <label
-                  key={opt.id}
-                  className="flex items-center gap-3 cursor-pointer text-sm font-medium text-[#1A1A1A] hover:text-black py-0.5"
-                >
-                  <input
-                    type="checkbox"
-                    checked={selected.includes(opt.id)}
-                    onChange={() => toggle(opt.id)}
-                    className="w-4 h-4 rounded border-[#D1CEC4] text-[#1A1A1A] focus:ring-0 cursor-pointer"
-                  />
-                  <span>{opt.label}</span>
-                </label>
-              ))}
-            </div>
+      <DropdownPortal open={open} triggerRef={triggerRef} onClose={() => setOpen(false)} width={256}>
+        <div className="max-h-[70vh] overflow-y-auto rounded-2xl border border-[#E5E2D9] bg-[#FAF8F5] p-4 shadow-2xl">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-semibold text-[#1A1A1A]">Use case</span>
+            {selected.length > 0 && (
+              <button
+                onClick={() => onChange([])}
+                className="text-xs font-semibold text-[#737067] hover:text-[#1A1A1A] underline"
+              >
+                Clear
+              </button>
+            )}
           </div>
-        </>
-      )}
+          <div className="space-y-2">
+            {options.map((opt) => (
+              <label
+                key={opt.id}
+                className="flex items-center gap-3 cursor-pointer text-sm font-medium text-[#1A1A1A] hover:text-black py-0.5"
+              >
+                <input
+                  type="checkbox"
+                  checked={selected.includes(opt.id)}
+                  onChange={() => toggle(opt.id)}
+                  className="w-4 h-4 rounded border-[#D1CEC4] text-[#1A1A1A] focus:ring-0 cursor-pointer"
+                />
+                <span>{opt.label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      </DropdownPortal>
     </div>
   );
 }
@@ -216,6 +327,9 @@ function FilterSortControls({
   onToggleSortSection,
   typeSectionOpen,
   onToggleTypeSection,
+  kindCounts,
+  effortCounts,
+  selectableKindCount,
 }: {
   showBookmarkedOnly: boolean;
   onToggleBookmarkedOnly: () => void;
@@ -232,8 +346,15 @@ function FilterSortControls({
   onToggleSortSection: () => void;
   typeSectionOpen: boolean;
   onToggleTypeSection: () => void;
+  /** How many items would remain for each option — an option other than "all" with a
+      zero count gets disabled instead of letting the user pick their way into an empty grid. */
+  kindCounts: Record<string, number>;
+  effortCounts: Record<string, number>;
+  /** Whether the Type section has at least 2 real choices — otherwise it's hidden entirely. */
+  selectableKindCount: number;
 }) {
   const hasActiveFilters = kindFilter !== 'all' || sortOrder !== 'default' || effortFilter !== 'all';
+  const filterTriggerRef = useRef<HTMLButtonElement>(null);
 
   return (
     <div className="flex items-center gap-3 shrink-0">
@@ -262,6 +383,7 @@ function FilterSortControls({
       {/* Filter & Sort Popover Dropdown Trigger */}
       <div className="relative">
         <button
+          ref={filterTriggerRef}
           onClick={onToggleFilterOpen}
           className={`inline-flex items-center gap-2 rounded-full border border-[#E5E2D9] px-4 py-2.5 text-sm font-medium transition-colors ${
             isFilterOpen || hasActiveFilters
@@ -279,11 +401,8 @@ function FilterSortControls({
         </button>
 
         {/* Floating Popover Dropdown Overlay */}
-        {isFilterOpen && (
-          <>
-            <div className="fixed inset-0 z-40" onClick={onCloseFilter} />
-
-            <div className="absolute right-0 mt-3 z-50 w-80 sm:w-96 rounded-2xl border border-[#E5E2D9] bg-[#FAF8F5] p-6 shadow-2xl space-y-5 text-[#1A1A1A]">
+        <DropdownPortal open={isFilterOpen} triggerRef={filterTriggerRef} onClose={onCloseFilter} align="right">
+            <div className="w-80 sm:w-96 max-h-[80vh] overflow-y-auto rounded-2xl border border-[#E5E2D9] bg-[#FAF8F5] p-6 shadow-2xl space-y-5 text-[#1A1A1A]">
               {/* Header */}
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-bold text-[#1A1A1A] tracking-tight">Filter and sort</h3>
@@ -340,7 +459,9 @@ function FilterSortControls({
                 )}
               </div>
 
-              {/* Section 2: Type Filter */}
+              {/* Section 2: Type Filter — hidden entirely when the category has fewer
+                  than 2 kinds present, since it could never narrow anything anyway. */}
+              {selectableKindCount >= 2 && (
               <div className="pb-1 space-y-3">
                 <button
                   type="button"
@@ -366,65 +487,97 @@ function FilterSortControls({
                       { id: 'method', label: 'Methods' },
                       { id: 'framework', label: 'Frameworks' },
                       { id: 'concept', label: 'Concepts' },
-                    ].map((t) => (
-                      <div key={t.id}>
-                        <label className="flex items-center gap-3 cursor-pointer group text-base font-medium text-[#1A1A1A] hover:text-black">
-                          <input
-                            type="radio"
-                            name="kindFilter"
-                            checked={kindFilter === t.id}
-                            onChange={() => {
-                              onKindFilterChange(t.id as 'all' | 'method' | 'framework' | 'concept');
-                              if (t.id !== 'method') onEffortFilterChange('all');
-                            }}
-                            className="w-5 h-5 border-[#D1CEC4] text-[#1A1A1A] focus:ring-0 cursor-pointer"
-                          />
-                          <span>{t.label}</span>
-                        </label>
+                    ].map((t) => {
+                      const count = kindCounts[t.id] ?? 0;
+                      const isDisabled = t.id !== 'all' && count === 0;
 
-                        {/* Progressive disclosure: Effort options only when Methods is selected */}
-                        <AnimatePresence initial={false}>
-                          {t.id === 'method' && kindFilter === 'method' && (
-                            <motion.div
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: 'auto', opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.2, ease: [0.32, 0.72, 0, 1] }}
-                              className="overflow-hidden"
-                            >
-                              <div className="pl-8 pt-2.5 space-y-2.5">
-                                {[
-                                  { id: 'all', label: 'All' },
-                                  { id: 'low', label: 'Low' },
-                                  { id: 'medium', label: 'Medium' },
-                                  { id: 'high', label: 'High' },
-                                ].map((e) => (
-                                  <label
-                                    key={e.id}
-                                    className="flex items-center gap-3 cursor-pointer group text-sm font-medium text-[#3A3834] hover:text-black"
-                                  >
-                                    <input
-                                      type="radio"
-                                      name="effortFilter"
-                                      checked={effortFilter === e.id}
-                                      onChange={() => onEffortFilterChange(e.id as 'all' | 'low' | 'medium' | 'high')}
-                                      className="w-4 h-4 border-[#D1CEC4] text-[#1A1A1A] focus:ring-0 cursor-pointer"
-                                    />
-                                    <span>{e.label}</span>
-                                  </label>
-                                ))}
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    ))}
+                      return (
+                        <div key={t.id}>
+                          <label
+                            className={`flex items-center justify-between gap-3 text-base font-medium ${
+                              isDisabled
+                                ? 'text-[#B8B2A6] cursor-not-allowed'
+                                : 'cursor-pointer group text-[#1A1A1A] hover:text-black'
+                            }`}
+                          >
+                            <span className="flex items-center gap-3">
+                              <input
+                                type="radio"
+                                name="kindFilter"
+                                checked={kindFilter === t.id}
+                                disabled={isDisabled}
+                                onChange={() => {
+                                  onKindFilterChange(t.id as 'all' | 'method' | 'framework' | 'concept');
+                                  if (t.id !== 'method') onEffortFilterChange('all');
+                                }}
+                                className={`w-5 h-5 border-[#D1CEC4] focus:ring-0 ${
+                                  isDisabled ? 'cursor-not-allowed' : 'text-[#1A1A1A] cursor-pointer'
+                                }`}
+                              />
+                              <span>{t.label}</span>
+                            </span>
+                            {t.id !== 'all' && <span className="text-xs text-[#B8B2A6]">{count}</span>}
+                          </label>
+
+                          {/* Progressive disclosure: Effort options only when Methods is selected */}
+                          <AnimatePresence initial={false}>
+                            {t.id === 'method' && kindFilter === 'method' && (
+                              <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.2, ease: [0.32, 0.72, 0, 1] }}
+                                className="overflow-hidden"
+                              >
+                                <div className="pl-8 pt-2.5 space-y-2.5">
+                                  {[
+                                    { id: 'all', label: 'All' },
+                                    { id: 'low', label: 'Low' },
+                                    { id: 'medium', label: 'Medium' },
+                                    { id: 'high', label: 'High' },
+                                  ].map((e) => {
+                                    const eCount = effortCounts[e.id] ?? 0;
+                                    const eDisabled = e.id !== 'all' && eCount === 0;
+
+                                    return (
+                                      <label
+                                        key={e.id}
+                                        className={`flex items-center justify-between gap-3 text-sm font-medium ${
+                                          eDisabled
+                                            ? 'text-[#B8B2A6] cursor-not-allowed'
+                                            : 'cursor-pointer group text-[#3A3834] hover:text-black'
+                                        }`}
+                                      >
+                                        <span className="flex items-center gap-3">
+                                          <input
+                                            type="radio"
+                                            name="effortFilter"
+                                            checked={effortFilter === e.id}
+                                            disabled={eDisabled}
+                                            onChange={() => onEffortFilterChange(e.id as 'all' | 'low' | 'medium' | 'high')}
+                                            className={`w-4 h-4 border-[#D1CEC4] focus:ring-0 ${
+                                              eDisabled ? 'cursor-not-allowed' : 'text-[#1A1A1A] cursor-pointer'
+                                            }`}
+                                          />
+                                          <span>{e.label}</span>
+                                        </span>
+                                        {e.id !== 'all' && <span className="text-xs text-[#B8B2A6]">{eCount}</span>}
+                                      </label>
+                                    );
+                                  })}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>
+              )}
             </div>
-          </>
-        )}
+        </DropdownPortal>
       </div>
     </div>
   );
@@ -569,6 +722,72 @@ export function CategoryTopicGrid({
     [allItems]
   );
 
+  // Everything displayedItems applies EXCEPT kind/effort/sort — this is the pool the
+  // Type/Effort radios in "Filter and sort" get their counts from, so an option that
+  // would produce zero results (e.g. "Frameworks" on a category that's 100% concepts)
+  // can be disabled instead of silently leading to an empty grid.
+  const itemsBeforeKindFilter = useMemo(() => {
+    let result = allItems;
+
+    if (activeTab !== 'all') {
+      result = result.filter((item) => item.topicTitle === activeTab);
+    }
+
+    if (activeUseCases.length > 0) {
+      result = result.filter((item) => item.useCases?.some((uc) => activeUseCases.includes(uc)));
+    }
+
+    if (showBookmarkedOnly) {
+      result = result.filter((item) => bookmarkedIds.has(item.id));
+    }
+
+    if (searchQuery.trim().length > 0) {
+      const q = searchQuery.toLowerCase().trim();
+      result = result.filter(
+        (item) => item.title.toLowerCase().includes(q) || item.description.toLowerCase().includes(q)
+      );
+    }
+
+    return result;
+  }, [allItems, activeTab, activeUseCases, showBookmarkedOnly, bookmarkedIds, searchQuery]);
+
+  const kindCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: itemsBeforeKindFilter.length, method: 0, framework: 0, concept: 0 };
+    itemsBeforeKindFilter.forEach((item) => {
+      const k = (item.kind || item.method?.kind || 'method').toLowerCase().trim();
+      if (k in counts) counts[k] += 1;
+    });
+    return counts;
+  }, [itemsBeforeKindFilter]);
+
+  const effortCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: 0, low: 0, medium: 0, high: 0 };
+    itemsBeforeKindFilter
+      .filter((item) => (item.kind || item.method?.kind || 'method').toLowerCase().trim() === 'method')
+      .forEach((item) => {
+        const e = (item.method?.effort || 'low').toLowerCase().trim();
+        counts.all += 1;
+        if (e in counts) counts[e] += 1;
+      });
+    return counts;
+  }, [itemsBeforeKindFilter]);
+
+  // Once a category has only one kind present (e.g. UX Psychology is 100% concepts),
+  // the Type section can never actually narrow anything — every option either matches
+  // everything or matches nothing — so it's hidden entirely rather than shown with two
+  // permanently-disabled options and one redundant "same as All Types" option.
+  const selectableKindCount = ['method', 'framework', 'concept'].filter((k) => (kindCounts[k] ?? 0) > 0).length;
+
+  // Safety net alongside disabling zero-count options in the popover: if a filter that
+  // was valid becomes stale because some other filter changed underneath it (e.g. Kind
+  // was "Method" and the Category dropdown just switched to a group with no methods),
+  // fall back to "all" instead of leaving the grid stuck on "No items found". Derived
+  // during render rather than via an effect + setState, which would cause an extra
+  // render pass for no benefit — this way there's nothing to "catch up" on.
+  const effectiveKindFilter = kindFilter !== 'all' && (kindCounts[kindFilter] ?? 0) === 0 ? 'all' : kindFilter;
+  const effectiveEffortFilter =
+    effortFilter !== 'all' && (effortCounts[effortFilter] ?? 0) === 0 ? 'all' : effortFilter;
+
   // Filtered and sorted items
   const displayedItems = useMemo(() => {
     let result = allItems;
@@ -586,18 +805,18 @@ export function CategoryTopicGrid({
     }
 
     // Filter by kind (method, framework, concept)
-    if (kindFilter !== 'all') {
+    if (effectiveKindFilter !== 'all') {
       result = result.filter((item) => {
         const k = (item.kind || item.method?.kind || 'method').toLowerCase().trim();
-        return k === kindFilter;
+        return k === effectiveKindFilter;
       });
     }
 
     // Filter by effort (only meaningful when narrowed to Methods)
-    if (kindFilter === 'method' && effortFilter !== 'all') {
+    if (effectiveKindFilter === 'method' && effectiveEffortFilter !== 'all') {
       result = result.filter((item) => {
         const e = (item.method?.effort || 'low').toLowerCase().trim();
-        return e === effortFilter;
+        return e === effectiveEffortFilter;
       });
     }
 
@@ -622,7 +841,7 @@ export function CategoryTopicGrid({
     }
 
     return result;
-  }, [allItems, activeTab, activeUseCases, kindFilter, effortFilter, searchQuery, sortOrder, showBookmarkedOnly, bookmarkedIds]);
+  }, [allItems, activeTab, activeUseCases, effectiveKindFilter, effectiveEffortFilter, searchQuery, sortOrder, showBookmarkedOnly, bookmarkedIds]);
 
   const isModalOpen = selectedConcept !== null;
 
@@ -699,9 +918,9 @@ export function CategoryTopicGrid({
               isFilterOpen={isFilterOpen}
               onToggleFilterOpen={() => setIsFilterOpen((v) => !v)}
               onCloseFilter={() => setIsFilterOpen(false)}
-              kindFilter={kindFilter}
+              kindFilter={effectiveKindFilter}
               onKindFilterChange={setKindFilter}
-              effortFilter={effortFilter}
+              effortFilter={effectiveEffortFilter}
               onEffortFilterChange={setEffortFilter}
               sortOrder={sortOrder}
               onSortOrderChange={setSortOrder}
@@ -709,6 +928,9 @@ export function CategoryTopicGrid({
               onToggleSortSection={() => setSortSectionOpen((v) => !v)}
               typeSectionOpen={typeSectionOpen}
               onToggleTypeSection={() => setTypeSectionOpen((v) => !v)}
+              kindCounts={kindCounts}
+              effortCounts={effortCounts}
+              selectableKindCount={selectableKindCount}
             />
           </div>
 

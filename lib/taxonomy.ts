@@ -229,23 +229,46 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     categoryId: 'qualitative-research',
     groups: [
       {
-        title: null,
+        title: 'Interview Research',
         items: [
           { id: 'user-interviews', title: 'User Interviews' },
+          { id: 'expert-interviews', title: 'Expert Interviews' },
+          { id: 'focus-groups', title: 'Focus Groups' },
+        ],
+      },
+      {
+        title: 'Contextual Research',
+        items: [
           { id: 'contextual-inquiry', title: 'Contextual Inquiry' },
           { id: 'ethnography', title: 'Ethnography' },
-          { id: 'diary-studies', title: 'Diary Studies' },
-          { id: 'think-aloud', title: 'Think Aloud' },
-          { id: 'retrospective-think-aloud', title: 'Retrospective Think Aloud' },
-          { id: 'focus-groups', title: 'Focus Groups' },
-          { id: 'participatory-design', title: 'Participatory Design' },
-          { id: 'co-design-workshops', title: 'Co-design Workshops' },
-          { id: 'cultural-probes', title: 'Cultural Probes' },
           { id: 'observation', title: 'Observation' },
           { id: 'shadowing', title: 'Shadowing' },
           { id: 'fly-on-the-wall-observation', title: 'Fly-on-the-wall Observation' },
-          { id: 'expert-interviews', title: 'Expert Interviews' },
-          { id: 'grounded-theory', title: 'Grounded Theory' },
+          { id: 'diary-studies', title: 'Diary Studies' },
+        ],
+      },
+      {
+        title: 'Participatory Research',
+        items: [
+          { id: 'participatory-design', title: 'Participatory Design' },
+          { id: 'co-design-workshops', title: 'Co-design Workshops' },
+          { id: 'cultural-probes', title: 'Cultural Probes' },
+        ],
+      },
+      {
+        title: 'Behavioral Science',
+        items: [
+          { id: 'think-aloud', title: 'Think Aloud' },
+          { id: 'retrospective-think-aloud', title: 'Retrospective Think Aloud' },
+        ],
+      },
+      {
+        title: 'Research Analysis',
+        items: [{ id: 'grounded-theory', title: 'Grounded Theory' }],
+      },
+      {
+        title: 'Research Rigor',
+        items: [
           { id: 'triangulation', title: 'Triangulation' },
           { id: 'mixed-methods-design', title: 'Mixed-Methods Design' },
           { id: 'inter-rater-reliability', title: 'Inter-rater Reliability' },
@@ -462,21 +485,42 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     categoryId: 'evaluation',
     groups: [
       {
-        title: null,
+        title: 'User Testing',
         items: [
           { id: 'usability-testing', title: 'Usability Testing' },
-          { id: 'heuristic-evaluation', title: 'Heuristic Evaluation' },
-          { id: 'cognitive-walkthrough', title: 'Cognitive Walkthrough' },
-          { id: 'accessibility-audit', title: 'Accessibility Audit' },
-          { id: 'expert-review', title: 'Expert Review' },
-          { id: 'a-b-testing', title: 'A/B Testing' },
           { id: 'benchmark-testing', title: 'Benchmark Testing' },
-          { id: 'comparative-testing', title: 'Comparative Testing' },
           { id: 'longitudinal-testing', title: 'Longitudinal Testing' },
           { id: 'pilot-testing', title: 'Pilot Testing' },
-          { id: 'pluralistic-walkthrough', title: 'Pluralistic Walkthrough' },
-          { id: 'goms-klm', title: 'GOMS / KLM' },
+          { id: 'seq', title: 'SEQ' },
         ],
+      },
+      {
+        title: 'Expert Evaluation',
+        items: [
+          { id: 'heuristic-evaluation', title: 'Heuristic Evaluation' },
+          { id: 'expert-review', title: 'Expert Review' },
+          { id: 'cognitive-walkthrough', title: 'Cognitive Walkthrough' },
+          { id: 'pluralistic-walkthrough', title: 'Pluralistic Walkthrough' },
+        ],
+      },
+      {
+        title: 'Comparative Testing',
+        items: [
+          { id: 'comparative-testing', title: 'Comparative Testing' },
+          { id: 'a-b-testing', title: 'A/B Testing' },
+        ],
+      },
+      {
+        title: 'Accessibility Evaluation',
+        items: [{ id: 'accessibility-audit', title: 'Accessibility Audit' }],
+      },
+      {
+        title: 'Information Architecture Evaluation',
+        items: [{ id: 'tree-testing', title: 'Tree Testing' }],
+      },
+      {
+        title: 'Performance Modeling',
+        items: [{ id: 'goms-klm', title: 'GOMS / KLM' }],
       },
     ],
   },
