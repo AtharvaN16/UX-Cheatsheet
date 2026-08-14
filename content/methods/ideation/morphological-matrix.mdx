@@ -1,0 +1,76 @@
+---
+id: morphological-matrix
+title: Morphological Matrix
+aka: ["Morphological Analysis", "Morphological Chart", "Zwicky Box"]
+category: ideation
+alsoIn: []
+kind: framework
+gives: conceptual
+effort: medium
+timeframe: days
+needs:
+  - The problem's key parameters/dimensions identified and named
+  - A list of distinct possible options for each parameter
+  - A way to screen combinations for internal consistency before pursuing any of them
+useInstead:
+  - when: You just need a single existing idea run through a fixed set of transformation prompts, not a full combinatorial map
+    method: scamper
+related:
+  alongside: [scamper, lotus-blossom]
+sources:
+  - title: "Discovery, Invention, Research Through the Morphological Approach"
+    author: Fritz Zwicky
+    url: https://archive.org/details/discoveryinventi0000zwic
+    type: book
+    year: 1969
+    seminal: true
+  - title: "General Morphological Analysis: A General Method for Non-Quantified Modelling"
+    author: Tom Ritchey (Swedish Morphological Society)
+    url: https://www.swemorph.com/ma.html
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A grid that lists a problem's key parameters as rows and every possible option for each parameter as columns, then systematically works through the resulting combinations to surface solutions that free-form brainstorming, generating one idea at a time, wouldn't reach.
+
+## Purpose
+
+Where free-form brainstorming tends to jump straight to a few familiar full solutions, a morphological matrix forces you to first decompose the problem into its independent parameters, then combine options across them — surfacing combinations no one would propose directly, because no one was holding that exact combination of choices in mind at once.
+
+## When to use
+
+- The problem has several genuinely independent dimensions (e.g. power source, material, form factor) rather than one dominant variable
+- You want to systematically map the full solution space before committing, not just generate a handful of options
+- Early brainstorming converged too fast and you suspect the team is missing viable combinations
+- You have time to build and screen a matrix properly — this isn't a five-minute exercise
+
+## How to do it
+
+1. Identify the problem's key parameters — the independent dimensions that together define a solution (e.g., for a new device: power source, input method, form factor, material).
+2. For each parameter, list every distinct option you can think of — these become the columns under each parameter's row.
+3. Lay the parameters as rows and their options as columns in a grid — this is the morphological matrix, sometimes called a Zwicky box.
+4. Work through the grid selecting one option per parameter to form a candidate combination — do this systematically, not just for the combinations that already seem obviously good.
+5. Screen candidate combinations for internal consistency — some option pairings are physically or logically incompatible and can be eliminated before further evaluation.
+6. Shortlist the consistent combinations that are genuinely novel or promising, and take those forward into prototyping or further evaluation.
+
+## Common mistakes
+
+- **Listing too few options per parameter** — a matrix with two options per dimension barely expands the solution space beyond what you'd generate by just talking; the value scales with how exhaustively each row is populated.
+- **Skipping the consistency screen** — mechanically generating every combination without checking whether the options are actually compatible produces a long list dominated by nonsense pairings, burying the viable ones.
+- **Choosing parameters that aren't independent** — if two "dimensions" are actually correlated, changing one always changes the other, and the matrix double-counts instead of expanding the space.
+- **Treating the matrix as the deliverable** — the matrix is a generation tool; the output that matters is the shortlisted combinations taken forward, not the grid itself.
+
+## Tips
+
+Use it specifically when you suspect the team is anchored on one or two familiar solutions — the matrix's value is forcing attention onto combinations you wouldn't have proposed directly, not onto combinations you would have generated anyway.
+
+## Using AI
+
+**Where it helps**
+- Enumerating the full cross-product of options across parameters, which gets unwieldy by hand once you have more than three or four dimensions with several options each
+- Doing a first-pass consistency screen by flagging combinations that look obviously incompatible, for a human to confirm
+
+**Where it fails**
+- Deciding which combinations are "promising" or worth pursuing. That judgment depends on context — cost, feasibility, strategic fit — that the matrix itself doesn't encode and a model isn't given; treating a model's ranking of combinations as the shortlist skips the actual evaluation step the method depends on.

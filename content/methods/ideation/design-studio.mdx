@@ -1,0 +1,68 @@
+---
+id: design-studio
+title: Design Studio
+aka: ["Design Studio Method", "UX Design Studio", "Design Charrette"]
+category: ideation
+alsoIn: []
+kind: method
+gives: qualitative
+effort: medium
+timeframe: hours
+needs:
+  - A cross-functional group (design, product, engineering, stakeholders) willing to sketch, not just discuss
+  - A clearly framed problem statement or user scenario to sketch against
+  - A facilitator to run timed sketch-critique-iterate rounds
+useInstead:
+  - when: You need one person's rapid individual divergence in a single timed round, not a multi-round group critique
+    method: crazy-8s
+related:
+  before: [crazy-8s]
+  alongside: [dot-voting, google-design-sprint]
+sources:
+  - title: "The Design Studio Method: Creative Problem Solving with UX Sketching"
+    author: Brian Sullivan
+    url: https://openlibrary.org/books/OL26967215M/The_design_studio_method
+    type: book
+    year: 2016
+    seminal: true
+  - title: "Facilitating an Effective Design Studio Workshop"
+    author: Kate Kaplan (Nielsen Norman Group)
+    url: https://www.nngroup.com/articles/facilitating-design-studio-workshop/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+A group format where each participant sketches their own solution to the same problem individually, presents it for group critique, then folds the strongest ideas into another round of sketching — repeated several times, getting sharper and more convergent each round.
+
+## Purpose
+
+Generates a wide spread of concepts fast, then converges the group around one direction everyone had a hand in shaping. Because everyone sketches — not just the designers — a design studio surfaces ideas from people who'd otherwise only comment on someone else's mockup, and the public critique step forces reasoning to be said out loud instead of left as unspoken taste.
+
+## When to use
+
+- You need to generate and converge on a direction in a single session, not over days of back-and-forth
+- Stakeholders keep disagreeing over Slack or email instead of around a shared artifact — get them sketching in a room instead
+- You want buy-in from a mixed group (PM, engineering, design) on the same direction before detailed design work starts
+- The problem is concrete enough to sketch against — a specific flow or screen, not "our onboarding strategy"
+
+## How to do it
+
+1. Frame the problem tightly — a specific user, task, and constraint, written where everyone can see it before sketching starts. A vague brief produces a vague first round.
+2. Round 1: each participant sketches 3-5 rough solutions individually, 5-10 minutes, pen and paper — no talking, no computers.
+3. Each participant presents their sketches to the group in under a few minutes; the group critiques against the problem framing, not personal taste.
+4. Pull out the strongest elements across everyone's sketches — a quick vote (dot voting works well here) or open discussion.
+5. Round 2: sketch again, now building on the strongest ideas from round 1 — fewer, more detailed concepts, with longer time allotted.
+6. Repeat for 2-4 rounds total, tightening scope and raising fidelity each round, until the group converges on one direction worth prototyping.
+
+## Common mistakes
+
+- **Letting one person sketch for the group** — the whole value of the format is that a PM's or engineer's untrained sketch surfaces an idea a designer wouldn't have proposed; skipping this collapses it into a regular design review.
+- **Critiquing the drawing instead of the idea** — "I can't tell what this is" is a fair note, but critique should target whether the concept solves the framed problem, not artistic skill.
+- **Running only one round** — the format's power is in the iterate step; a single sketch-and-critique pass is just a group brainstorm with paper.
+- **Letting the loudest voice's sketch win by default** — use an explicit method (dot voting, a quick poll) to surface what the group actually favors, not who argued hardest for their own idea.
+
+## Tips
+
+Time-box every step visibly — a countdown on a shared screen keeps a design studio moving at the pace that makes it work. Without one, the sketch round quietly turns into a 20-minute silent work session and the day runs out before the group ever converges.

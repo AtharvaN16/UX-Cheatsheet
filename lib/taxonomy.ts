@@ -301,19 +301,40 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     categoryId: 'ideation',
     groups: [
       {
-        title: null,
+        title: 'Divergent Thinking',
         items: [
+          { id: 'divergent-convergent-thinking', title: 'Divergent–Convergent Thinking' },
           { id: 'brainstorming', title: 'Brainstorming' },
           { id: 'brainwriting', title: 'Brainwriting' },
           { id: 'crazy-8s', title: 'Crazy 8s' },
-          { id: 'scamper', title: 'SCAMPER' },
-          { id: 'design-studio', title: 'Design Studio' },
           { id: 'reverse-brainstorming', title: 'Reverse Brainstorming' },
+          { id: 'mind-mapping', title: 'Mind Mapping' },
+          { id: 'role-storming', title: 'Role Storming' },
+          { id: 'worst-possible-idea', title: 'Worst Possible Idea' },
+          { id: 'forced-connections', title: 'Forced Connections' },
+        ],
+      },
+      {
+        title: 'Collaborative Ideation',
+        items: [
+          { id: 'design-studio', title: 'Design Studio' },
+          { id: 'bodystorming', title: 'Bodystorming' },
+          { id: 'dot-voting', title: 'Dot Voting' },
+        ],
+      },
+      {
+        title: 'Analogical & Exploratory',
+        items: [
+          { id: 'analogous-inspiration', title: 'Analogous Inspiration' },
+          { id: 'biomimicry', title: 'Biomimicry' },
+        ],
+      },
+      {
+        title: 'Systematic Ideation',
+        items: [
+          { id: 'scamper', title: 'SCAMPER' },
           { id: 'morphological-matrix', title: 'Morphological Matrix' },
           { id: 'lotus-blossom', title: 'Lotus Blossom' },
-          { id: 'bodystorming', title: 'Bodystorming' },
-          { id: 'analogous-inspiration', title: 'Analogous Inspiration' },
-          { id: 'dot-voting', title: 'Dot Voting' },
         ],
       },
     ],
