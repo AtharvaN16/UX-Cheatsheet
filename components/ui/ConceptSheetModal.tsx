@@ -14,6 +14,8 @@ export interface ConceptSheetItem {
   isWritten: boolean;
   kind?: string;
   method?: Method;
+  /** Cross-cutting "why would I use this" tags — see lib/useCases.ts. */
+  useCases?: string[];
 }
 
 interface ConceptSheetModalProps {

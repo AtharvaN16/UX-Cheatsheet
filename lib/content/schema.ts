@@ -51,6 +51,7 @@ export const frontmatterSchema = z.object({
   effort: z.enum(EFFORT),
   timeframe: z.enum(TIMEFRAME),
   needs: z.array(z.string()).default([]),
+  useCases: z.array(z.string().regex(KEBAB)).default([]),
   useInstead: z.array(useInsteadSchema).min(1),
   related: relatedSchema.default({ before: [], after: [], alongside: [] }),
   sources: z.array(sourceSchema).min(2),
