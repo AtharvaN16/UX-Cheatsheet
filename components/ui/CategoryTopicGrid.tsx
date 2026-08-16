@@ -62,11 +62,10 @@ function DropdownPortal({
       if (!el) return;
       const rect = el.getBoundingClientRect();
       const top = rect.bottom + 12;
-      // Clamp to whatever room is actually available below the trigger — for a trigger
-      // near the top of a tall page (the common case) that's plenty, so the list just
-      // renders in full with no visible scrollbar. Only a trigger with genuinely little
-      // room below it (near the bottom of a short viewport) ever needs to scroll — and
-      // it can, internally, self-contained within the popover.
+      // Self-contained overlay, not an in-flow element — clamp to whatever room is
+      // actually available below the trigger and let it scroll internally past that,
+      // rather than trying to move the page (which has no "more real content" to reveal
+      // under a floating overlay in the first place).
       const maxHeight = Math.max(160, window.innerHeight - top - 16);
       setCoords(
         align === 'right'
@@ -83,25 +82,42 @@ function DropdownPortal({
     };
   }, [open, triggerRef, align]);
 
-  if (!open || !coords || typeof document === 'undefined') return null;
+  if (typeof document === 'undefined') return null;
 
   return createPortal(
-    <>
-      <div className="fixed inset-0 z-40" onClick={onClose} />
-      <div
-        style={{
-          position: 'fixed',
-          top: coords.top,
-          left: coords.left,
-          right: coords.right,
-          width,
-          maxHeight: coords.maxHeight,
-        }}
-        className="z-50 overflow-y-auto rounded-2xl border border-[#E5E2D9] bg-[#FAF8F5] shadow-2xl"
-      >
-        {children}
-      </div>
-    </>,
+    <AnimatePresence>
+      {open && coords && (
+        <motion.div
+          key="dropdown-backdrop"
+          className="fixed inset-0 z-40"
+          onClick={onClose}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.15 }}
+        />
+      )}
+      {open && coords && (
+        <motion.div
+          key="dropdown-panel"
+          style={{
+            position: 'fixed',
+            top: coords.top,
+            left: coords.left,
+            right: coords.right,
+            width,
+            maxHeight: coords.maxHeight,
+          }}
+          className="z-50 overflow-y-auto rounded-2xl border border-[#E5E2D9] bg-[#FAF8F5] shadow-2xl"
+          initial={{ opacity: 0, y: -8, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -8, scale: 0.98 }}
+          transition={{ duration: 0.15, ease: [0.32, 0.72, 0, 1] }}
+        >
+          {children}
+        </motion.div>
+      )}
+    </AnimatePresence>,
     document.body
   );
 }

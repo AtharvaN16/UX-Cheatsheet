@@ -56,6 +56,14 @@ export const USE_CASES: readonly UseCase[] = [
   { id: 'understand-systems', label: 'Understand systems' },
   { id: 'anticipate-consequences', label: 'Anticipate consequences' },
   { id: 'influence-behavior', label: 'Influence behavior' },
+
+  // Ideation (generate-ideas above is shared/reused, not duplicated)
+  { id: 'expand-ideas', label: 'Expand ideas' },
+  { id: 'explore-alternatives', label: 'Explore alternatives' },
+  { id: 'change-perspective', label: 'Change perspective' },
+  { id: 'break-constraints', label: 'Break constraints' },
+  { id: 'develop-ideas', label: 'Develop ideas' },
+  { id: 'select-ideas', label: 'Select ideas' },
 ] as const;
 
 const USE_CASE_MAP = new Map(USE_CASES.map((u) => [u.id, u]));
