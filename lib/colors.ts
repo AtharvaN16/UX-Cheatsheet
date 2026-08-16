@@ -9,7 +9,7 @@ export interface LawsOfUXColor {
  * Muted solid colors shared 1-to-1 by category cards & topic page banners
  */
 export const GROUP_MUTED_COLORS: Record<string, LawsOfUXColor> = {
-  'UX Psychology': { hex: '#D97757', name: 'Terracotta' },
+  'UX Psychology': { hex: '#B24A58', name: 'Muted Rose' },
   'Strategic Thinking': { hex: '#5B9A82', name: 'Sage Teal' },
   'Research': { hex: '#5A92C6', name: 'Sky Blue' },
   'Design & Craft': { hex: '#8C77B8', name: 'Dusk Violet' },
@@ -18,9 +18,11 @@ export const GROUP_MUTED_COLORS: Record<string, LawsOfUXColor> = {
 };
 
 export const DEFAULT_FALLBACK_COLOR: LawsOfUXColor = {
-  hex: '#D97757',
-  name: 'Terracotta',
+  hex: '#B24A58',
+  name: 'Muted Rose',
 };
+
+
 
 export function getCategoryColor(categoryId: string): LawsOfUXColor {
   const group = getCategoryGroup(categoryId);

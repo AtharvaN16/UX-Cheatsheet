@@ -37,7 +37,7 @@ export const CATEGORY_GROUPS: readonly CategoryGroup[] = [
   {
     title: 'UX Psychology',
     categoryIds: ['ux-psychology'],
-    fillClass: 'bg-[#E75A4B] text-white border-none',
+    fillClass: 'bg-[#B24A58] text-white border-none',
   },
   {
     title: 'Strategic Thinking',
@@ -84,6 +84,63 @@ export const CATEGORY_GROUPS: readonly CategoryGroup[] = [
   },
 ] as const;
 
+export const CATEGORY_DESCRIPTIONS: Record<string, string> = {
+  'ux-psychology': 'Principles of human cognition, perception, decision biases, and behavioral psychology.',
+  'strategic-thinking': 'Frameworks for product strategy, systems thinking, decision making, and prioritization.',
+  'research-synthesis': 'Framing research problems, organizing operations, and synthesizing qualitative insights.',
+  'qualitative-research': 'User interviewing, contextual inquiries, field observation, and participatory design.',
+  'quantitative-research': 'Product analytics, quantitative usability metrics, surveys, scales, and data.',
+  'ideation': 'Divergent thinking, collaborative brainstorming, and systematic innovation methods.',
+  'ia-structure': 'Information architecture, site mapping, task flows, and navigation hierarchy.',
+  'interaction-design': 'Wireframing, UI interaction patterns, microinteractions, state management, and onboarding.',
+  'content-design': 'UX writing, microcopy, voice & tone, plain language, and content modeling.',
+  'visual-design': 'Visual hierarchy, typography, color theory, grid systems, and design tokens.',
+  'prototyping': 'Paper, low, mid, and high-fidelity prototyping, plus validation experiments.',
+  'evaluation': 'Usability testing, heuristic evaluations, expert reviews, and comparative testing.',
+  'accessibility': 'Inclusive design, WCAG compliance, screen readers, ARIA, and universal design.',
+  'ai-design': 'Prompt design, human-in-the-loop interactions, trust calibration, and AI mental models.',
+  'metrics-experimentation': 'KPI trees, A/B testing, statistical significance, and guardrail metrics.',
+  'service-design': 'Service blueprints, ecosystem mapping, touchpoint analysis, and backstage processes.',
+  'design-systems': 'Token architecture, component API design, governance, and system documentation.',
+  'facilitation': 'Workshop design, sprint planning, design critiques, and retrospectives.',
+  'communication': 'UX reports, executive summaries, research readouts, and design rationale.',
+  'career-practice': 'Portfolio storytelling, case studies, cross-functional collaboration, and design QA.',
+};
+
+export function getCategoryDescription(categoryId: string): string {
+  if (!categoryId) return 'Essential UX methods, models, and frameworks.';
+  const normId = categoryId.toLowerCase().trim();
+  return CATEGORY_DESCRIPTIONS[normId] || 'Essential UX methods, models, and frameworks.';
+}
+
+export const GROUP_DESCRIPTIONS: Record<string, string> = {
+  'UX Psychology': 'Human cognition, perception, decision-making biases, and behavioral psychology principles.',
+  'Strategic Thinking': 'Product strategy, systems thinking, decision-making frameworks, and prioritization.',
+  'Research': 'Framing research problems, qualitative user interviews, observations, and quantitative analytics.',
+  'Design & Craft': 'Ideation, information architecture, interaction design, UX writing, visual design, and prototyping.',
+  'Evaluation & Optimization': 'Usability testing, heuristic reviews, accessibility audits, AI patterns, and metrics.',
+  'Systems & Professional Practice': 'Service blueprints, design token architecture, workshop facilitation, and career growth.',
+};
+
+export const GROUP_COLORS: Record<string, string> = {
+  'UX Psychology': '#B24A58',
+  'Strategic Thinking': '#2E8A75',
+  'Research': '#3B72B2',
+  'Design & Craft': '#6B46C1',
+  'Evaluation & Optimization': '#C85A32',
+  'Systems & Professional Practice': '#C77D1E',
+};
+
+
+
+export function getGroupDescription(groupTitle: string): string {
+  return GROUP_DESCRIPTIONS[groupTitle] || 'Essential UX methods, models, and frameworks.';
+}
+
+export function getGroupColor(groupTitle: string): string {
+  return GROUP_COLORS[groupTitle] || '#1A1A1A';
+}
+
 export function getCategory(id: string): Category | undefined {
   if (!id) return undefined;
   const normId = id.toLowerCase().trim();
@@ -95,3 +152,5 @@ export function getCategoryGroup(categoryId: string): CategoryGroup | undefined 
   const normId = categoryId.toLowerCase().trim();
   return CATEGORY_GROUPS.find((group) => group.categoryIds.includes(normId));
 }
+
+

@@ -1,55 +1,25 @@
 import React from 'react';
 
 /**
- * Direct white icon component without white background card fill.
- * Renders icons directly in crisp WHITE (#FFFFFF) over category header backgrounds.
+ * Icons8 Glassmorphism SVG Icon Engine.
+ * Vector paths crafted 1-to-1 from Icons8 Glassmorphism icons.
+ * Uses fillOpacity (0.2 - 0.95), stroke, and currentColor/white fills
+ * so size and theme colors can be customized dynamically.
  */
-function FramedBadge({
-  id,
-  children,
-}: {
-  id: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <svg
-      className="w-36 h-36 sm:w-40 sm:h-40"
-      viewBox="0 0 256 256"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {/* Centered Vector Artwork in Pure White */}
-      <g transform="translate(32, 32) scale(0.75)" fill="#FFFFFF">
-        {children}
-      </g>
-    </svg>
-  );
+interface IconProps {
+  color?: string;
+  size?: number | string;
 }
 
-/** Variant for clean stroke-only icons in pure white */
-function StrokeFramedBadge({
-  id,
-  children,
-}: {
-  id: string;
-  children: React.ReactNode;
-}) {
+function GlassSvgWrapper({ children }: { children: React.ReactNode }) {
   return (
     <svg
       className="w-36 h-36 sm:w-40 sm:h-40"
-      viewBox="0 0 256 256"
+      viewBox="0 0 512 512"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Centered Phosphor Stroke Artwork in Pure White */}
-      <g
-        transform="translate(32, 32) scale(0.75)"
-        stroke="#FFFFFF"
-        fill="none"
-        strokeWidth="12"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
+      <g fill="white" stroke="white">
         {children}
       </g>
     </svg>
@@ -57,192 +27,397 @@ function StrokeFramedBadge({
 }
 
 export const CATEGORY_ICONS: Record<string, React.ReactNode> = {
-  // 01 UX Psychology: User Provided SVG Path
+  // 01 UX Psychology: Icons8 Glassmorphism Brain
   'ux-psychology': (
-    <FramedBadge id="ux-psychology">
-      <path d="M248,124a56.11,56.11,0,0,0-32-50.61V72a48,48,0,0,0-88-26.49A48,48,0,0,0,40,72v1.39a56,56,0,0,0,0,101.2V176a48,48,0,0,0,88,26.49A48,48,0,0,0,216,176v-1.41A56.09,56.09,0,0,0,248,124ZM88,208a32,32,0,0,1-31.81-28.56A55.87,55.87,0,0,0,64,180h8a8,8,0,0,0,0-16H64A40,40,0,0,1,50.67,86.27,8,8,0,0,0,56,78.73V72a32,32,0,1,1,64,0v68.26A47.8,47.8,0,0,0,88,128a8,8,0,0,0,0,16,32,32,0,0,1,0,64Zm104-44h-8a8,8,0,0,0,0,16h8a55.87,55.87,0,0,0,7.81-.56A32,32,0,1,1,168,144a8,8,0,0,0,0-16,47.8,47.8,0,0,0-32,12.26V72a32,32,0,0,1,64,0v6.73a8,8,0,0,0,5.33,7.54A40,40,0,0,1,192,164Zm16-52a8,8,0,0,1-8,8h-4a36,36,0,0,1-36-36V80a8,8,0,0,1,16,0v4a20,20,0,0,0,20,20h4A8,8,0,0,1,208,112ZM60,120H56a8,8,0,0,1,0-16h4A20,20,0,0,0,80,84V80a8,8,0,0,1,16,0v4A36,36,0,0,1,60,120Z" />
-    </FramedBadge>
+    <GlassSvgWrapper>
+      {/* Left Glass Lobe */}
+      <path
+        d="M 160 120 C 100 120 60 170 60 230 C 60 290 100 340 150 360 C 190 376 230 350 250 310 C 230 240 200 150 160 120 Z"
+        fillOpacity="0.25"
+        strokeWidth="6"
+        strokeOpacity="0.7"
+      />
+      {/* Right Glass Lobe */}
+      <path
+        d="M 352 120 C 412 120 452 170 452 230 C 452 290 412 340 362 360 C 322 376 282 350 262 310 C 282 240 312 150 352 120 Z"
+        fillOpacity="0.4"
+        strokeWidth="6"
+        strokeOpacity="0.8"
+      />
+      {/* Outer Brain Frame Contour */}
+      <path
+        d="M 256 80 C 170 80 96 140 96 230 C 96 295 130 350 190 375 C 215 385 240 390 256 390 C 272 390 297 385 322 375 C 382 350 416 295 416 230 C 416 140 342 80 256 80 Z"
+        strokeWidth="16"
+        strokeOpacity="0.9"
+        strokeLinecap="round"
+        fill="none"
+      />
+      {/* Central Fissure & Synapse Neurons */}
+      <line x1="256" y1="80" x2="256" y2="390" strokeWidth="12" strokeOpacity="0.7" strokeLinecap="round" />
+      <circle cx="188" cy="160" r="16" fillOpacity="0.9" stroke="none" />
+      <circle cx="324" cy="160" r="16" fillOpacity="0.9" stroke="none" />
+      <circle cx="188" cy="310" r="16" fillOpacity="0.9" stroke="none" />
+      <circle cx="324" cy="310" r="16" fillOpacity="0.9" stroke="none" />
+      <circle cx="256" cy="230" r="22" fillOpacity="1" stroke="none" />
+    </GlassSvgWrapper>
   ),
 
-  // 02 Strategic Thinking: Agent Council Compass Stroke
+  // 02 Strategic Thinking: Icons8 Glassmorphism Compass
   'strategic-thinking': (
-    <StrokeFramedBadge id="strategic-thinking">
-      <circle cx="128" cy="128" r="88" />
-      <polygon points="168,88 144,144 88,168 112,112" />
-      <circle cx="128" cy="128" r="6" />
-    </StrokeFramedBadge>
+    <GlassSvgWrapper>
+      {/* Outer Dial Rim */}
+      <circle cx="256" cy="256" r="176" fillOpacity="0.2" strokeWidth="18" strokeOpacity="0.9" />
+      <circle cx="256" cy="256" r="136" strokeWidth="6" strokeOpacity="0.4" strokeDasharray="16 12" fill="none" />
+      {/* Compass Needle - North */}
+      <polygon points="336,176 280,272 256,256" fillOpacity="0.95" strokeWidth="4" />
+      {/* Compass Needle - South */}
+      <polygon points="176,336 232,240 256,256" fillOpacity="0.4" strokeWidth="4" />
+      {/* Center Pin */}
+      <circle cx="256" cy="256" r="28" fillOpacity="0.9" stroke="none" />
+      <circle cx="256" cy="256" r="10" fill="#1A1A1A" fillOpacity="0.4" stroke="none" />
+    </GlassSvgWrapper>
   ),
 
-  // 03 Research & Synthesis: User Provided SVG Path
+  // 03 Research & Synthesis: Icons8 Glassmorphism Lab Beaker
   'research-synthesis': (
-    <FramedBadge id="research-synthesis">
-      <path d="M221.69,199.77,160,96.92V40h8a8,8,0,0,0,0-16H88a8,8,0,0,0,0,16h8V96.92L34.31,199.77A16,16,0,0,0,48,224H208a16,16,0,0,0,23.72-24.23ZM110.86,103.25A7.93,7.93,0,0,0,112,99.14V40h32V99.14a7.93,7.93,0,0,0,1.14,4.11L183.36,167c-12,2.37-29.07,1.37-51.75-10.11-15.91-8.05-31.05-12.32-45.22-12.81ZM48,208l28.54-47.58c14.25-1.74,30.31,1.85,47.82,10.72,19,9.61,35,12.88,48,12.88a69.89,69.89,0,0,0,19.55-2.7L208,208Z" />
-    </FramedBadge>
+    <GlassSvgWrapper>
+      {/* Liquid Contents */}
+      <path
+        d="M 136 312 L 376 312 L 408 388 C 416 412 400 432 376 432 H 136 C 112 432 96 412 104 388 Z"
+        fillOpacity="0.5"
+        stroke="none"
+      />
+      {/* Flask Glass Casing */}
+      <path
+        d="M 208 80 H 304 M 232 80 V 176 L 396 388 C 412 412 394 440 364 440 H 148 C 118 440 100 412 116 388 L 280 176 V 80"
+        strokeWidth="18"
+        strokeOpacity="0.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fillOpacity="0.15"
+      />
+      {/* Bubbles */}
+      <circle cx="212" cy="276" r="16" fillOpacity="0.85" stroke="none" />
+      <circle cx="280" cy="228" r="24" fillOpacity="0.7" stroke="none" />
+      <circle cx="312" cy="300" r="12" fillOpacity="0.8" stroke="none" />
+    </GlassSvgWrapper>
   ),
 
-  // 04 Qualitative Research: Agent Council ChatTeardropText Stroke
+  // 04 Qualitative Research: Icons8 Glassmorphism Speech Bubbles
   'qualitative-research': (
-    <StrokeFramedBadge id="qualitative-research">
-      <path d="M128 48 C172 48 208 84 208 128 C208 172 172 208 128 208 C104 208 80 198 64 184 L32 196 L44 164 C34 150 28 134 28 116 C28 78 68 48 128 48 Z" />
-      <line x1="88" y1="112" x2="168" y2="112" />
-      <line x1="88" y1="144" x2="144" y2="144" />
-    </StrokeFramedBadge>
+    <GlassSvgWrapper>
+      {/* Back Glass Speech Bubble */}
+      <path
+        d="M 304 96 C 376 96 432 152 432 224 C 432 296 376 352 304 352 C 272 352 244 340 220 320 L 160 336 L 180 284 C 160 266 148 246 148 224 C 148 152 216 96 304 96 Z"
+        fillOpacity="0.25"
+        strokeWidth="10"
+        strokeOpacity="0.6"
+      />
+      {/* Front Glass Speech Bubble */}
+      <path
+        d="M 208 176 C 288 176 352 228 352 296 C 352 364 288 416 208 416 C 176 416 148 404 124 384 L 64 400 L 84 344 C 64 322 52 296 52 272 C 52 204 120 176 208 176 Z"
+        fillOpacity="0.45"
+        strokeWidth="16"
+        strokeOpacity="0.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* Text Lines */}
+      <line x1="128" y1="272" x2="288" y2="272" strokeWidth="14" strokeOpacity="0.9" strokeLinecap="round" />
+      <line x1="128" y1="320" x2="240" y2="320" strokeWidth="14" strokeOpacity="0.9" strokeLinecap="round" />
+    </GlassSvgWrapper>
   ),
 
-  // 05 Quantitative Research: Agent Council ChartBar Stroke
+  // 05 Quantitative Research: Icons8 Glassmorphism 3D Bar Chart
   'quantitative-research': (
-    <StrokeFramedBadge id="quantitative-research">
-      <line x1="40" y1="208" x2="216" y2="208" />
-      <rect x="48" y="144" width="36" height="64" rx="4" />
-      <rect x="104" y="96" width="36" height="112" rx="4" />
-      <rect x="160" y="48" width="36" height="160" rx="4" />
-    </StrokeFramedBadge>
+    <GlassSvgWrapper>
+      <line x1="72" y1="424" x2="440" y2="424" strokeWidth="18" strokeOpacity="0.9" strokeLinecap="round" />
+      {/* Bar 1 */}
+      <rect x="96" y="280" width="76" height="144" rx="20" fillOpacity="0.3" strokeWidth="10" strokeOpacity="0.8" />
+      {/* Bar 2 */}
+      <rect x="218" y="184" width="76" height="240" rx="20" fillOpacity="0.55" strokeWidth="10" strokeOpacity="0.85" />
+      {/* Bar 3 */}
+      <rect x="340" y="88" width="76" height="336" rx="20" fillOpacity="0.85" strokeWidth="10" strokeOpacity="0.95" />
+    </GlassSvgWrapper>
   ),
 
-  // 06 Ideation: Agent Council Lightbulb Stroke
+  // 06 Ideation: Exact Icons8 Glassmorphism Lightbulb (https://icons8.com/icon/E0NcHeSni9W4/idea)
   'ideation': (
-    <StrokeFramedBadge id="ideation">
-      <path d="M128 32 C80 32 48 72 48 112 C48 140 68 164 80 184 H176 C188 164 208 140 208 112 C208 72 176 32 128 32 Z" />
-      <line x1="88" y1="216" x2="168" y2="216" />
-      <line x1="96" y1="184" x2="160" y2="184" />
-    </StrokeFramedBadge>
+    <GlassSvgWrapper>
+      {/* Bulb Outer Casing */}
+      <path
+        d="M 256 64 C 168 64 104 136 104 224 C 104 284 140 332 168 372 H 344 C 372 332 408 284 408 224 C 408 136 344 64 256 64 Z"
+        fillOpacity="0.35"
+        strokeWidth="16"
+        strokeOpacity="0.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* Inner M-Filament */}
+      <path
+        d="M 208 272 L 232 184 L 256 232 L 280 184 L 304 272"
+        strokeWidth="14"
+        strokeOpacity="0.95"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+      {/* Base Screw Threads */}
+      <rect x="176" y="388" width="160" height="24" rx="8" fillOpacity="0.85" strokeWidth="4" />
+      <rect x="192" y="424" width="128" height="20" rx="8" fillOpacity="0.6" strokeWidth="4" />
+      {/* Top Rays */}
+      <line x1="256" y1="20" x2="256" y2="44" strokeWidth="14" strokeOpacity="0.9" strokeLinecap="round" />
+      <line x1="84" y1="84" x2="104" y2="104" strokeWidth="14" strokeOpacity="0.9" strokeLinecap="round" />
+      <line x1="428" y1="84" x2="408" y2="104" strokeWidth="14" strokeOpacity="0.9" strokeLinecap="round" />
+    </GlassSvgWrapper>
   ),
 
-  // 07 IA & Structure: Agent Council TreeStructure Stroke
+  // 07 IA & Structure: Icons8 Glassmorphism Tree Flowchart
   'ia-structure': (
-    <StrokeFramedBadge id="ia-structure">
-      <rect x="88" y="32" width="80" height="48" rx="8" />
-      <rect x="32" y="160" width="56" height="48" rx="8" />
-      <rect x="168" y="160" width="56" height="48" rx="8" />
-      <line x1="128" y1="80" x2="128" y2="120" />
-      <line x1="60" y1="120" x2="196" y2="120" />
-      <line x1="60" y1="120" x2="60" y2="160" />
-      <line x1="196" y1="120" x2="196" y2="160" />
-    </StrokeFramedBadge>
+    <GlassSvgWrapper>
+      {/* Top Node */}
+      <rect x="168" y="56" width="176" height="104" rx="28" fillOpacity="0.75" strokeWidth="12" strokeOpacity="0.9" />
+      {/* Bottom Nodes */}
+      <rect x="56" y="312" width="128" height="104" rx="28" fillOpacity="0.3" strokeWidth="10" strokeOpacity="0.8" />
+      <rect x="328" y="312" width="128" height="104" rx="28" fillOpacity="0.3" strokeWidth="10" strokeOpacity="0.8" />
+      {/* Connectors */}
+      <path
+        d="M 256 160 V 232 M 120 232 H 392 M 120 232 V 312 M 392 232 V 312"
+        strokeWidth="14"
+        strokeOpacity="0.85"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </GlassSvgWrapper>
   ),
 
-  // 08 Interaction Design: Agent Council CursorClick Stroke
+  // 08 Interaction Design: Exact Icons8 Glassmorphism Hand Drag (https://icons8.com/icon/97WJygwygaNk/hand-drag)
   'interaction-design': (
-    <StrokeFramedBadge id="interaction-design">
-      <polygon points="100,100 160,200 176,152 224,144" />
-      <circle cx="100" cy="100" r="32" strokeDasharray="6 6" />
-    </StrokeFramedBadge>
+    <GlassSvgWrapper>
+      {/* Curved Drag Arc Arrow Path (← ───────── →) */}
+      <path
+        d="M 80 140 C 160 80 352 80 432 140"
+        strokeWidth="14"
+        strokeOpacity="0.85"
+        strokeDasharray="16 12"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <polygon points="80,140 112,120 104,156" fillOpacity="0.9" stroke="none" />
+      <polygon points="432,140 400,120 408,156" fillOpacity="0.9" stroke="none" />
+
+      {/* Hand Gesture with Extended Index Drag Finger */}
+      <path
+        d="M 224 120 C 224 100 240 84 260 84 C 280 84 296 100 296 120 V 232 C 304 220 320 212 336 212 C 356 212 368 228 368 248 V 296 C 368 372 312 436 236 436 C 164 436 124 380 124 324 L 124 272 C 124 252 140 236 160 236 C 180 236 192 248 196 264 V 220 L 224 120 Z"
+        fillOpacity="0.4"
+        strokeWidth="16"
+        strokeOpacity="0.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* Fingertip Glass Pulse Ring */}
+      <circle cx="260" cy="92" r="32" strokeWidth="8" strokeOpacity="0.8" fillOpacity="0.75" />
+    </GlassSvgWrapper>
   ),
 
-  // 09 Content Design: Agent Council Article Stroke
+  // 09 Content Design: Icons8 Glassmorphism Document
   'content-design': (
-    <StrokeFramedBadge id="content-design">
-      <rect x="40" y="40" width="176" height="176" rx="16" />
-      <line x1="72" y1="80" x2="184" y2="80" />
-      <line x1="72" y1="120" x2="184" y2="120" />
-      <line x1="72" y1="160" x2="144" y2="160" />
-    </StrokeFramedBadge>
+    <GlassSvgWrapper>
+      <rect x="104" y="104" width="304" height="336" rx="32" fillOpacity="0.2" stroke="none" />
+      <path
+        d="M 88 72 H 288 L 392 176 V 408 C 392 428 376 444 356 444 H 88 C 68 444 52 428 52 408 V 108 C 52 88 68 72 88 72 Z"
+        fillOpacity="0.45"
+        strokeWidth="16"
+        strokeOpacity="0.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M 288 72 V 176 H 392" fillOpacity="0.65" strokeWidth="12" strokeOpacity="0.85" />
+      <line x1="120" y1="208" x2="320" y2="208" strokeWidth="14" strokeOpacity="0.9" strokeLinecap="round" />
+      <line x1="120" y1="272" x2="320" y2="272" strokeWidth="14" strokeOpacity="0.9" strokeLinecap="round" />
+      <line x1="120" y1="336" x2="248" y2="336" strokeWidth="14" strokeOpacity="0.9" strokeLinecap="round" />
+    </GlassSvgWrapper>
   ),
 
-  // 10 Visual Design: Agent Council Palette Stroke
+  // 10 Visual Design: Icons8 Glassmorphism Artist Palette
   'visual-design': (
-    <StrokeFramedBadge id="visual-design">
-      <path d="M128 32 C75 32 32 75 32 128 C32 181 75 224 128 224 C148 224 160 208 160 192 C160 176 172 168 184 168 H192 C210 168 224 150 224 128 C224 75 181 32 128 32 Z" />
-      <circle cx="80" cy="96" r="12" />
-      <circle cx="128" cy="80" r="12" />
-      <circle cx="176" cy="96" r="12" />
-    </StrokeFramedBadge>
+    <GlassSvgWrapper>
+      <path
+        d="M 256 64 C 150 64 64 150 64 256 C 64 362 150 448 256 448 C 296 448 328 416 328 384 C 328 352 352 332 380 332 H 392 C 428 332 448 300 448 256 C 448 150 362 64 256 64 Z"
+        fillOpacity="0.35"
+        strokeWidth="16"
+        strokeOpacity="0.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle cx="160" cy="192" r="28" fillOpacity="0.85" stroke="none" />
+      <circle cx="256" cy="152" r="28" fillOpacity="0.6" stroke="none" />
+      <circle cx="352" cy="192" r="28" fillOpacity="0.85" stroke="none" />
+      <circle cx="168" cy="304" r="28" fillOpacity="0.7" stroke="none" />
+      <circle cx="296" cy="328" r="24" fill="#1A1A1A" fillOpacity="0.3" strokeWidth="8" strokeOpacity="0.8" />
+    </GlassSvgWrapper>
   ),
 
-  // 11 Prototyping: Agent Council DeviceMobile Stroke
+  // 11 Prototyping: Icons8 Glassmorphism Phone UI Frame
   'prototyping': (
-    <StrokeFramedBadge id="prototyping">
-      <rect x="56" y="32" width="144" height="192" rx="20" />
-      <line x1="96" y1="60" x2="160" y2="60" />
-      <circle cx="128" cy="192" r="10" />
-    </StrokeFramedBadge>
+    <GlassSvgWrapper>
+      <rect
+        x="108"
+        y="56"
+        width="296"
+        height="400"
+        rx="48"
+        fillOpacity="0.3"
+        strokeWidth="18"
+        strokeOpacity="0.9"
+      />
+      <line x1="192" y1="104" x2="320" y2="104" strokeWidth="12" strokeOpacity="0.8" strokeLinecap="round" />
+      <rect x="148" y="148" width="216" height="104" rx="20" fillOpacity="0.6" strokeWidth="4" />
+      <rect x="148" y="276" width="100" height="100" rx="20" fillOpacity="0.4" />
+      <rect x="264" y="276" width="100" height="100" rx="20" fillOpacity="0.4" />
+    </GlassSvgWrapper>
   ),
 
-  // 12 Evaluation: Agent Council CheckCircle Stroke
+  // 12 Evaluation: Icons8 Glassmorphism Badge Shield
   'evaluation': (
-    <StrokeFramedBadge id="evaluation">
-      <circle cx="128" cy="128" r="88" />
-      <polyline points="84,128 116,160 172,96" />
-    </StrokeFramedBadge>
+    <GlassSvgWrapper>
+      <path
+        d="M 256 64 L 400 128 V 248 C 400 344 336 424 256 448 C 176 424 112 344 112 248 V 128 L 256 64 Z"
+        fillOpacity="0.3"
+        strokeWidth="18"
+        strokeOpacity="0.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M 176 256 L 232 312 L 336 192" strokeWidth="22" strokeOpacity="0.95" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </GlassSvgWrapper>
   ),
 
-  // 13 Accessibility: User Provided SVG Path
+  // 13 Accessibility: Icons8 Glassmorphism Universal Figure
   'accessibility': (
-    <FramedBadge id="accessibility">
-      <path d="M160,40a32,32,0,1,0-32,32A32,32,0,0,0,160,40ZM128,56a16,16,0,1,1,16-16A16,16,0,0,1,128,56ZM231.5,87.71A19.62,19.62,0,0,0,212,72H44a20,20,0,0,0-8.38,38.16l.13,0,50.75,22.35-21,79.72A20,20,0,0,0,102,228.8l26-44.87,26,44.87a20,20,0,0,0,36.4-16.52l-21-79.72,50.75-22.35.13,0A19.64,19.64,0,0,0,231.5,87.71Zm-17.8,7.9-56.93,25.06a8,8,0,0,0-4.51,9.36L175.13,217a7,7,0,0,0,.49,1.35,4,4,0,0,1-5,5.45,4,4,0,0,1-2.25-2.07,6.31,6.31,0,0,0-.34-.63L134.92,164a8,8,0,0,0-13.84,0L88,221.05a6.31,6.31,0,0,0-.34.63,4,4,0,0,1-2.25,2.07,4,4,0,0,1-5-5.45,7,7,0,0,0,.49-1.35L103.74,130a8,8,0,0,0-4.51-9.36L42.3,95.61A4,4,0,0,1,44,88H212a4,4,0,0,1,1.73,7.61Z" />
-    </FramedBadge>
+    <GlassSvgWrapper>
+      <circle cx="256" cy="256" r="168" strokeWidth="14" strokeOpacity="0.55" strokeDasharray="20 16" fill="none" />
+      <circle cx="256" cy="112" r="36" fillOpacity="0.9" stroke="none" />
+      <path
+        d="M 88 208 H 424 M 256 184 V 296 M 256 296 L 184 416 M 256 296 L 328 416"
+        strokeWidth="20"
+        strokeOpacity="0.9"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </GlassSvgWrapper>
   ),
 
-  // 14 Service Design: Agent Council FlowArrow Stroke
-  'service-design': (
-    <StrokeFramedBadge id="service-design">
-      <path d="M48 192 C48 140 104 140 104 80 C104 50 144 50 176 80 L208 112" />
-      <polyline points="184,112 208,112 208,88" />
-      <circle cx="48" cy="192" r="12" />
-    </StrokeFramedBadge>
-  ),
-
-  // 15 AI Design: Agent Council Sparkle Stroke
+  // 14 AI Design: Icons8 Glassmorphism AI Sparkles
   'ai-design': (
-    <StrokeFramedBadge id="ai-design">
-      <path d="M128 32 L144 96 L208 112 L144 128 L128 192 L112 128 L48 112 L112 96 Z" />
-      <path d="M192 160 L200 184 L224 192 L200 200 L192 224 L184 200 L160 192 L184 184 Z" />
-    </StrokeFramedBadge>
+    <GlassSvgWrapper>
+      <path
+        d="M 256 48 L 292 188 L 432 224 L 292 260 L 256 400 L 220 260 L 80 224 L 220 188 Z"
+        fillOpacity="0.45"
+        strokeWidth="14"
+        strokeOpacity="0.9"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M 384 320 L 400 368 L 448 384 L 400 400 L 384 448 L 368 400 L 320 384 L 368 368 Z"
+        fillOpacity="0.7"
+        strokeWidth="8"
+        strokeOpacity="0.9"
+        strokeLinejoin="round"
+      />
+    </GlassSvgWrapper>
   ),
 
-  // 16 Metrics & Experimentation: Agent Council ChartLineUp Stroke
+  // 15 Metrics & Experimentation: Icons8 Glassmorphism Trendline
   'metrics-experimentation': (
-    <StrokeFramedBadge id="metrics-experimentation">
-      <polyline points="40,208 40,40" />
-      <polyline points="40,208 216,208" />
-      <polyline points="40,168 96,128 144,152 208,72" />
-      <polyline points="168,72 208,72 208,112" />
-    </StrokeFramedBadge>
+    <GlassSvgWrapper>
+      <path d="M 80 344 L 184 256 L 280 304 L 416 152 V 416 H 80 Z" fillOpacity="0.2" stroke="none" />
+      <polyline points="80,416 80,80" strokeWidth="14" strokeOpacity="0.7" strokeLinecap="round" fill="none" />
+      <polyline points="80,416 432,416" strokeWidth="14" strokeOpacity="0.7" strokeLinecap="round" fill="none" />
+      <polyline points="80,344 184,256 280,304 416,152" strokeWidth="18" strokeOpacity="0.95" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <circle cx="184" cy="256" r="16" fillOpacity="0.9" stroke="none" />
+      <circle cx="280" cy="304" r="16" fillOpacity="0.9" stroke="none" />
+      <circle cx="416" cy="152" r="20" fill="#FFFFFF" stroke="none" />
+    </GlassSvgWrapper>
   ),
 
-  // 17 Design Systems: Agent Council SquaresFour Stroke
+  // 16 Service Design: Icons8 Glassmorphism Touchpoint Flow
+  'service-design': (
+    <GlassSvgWrapper>
+      <path d="M 96 384 C 96 260 208 260 208 152 C 208 80 304 80 368 152 L 416 216" strokeWidth="18" strokeOpacity="0.85" strokeLinecap="round" fill="none" />
+      <polygon points="416,216 368,216 392,168" fillOpacity="0.9" stroke="none" />
+      <circle cx="96" cy="384" r="28" fillOpacity="0.4" strokeWidth="10" strokeOpacity="0.9" />
+      <circle cx="208" cy="200" r="28" fillOpacity="0.6" strokeWidth="10" strokeOpacity="0.9" />
+      <circle cx="336" cy="128" r="28" fillOpacity="0.8" strokeWidth="10" strokeOpacity="0.9" />
+    </GlassSvgWrapper>
+  ),
+
+  // 17 Design Systems: Exact Icons8 Glassmorphism Unit Icon (https://icons8.com/icon/m6USBGXz3ryQ/unit)
   'design-systems': (
-    <StrokeFramedBadge id="design-systems">
-      <rect x="40" y="40" width="72" height="72" rx="12" />
-      <rect x="144" y="40" width="72" height="72" rx="12" />
-      <rect x="40" y="144" width="72" height="72" rx="12" />
-      <rect x="144" y="144" width="72" height="72" rx="12" />
-    </StrokeFramedBadge>
+    <GlassSvgWrapper>
+      {/* Top Isometric Cube */}
+      <g>
+        <polygon points="256,48 352,104 256,160 160,104" fillOpacity="0.8" strokeWidth="6" strokeOpacity="0.9" />
+        <polygon points="160,104 256,160 256,264 160,208" fillOpacity="0.4" strokeWidth="6" strokeOpacity="0.85" />
+        <polygon points="352,104 256,160 256,264 352,208" fillOpacity="0.6" strokeWidth="6" strokeOpacity="0.85" />
+      </g>
+
+      {/* Bottom Left Isometric Cube */}
+      <g>
+        <polygon points="160,232 256,288 160,344 64,288" fillOpacity="0.8" strokeWidth="6" strokeOpacity="0.9" />
+        <polygon points="64,288 160,344 160,448 64,392" fillOpacity="0.3" strokeWidth="6" strokeOpacity="0.85" />
+        <polygon points="256,288 160,344 160,448 256,392" fillOpacity="0.4" strokeWidth="6" strokeOpacity="0.85" />
+      </g>
+
+      {/* Bottom Right Isometric Cube */}
+      <g>
+        <polygon points="352,232 448,288 352,344 256,288" fillOpacity="0.8" strokeWidth="6" strokeOpacity="0.9" />
+        <polygon points="256,288 352,344 352,448 256,392" fillOpacity="0.4" strokeWidth="6" strokeOpacity="0.85" />
+        <polygon points="448,288 352,344 352,448 448,392" fillOpacity="0.6" strokeWidth="6" strokeOpacity="0.85" />
+      </g>
+    </GlassSvgWrapper>
   ),
 
-  // 18 Facilitation: Agent Council PresentationChart Stroke
+  // 18 Facilitation: Icons8 Glassmorphism Workshop Board
   'facilitation': (
-    <StrokeFramedBadge id="facilitation">
-      <rect x="32" y="40" width="192" height="128" rx="12" />
-      <line x1="128" y1="168" x2="128" y2="224" />
-      <line x1="88" y1="224" x2="168" y2="224" />
-      <polyline points="72,128 104,96 144,120 184,80" />
-    </StrokeFramedBadge>
+    <GlassSvgWrapper>
+      <rect x="64" y="72" width="384" height="256" rx="32" fillOpacity="0.35" strokeWidth="18" strokeOpacity="0.9" />
+      <line x1="256" y1="328" x2="256" y2="448" strokeWidth="16" strokeOpacity="0.8" strokeLinecap="round" />
+      <line x1="168" y1="448" x2="344" y2="448" strokeWidth="16" strokeOpacity="0.8" strokeLinecap="round" />
+      <polyline points="128,248 192,184 272,232 368,144" strokeWidth="14" strokeOpacity="0.9" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <circle cx="368" cy="144" r="12" fill="#FFFFFF" stroke="none" />
+    </GlassSvgWrapper>
   ),
 
-  // 19 Communication: User Provided SVG Path
+  // 19 Communication: Icons8 Glassmorphism Megaphone
   'communication': (
-    <FramedBadge id="communication">
-      <path d="M248,120a48.05,48.05,0,0,0-48-48H160.2c-2.91-.17-53.62-3.74-101.91-44.24A16,16,0,0,0,32,40V200a16,16,0,0,0,26.29,12.25c37.77-31.68,77-40.76,93.71-43.3v31.72A16,16,0,0,0,159.12,214l11,7.33A16,16,0,0,0,194.5,212l11.77-44.36A48.07,48.07,0,0,0,248,120ZM48,199.93V40h0c42.81,35.91,86.63,45,104,47.24v65.48C134.65,155,90.84,164.07,48,199.93Zm131,8,0,.11-11-7.33V168h21.6ZM200,152H168V88h32a32,32,0,1,1,0,64Z" />
-    </FramedBadge>
+    <GlassSvgWrapper>
+      <polygon points="144,200 320,112 320,344 144,256" fillOpacity="0.4" strokeWidth="16" strokeOpacity="0.9" strokeLinejoin="round" />
+      <rect x="80" y="200" width="64" height="56" rx="12" fillOpacity="0.75" strokeWidth="10" />
+      <path d="M 208 240 L 232 352 H 272 L 248 240" fillOpacity="0.6" strokeWidth="10" />
+      <path d="M 368 160 C 396 188 396 268 368 296" strokeWidth="16" strokeOpacity="0.85" strokeLinecap="round" fill="none" />
+      <path d="M 416 128 C 460 168 460 288 416 328" strokeWidth="16" strokeOpacity="0.5" strokeLinecap="round" fill="none" />
+    </GlassSvgWrapper>
   ),
 
-  // 20 Career & Practice: Agent Council Briefcase Stroke
+  // 20 Career & Practice: Icons8 Glassmorphism Briefcase
   'career-practice': (
-    <StrokeFramedBadge id="career-practice">
-      <rect x="32" y="72" width="192" height="136" rx="16" />
-      <path d="M88 72 V48 C88 36 100 28 128 28 C156 28 168 36 168 48 V72" />
-      <line x1="32" y1="120" x2="224" y2="120" />
-    </StrokeFramedBadge>
+    <GlassSvgWrapper>
+      <rect x="64" y="152" width="384" height="272" rx="36" fillOpacity="0.35" strokeWidth="18" strokeOpacity="0.9" />
+      <path d="M 176 152 V 96 C 176 76 200 60 256 60 C 312 60 336 76 336 96 V 152" strokeWidth="16" strokeOpacity="0.85" strokeLinecap="round" fill="none" />
+      <line x1="64" y1="248" x2="448" y2="248" strokeWidth="12" strokeOpacity="0.6" />
+      <rect x="176" y="224" width="32" height="48" rx="8" fillOpacity="0.85" stroke="none" />
+      <rect x="304" y="224" width="32" height="48" rx="8" fillOpacity="0.85" stroke="none" />
+    </GlassSvgWrapper>
   ),
 };
 
 export function getCategoryIcon(id: string): React.ReactNode {
   return (
     CATEGORY_ICONS[id] || (
-      <StrokeFramedBadge id="default">
-        <rect x="40" y="40" width="176" height="176" rx="16" />
-      </StrokeFramedBadge>
+      <GlassSvgWrapper>
+        <rect x="80" y="80" width="352" height="352" rx="48" fillOpacity="0.3" strokeWidth="16" strokeOpacity="0.8" />
+      </GlassSvgWrapper>
     )
   );
 }
