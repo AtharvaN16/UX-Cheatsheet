@@ -48,7 +48,9 @@ function DropdownPortal({
   onClose: () => void;
   children: React.ReactNode;
 }) {
-  const [coords, setCoords] = useState<{ top: number; left?: number; right?: number } | null>(null);
+  const [coords, setCoords] = useState<{ top: number; left?: number; right?: number; maxHeight: number } | null>(
+    null
+  );
 
   useLayoutEffect(() => {
     if (!open) {
@@ -59,10 +61,17 @@ function DropdownPortal({
       const el = triggerRef.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
+      const top = rect.bottom + 12;
+      // Clamp to whatever room is actually available below the trigger — for a trigger
+      // near the top of a tall page (the common case) that's plenty, so the list just
+      // renders in full with no visible scrollbar. Only a trigger with genuinely little
+      // room below it (near the bottom of a short viewport) ever needs to scroll — and
+      // it can, internally, self-contained within the popover.
+      const maxHeight = Math.max(160, window.innerHeight - top - 16);
       setCoords(
         align === 'right'
-          ? { top: rect.bottom + 12, right: window.innerWidth - rect.right }
-          : { top: rect.bottom + 12, left: rect.left }
+          ? { top, right: window.innerWidth - rect.right, maxHeight }
+          : { top, left: rect.left, maxHeight }
       );
     };
     update();
@@ -80,8 +89,15 @@ function DropdownPortal({
     <>
       <div className="fixed inset-0 z-40" onClick={onClose} />
       <div
-        style={{ position: 'fixed', top: coords.top, left: coords.left, right: coords.right, width }}
-        className="z-50"
+        style={{
+          position: 'fixed',
+          top: coords.top,
+          left: coords.left,
+          right: coords.right,
+          width,
+          maxHeight: coords.maxHeight,
+        }}
+        className="z-50 overflow-y-auto rounded-2xl border border-[#E5E2D9] bg-[#FAF8F5] shadow-2xl"
       >
         {children}
       </div>
@@ -198,7 +214,7 @@ function CategoryDropdown({
       />
 
       <DropdownPortal open={open} triggerRef={triggerRef} onClose={() => setOpen(false)} width={256}>
-        <div className="rounded-2xl border border-[#E5E2D9] bg-[#FAF8F5] p-4 shadow-2xl">
+        <div className="p-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-semibold text-[#1A1A1A]">Category</span>
             {value !== 'all' && (
@@ -276,7 +292,7 @@ function UseCaseFilter({
       />
 
       <DropdownPortal open={open} triggerRef={triggerRef} onClose={() => setOpen(false)} width={256}>
-        <div className="max-h-[70vh] overflow-y-auto rounded-2xl border border-[#E5E2D9] bg-[#FAF8F5] p-4 shadow-2xl">
+        <div className="p-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-semibold text-[#1A1A1A]">Use case</span>
             {selected.length > 0 && (
@@ -402,7 +418,7 @@ function FilterSortControls({
 
         {/* Floating Popover Dropdown Overlay */}
         <DropdownPortal open={isFilterOpen} triggerRef={filterTriggerRef} onClose={onCloseFilter} align="right">
-            <div className="w-80 sm:w-96 max-h-[80vh] overflow-y-auto rounded-2xl border border-[#E5E2D9] bg-[#FAF8F5] p-6 shadow-2xl space-y-5 text-[#1A1A1A]">
+            <div className="w-80 sm:w-96 p-6 space-y-5 text-[#1A1A1A]">
               {/* Header */}
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-bold text-[#1A1A1A] tracking-tight">Filter and sort</h3>
@@ -934,13 +950,15 @@ export function CategoryTopicGrid({
             />
           </div>
 
-          {/* Full-Width 4-Column Card Grid */}
+          {/* Full-Width 4-Column Card Grid — min-height keeps the page from visually
+              shrinking to a tiny sliver when filters narrow the results down to a
+              handful of cards or none at all. */}
           {displayedItems.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-border p-12 text-center text-secondary">
+            <div className="min-h-[50vh] flex items-center justify-center rounded-2xl border border-dashed border-border p-12 text-center text-secondary">
               No items found matching your filters.
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-8">
+            <div className="min-h-[50vh] grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-8 items-start">
               {displayedItems.map((item) => {
                 const isBookmarked = bookmarkedIds.has(item.id);
                 const kindSquareBg =

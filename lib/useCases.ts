@@ -41,6 +41,21 @@ export const USE_CASES: readonly UseCase[] = [
   { id: 'evaluate-navigation', label: 'Evaluate navigation' },
   { id: 'predict-performance', label: 'Predict performance' },
   { id: 'track-usability-over-time', label: 'Track usability over time' },
+
+  // Strategic Thinking (prioritize-decisions above is shared/reused)
+  { id: 'set-strategy', label: 'Set strategy' },
+  { id: 'define-value', label: 'Define value' },
+  { id: 'set-goals', label: 'Set goals' },
+  { id: 'measure-success', label: 'Measure success' },
+  { id: 'plan-work', label: 'Plan work' },
+  { id: 'discover-opportunities', label: 'Discover opportunities' },
+  { id: 'generate-solutions', label: 'Generate solutions' },
+  { id: 'make-decisions', label: 'Make decisions' },
+  { id: 'manage-risk', label: 'Manage risk' },
+  { id: 'handle-uncertainty', label: 'Handle uncertainty' },
+  { id: 'understand-systems', label: 'Understand systems' },
+  { id: 'anticipate-consequences', label: 'Anticipate consequences' },
+  { id: 'influence-behavior', label: 'Influence behavior' },
 ] as const;
 
 const USE_CASE_MAP = new Map(USE_CASES.map((u) => [u.id, u]));
