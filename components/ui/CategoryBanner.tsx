@@ -1,6 +1,18 @@
-import Link from 'next/link';
-import { getCategoryColor } from '@/lib/colors';
+'use client';
 
+import { useState } from 'react';
+import Link from 'next/link';
+import { motion } from 'motion/react';
+import { getCategoryColor } from '@/lib/colors';
+import { shouldSkipEntrance } from '@/lib/entranceGuard';
+import { ENTRANCE, EASE_ARRIVE } from '@/lib/entranceChoreography';
+
+/**
+ * Beats 1 and 2 of the category entrance (see lib/entranceChoreography.ts): the
+ * banner scales up as a surface, then the title lands on it. Splitting the two
+ * is the whole point — the title arriving *onto* an already-present surface
+ * reads as depth, where animating them together would just be one moving block.
+ */
 export function CategoryBanner({
   categoryId,
   title,
@@ -9,11 +21,21 @@ export function CategoryBanner({
   title: string;
 }) {
   const color = getCategoryColor(categoryId);
+  // See lib/entranceGuard.ts — Next.js remounts this on client navigation twice
+  // in quick succession; without this the entrance would visibly replay.
+  const [skipEntrance] = useState(() => shouldSkipEntrance(`banner:${categoryId}`));
 
   return (
-    <div
+    <motion.div
       className="mb-10 relative flex min-h-[40vh] flex-col justify-between overflow-hidden rounded-3xl p-8 sm:p-12 transition-colors"
       style={{ backgroundColor: color.hex }}
+      initial={skipEntrance ? false : { opacity: 0, scale: 0.94 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: ENTRANCE.banner.duration,
+        delay: ENTRANCE.banner.delay,
+        ease: EASE_ARRIVE,
+      }}
     >
       {/* Top action bar */}
       <div className="relative z-10 flex items-center justify-between">
@@ -28,10 +50,19 @@ export function CategoryBanner({
 
       {/* Main banner title */}
       <div className="relative z-10 my-auto pt-6">
-        <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-7xl">
+        <motion.h1
+          className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-7xl"
+          initial={skipEntrance ? false : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: ENTRANCE.title.duration,
+            delay: ENTRANCE.title.delay,
+            ease: EASE_ARRIVE,
+          }}
+        >
           {title}
-        </h1>
+        </motion.h1>
       </div>
-    </div>
+    </motion.div>
   );
 }

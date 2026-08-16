@@ -13,6 +13,8 @@ import { USE_CASES } from '@/lib/useCases';
 import { ConceptSheetModal, type ConceptSheetItem, SHEET_TRANSITION } from '@/components/ui/ConceptSheetModal';
 import { CategoryBanner } from '@/components/ui/CategoryBanner';
 import { inferKind } from '@/lib/inferKind';
+import { shouldSkipEntrance } from '@/lib/entranceGuard';
+import { ENTRANCE, EASE_ARRIVE, cardDelay, ENTRANCE_SETTLED_MS } from '@/lib/entranceChoreography';
 
 export type CategoryItem = ConceptSheetItem;
 
@@ -636,6 +638,19 @@ export function CategoryTopicGrid({
   const [showBookmarkedOnly, setShowBookmarkedOnly] = useState(false);
   const [sortSectionOpen, setSortSectionOpen] = useState(true);
   const [typeSectionOpen, setTypeSectionOpen] = useState(true);
+  // See lib/entranceGuard.ts — Next.js remounts this on client navigation twice
+  // in quick succession; without this the card stagger would visibly replay.
+  const [skipEntrance] = useState(() => shouldSkipEntrance(`grid:${categoryId}`));
+  // Beat 3 of the page entrance waits for the banner and title. Once that one-time
+  // sequence is over, cards mounting from a filter change animate immediately —
+  // see cardDelay's note on why re-running the lead-in reads as a broken filter.
+  const [entranceDone, setEntranceDone] = useState(skipEntrance);
+
+  useEffect(() => {
+    if (entranceDone) return;
+    const t = setTimeout(() => setEntranceDone(true), ENTRANCE_SETTLED_MS);
+    return () => clearTimeout(t);
+  }, [entranceDone]);
 
   // Load bookmarks from localStorage
   useEffect(() => {
@@ -975,7 +990,7 @@ export function CategoryTopicGrid({
             </div>
           ) : (
             <div className="min-h-[50vh] grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-8 items-start">
-              {displayedItems.map((item) => {
+              {displayedItems.map((item, index) => {
                 const isBookmarked = bookmarkedIds.has(item.id);
                 const kindSquareBg =
                   (item.kind || 'concept').toLowerCase().trim() === 'method'
@@ -985,8 +1000,18 @@ export function CategoryTopicGrid({
                     : 'bg-orange-500';
 
                 return (
-                  <div
+                  <motion.div
                     key={item.id}
+                    initial={skipEntrance ? false : { opacity: 0, scale: 0.92, y: 12 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{
+                      duration: ENTRANCE.cards.duration,
+                      ease: EASE_ARRIVE,
+                      // Staggered like lawsofux's dot-grid cascade, but capped so a
+                      // 60+ item grid (e.g. Strategic Thinking) doesn't take forever
+                      // to finish revealing — everything past ~10 cards arrives together.
+                      delay: cardDelay(index, !entranceDone),
+                    }}
                     onClick={() => setSelectedConcept(item)}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' || e.key === ' ') {
@@ -1036,7 +1061,7 @@ export function CategoryTopicGrid({
                         </h3>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
