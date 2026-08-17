@@ -1,6 +1,6 @@
 /**
  * Pure utility function to infer kind ('method' | 'framework' | 'concept')
- * based on item title, category, and ID.
+ * based on item title, domain, and ID.
  * Safe to import from both Server Components (app/layout.tsx) and Client Components.
  *
  * Core Distinctions:
@@ -8,8 +8,8 @@
  * - Framework: A structure/scaffolding you use ("How is this structured?")
  * - Concept: An idea, principle, law, or mechanism you understand ("What does this mean?")
  */
-export function inferKind(title: string, categoryId: string, itemId: string): 'method' | 'framework' | 'concept' {
-  const cat = categoryId.toLowerCase().trim();
+export function inferKind(title: string, domainId: string, itemId: string): 'method' | 'framework' | 'concept' {
+  const domain = domainId.toLowerCase().trim();
   const t = title.toLowerCase().trim();
   const id = itemId.toLowerCase().trim();
 
@@ -79,7 +79,7 @@ export function inferKind(title: string, categoryId: string, itemId: string): 'm
   if (FRAMEWORK_IDS.has(id)) return 'framework';
 
   // Category rule: UX Psychology items are all concepts
-  if (cat === 'ux-psychology') return 'concept';
+  if (domain === 'ux-psychology') return 'concept';
 
   // Concepts: Laws, effects, biases, rules, theories, fallacies, thresholds, principles, paradoxes, mental models
   if (

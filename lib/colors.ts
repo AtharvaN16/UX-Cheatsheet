@@ -1,4 +1,4 @@
-import { getCategoryGroup } from '@/lib/categories';
+import { getDomainGroup } from '@/lib/domains';
 
 export interface LawsOfUXColor {
   hex: string;
@@ -6,7 +6,7 @@ export interface LawsOfUXColor {
 }
 
 /**
- * Muted solid colors shared 1-to-1 by category cards & topic page banners
+ * Muted solid colors shared 1-to-1 by domain cards & topic page banners
  */
 export const GROUP_MUTED_COLORS: Record<string, LawsOfUXColor> = {
   'UX Psychology': { hex: '#B24A58', name: 'Muted Rose' },
@@ -24,8 +24,8 @@ export const DEFAULT_FALLBACK_COLOR: LawsOfUXColor = {
 
 
 
-export function getCategoryColor(categoryId: string): LawsOfUXColor {
-  const group = getCategoryGroup(categoryId);
+export function getDomainColor(domainId: string): LawsOfUXColor {
+  const group = getDomainGroup(domainId);
   if (group && GROUP_MUTED_COLORS[group.title]) {
     return GROUP_MUTED_COLORS[group.title];
   }

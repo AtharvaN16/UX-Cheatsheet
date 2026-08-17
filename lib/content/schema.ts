@@ -44,7 +44,7 @@ export const frontmatterSchema = z.object({
   id: z.string().regex(KEBAB),
   title: z.string().min(1),
   aka: z.array(z.string()).default([]),
-  category: z.string().regex(KEBAB),
+  domain: z.string().regex(KEBAB),
   alsoIn: z.array(z.string().regex(KEBAB)).default([]),
   kind: z.enum(KIND),
   gives: z.enum(GIVES),

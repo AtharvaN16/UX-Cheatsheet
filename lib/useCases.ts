@@ -1,10 +1,10 @@
 /**
  * Canonical, site-wide "use case" vocabulary — a cross-cutting facet ("why would I
- * use this?") layered on top of the category taxonomy ("what is it?"). A method can
+ * use this?") layered on top of the domain taxonomy ("what is it?"). A method can
  * carry any number of these, unlike `category`/`kind` which are mutually exclusive.
  *
- * Started with Quantitative Research; extend this list as other categories adopt
- * the use-case filter — one shared vocabulary so tags compose across categories
+ * Started with Quantitative Research; extend this list as other domains adopt
+ * the use-case filter — one shared vocabulary so tags compose across domains
  * instead of each one inventing its own.
  */
 export interface UseCase {
@@ -55,7 +55,6 @@ export const USE_CASES: readonly UseCase[] = [
   { id: 'handle-uncertainty', label: 'Handle uncertainty' },
   { id: 'understand-systems', label: 'Understand systems' },
   { id: 'anticipate-consequences', label: 'Anticipate consequences' },
-  { id: 'influence-behavior', label: 'Influence behavior' },
 
   // Ideation (generate-ideas above is shared/reused, not duplicated)
   { id: 'expand-ideas', label: 'Expand ideas' },
@@ -64,6 +63,15 @@ export const USE_CASES: readonly UseCase[] = [
   { id: 'break-constraints', label: 'Break constraints' },
   { id: 'develop-ideas', label: 'Develop ideas' },
   { id: 'select-ideas', label: 'Select ideas' },
+
+  // UX Psychology (understand-users above is shared/reused, not duplicated)
+  { id: 'reduce-cognitive-effort', label: 'Reduce cognitive effort' },
+  { id: 'guide-decisions', label: 'Guide decisions' },
+  { id: 'shape-behavior', label: 'Shape behavior' },
+  { id: 'build-motivation', label: 'Build motivation' },
+  { id: 'emotional-impact', label: 'Emotional impact' },
+  { id: 'build-trust-influence', label: 'Build trust & influence' },
+  { id: 'improve-interaction', label: 'Improve interaction' },
 ] as const;
 
 const USE_CASE_MAP = new Map(USE_CASES.map((u) => [u.id, u]));

@@ -3,13 +3,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import {
-  CATEGORIES,
-  CATEGORY_GROUPS,
-  getCategoryGroup,
+  DOMAINS,
+  DOMAIN_GROUPS,
+  getDomainGroup,
   getGroupColor,
-} from '@/lib/categories';
-import { getCategoryColor } from '@/lib/colors';
-import { getCategoryIcon } from '@/lib/categoryIcons';
+} from '@/lib/domains';
+import { getDomainColor } from '@/lib/colors';
+import { getDomainIcon } from '@/lib/domainIcons';
 import { TAXONOMY } from '@/lib/taxonomy';
 import { get1Liner } from '@/lib/taxonomyDescriptions';
 import { inferKind } from '@/lib/inferKind';
@@ -18,7 +18,7 @@ import { ConceptSheetModal, type ConceptSheetItem } from '@/components/ui/Concep
 
 const BOOKMARKS_KEY = 'ux_cheatsheet_bookmarks';
 
-interface CategoryDashboardGridProps {
+interface DomainDashboardGridProps {
   allMethods: Method[];
 }
 
@@ -28,14 +28,14 @@ const getGroupSlug = (title: string) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '');
 
-export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps) {
+export function DomainDashboardGrid({ allMethods }: DomainDashboardGridProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeGroups, setActiveGroups] = useState<Set<string>>(new Set());
   const [sortOrder, setSortOrder] = useState<'default' | 'a-z' | 'z-a'>('default');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [showBookmarked, setShowBookmarked] = useState(false);
   const [sortSectionOpen, setSortSectionOpen] = useState(true);
-  const [categorySectionOpen, setCategorySectionOpen] = useState(true);
+  const [domainGroupSectionOpen, setDomainGroupSectionOpen] = useState(true);
   const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set());
   const [selectedConcept, setSelectedConcept] = useState<ConceptSheetItem | null>(null);
   const [activeGroupTitle, setActiveGroupTitle] = useState<string>('');
@@ -52,10 +52,65 @@ export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps
     }
   }, []);
 
-  // Scrollspy logic to highlight active category group in left sidebar as user scrolls
+  // Restore scroll position or target card when returning to the home page
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    const restoreScroll = () => {
+      try {
+        const lastDomain = sessionStorage.getItem('home_last_domain');
+        if (lastDomain) {
+          const el = document.getElementById(`domain-card-${lastDomain}`);
+          if (el) {
+            el.scrollIntoView({ block: 'center', behavior: 'instant' });
+            return;
+          }
+        }
+
+        const savedPos = sessionStorage.getItem('home_scroll_pos');
+        if (savedPos !== null) {
+          const top = parseInt(savedPos, 10);
+          if (!isNaN(top) && top > 0) {
+            window.scrollTo({ top, behavior: 'instant' });
+          }
+        }
+      } catch (e) {}
+    };
+
+    restoreScroll();
+    const frame1 = requestAnimationFrame(restoreScroll);
+    const frame2 = requestAnimationFrame(() => requestAnimationFrame(restoreScroll));
+    const timer1 = setTimeout(restoreScroll, 50);
+    const timer2 = setTimeout(restoreScroll, 150);
+    const timer3 = setTimeout(restoreScroll, 300);
+
+    return () => {
+      cancelAnimationFrame(frame1);
+      cancelAnimationFrame(frame2);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+    };
+  }, []);
+
+  // Save scroll position as user scrolls
+  useEffect(() => {
+    const handleScrollPos = () => {
+      try {
+        sessionStorage.setItem('home_scroll_pos', window.scrollY.toString());
+      } catch (e) {}
+    };
+
+    window.addEventListener('scroll', handleScrollPos, { passive: true });
+    return () => window.removeEventListener('scroll', handleScrollPos);
+  }, []);
+
+  // Scrollspy logic to highlight active domain group in left sidebar as user scrolls
   useEffect(() => {
     const handleScroll = () => {
-      const groupElements = CATEGORY_GROUPS.map((g) =>
+      const groupElements = DOMAIN_GROUPS.map((g) =>
         document.getElementById(`group-${getGroupSlug(g.title)}`)
       ).filter(Boolean) as HTMLElement[];
 
@@ -64,7 +119,7 @@ export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps
       for (let i = groupElements.length - 1; i >= 0; i--) {
         const el = groupElements[i];
         if (el && el.offsetTop <= scrollPos) {
-          const matchedGroup = CATEGORY_GROUPS.find(
+          const matchedGroup = DOMAIN_GROUPS.find(
             (g) => `group-${getGroupSlug(g.title)}` === el.id
           );
           if (matchedGroup) {
@@ -106,22 +161,22 @@ export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps
 
   const cards = useMemo(
     () =>
-      CATEGORIES.map((c) => {
-        const group = getCategoryGroup(c.id);
-        const colorHex = getCategoryColor(c.id).hex;
+      DOMAINS.map((c) => {
+        const group = getDomainGroup(c.id);
+        const colorHex = getDomainColor(c.id).hex;
         return {
           ...c,
           group,
           colorHex,
-          icon: getCategoryIcon(c.id),
+          icon: getDomainIcon(c.id),
         };
       }),
     []
   );
 
-  const categoryTitleById = useMemo(() => {
+  const domainTitleById = useMemo(() => {
     const map = new Map<string, string>();
-    CATEGORIES.forEach((c) => map.set(c.id, c.title));
+    DOMAINS.forEach((c) => map.set(c.id, c.title));
     return map;
   }, []);
 
@@ -131,14 +186,14 @@ export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps
     return map;
   }, [allMethods]);
 
-  // Every topic across every category, used for bookmarks view
+  // Every topic across every domain, used for bookmarks view
   const allTopicItems = useMemo<ConceptSheetItem[]>(() => {
     const list: ConceptSheetItem[] = [];
     const seenIds = new Set<string>();
 
-    TAXONOMY.forEach((taxCategory) => {
-      const categoryTitle = categoryTitleById.get(taxCategory.categoryId) ?? taxCategory.categoryId;
-      taxCategory.groups.forEach((group) => {
+    TAXONOMY.forEach((domainTax) => {
+      const domainTitle = domainTitleById.get(domainTax.domainId) ?? domainTax.domainId;
+      domainTax.groups.forEach((group) => {
         group.items.forEach((item) => {
           seenIds.add(item.id);
           const written = methodsById.get(item.id);
@@ -148,10 +203,10 @@ export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps
           list.push({
             id: item.id,
             title: item.title,
-            topicTitle: categoryTitle,
+            topicTitle: domainTitle,
             description: cleanDesc,
             isWritten: !!written,
-            kind: written?.kind || inferKind(item.title, taxCategory.categoryId, item.id),
+            kind: written?.kind || inferKind(item.title, domainTax.domainId, item.id),
             method: written,
           });
         });
@@ -161,34 +216,25 @@ export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps
     // Add written methods that aren't listed in the taxonomy
     methodsById.forEach((written, id) => {
       if (!seenIds.has(id)) {
-        const categoryTitle = categoryTitleById.get(written.category) ?? written.category;
+        const domainTitle = domainTitleById.get(written.domain) ?? written.domain;
         const rawDesc = written.sections['What is it'] ?? get1Liner(id, written.title);
         const cleanDesc = rawDesc.replace(/\n+/g, ' ').trim();
 
         list.push({
           id: written.id,
           title: written.title,
-          topicTitle: categoryTitle,
+          topicTitle: domainTitle,
           description: cleanDesc,
           isWritten: true,
-          kind: written.kind || inferKind(written.title, written.category, written.id),
+          kind: written.kind || inferKind(written.title, written.domain, written.id),
           method: written,
         });
       }
     });
 
     return list;
-  }, [categoryTitleById, methodsById]);
+  }, [domainTitleById, methodsById]);
 
-  // Topic count per category ID
-  const topicCountsByCategoryId = useMemo(() => {
-    const map = new Map<string, number>();
-    TAXONOMY.forEach((catTax) => {
-      const count = catTax.groups.reduce((sum, g) => sum + g.items.length, 0);
-      map.set(catTax.categoryId, count);
-    });
-    return map;
-  }, []);
 
   const bookmarkedTopicItems = useMemo(
     () => allTopicItems.filter((item) => bookmarkedIds.has(item.id)),
@@ -198,7 +244,7 @@ export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps
   const filteredCards = useMemo(() => {
     let result = cards;
 
-    // Filter by active category group checkboxes
+    // Filter by active domain group checkboxes
     if (activeGroups.size > 0) {
       result = result.filter((c) => c.group && activeGroups.has(c.group.title));
     }
@@ -407,11 +453,11 @@ export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps
                       )}
                     </div>
 
-                    {/* Section 2: Category Group Checkboxes */}
+                    {/* Section 2: Domain Group Checkboxes */}
                     <div className="pb-1 space-y-4">
                       <button
                         type="button"
-                        onClick={() => setCategorySectionOpen((v) => !v)}
+                        onClick={() => setDomainGroupSectionOpen((v) => !v)}
                         className="w-full flex items-center justify-between"
                       >
                         <span className="text-base font-semibold text-[#3A3834]">
@@ -419,7 +465,7 @@ export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps
                         </span>
                         <svg
                           className={`w-4 h-4 text-[#737067] transition-transform duration-200 ${
-                            categorySectionOpen ? 'rotate-180' : ''
+                            domainGroupSectionOpen ? 'rotate-180' : ''
                           }`}
                           fill="none"
                           stroke="currentColor"
@@ -434,9 +480,9 @@ export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps
                         </svg>
                       </button>
 
-                      {categorySectionOpen && (
+                      {domainGroupSectionOpen && (
                         <div className="space-y-2.5 max-h-56 overflow-y-auto pr-1">
-                          {CATEGORY_GROUPS.map((g) => {
+                          {DOMAIN_GROUPS.map((g) => {
                             const isChecked = activeGroups.has(g.title);
                             return (
                               <label
@@ -464,12 +510,12 @@ export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps
         </div>
       </div>
 
-      {/* 2. Main Content Container: Sidenav aligned with top of first category */}
+      {/* 2. Main Content Container: Sidenav aligned with top of first domain */}
       <div className="lg:flex lg:gap-10 items-start">
-        {/* Left Freed-Up Space: Category Group Navigation Sidebar */}
+        {/* Left Freed-Up Space: Domain Group Navigation Sidebar */}
         <aside className="hidden lg:block w-64 xl:w-72 shrink-0 sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pr-3 space-y-1 text-[#1A1A1A]">
           <nav className="space-y-1">
-            {CATEGORY_GROUPS.map((g) => {
+            {DOMAIN_GROUPS.map((g) => {
               const isActive = activeGroupTitle === g.title;
               const groupColor = getGroupColor(g.title);
 
@@ -499,9 +545,9 @@ export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps
 
         {/* Right Main Area */}
         <main className="flex-1 min-w-0">
-          {/* Mobile Category Horizontal Pill Bar */}
+          {/* Mobile Domain Group Horizontal Pill Bar */}
           <div className="lg:hidden flex items-center gap-2 overflow-x-auto pb-3 mb-6 scrollbar-none">
-            {CATEGORY_GROUPS.map((g) => (
+            {DOMAIN_GROUPS.map((g) => (
               <button
                 key={g.title}
                 type="button"
@@ -598,9 +644,9 @@ export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps
               No categories found matching your search.
             </div>
           ) : (
-            /* Main Content: Category Group Sections (NO subheadings, NO category count, NO line dividers) */
+            /* Main Content: Domain Group Sections (NO subheadings, NO domain count, NO line dividers) */
             <div className="space-y-12">
-              {CATEGORY_GROUPS.map((group) => {
+              {DOMAIN_GROUPS.map((group) => {
                 const groupCards = filteredCards.filter(
                   (c) => c.group?.title === group.title
                 );
@@ -616,7 +662,7 @@ export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps
                     className="scroll-mt-32"
                     aria-label={group.title}
                   >
-                    {/* Category Group Header Block: Clean Icon Badge + Title (NO subheadings, NO counts, NO line dividers) */}
+                    {/* Domain Group Header Block: Clean Icon Badge + Title (NO subheadings, NO counts, NO line dividers) */}
                     <div className="flex items-center gap-4 mb-6">
                       {/* Group Color Badge Pill */}
                       <div
@@ -631,37 +677,37 @@ export function CategoryDashboardGrid({ allMethods }: CategoryDashboardGridProps
                       </h2>
                     </div>
 
-                    {/* 3-Cards Column Layout of Category Cards */}
+                    {/* 3-Cards Column Layout of Domain Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {groupCards.map((c) => {
-                        const count = topicCountsByCategoryId.get(c.id) ?? 0;
-
-                        return (
-                          <Link
-                            key={c.id}
-                            href={`/c/${c.id}`}
-                            className="group flex flex-col justify-between rounded-2xl overflow-hidden bg-[#F0EDE6] border border-[#E5E2D9] transition-all duration-200 hover:shadow-md min-h-[300px] sm:min-h-[330px] focus:outline-none"
+                      {groupCards.map((c) => (
+                        <Link
+                          key={c.id}
+                          id={`domain-card-${c.id}`}
+                          href={`/c/${c.id}`}
+                          onClick={() => {
+                            try {
+                              sessionStorage.setItem('home_scroll_pos', window.scrollY.toString());
+                              sessionStorage.setItem('home_last_domain', c.id);
+                            } catch (e) {}
+                          }}
+                          className="group flex flex-col justify-between rounded-2xl overflow-hidden bg-[#F0EDE6] border border-[#E5E2D9] transition-all duration-200 hover:shadow-md min-h-[300px] sm:min-h-[330px] focus:outline-none"
+                        >
+                          {/* Top Vector Line Art Header Block */}
+                          <div
+                            className="h-52 sm:h-56 w-full rounded-t-2xl relative flex items-center justify-center p-6 overflow-hidden transition-opacity group-hover:opacity-95 shrink-0"
+                            style={{ backgroundColor: c.colorHex }}
                           >
-                            {/* Top Vector Line Art Header Block */}
-                            <div
-                              className="h-52 sm:h-56 w-full rounded-t-2xl relative flex items-center justify-center p-6 overflow-hidden transition-opacity group-hover:opacity-95 shrink-0"
-                              style={{ backgroundColor: c.colorHex }}
-                            >
-                              <div>{c.icon}</div>
-                            </div>
+                            <div>{c.icon}</div>
+                          </div>
 
-                            {/* Bottom Card Content Body */}
-                            <div className="p-6 sm:p-7 flex flex-col justify-between flex-1 bg-[#F0EDE6] rounded-b-2xl">
-                              <h3 className="text-xl sm:text-2xl font-bold text-[#1A1A1A] leading-snug tracking-tight group-hover:text-black transition-colors">
-                                {c.title}
-                              </h3>
-                              <span className="text-xs font-bold text-[#8C887E] mt-3 block group-hover:text-[#1A1A1A] transition-colors">
-                                {count} topics inside →
-                              </span>
-                            </div>
-                          </Link>
-                        );
-                      })}
+                          {/* Bottom Card Content Body */}
+                          <div className="p-6 sm:p-7 flex flex-col justify-center flex-1 bg-[#F0EDE6] rounded-b-2xl">
+                            <h3 className="text-xl sm:text-2xl font-bold text-[#1A1A1A] leading-snug tracking-tight group-hover:text-black transition-colors">
+                              {c.title}
+                            </h3>
+                          </div>
+                        </Link>
+                      ))}
                     </div>
                   </section>
                 );

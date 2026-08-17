@@ -3,8 +3,8 @@ import { createMethodSource, type MethodItem } from './source';
 import type { ScorableMethod } from './score';
 
 const items: MethodItem[] = [
-  { id: 'tree-testing', label: 'Tree Testing', auxiliaryData: { category: 'ia-structure', kind: 'method', group: '' } },
-  { id: 'card-sorting', label: 'Card Sorting', auxiliaryData: { category: 'ia-structure', kind: 'method', group: '' } },
+  { id: 'tree-testing', label: 'Tree Testing', auxiliaryData: { domain: 'ia-structure', kind: 'method', group: '' } },
+  { id: 'card-sorting', label: 'Card Sorting', auxiliaryData: { domain: 'ia-structure', kind: 'method', group: '' } },
 ];
 
 const scorables: ScorableMethod[] = [
@@ -40,7 +40,7 @@ describe('createMethodSource', () => {
 
   test('search silently drops scorable ids with no matching item, without crashing', async () => {
     const partialItems: MethodItem[] = [
-      { id: 'tree-testing', label: 'Tree Testing', auxiliaryData: { category: 'ia-structure', kind: 'method', group: '' } },
+      { id: 'tree-testing', label: 'Tree Testing', auxiliaryData: { domain: 'ia-structure', kind: 'method', group: '' } },
     ];
     const bothScorables: ScorableMethod[] = [
       ...scorables,
@@ -86,7 +86,7 @@ describe('createMethodSource', () => {
       {
         id: 'evaluation',
         label: 'Evaluation',
-        auxiliaryData: { category: 'evaluation', kind: 'category', group: '', href: '/c/evaluation', type: 'category' },
+        auxiliaryData: { domain: 'evaluation', kind: 'category', group: '', href: '/c/evaluation', type: 'category' },
       },
     ];
     const catScorables: ScorableMethod[] = [
@@ -103,7 +103,7 @@ describe('createMethodSource', () => {
       {
         id: 'ia-structure',
         label: 'IA & Structure',
-        auxiliaryData: { category: 'ia-structure', kind: 'category', group: '', href: '/c/ia-structure', type: 'category' },
+        auxiliaryData: { domain: 'ia-structure', kind: 'category', group: '', href: '/c/ia-structure', type: 'category' },
       },
     ];
     const mixedScorables: ScorableMethod[] = [

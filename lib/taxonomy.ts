@@ -1,6 +1,6 @@
 /**
  * The full ~310-entry taxonomy from docs/superpowers/specs/2026-08-05-ux-methods-cheatsheet-design.md §4,
- * transcribed as structured data so category pages can render every planned
+ * transcribed as structured data so domain pages can render every planned
  * entry as a card — written or not — instead of only what has content today.
  * Source of truth for entry lists remains §4; keep this in sync with it.
  */
@@ -11,19 +11,19 @@ export interface TaxonomyItem {
 }
 
 export interface TaxonomyGroup {
-  /** null for categories with no named subgroups (a single flat list) */
+  /** null for domains with no named subgroups (a single flat list) */
   title: string | null;
-  items: TaxonomyItem[];
+  items: readonly TaxonomyItem[];
 }
 
-export interface TaxonomyCategory {
-  categoryId: string;
-  groups: TaxonomyGroup[];
+export interface TaxonomyDomain {
+  domainId: string;
+  groups: readonly TaxonomyGroup[];
 }
 
-export const TAXONOMY: readonly TaxonomyCategory[] = [
+export const TAXONOMY: readonly TaxonomyDomain[] = [
   {
-    categoryId: 'ux-psychology',
+    domainId: 'ux-psychology',
     groups: [
       {
         title: 'Cognition',
@@ -98,7 +98,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'strategic-thinking',
+    domainId: 'strategic-thinking',
     groups: [
       {
         title: 'Strategy & Value',
@@ -199,7 +199,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'research-synthesis',
+    domainId: 'research-synthesis',
     groups: [
       {
         title: 'Framing & Planning',
@@ -252,7 +252,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'qualitative-research',
+    domainId: 'qualitative-research',
     groups: [
       {
         title: 'Interview Research',
@@ -303,7 +303,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'quantitative-research',
+    domainId: 'quantitative-research',
     groups: [
       {
         title: 'Product Analytics',
@@ -368,7 +368,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'ideation',
+    domainId: 'ideation',
     groups: [
       {
         title: 'Divergent Thinking',
@@ -410,7 +410,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'ia-structure',
+    domainId: 'ia-structure',
     groups: [
       {
         title: null,
@@ -430,7 +430,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'interaction-design',
+    domainId: 'interaction-design',
     groups: [
       {
         title: null,
@@ -450,7 +450,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'content-design',
+    domainId: 'content-design',
     groups: [
       {
         title: null,
@@ -468,7 +468,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'visual-design',
+    domainId: 'visual-design',
     groups: [
       {
         title: null,
@@ -487,7 +487,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'prototyping',
+    domainId: 'prototyping',
     groups: [
       {
         title: null,
@@ -508,7 +508,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'evaluation',
+    domainId: 'evaluation',
     groups: [
       {
         title: 'User Testing',
@@ -551,7 +551,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'accessibility',
+    domainId: 'accessibility',
     groups: [
       {
         title: null,
@@ -576,7 +576,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'service-design',
+    domainId: 'service-design',
     groups: [
       {
         title: null,
@@ -594,7 +594,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'ai-design',
+    domainId: 'ai-design',
     groups: [
       {
         title: null,
@@ -614,7 +614,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'metrics-experimentation',
+    domainId: 'metrics-experimentation',
     groups: [
       {
         title: null,
@@ -638,7 +638,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'design-systems',
+    domainId: 'design-systems',
     groups: [
       {
         title: null,
@@ -656,7 +656,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'facilitation',
+    domainId: 'facilitation',
     groups: [
       {
         title: null,
@@ -673,7 +673,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'communication',
+    domainId: 'communication',
     groups: [
       {
         title: null,
@@ -691,7 +691,7 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
     ],
   },
   {
-    categoryId: 'career-practice',
+    domainId: 'career-practice',
     groups: [
       {
         title: null,
@@ -707,14 +707,14 @@ export const TAXONOMY: readonly TaxonomyCategory[] = [
       },
     ],
   },
-] as const;
+];
 
-export function getTaxonomyForCategory(categoryId: string): TaxonomyCategory | undefined {
-  return TAXONOMY.find((c) => c.categoryId === categoryId);
+export function getTaxonomyForDomain(domainId: string): TaxonomyDomain | undefined {
+  return TAXONOMY.find((d) => d.domainId === domainId);
 }
 
-export function getTaxonomyEntryCount(categoryId: string): number {
-  const tax = getTaxonomyForCategory(categoryId);
+export function getTaxonomyEntryCount(domainId: string): number {
+  const tax = getTaxonomyForDomain(domainId);
   if (!tax) return 0;
-  return tax.groups.reduce((sum, g) => sum + g.items.length, 0);
+  return tax.groups.reduce((sum: number, g) => sum + g.items.length, 0);
 }

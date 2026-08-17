@@ -11,16 +11,16 @@ import { get1Liner } from '@/lib/taxonomyDescriptions';
 import { getStubUseCases } from '@/lib/taxonomyUseCases';
 import { USE_CASES } from '@/lib/useCases';
 import { ConceptSheetModal, type ConceptSheetItem, SHEET_TRANSITION } from '@/components/ui/ConceptSheetModal';
-import { CategoryBanner } from '@/components/ui/CategoryBanner';
+import { DomainBanner } from '@/components/ui/DomainBanner';
 import { inferKind } from '@/lib/inferKind';
 import { shouldSkipEntrance } from '@/lib/entranceGuard';
 import { ENTRANCE, EASE_ARRIVE, cardDelay, ENTRANCE_SETTLED_MS } from '@/lib/entranceChoreography';
 
-export type CategoryItem = ConceptSheetItem;
+export type DomainItem = ConceptSheetItem;
 
-interface CategoryTopicGridProps {
-  categoryId: string;
-  categoryTitle: string;
+interface DomainTopicGridProps {
+  domainId: string;
+  domainTitle: string;
   groups: TaxonomyGroup[];
   methods: Method[];
   secondaryMethods?: Method[];
@@ -209,7 +209,7 @@ function CategoryDropdown({
   tabs: string[];
   value: string;
   onChange: (tab: string) => void;
-  allItems: CategoryItem[];
+  allItems: DomainItem[];
 }) {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLDivElement>(null);
@@ -275,8 +275,8 @@ function CategoryDropdown({
 }
 
 /**
- * Multi-select "why would I use this" facet. Renders nothing if the category has no
- * use-case tags at all — this is what keeps the whole feature opt-in per category.
+ * Multi-select "why would I use this" facet. Renders nothing if the domain has no
+ * use-case tags at all — this is what keeps the whole feature opt-in per domain.
  */
 function UseCaseFilter({
   options,
@@ -493,7 +493,7 @@ function FilterSortControls({
                 )}
               </div>
 
-              {/* Section 2: Type Filter — hidden entirely when the category has fewer
+              {/* Section 2: Type Filter — hidden entirely when the domain has fewer
                   than 2 kinds present, since it could never narrow anything anyway. */}
               {selectableKindCount >= 2 && (
               <div className="pb-1 space-y-3">
@@ -617,13 +617,13 @@ function FilterSortControls({
   );
 }
 
-export function CategoryTopicGrid({
-  categoryId,
-  categoryTitle,
+export function DomainTopicGrid({
+  domainId,
+  domainTitle,
   groups,
   methods,
   secondaryMethods = [],
-}: CategoryTopicGridProps) {
+}: DomainTopicGridProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<string>('all');
@@ -633,14 +633,14 @@ export function CategoryTopicGrid({
   const [effortFilter, setEffortFilter] = useState<'all' | 'low' | 'medium' | 'high'>('all');
   const [sortOrder, setSortOrder] = useState<'default' | 'a-z' | 'z-a'>('default');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [selectedConcept, setSelectedConcept] = useState<CategoryItem | null>(null);
+  const [selectedConcept, setSelectedConcept] = useState<DomainItem | null>(null);
   const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set());
   const [showBookmarkedOnly, setShowBookmarkedOnly] = useState(false);
   const [sortSectionOpen, setSortSectionOpen] = useState(true);
   const [typeSectionOpen, setTypeSectionOpen] = useState(true);
   // See lib/entranceGuard.ts — Next.js remounts this on client navigation twice
   // in quick succession; without this the card stagger would visibly replay.
-  const [skipEntrance] = useState(() => shouldSkipEntrance(`grid:${categoryId}`));
+  const [skipEntrance] = useState(() => shouldSkipEntrance(`grid:${domainId}`));
   // Beat 3 of the page entrance waits for the banner and title. Once that one-time
   // sequence is over, cards mounting from a filter change animate immediately —
   // see cardDelay's note on why re-running the lead-in reads as a broken filter.
@@ -687,19 +687,19 @@ export function CategoryTopicGrid({
   }, [methods, secondaryMethods]);
 
   // Consolidate all items under their respective topics
-  const allItems = useMemo<CategoryItem[]>(() => {
-    const list: CategoryItem[] = [];
+  const allItems = useMemo<DomainItem[]>(() => {
+    const list: DomainItem[] = [];
     const seenIds = new Set<string>();
 
     if (groups && groups.length > 0) {
       groups.forEach((group) => {
-        const groupTitle = group.title ?? categoryTitle;
+        const groupTitle = group.title ?? domainTitle;
         group.items.forEach((item) => {
           seenIds.add(item.id);
           const written = writtenMap.get(item.id);
           const rawDesc = written?.sections['What is it'] ?? get1Liner(item.id, item.title);
           const cleanDesc = rawDesc.replace(/\n+/g, ' ').trim();
-          const itemKind = written?.kind || inferKind(item.title, categoryId, item.id);
+          const itemKind = written?.kind || inferKind(item.title, domainId, item.id);
           const itemUseCases = written?.useCases?.length ? written.useCases : getStubUseCases(item.id);
 
           list.push({
@@ -725,10 +725,10 @@ export function CategoryTopicGrid({
         list.push({
           id: written.id,
           title: written.title,
-          topicTitle: categoryTitle,
+          topicTitle: domainTitle,
           description: cleanDesc,
           isWritten: true,
-          kind: written.kind || inferKind(written.title, categoryId, written.id),
+          kind: written.kind || inferKind(written.title, domainId, written.id),
           method: written,
           useCases: written.useCases,
         });
@@ -736,7 +736,7 @@ export function CategoryTopicGrid({
     });
 
     return list;
-  }, [groups, categoryTitle, categoryId, writtenMap]);
+  }, [groups, domainTitle, domainId, writtenMap]);
 
   // Deep link from search (e.g. /c/ux-psychology?item=hicks-law): open that item's sheet on load
   useEffect(() => {
@@ -746,24 +746,24 @@ export function CategoryTopicGrid({
     const match = allItems.find((i) => i.id === deepLinkId);
     if (match) setSelectedConcept(match);
 
-    router.replace(`/c/${categoryId}`, { scroll: false });
+    router.replace(`/c/${domainId}`, { scroll: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams, allItems, categoryId]);
+  }, [searchParams, allItems, domainId]);
 
   // Compute unique topic tabs
   const tabs = useMemo(() => {
     const topicSet = new Set<string>();
     allItems.forEach((i) => {
-      if (i.topicTitle && i.topicTitle !== categoryTitle) {
+      if (i.topicTitle && i.topicTitle !== domainTitle) {
         topicSet.add(i.topicTitle);
       }
     });
     return ['all', ...Array.from(topicSet)];
-  }, [allItems, categoryTitle]);
+  }, [allItems, domainTitle]);
 
-  // Use-case dropdown only ever offers tags a category actually has (UseCaseFilter
-  // itself renders nothing when this is empty) — everything else in the row (Category,
-  // Bookmark, Filter and sort) is universal across every category page.
+  // Use-case dropdown only ever offers tags a domain actually has (UseCaseFilter
+  // itself renders nothing when this is empty) — everything else in the row (Category
+  // dropdown, Bookmark, Filter and sort) is universal across every domain page.
   const availableUseCases = useMemo(
     () => USE_CASES.filter((uc) => allItems.some((i) => i.useCases?.includes(uc.id))),
     [allItems]
@@ -771,7 +771,7 @@ export function CategoryTopicGrid({
 
   // Everything displayedItems applies EXCEPT kind/effort/sort — this is the pool the
   // Type/Effort radios in "Filter and sort" get their counts from, so an option that
-  // would produce zero results (e.g. "Frameworks" on a category that's 100% concepts)
+  // would produce zero results (e.g. "Frameworks" on a domain that's 100% concepts)
   // can be disabled instead of silently leading to an empty grid.
   const itemsBeforeKindFilter = useMemo(() => {
     let result = allItems;
@@ -819,7 +819,7 @@ export function CategoryTopicGrid({
     return counts;
   }, [itemsBeforeKindFilter]);
 
-  // Once a category has only one kind present (e.g. UX Psychology is 100% concepts),
+  // Once a domain has only one kind present (e.g. UX Psychology is 100% concepts),
   // the Type section can never actually narrow anything — every option either matches
   // everything or matches nothing — so it's hidden entirely rather than shown with two
   // permanently-disabled options and one redundant "same as All Types" option.
@@ -892,18 +892,28 @@ export function CategoryTopicGrid({
 
   const isModalOpen = selectedConcept !== null;
 
-  // Escape on the topic page (sheet closed) navigates back to the main cheatsheet page.
+  // Escape on the topic page (sheet closed) navigates back to the main cheatsheet page preserving scroll.
   // When the sheet is open, ConceptSheetModal owns Escape and closes itself instead.
   useEffect(() => {
     if (isModalOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') router.push('/');
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        try {
+          sessionStorage.setItem('home_last_domain', domainId);
+        } catch (err) {}
+        if (window.history.length > 1) {
+          router.back();
+        } else {
+          router.push('/', { scroll: false });
+        }
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isModalOpen, router]);
+  }, [domainId, isModalOpen, router]);
 
   return (
     <>
@@ -918,14 +928,14 @@ export function CategoryTopicGrid({
         transition={SHEET_TRANSITION}
         className="w-full space-y-8 origin-top overflow-hidden"
       >
-        {/* Category Banner */}
-        <CategoryBanner categoryId={categoryId} title={categoryTitle} />
+        {/* Domain Banner */}
+        <DomainBanner domainId={domainId} title={domainTitle} />
 
         {/* Inner Content Section padded with px-8 sm:px-12 to align with banner text */}
         <div className="w-full space-y-8 px-8 sm:px-12">
           {/* Search — its own row above the category/use-case row. Recessed rectangle
               (not a pill) so it reads as an input field, distinct from the filter chips
-              below it. This is now the universal layout for every category page — the
+              below it. This is now the universal layout for every domain page — the
               old tab row is gone; CategoryDropdown replaces it everywhere. */}
           <div className="relative w-full max-w-xs">
             <svg
@@ -946,8 +956,8 @@ export function CategoryTopicGrid({
             />
           </div>
 
-          {/* Topics within the category — Category dropdown (replaces the old tab row for
-              every category) + Use case dropdown (only renders once a category has
+          {/* Topics within the domain — Category dropdown (replaces the old tab row for
+              every domain) + Use case dropdown (only renders once a domain has
               use-case tags — see UseCaseFilter's own empty-options guard), sharing the row
               with Bookmark/Filter-sort. */}
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/40 pb-4">

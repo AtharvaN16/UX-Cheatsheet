@@ -3,27 +3,27 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import { getCategoryColor } from '@/lib/colors';
+import { getDomainColor } from '@/lib/colors';
 import { shouldSkipEntrance } from '@/lib/entranceGuard';
 import { ENTRANCE, EASE_ARRIVE } from '@/lib/entranceChoreography';
 
 /**
- * Beats 1 and 2 of the category entrance (see lib/entranceChoreography.ts): the
+ * Beats 1 and 2 of the domain entrance (see lib/entranceChoreography.ts): the
  * banner scales up as a surface, then the title lands on it. Splitting the two
  * is the whole point — the title arriving *onto* an already-present surface
  * reads as depth, where animating them together would just be one moving block.
  */
-export function CategoryBanner({
-  categoryId,
+export function DomainBanner({
+  domainId,
   title,
 }: {
-  categoryId: string;
+  domainId: string;
   title: string;
 }) {
-  const color = getCategoryColor(categoryId);
+  const color = getDomainColor(domainId);
   // See lib/entranceGuard.ts — Next.js remounts this on client navigation twice
   // in quick succession; without this the entrance would visibly replay.
-  const [skipEntrance] = useState(() => shouldSkipEntrance(`banner:${categoryId}`));
+  const [skipEntrance] = useState(() => shouldSkipEntrance(`banner:${domainId}`));
 
   return (
     <motion.div
@@ -41,6 +41,12 @@ export function CategoryBanner({
       <div className="relative z-10 flex items-center justify-between">
         <Link
           href="/"
+          scroll={false}
+          onClick={() => {
+            try {
+              sessionStorage.setItem('home_last_domain', domainId);
+            } catch (e) {}
+          }}
           className="inline-flex items-center gap-2 rounded-full bg-black/20 backdrop-blur-md border border-white/20 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white transition-transform hover:scale-105 hover:bg-black/35"
         >
           <span>←</span>

@@ -1,7 +1,7 @@
 /**
  * Next.js's App Router client-side navigation genuinely remounts the destination
  * page's client component tree twice in quick succession (confirmed via direct
- * instrumentation: two separate CategoryBanner mounts ~230-250ms apart, with only
+ * instrumentation: two separate DomainBanner mounts ~230-250ms apart, with only
  * one real pathname change logged in between) — this isn't something a page/
  * component can prevent from the outside, only work around.
  *

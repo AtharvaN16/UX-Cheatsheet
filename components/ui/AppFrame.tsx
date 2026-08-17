@@ -18,7 +18,7 @@ const PAGE_FADE_SECONDS = 1;
  * through a blank gap, then watches a page arrive. Dropping the exit means the
  * old page is simply gone on the same frame the new one mounts.
  *
- * `key={pathname}` is what forces that swap: navigating between two categories
+ * `key={pathname}` is what forces that swap: navigating between two domains
  * reuses the same [category] route template, so without it React would reuse
  * the instance and the incoming page would never replay its entrance at all.
  */

@@ -36,15 +36,15 @@ export function getMethod(id: string): Method | undefined {
   return getAllMethods().find((m) => m.id === id);
 }
 
-/** Methods whose primary home is `category`, plus those listing it in alsoIn. */
-export function getMethodsByCategory(category: string): {
+/** Methods whose primary home is `domain`, plus those listing it in alsoIn. */
+export function getMethodsByDomain(domain: string): {
   primary: Method[];
   secondary: Method[];
 } {
   const all = getAllMethods();
   return {
-    primary: all.filter((m) => m.category === category),
-    secondary: all.filter((m) => m.alsoIn.includes(category)),
+    primary: all.filter((m) => m.domain === domain),
+    secondary: all.filter((m) => m.alsoIn.includes(domain)),
   };
 }
 

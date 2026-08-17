@@ -1,4 +1,4 @@
-import { CategoryDashboardGrid } from '@/components/ui/CategoryDashboardGrid';
+import { DomainDashboardGrid } from '@/components/ui/DomainDashboardGrid';
 import { getAllMethods } from '@/lib/content';
 
 export default function IndexPage() {
@@ -14,7 +14,7 @@ export default function IndexPage() {
           </h1>
         </div>
 
-        <CategoryDashboardGrid allMethods={allMethods} />
+        <DomainDashboardGrid allMethods={allMethods} />
       </div>
     </div>
   );

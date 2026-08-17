@@ -1,14 +1,14 @@
 /**
- * The category page's one authored moment: a three-beat entrance that builds the
+ * The domain page's one authored moment: a three-beat entrance that builds the
  * page in the order the eye reads it — the coloured banner arrives as a surface,
  * its title lands on that surface, then the grid fills in beneath.
  *
  * Timings live here rather than in the components because the sequence spans two
- * files (CategoryBanner owns beats 1-2, CategoryTopicGrid owns beat 3) and a
+ * files (DomainBanner owns beats 1-2, DomainTopicGrid owns beat 3) and a
  * choreography you can only read by cross-referencing two components is one that
  * silently drifts out of step the first time someone tunes half of it.
  *
- * t=0 is the moment the category page mounts, which is also when AppFrame's page
+ * t=0 is the moment the domain page mounts, which is also when AppFrame's page
  * fade starts. The two are meant to overlap: the fade is the wash, this is the
  * structure underneath it, and together they read as a single arrival.
  *

@@ -2,13 +2,13 @@ import type { SearchSource, SearchableItem } from '@astryxdesign/core/Typeahead'
 import { scoreMethods, type ScorableMethod, type MatchField } from './score';
 
 export interface MethodAux {
-  category: string;
+  domain: string;
   kind: string;
   /** CommandPalette auto-groups on this. */
   group: string;
   /** Route to navigate to on selection. */
   href?: string;
-  /** Distinguishes a category entry from a method entry. */
+  /** Distinguishes a domain entry from a method entry. */
   type?: 'method' | 'category';
   matchedOn?: MatchField;
   matchedSnippet?: string;

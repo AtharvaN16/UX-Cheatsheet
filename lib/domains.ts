@@ -1,16 +1,16 @@
-export interface Category {
+export interface Domain {
   id: string;
   number: string;
   title: string;
 }
 
-export interface CategoryGroup {
+export interface DomainGroup {
   title: string;
-  categoryIds: string[];
+  domainIds: string[];
   fillClass: string;
 }
 
-export const CATEGORIES: readonly Category[] = [
+export const DOMAINS: readonly Domain[] = [
   { id: 'ux-psychology', number: '01', title: 'UX Psychology' },
   { id: 'strategic-thinking', number: '02', title: 'Strategic Thinking' },
   { id: 'research-synthesis', number: '03', title: 'Research & Synthesis' },
@@ -33,25 +33,25 @@ export const CATEGORIES: readonly Category[] = [
   { id: 'career-practice', number: '20', title: 'Career & Practice' },
 ] as const;
 
-export const CATEGORY_GROUPS: readonly CategoryGroup[] = [
+export const DOMAIN_GROUPS: readonly DomainGroup[] = [
   {
     title: 'UX Psychology',
-    categoryIds: ['ux-psychology'],
+    domainIds: ['ux-psychology'],
     fillClass: 'bg-[#B24A58] text-white border-none',
   },
   {
     title: 'Strategic Thinking',
-    categoryIds: ['strategic-thinking'],
+    domainIds: ['strategic-thinking'],
     fillClass: 'bg-[#2E8A75] text-white border-none',
   },
   {
     title: 'Research',
-    categoryIds: ['research-synthesis', 'qualitative-research', 'quantitative-research'],
+    domainIds: ['research-synthesis', 'qualitative-research', 'quantitative-research'],
     fillClass: 'bg-[#3B72B2] text-white border-none',
   },
   {
     title: 'Design & Craft',
-    categoryIds: [
+    domainIds: [
       'ideation',
       'ia-structure',
       'interaction-design',
@@ -63,7 +63,7 @@ export const CATEGORY_GROUPS: readonly CategoryGroup[] = [
   },
   {
     title: 'Evaluation & Optimization',
-    categoryIds: [
+    domainIds: [
       'evaluation',
       'accessibility',
       'ai-design',
@@ -73,7 +73,7 @@ export const CATEGORY_GROUPS: readonly CategoryGroup[] = [
   },
   {
     title: 'Systems & Professional Practice',
-    categoryIds: [
+    domainIds: [
       'service-design',
       'design-systems',
       'facilitation',
@@ -84,7 +84,7 @@ export const CATEGORY_GROUPS: readonly CategoryGroup[] = [
   },
 ] as const;
 
-export const CATEGORY_DESCRIPTIONS: Record<string, string> = {
+export const DOMAIN_DESCRIPTIONS: Record<string, string> = {
   'ux-psychology': 'Principles of human cognition, perception, decision biases, and behavioral psychology.',
   'strategic-thinking': 'Frameworks for product strategy, systems thinking, decision making, and prioritization.',
   'research-synthesis': 'Framing research problems, organizing operations, and synthesizing qualitative insights.',
@@ -107,10 +107,10 @@ export const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   'career-practice': 'Portfolio storytelling, case studies, cross-functional collaboration, and design QA.',
 };
 
-export function getCategoryDescription(categoryId: string): string {
-  if (!categoryId) return 'Essential UX methods, models, and frameworks.';
-  const normId = categoryId.toLowerCase().trim();
-  return CATEGORY_DESCRIPTIONS[normId] || 'Essential UX methods, models, and frameworks.';
+export function getDomainDescription(domainId: string): string {
+  if (!domainId) return 'Essential UX methods, models, and frameworks.';
+  const normId = domainId.toLowerCase().trim();
+  return DOMAIN_DESCRIPTIONS[normId] || 'Essential UX methods, models, and frameworks.';
 }
 
 export const GROUP_DESCRIPTIONS: Record<string, string> = {
@@ -141,16 +141,15 @@ export function getGroupColor(groupTitle: string): string {
   return GROUP_COLORS[groupTitle] || '#1A1A1A';
 }
 
-export function getCategory(id: string): Category | undefined {
+export function getDomain(id: string): Domain | undefined {
   if (!id) return undefined;
   const normId = id.toLowerCase().trim();
-  return CATEGORIES.find((c) => c.id === normId || c.title.toLowerCase().trim() === normId);
+  return DOMAINS.find((d) => d.id === normId || d.title.toLowerCase().trim() === normId);
 }
 
-export function getCategoryGroup(categoryId: string): CategoryGroup | undefined {
-  if (!categoryId) return undefined;
-  const normId = categoryId.toLowerCase().trim();
-  return CATEGORY_GROUPS.find((group) => group.categoryIds.includes(normId));
+export function getDomainGroup(domainId: string): DomainGroup | undefined {
+  if (!domainId) return undefined;
+  const normId = domainId.toLowerCase().trim();
+  return DOMAIN_GROUPS.find((group) => group.domainIds.includes(normId));
 }
-
 

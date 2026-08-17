@@ -9,7 +9,7 @@ import { PaletteProvider } from '@/components/ui/PaletteProvider';
 import type { MethodItem } from '@/lib/search/source';
 import type { ScorableMethod } from '@/lib/search/score';
 import { AppFrame } from '@/components/ui/AppFrame';
-import { CATEGORIES, getCategory } from '@/lib/categories';
+import { DOMAINS, getDomain } from '@/lib/domains';
 import { TAXONOMY } from '@/lib/taxonomy';
 import { get1Liner } from '@/lib/taxonomyDescriptions';
 import { inferKind } from '@/lib/inferKind';
@@ -23,22 +23,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const methods = getAllMethods();
   const writtenIds = new Set(methods.map((m) => m.id));
 
-  // 1. Written method search items — one entry per category a method actually
-  // renders under (its primary `category` plus every `alsoIn`), so a search
+  // 1. Written method search items — one entry per domain a method actually
+  // renders under (its primary `domain` plus every `alsoIn`), so a search
   // result's label/href always matches the page the user found it on instead
-  // of silently pointing back to the primary category only.
+  // of silently pointing back to the primary domain only.
   const writtenMethodItems: MethodItem[] = methods.flatMap((m) => {
-    const categoriesForSearch = [m.category, ...m.alsoIn];
-    return categoriesForSearch.map((catId, i) => {
-      const categoryMeta = getCategory(catId);
+    const domainsForSearch = [m.domain, ...m.alsoIn];
+    return domainsForSearch.map((domainId, i) => {
+      const domainMeta = getDomain(domainId);
       return {
-        id: i === 0 ? m.id : `${m.id}::${catId}`,
+        id: i === 0 ? m.id : `${m.id}::${domainId}`,
         label: m.title,
         auxiliaryData: {
-          category: categoryMeta?.title || catId,
-          kind: m.kind || inferKind(m.title, catId, m.id),
+          domain: domainMeta?.title || domainId,
+          kind: m.kind || inferKind(m.title, domainId, m.id),
           group: '',
-          href: `/c/${catId}?item=${m.id}`,
+          href: `/c/${domainId}?item=${m.id}`,
         },
       };
     });
@@ -48,24 +48,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const taxonomyItems: MethodItem[] = [];
   const taxonomyScorables: ScorableMethod[] = [];
 
-  TAXONOMY.forEach((catTax) => {
-    const categoryMeta = getCategory(catTax.categoryId);
-    const categoryName = categoryMeta?.title || catTax.categoryId;
+  TAXONOMY.forEach((domainTax) => {
+    const domainMeta = getDomain(domainTax.domainId);
+    const domainName = domainMeta?.title || domainTax.domainId;
 
-    catTax.groups.forEach((group) => {
+    domainTax.groups.forEach((group) => {
       group.items.forEach((item) => {
         if (!writtenIds.has(item.id)) {
-          const kind = inferKind(item.title, catTax.categoryId, item.id);
+          const kind = inferKind(item.title, domainTax.domainId, item.id);
           const desc = get1Liner(item.id, item.title);
 
           taxonomyItems.push({
             id: item.id,
             label: item.title,
             auxiliaryData: {
-              category: categoryName,
+              domain: domainName,
               kind,
               group: '',
-              href: `/c/${catTax.categoryId}?item=${item.id}`,
+              href: `/c/${domainTax.domainId}?item=${item.id}`,
             },
           });
 
@@ -74,49 +74,49 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             title: item.title,
             aka: [],
             whenToUse: desc,
-            rest: `${item.title} ${categoryName} ${group.title || ''}`,
+            rest: `${item.title} ${domainName} ${group.title || ''}`,
           });
         }
       });
     });
   });
 
-  // 3. Category Items & Scorables
-  const categoryItems: MethodItem[] = CATEGORIES.map((c) => ({
-    id: c.id,
-    label: c.title,
+  // 3. Domain Items & Scorables
+  const domainItems: MethodItem[] = DOMAINS.map((d) => ({
+    id: d.id,
+    label: d.title,
     auxiliaryData: {
-      category: c.title,
+      domain: d.title,
       kind: 'category',
       group: '',
-      href: `/c/${c.id}`,
+      href: `/c/${d.id}`,
       type: 'category',
     },
   }));
 
-  const categoryScorables: ScorableMethod[] = CATEGORIES.map((c) => ({
-    id: c.id,
-    title: c.title,
+  const domainScorables: ScorableMethod[] = DOMAINS.map((d) => ({
+    id: d.id,
+    title: d.title,
     aka: [],
-    whenToUse: `Category cheatsheet with topics & frameworks for ${c.title}`,
-    rest: c.title,
+    whenToUse: `Category cheatsheet with topics & frameworks for ${d.title}`,
+    rest: d.title,
   }));
 
-  // Mirrors writtenMethodItems: one scorable per category a method renders under,
+  // Mirrors writtenMethodItems: one scorable per domain a method renders under,
   // keyed with the same ids, so createMethodSource's byId lookup resolves each row.
   const writtenScorables: ScorableMethod[] = methods.flatMap((m) => {
     const base = toScorable(m);
-    return [m.category, ...m.alsoIn].map((catId, i) => ({
+    return [m.domain, ...m.alsoIn].map((domainId, i) => ({
       ...base,
-      id: i === 0 ? m.id : `${m.id}::${catId}`,
+      id: i === 0 ? m.id : `${m.id}::${domainId}`,
     }));
   });
 
-  const items: MethodItem[] = [...writtenMethodItems, ...taxonomyItems, ...categoryItems];
+  const items: MethodItem[] = [...writtenMethodItems, ...taxonomyItems, ...domainItems];
   const scorables: ScorableMethod[] = [
     ...writtenScorables,
     ...taxonomyScorables,
-    ...categoryScorables,
+    ...domainScorables,
   ];
 
   return (

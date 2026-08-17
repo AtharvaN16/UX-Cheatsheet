@@ -523,44 +523,53 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
               {/* If written method details exist, render flat editorial sections */}
               {item.method ? (
                 <div className="space-y-10">
-                  {/* Editorial Sections: Filter out redundant "What is it" and "Tips", make "How to do it" (methods) / "How to use" (frameworks) a collapsible dropdown */}
-                  {Object.entries(item.method.sections)
-                    .filter(
-                      ([title]) =>
-                        title.toLowerCase().trim() !== 'what is it' &&
-                        title.toLowerCase().trim() !== 'tips'
-                    )
-                    .map(([sectionTitle, sectionContent]) => {
-                      const normalizedTitle = sectionTitle.toLowerCase().trim();
-                      const isCollapsible = normalizedTitle === 'how to do it' || normalizedTitle === 'how to use';
+                  {/* Editorial Sections: Filter out redundant "What is it", "Tips", and "How it works" for UX Psychology concepts; make "How to do it" (methods) / "How to use" (frameworks) a collapsible dropdown */}
+                  {(() => {
+                    const isUxPsychologyConcept =
+                      ((item.topicTitle || '').toLowerCase().includes('psychology') ||
+                        item.method.domain === 'ux-psychology' ||
+                        (item.method as any)?.category === 'ux-psychology') &&
+                      (!kindVal || kindVal.toLowerCase().trim() === 'concept');
 
-                      if (isCollapsible) {
+                    return Object.entries(item.method.sections)
+                      .filter(([title]) => {
+                        const normalizedTitle = title.toLowerCase().trim();
+                        if (normalizedTitle === 'what is it' || normalizedTitle === 'tips') return false;
+                        if (isUxPsychologyConcept && normalizedTitle === 'how it works') return false;
+                        return true;
+                      })
+                      .map(([sectionTitle, sectionContent]) => {
+                        const normalizedTitle = sectionTitle.toLowerCase().trim();
+                        const isCollapsible = normalizedTitle === 'how to do it' || normalizedTitle === 'how to use';
+
+                        if (isCollapsible) {
+                          return (
+                            <CollapsibleSection
+                              key={sectionTitle}
+                              title={sectionTitle}
+                              content={sectionContent}
+                              tipsContent={tipsContent}
+                            />
+                          );
+                        }
+
                         return (
-                          <CollapsibleSection
-                            key={sectionTitle}
-                            title={sectionTitle}
-                            content={sectionContent}
-                            tipsContent={tipsContent}
-                          />
+                          <div key={sectionTitle} className="space-y-4 pt-2">
+                            <h2
+                              style={{ fontSize: '28px', fontWeight: 600, lineHeight: '1.3' }}
+                              className="text-primary tracking-tight"
+                            >
+                              {sectionTitle}
+                            </h2>
+                            <FormattedText
+                              content={sectionContent}
+                              style={{ fontSize: '20px', fontWeight: 400, lineHeight: '1.6' }}
+                              className="text-secondary"
+                            />
+                          </div>
                         );
-                      }
-
-                      return (
-                        <div key={sectionTitle} className="space-y-4 pt-2">
-                          <h2
-                            style={{ fontSize: '28px', fontWeight: 600, lineHeight: '1.3' }}
-                            className="text-primary tracking-tight"
-                          >
-                            {sectionTitle}
-                          </h2>
-                          <FormattedText
-                            content={sectionContent}
-                            style={{ fontSize: '20px', fontWeight: 400, lineHeight: '1.6' }}
-                            className="text-secondary"
-                          />
-                        </div>
-                      );
-                    })}
+                      });
+                  })()}
                 </div>
               ) : (
                 /* Unwritten item preview block */

@@ -4,7 +4,7 @@ import { frontmatterSchema, REQUIRED_SECTIONS } from './schema';
 const valid = {
   id: 'tree-testing',
   title: 'Tree Testing',
-  category: 'ia-structure',
+  domain: 'ia-structure',
   kind: 'method',
   gives: 'quantitative',
   effort: 'low',
@@ -49,8 +49,8 @@ describe('frontmatterSchema', () => {
     expect(() => frontmatterSchema.parse(bad)).toThrow();
   });
 
-  test('rejects a non-kebab-case category', () => {
-    expect(() => frontmatterSchema.parse({ ...valid, category: 'IA_Structure' })).toThrow();
+  test('rejects a non-kebab-case domain', () => {
+    expect(() => frontmatterSchema.parse({ ...valid, domain: 'IA_Structure' })).toThrow();
   });
 
   test('rejects a non-kebab-case item in alsoIn', () => {

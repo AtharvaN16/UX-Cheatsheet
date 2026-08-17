@@ -1,12 +1,12 @@
 import { Suspense } from 'react';
 import { notFound } from 'next/navigation';
-import { getMethodsByCategory } from '@/lib/content';
-import { CATEGORIES, getCategory } from '@/lib/categories';
-import { getTaxonomyForCategory } from '@/lib/taxonomy';
-import { CategoryTopicGrid } from '@/components/ui/CategoryTopicGrid';
+import { getMethodsByDomain } from '@/lib/content';
+import { DOMAINS, getDomain } from '@/lib/domains';
+import { getTaxonomyForDomain } from '@/lib/taxonomy';
+import { DomainTopicGrid } from '@/components/ui/DomainTopicGrid';
 
 export function generateStaticParams() {
-  return CATEGORIES.map((c) => ({ category: c.id }));
+  return DOMAINS.map((d) => ({ category: d.id }));
 }
 
 export default async function CategoryPage({
@@ -15,20 +15,20 @@ export default async function CategoryPage({
   params: Promise<{ category: string }>;
 }) {
   const { category } = await params;
-  const meta = getCategory(category);
+  const meta = getDomain(category);
   if (!meta) notFound();
 
-  const { primary, secondary } = getMethodsByCategory(category);
-  const taxonomy = getTaxonomyForCategory(category);
+  const { primary, secondary } = getMethodsByDomain(category);
+  const taxonomy = getTaxonomyForDomain(category);
   const groups = taxonomy?.groups ? [...taxonomy.groups] : [];
 
   return (
     <div className="w-full min-h-screen pb-16">
       <div className="w-full px-[32px] pt-6">
         <Suspense fallback={null}>
-          <CategoryTopicGrid
-            categoryId={category}
-            categoryTitle={meta.title}
+          <DomainTopicGrid
+            domainId={category}
+            domainTitle={meta.title}
             groups={groups}
             methods={primary}
             secondaryMethods={secondary}

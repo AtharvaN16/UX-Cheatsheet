@@ -1,0 +1,99 @@
+---
+id: gestalt-principles
+title: "Gestalt Principles"
+aka: ["Gestalt Laws", "Laws of Perceptual Organization", "Gestalt Theory", "Principles of Grouping"]
+domain: ux-psychology
+alsoIn: ["visual-design"]
+kind: concept
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "Layout, grouping, or visual hierarchy decisions"
+  - "Component or design system organization"
+useCases: [improve-interaction, reduce-cognitive-effort]
+useInstead:
+  - when: "You need to validate whether real users actually perceive your intended visual groupings"
+    method: "usability-testing"
+related:
+  alongside: ["weber-fechner-law", "von-restorff-effect"]
+sources:
+  - title: "Laws of Organization in Perceptual Forms"
+    author: "Max Wertheimer"
+    url: "https://psychclassics.yorku.ca/Wertheimer/Forms/forms.htm"
+    type: "paper"
+    year: 1923
+    seminal: true
+  - title: "Psychology for UX: Study Guide"
+    author: "Nielsen Norman Group"
+    url: "https://www.nngroup.com/articles/psychology-study-guide/"
+    type: "article"
+    year: 2024
+---
+
+## What is it
+
+A set of principles describing how the human eye and brain group individual visual elements into unified wholes, without being told to. People don't perceive a screen as a pile of disconnected pixels — they automatically organize it into shapes, groups, and hierarchy based on a handful of predictable rules.
+
+## Why it matters
+
+Every layout decision — spacing, alignment, color, borders — is read by users as a grouping signal whether you intend it or not. Two buttons placed close together read as related; the same two buttons spaced apart read as unrelated, even with identical styling. Designers who understand Gestalt principles can deliberately signal structure (this belongs together, that's separate, start here) using spacing and form alone, before a single word of copy is read.
+
+## Key ideas
+
+- **Proximity**: Elements placed near each other are perceived as a group, more strongly than shared color or shape can imply.
+- **Similarity**: Elements sharing color, shape, or size are read as related, even when scattered across a layout.
+- **Closure**: The eye fills in gaps to perceive a complete shape from incomplete or overlapping information (a partially drawn icon still reads as whole).
+- **Continuation**: The eye follows the smoothest path along a line or curve, so elements arranged along an implied line are perceived as a connected sequence.
+- **Figure-Ground**: Perception separates a layout into a foreground "figure" and a background "ground" — ambiguous figure-ground relationships create genuine visual confusion, not just a stylistic quirk.
+- **Common Region**: Elements sharing an enclosed boundary (a card, a bordered box) are grouped together more strongly than proximity or similarity alone would produce.
+- **Common Fate**: Elements that move or change together are perceived as belonging together, even if they aren't near each other (used heavily in animated state transitions).
+
+## How it works
+
+```
+Ungrouped Elements:     ○  ○  ○     ○  ○  ○
+                          (ambiguous — no relationship signaled)
+
+Proximity applied:      ○ ○ ○       ○ ○ ○
+                          (two clear groups, purely from spacing)
+
+Common Region applied:  ┌─────┐     ┌─────┐
+                         │○ ○ ○│     │○ ○ ○│
+                         └─────┘     └─────┘
+                          (grouping reinforced by an enclosing boundary)
+```
+
+Grouping strength is cumulative and can conflict: strong proximity can override weak similarity, and a bounding container (common region) tends to dominate both when the signals disagree.
+
+## Example
+
+1. **Settings Screens**: Related toggles (e.g. all notification settings) are visually clustered with tight vertical spacing and separated from the next group by a larger gap or a divider — no heading is strictly required for the grouping to read correctly.
+2. **Form Field Grouping**: A shipping address form places street, city, state, and zip fields close together, then leaves a larger gap before the payment fields, signaling "these fields belong to one task" purely through spacing.
+
+## Application
+
+- **Use Spacing as the Primary Grouping Signal**: Before reaching for borders, dividers, or background-color changes, check whether proximity alone already communicates the intended grouping.
+- **Enclose Ambiguous Groups**: When items must be grouped but can't be placed close together (e.g. a dashboard widget), use a card or bordered container (common region) to make the grouping unambiguous.
+- **Align Related Actions Along a Line**: Arrange sequential steps (onboarding, checkout) along a clear horizontal or vertical line so continuation reinforces the intended reading order.
+- **Animate State Changes Together**: When two elements represent the same underlying object (a thumbnail expanding into a detail view), animate them as one continuous motion so common fate confirms they're the same thing, not two separate elements.
+
+## Limitations
+
+- **Conflicting Signals Break Grouping**: Applying proximity and similarity in contradiction (e.g. spacing two unrelated items closely while giving them different colors) produces genuine ambiguity, not a stylistic tension a viewer resolves in your favor.
+- **Cultural and Individual Variation**: Reading order assumptions built on continuation (left-to-right, top-to-bottom) don't hold universally across writing systems, and users with low vision or cognitive differences may rely on landmarks (headings, borders) more than implicit spatial grouping.
+- **Doesn't Replace Explicit Labeling**: Gestalt grouping communicates *that* elements relate, not *why* — a settings screen still needs a heading or label for a screen reader user, since spatial grouping alone conveys nothing to assistive technology.
+
+## Common misconceptions
+
+- **"Gestalt principles are just about aesthetics"**: They're perceptual mechanics, not a style preference — violating them produces measurable comprehension errors, not merely a "less polished" look.
+- **"One principle at a time"**: Real layouts stack multiple principles simultaneously (proximity + similarity + common region on the same group); the principles are lenses for diagnosing a layout, not a checklist applied one-by-one.
+
+## Using AI
+
+**Where it helps**
+- Auditing a screenshot for unintended groupings (e.g. flagging where spacing accidentally implies a relationship between unrelated elements).
+- Generating multiple spacing/layout variants of the same content to compare which grouping reads most clearly.
+
+**Where it fails**
+- Judging whether a grouping "feels" correct to an actual target audience — Gestalt principles predict what *can* be perceived as grouped, not what a specific user base will find intuitive or attractive.

@@ -105,7 +105,7 @@ export function Palette({
       }}
       renderItem={(item, isSelected) => {
         const typeBadgeStyle = getTypeBadgeStyle(item.auxiliaryData.kind);
-        const categoryName = item.auxiliaryData.category;
+        const domainName = item.auxiliaryData.domain;
         const snippet = item.auxiliaryData.matchedSnippet;
         const isCategory = item.auxiliaryData.type === 'category';
 
@@ -121,10 +121,10 @@ export function Palette({
               </span>
             </div>
 
-            {/* Category Subheading */}
-            {!isCategory && categoryName && (
+            {/* Domain Subheading */}
+            {!isCategory && domainName && (
               <span className="text-sm font-medium text-[#737067] leading-snug">
-                In <HighlightText text={categoryName} query={currentQuery} />
+                In <HighlightText text={domainName} query={currentQuery} />
               </span>
             )}
 

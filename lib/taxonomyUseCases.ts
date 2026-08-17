@@ -2,7 +2,7 @@
  * Use-case tags for taxonomy items that have no MDX content yet (see
  * `taxonomyDescriptions.ts` for the same pattern applied to descriptions).
  * Once an item gets written, its real `useCases` frontmatter field takes over —
- * see `CategoryTopicGrid`, which prefers `written.useCases` and falls back to
+ * see `DomainTopicGrid`, which prefers `written.useCases` and falls back to
  * this map only for unwritten stubs.
  */
 export const TAXONOMY_USE_CASES: Record<string, string[]> = {
