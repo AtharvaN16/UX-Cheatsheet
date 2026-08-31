@@ -12,9 +12,9 @@
  * fade starts. The two are meant to overlap: the fade is the wash, this is the
  * structure underneath it, and together they read as a single arrival.
  *
- *   0.00s  ├─ banner scales up ─────────┤
- *   0.42s            ├─ title rises ────────┤
- *   0.78s                     ├─ cards stagger in ─────── ...
+ *   0.00s  ├─ banner scales up ───┤
+ *   0.28s        ├─ title rises ────┤
+ *   0.52s               ├─ cards stagger in ─────── ...
  *
  * Each beat starts while the previous is ~75% settled. Strict "wait until fully
  * stopped" gaps read as stutter and would push a routine navigation past two
@@ -25,9 +25,9 @@
 export const EASE_ARRIVE = [0.16, 1, 0.3, 1] as const;
 
 export const ENTRANCE = {
-  banner: { delay: 0, duration: 0.6 },
-  title: { delay: 0.42, duration: 0.45 },
-  cards: { delay: 0.78, duration: 0.45, stagger: 0.035, maxStagger: 0.35 },
+  banner: { delay: 0, duration: 0.4 },
+  title: { delay: 0.28, duration: 0.3 },
+  cards: { delay: 0.52, duration: 0.3, stagger: 0.025, maxStagger: 0.22 },
 } as const;
 
 /**

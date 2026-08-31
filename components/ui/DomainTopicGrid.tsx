@@ -157,7 +157,7 @@ function PillTrigger({
           : 'bg-white text-[#1A1A1A] border-[#E5E2D9] hover:bg-[#F0EDE6]'
       }`}
     >
-      <button type="button" onClick={onToggle} className="flex items-center py-2.5 pl-4 pr-1.5 text-sm font-medium">
+      <button type="button" onClick={onToggle} className="flex items-center py-2.5 pl-4 pr-3 text-sm font-medium">
         <span>{label}</span>
       </button>
       {hasSelection && (
@@ -176,7 +176,7 @@ function PillTrigger({
         type="button"
         onClick={onToggle}
         aria-label="Toggle dropdown"
-        className={`flex items-center py-2.5 pl-2.5 pr-4 transition-colors ${
+        className={`flex items-center py-2.5 pl-3 pr-4 transition-colors ${
           isDark ? 'bg-white/10 hover:bg-white/15' : 'hover:bg-black/5'
         }`}
       >

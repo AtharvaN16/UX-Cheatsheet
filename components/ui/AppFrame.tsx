@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 import { AppShellFrame } from '@/components/ui/AppShellFrame';
 import { AppNavbar } from '@/components/ui/AppNavbar';
 
-const PAGE_FADE_SECONDS = 1;
+const PAGE_FADE_SECONDS = 0.6;
 
 /**
  * Whole-page entrance fade on route change: the outgoing page is removed
