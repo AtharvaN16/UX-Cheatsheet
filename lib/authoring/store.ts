@@ -1,6 +1,7 @@
 // lib/authoring/store.ts
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, dirname, sep } from 'node:path';
+import { GitHubStore } from './github';
 
 export interface FileWrite {
   /** Repo-relative, POSIX-style. */
@@ -47,6 +48,11 @@ export class DiskStore implements ContentStore {
   }
 }
 
+/**
+ * Disk in development, GitHub everywhere else. This is the only place the two
+ * differ; nothing above this line knows which is in play.
+ */
 export function getStore(): ContentStore {
-  return new DiskStore(process.cwd());
+  if (process.env.NODE_ENV === 'development') return new DiskStore(process.cwd());
+  return new GitHubStore();
 }
