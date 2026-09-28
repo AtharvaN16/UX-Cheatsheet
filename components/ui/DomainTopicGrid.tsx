@@ -1053,11 +1053,14 @@ export function DomainTopicGrid({
                       className={`h-full min-h-[160px] sm:min-h-[180px] flex flex-col justify-between rounded-2xl border p-6 sm:p-7 transition-all group-hover:border-primary/50 relative ${
                         item.isWritten
                           ? 'border-border/60'
-                          : // Nothing written behind this entry yet. 70% is the floor that
-                            // keeps #1A1A1A body text above 4.5:1 on this background; a
-                            // dashed edge carries the same signal without relying on
-                            // opacity alone, which some displays flatten.
-                            'border-dashed border-border/50 opacity-70'
+                          : // Nothing written behind this entry yet. At 50% the title
+                            // computes to roughly 3.2:1 on this background — AA for
+                            // large/bold text, under the 4.5:1 normal-text bar. These
+                            // cards render title-only and are a deliberately recessive
+                            // "nothing here yet" signal, so the trade is intentional.
+                            // The dashed edge carries the same signal independently,
+                            // for displays that flatten opacity.
+                            'border-dashed border-border/50 opacity-50'
                       }`}
                       style={{ backgroundColor: '#f1eee6' }}
                     >

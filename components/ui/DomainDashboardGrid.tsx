@@ -612,7 +612,7 @@ export function DomainDashboardGrid({ allMethods }: DomainDashboardGridProps) {
                         className={`h-full min-h-[170px] sm:min-h-[190px] flex flex-col justify-between rounded-2xl border p-6 bg-[#F0EDE6] transition-all duration-200 group-hover:border-[#1A1A1A]/40 group-hover:shadow-md relative ${
                           item.isWritten
                             ? 'border-[#E5E2D9]'
-                            : 'border-dashed border-[#D8D3C6] opacity-70'
+                            : 'border-dashed border-[#D8D3C6] opacity-50'
                         }`}
                       >
                         <button
