@@ -128,10 +128,13 @@ export function FrontmatterPanel({ method }: { method: Method }) {
         );
       })}
 
-      {method.image && (
+      {/* Shown on every card, not only the 14 that already have an image.
+          applyEdits creates the frontmatter `image:` block when one is absent,
+          so a first diagram can be dropped in like any replacement. */}
+      <div className="mb-3">
         <div className="mb-3">
           <label className="mb-1.5 block text-[14px] font-medium uppercase tracking-[0.06em] text-[#8C887E]">
-            Image
+            {method.image ? 'Image' : 'Image — none yet'}
           </label>
           <label
             className="block cursor-pointer rounded-[9px] border-[1.5px] border-dashed border-[#CFC8B8] bg-white p-4 text-center text-[14px] text-[#8C887E] hover:border-[#5A92C6]"
@@ -154,7 +157,7 @@ export function FrontmatterPanel({ method }: { method: Method }) {
             />
           </label>
         </div>
-      )}
+      </div>
 
       {errors.length > 0 && (
         <ul className="rounded-[7px] bg-[#FDF2F2] p-3 text-[14px] text-[#A33]">
