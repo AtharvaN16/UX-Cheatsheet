@@ -1,6 +1,6 @@
 import { expect, test, describe, afterEach, beforeEach } from 'bun:test';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
-import { join } from 'node:path';
+import { basename, dirname, join } from 'node:path';
 import { guardRequest, devOnlyRoute } from './guard';
 import { signSession } from './auth';
 
@@ -125,9 +125,18 @@ describe('authoring routes', () => {
         return statSync(full).isDirectory() ? walk(full) : e === 'route.ts' ? [full] : [];
       });
 
+    // The two unauthenticated surfaces in the app, exempt for reasons the
+    // guard cannot express: `login` is unauthenticated by definition — the
+    // session check would reject the very request that creates a session — and
+    // `session`'s entire job is answering "am I signed in?" for a caller who
+    // may not be. Both still perform the same-origin half of the guard inline,
+    // which is what the check below is really protecting.
+    const EXEMPT = new Set(['login', 'session']);
+
     const routes = walk(base);
     expect(routes.length).toBeGreaterThan(0);
     for (const r of routes) {
+      if (EXEMPT.has(basename(dirname(r)))) continue;
       // Not just `guardRequest(` — it must receive the request, or the
       // cross-origin half of the guard silently does nothing.
       expect(readFileSync(r, 'utf8')).toContain('guardRequest(request)');

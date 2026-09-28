@@ -23,5 +23,17 @@ if (allErrors.length > 0) {
   process.exit(1);
 }
 
+// Written here rather than in a separate step because this script already has
+// the parsed methods in hand, and because anything that changes the content
+// tree must run validate anyway. lib/authoring/resolve.ts imports this file
+// statically so it survives into the serverless bundle, where content/ does not.
+// Only on the success path above: a manifest derived from invalid content would
+// be worse than none.
+const manifest = Object.fromEntries(methods.map((m) => [m.id, m.domain]));
+await Bun.write(
+  join(root, 'lib', 'content', 'manifest.json'),
+  `${JSON.stringify(manifest, null, 2)}\n`,
+);
+
 const withImages = methods.filter((m) => m.image).length;
 console.log(`✓ ${methods.length} methods valid (${withImages} with an image)`);
