@@ -21,6 +21,9 @@ export function AuthorDock() {
     syncing,
     justSynced,
     discardAll,
+    logout,
+    dockCollapsed,
+    setDockCollapsed,
   } = useAuthoring();
 
   // Two-step, because discarding is the one irreversible thing in the dock:
@@ -49,6 +52,24 @@ export function AuthorDock() {
   const openTerminal = () => {
     void fetch('/api/authoring/terminal', { method: 'POST' });
   };
+
+  // Collapsed, the dock is a single dot. It is never removed outright: queued
+  // edits live only in this browser, so a control that could hide them for
+  // good would be a way to lose work silently. The dot stays amber while
+  // anything is unsynced.
+  if (dockCollapsed) {
+    return (
+      <button
+        type="button"
+        onClick={() => setDockCollapsed(false)}
+        title={pending.length > 0 ? `${pending.length} unsynced — click to reopen` : 'Show authoring controls'}
+        aria-label="Show authoring controls"
+        className={`fixed bottom-[14px] left-[14px] z-50 h-[18px] w-[18px] rounded-full border border-[#E4DED2] shadow-[0_4px_14px_rgba(35,33,29,0.14)] ${
+          pending.length > 0 ? 'bg-[#C98A28]' : 'bg-[#2E8A75]'
+        }`}
+      />
+    );
+  }
 
   return (
     <div
@@ -124,6 +145,25 @@ export function AuthorDock() {
       {!IS_DEV && justSynced && pending.length === 0 && (
         <span className="text-[12px] text-[#2E8A75]">live in ~1 min</span>
       )}
+      {!IS_DEV && (
+        <button
+          type="button"
+          onClick={() => void logout()}
+          title="Sign out of editing on this browser"
+          className={`${ICON} ${IDLE}`}
+        >
+          ⏻
+        </button>
+      )}
+      <button
+        type="button"
+        onClick={() => setDockCollapsed(true)}
+        title="Collapse to a dot"
+        aria-label="Collapse authoring controls"
+        className={`${ICON} ${IDLE}`}
+      >
+        ‹
+      </button>
       {/* There is no terminal to open on a serverless function. */}
       {IS_DEV && (
         <button type="button" onClick={openTerminal} title="Open terminal here" className={`${ICON} ${IDLE}`}>

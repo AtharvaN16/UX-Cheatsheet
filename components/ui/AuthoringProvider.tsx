@@ -37,6 +37,11 @@ interface Authoring {
   discardEdits: (id: string) => void;
   /** Drop the entire queue, including new-card entries. */
   discardAll: () => void;
+  /** End the session in this browser. */
+  logout: () => Promise<void>;
+  /** Whether the dock is collapsed to a dot. */
+  dockCollapsed: boolean;
+  setDockCollapsed: (v: boolean) => void;
   saveEdit: (edit: PendingEdit) => Promise<{ ok: boolean; errors?: string[] }>;
   sync: () => Promise<{ ok: boolean; errors?: string[] }>;
   syncing: boolean;
@@ -115,6 +120,7 @@ export function AuthoringProvider({ children }: { children: React.ReactNode }) {
   const [pending, setPending] = useState<PendingEdit[]>([]);
   const [syncing, setSyncing] = useState(false);
   const [justSynced, setJustSynced] = useState(false);
+  const [dockCollapsed, setDockCollapsed] = useState(false);
 
   // Asked on mount rather than read during render: a cookies() call in a layout
   // opts the whole route out of static rendering, and every visitor-facing page
@@ -250,6 +256,18 @@ export function AuthoringProvider({ children }: { children: React.ReactNode }) {
    */
   const discardAll = useCallback(() => setPending([]), []);
 
+  /**
+   * Sign out of this browser. Editing is switched off first so the page does
+   * not sit in edit mode with no session behind it — every save would 401.
+   * Queued edits are deliberately NOT discarded: they are unsynced work, and
+   * signing out is not a request to destroy it.
+   */
+  const logout = useCallback(async () => {
+    await fetch('/api/authoring/logout', { method: 'POST' });
+    setEditing(false);
+    setAuthed(false);
+  }, []);
+
   const pendingField = useCallback(
     (id: string, field: string) =>
       pending.find(
@@ -346,6 +364,9 @@ export function AuthoringProvider({ children }: { children: React.ReactNode }) {
         pendingCountFor,
         discardEdits,
         discardAll,
+        logout,
+        dockCollapsed,
+        setDockCollapsed,
         saveEdit,
         sync,
         syncing,
