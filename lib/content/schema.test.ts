@@ -117,6 +117,80 @@ describe('frontmatterSchema', () => {
   });
 });
 
+describe('imageSchema', () => {
+  const localImage = {
+    src: '/images/methods/tree-testing.png',
+    alt: 'A tree-testing task list beside the navigation hierarchy under test',
+  };
+
+  test('the field is optional — every existing method stays valid without it', () => {
+    const r = frontmatterSchema.parse(valid);
+    expect(r.image).toBeUndefined();
+  });
+
+  test('accepts a local image with alt text', () => {
+    const r = frontmatterSchema.parse({ ...valid, image: localImage });
+    expect(r.image?.src).toBe('/images/methods/tree-testing.png');
+  });
+
+  test('accepts an optional caption', () => {
+    const image = { ...localImage, caption: 'Findability scores per task' };
+    const r = frontmatterSchema.parse({ ...valid, image });
+    expect(r.image?.caption).toBe('Findability scores per task');
+  });
+
+  test('accepts a remote image when credited', () => {
+    const image = {
+      src: 'https://example.test/kano.png',
+      alt: 'Kano curves plotting customer satisfaction against feature investment',
+      credit: { title: 'Kano Model', url: 'https://example.test/paper' },
+    };
+    const r = frontmatterSchema.parse({ ...valid, image });
+    expect(r.image?.credit?.title).toBe('Kano Model');
+  });
+
+  test('rejects a remote image with no credit', () => {
+    const image = {
+      src: 'https://example.test/kano.png',
+      alt: 'Kano curves plotting customer satisfaction against feature investment',
+    };
+    expect(() => frontmatterSchema.parse({ ...valid, image })).toThrow();
+  });
+
+  test('rejects a local path outside /images/methods', () => {
+    const image = { ...localImage, src: '/uploads/tree-testing.png' };
+    expect(() => frontmatterSchema.parse({ ...valid, image })).toThrow();
+  });
+
+  test('rejects an unsupported file extension', () => {
+    const image = { ...localImage, src: '/images/methods/tree-testing.gif' };
+    expect(() => frontmatterSchema.parse({ ...valid, image })).toThrow();
+  });
+
+  test('rejects a non-kebab-case filename', () => {
+    const image = { ...localImage, src: '/images/methods/Tree_Testing.png' };
+    expect(() => frontmatterSchema.parse({ ...valid, image })).toThrow();
+  });
+
+  test('rejects a missing alt', () => {
+    expect(() => frontmatterSchema.parse({ ...valid, image: { src: localImage.src } })).toThrow();
+  });
+
+  test('rejects placeholder alt text that is too short to describe anything', () => {
+    const image = { ...localImage, alt: 'diagram' };
+    expect(() => frontmatterSchema.parse({ ...valid, image })).toThrow();
+  });
+
+  test('rejects a malformed credit url', () => {
+    const image = {
+      src: 'https://example.test/kano.png',
+      alt: 'Kano curves plotting customer satisfaction against feature investment',
+      credit: { title: 'Kano Model', url: 'not-a-url' },
+    };
+    expect(() => frontmatterSchema.parse({ ...valid, image })).toThrow();
+  });
+});
+
 describe('REQUIRED_SECTIONS', () => {
   test('is the seven spec sections in order', () => {
     expect([...REQUIRED_SECTIONS]).toEqual([

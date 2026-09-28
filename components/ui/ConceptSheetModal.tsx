@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import Link from 'next/link';
 import type { Method } from '@/lib/content';
 import { useMethodLookup, type MethodLookupEntry } from '@/components/ui/PaletteProvider';
+import { MethodImage } from '@/components/ui/MethodImage';
 
 export interface ConceptSheetItem {
   id: string;
@@ -518,7 +519,8 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
                 />
               </div>
 
-
+              {/* Optional diagram: renders only for the entries that carry one. */}
+              <MethodImage image={item.method?.image} />
 
               {/* If written method details exist, render flat editorial sections */}
               {item.method ? (

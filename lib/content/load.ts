@@ -38,6 +38,12 @@ interface ParsedFile {
  * that legitimately references it is not falsely reported as having an
  * unresolved reference, and a duplicate id is still caught even when one
  * of the two copies also happens to have an unrelated schema error.
+ *
+ * Note this validates *content*, not assets: whether a local `image.src`
+ * actually exists on disk is checked by `checkImageFiles` in ./images, which
+ * runs in the validate script rather than here. Reaching into `public/` from
+ * this module would make Turbopack trace the entire project into the server
+ * bundle, since the path isn't statically analyzable.
  */
 export function loadMethods(dir: string): { methods: Method[]; errors: string[] } {
   const errors: string[] = [];

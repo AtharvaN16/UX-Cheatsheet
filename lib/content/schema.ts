@@ -29,6 +29,40 @@ export const sourceSchema = z.object({
   seminal: z.boolean().default(false),
 });
 
+/**
+ * A local image must live under `public/images/methods/` and be named in
+ * kebab-case, so paths can't drift and `loadMethods` can check the file
+ * actually exists on disk. Remote images are permitted but unverifiable at
+ * build time, so they carry a stricter editorial requirement instead: a
+ * credit. A remote diagram is almost always someone else's work.
+ */
+const LOCAL_IMAGE = /^\/images\/methods\/[a-z0-9]+(-[a-z0-9]+)*\.(png|jpe?g|svg|webp)$/;
+
+/** Shortest alt text that can plausibly describe a diagram rather than name it. */
+const MIN_ALT = 20;
+
+export const imageSchema = z
+  .object({
+    src: z.union([
+      z.string().regex(LOCAL_IMAGE, 'must be /images/methods/<kebab-name>.(png|jpg|svg|webp) or a URL'),
+      z.url(),
+    ]),
+    alt: z
+      .string()
+      .min(MIN_ALT, `must be at least ${MIN_ALT} characters — describe the image, don't label it`),
+    caption: z.string().min(1).optional(),
+    credit: z.object({ title: z.string().min(1), url: z.url() }).optional(),
+  })
+  .refine((i) => !isRemoteImage(i.src) || i.credit !== undefined, {
+    message: 'a remote image must include credit { title, url }',
+    path: ['credit'],
+  });
+
+/** True for images fetched over the network, which the build cannot verify. */
+export function isRemoteImage(src: string): boolean {
+  return /^https?:\/\//.test(src);
+}
+
 export const useInsteadSchema = z.object({
   when: z.string().min(1),
   method: z.string().regex(KEBAB),
@@ -55,8 +89,16 @@ export const frontmatterSchema = z.object({
   useInstead: z.array(useInsteadSchema).min(1),
   related: relatedSchema.default({ before: [], after: [], alongside: [] }),
   sources: z.array(sourceSchema).min(2),
+  /**
+   * Optional: only present on entries where a diagram genuinely adds
+   * something the prose can't. There is no schema rule for "benefits from an
+   * image" — that is a per-entry editorial call. What the schema does enforce
+   * is that an image, once added, is complete and locatable.
+   */
+  image: imageSchema.optional(),
 });
 
 export type Frontmatter = z.infer<typeof frontmatterSchema>;
 export type Source = z.infer<typeof sourceSchema>;
 export type UseInstead = z.infer<typeof useInsteadSchema>;
+export type MethodImage = z.infer<typeof imageSchema>;

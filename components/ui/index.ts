@@ -4,4 +4,4 @@
 // the Task 2 brief — `lib/theme.ts`, `app/providers.tsx`, `app/page.tsx`) that
 // may import from `@astryxdesign/*`. Later tasks populate this barrel as they
 // add wrapper components here.
-export {};
+export { MethodImage } from './MethodImage';
