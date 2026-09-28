@@ -6,13 +6,12 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import type { Method } from '@/lib/content';
-import type { TaxonomyGroup } from '@/lib/taxonomy';
+import { type TaxonomyGroup, resolveKind } from '@/lib/taxonomy';
 import { get1Liner } from '@/lib/taxonomyDescriptions';
 import { getStubUseCases } from '@/lib/taxonomyUseCases';
 import { USE_CASES } from '@/lib/useCases';
 import { ConceptSheetModal, type ConceptSheetItem, SHEET_TRANSITION } from '@/components/ui/ConceptSheetModal';
 import { DomainBanner } from '@/components/ui/DomainBanner';
-import { inferKind } from '@/lib/inferKind';
 import { domainCoverage } from '@/lib/coverage';
 import { CoverageBadge } from '@/components/ui/CoverageBadge';
 import { shouldSkipEntrance } from '@/lib/entranceGuard';
@@ -709,7 +708,7 @@ export function DomainTopicGrid({
           const written = writtenMap.get(item.id);
           const rawDesc = written?.sections['What is it'] ?? get1Liner(item.id, item.title);
           const cleanDesc = rawDesc.replace(/\n+/g, ' ').trim();
-          const itemKind = written?.kind || inferKind(item.title, domainId, item.id);
+          const itemKind = resolveKind(item, domainId, written?.kind);
           const itemUseCases = written?.useCases?.length ? written.useCases : getStubUseCases(item.id);
 
           list.push({
@@ -738,7 +737,7 @@ export function DomainTopicGrid({
           topicTitle: domainTitle,
           description: cleanDesc,
           isWritten: true,
-          kind: written.kind || inferKind(written.title, domainId, written.id),
+          kind: resolveKind({ id: written.id, title: written.title }, domainId, written.kind),
           method: written,
           useCases: written.useCases,
         });

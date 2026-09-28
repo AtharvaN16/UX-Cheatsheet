@@ -12,9 +12,8 @@ import { getDomainColor } from '@/lib/colors';
 import { computeCoverage } from '@/lib/coverage';
 import { CoverageBadge } from '@/components/ui/CoverageBadge';
 import { getDomainIcon } from '@/lib/domainIcons';
-import { TAXONOMY } from '@/lib/taxonomy';
+import { TAXONOMY, resolveKind } from '@/lib/taxonomy';
 import { get1Liner } from '@/lib/taxonomyDescriptions';
-import { inferKind } from '@/lib/inferKind';
 import type { Method } from '@/lib/content';
 import { ConceptSheetModal, type ConceptSheetItem } from '@/components/ui/ConceptSheetModal';
 
@@ -215,7 +214,7 @@ export function DomainDashboardGrid({ allMethods }: DomainDashboardGridProps) {
             topicTitle: domainTitle,
             description: cleanDesc,
             isWritten: !!written,
-            kind: written?.kind || inferKind(item.title, domainTax.domainId, item.id),
+            kind: resolveKind(item, domainTax.domainId, written?.kind),
             method: written,
           });
         });
@@ -235,7 +234,7 @@ export function DomainDashboardGrid({ allMethods }: DomainDashboardGridProps) {
           topicTitle: domainTitle,
           description: cleanDesc,
           isWritten: true,
-          kind: written.kind || inferKind(written.title, written.domain, written.id),
+          kind: resolveKind({ id: written.id, title: written.title }, written.domain, written.kind),
           method: written,
         });
       }

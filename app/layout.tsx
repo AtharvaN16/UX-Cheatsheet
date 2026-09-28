@@ -10,9 +10,8 @@ import type { MethodItem } from '@/lib/search/source';
 import type { ScorableMethod } from '@/lib/search/score';
 import { AppFrame } from '@/components/ui/AppFrame';
 import { DOMAINS, getDomain } from '@/lib/domains';
-import { TAXONOMY } from '@/lib/taxonomy';
+import { TAXONOMY, resolveKind } from '@/lib/taxonomy';
 import { get1Liner } from '@/lib/taxonomyDescriptions';
-import { inferKind } from '@/lib/inferKind';
 
 export const metadata: Metadata = {
   title: 'UX Cheatsheets',
@@ -36,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         label: m.title,
         auxiliaryData: {
           domain: domainMeta?.title || domainId,
-          kind: m.kind || inferKind(m.title, domainId, m.id),
+          kind: resolveKind({ id: m.id, title: m.title }, domainId, m.kind),
           group: '',
           href: `/c/${domainId}?item=${m.id}`,
         },
@@ -55,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     domainTax.groups.forEach((group) => {
       group.items.forEach((item) => {
         if (!writtenIds.has(item.id)) {
-          const kind = inferKind(item.title, domainTax.domainId, item.id);
+          const kind = resolveKind(item, domainTax.domainId);
           const desc = get1Liner(item.id, item.title);
 
           taxonomyItems.push({
