@@ -38,20 +38,18 @@ export const sourceSchema = z.object({
  */
 const LOCAL_IMAGE = /^\/images\/methods\/[a-z0-9]+(-[a-z0-9]+)*\.(png|jpe?g|svg|webp)$/;
 
+/**
+ * No `alt` field: removed at the owner's request for this personal tool.
+ * `MethodImage` renders `alt=""`, which is the correct HTML for a decorative
+ * image — omitting the attribute entirely makes screen readers announce the
+ * filename instead, which is worse than silence.
+ */
 export const imageSchema = z
   .object({
     src: z.union([
       z.string().regex(LOCAL_IMAGE, 'must be /images/methods/<kebab-name>.(png|jpg|svg|webp) or a URL'),
       z.url(),
     ]),
-    /**
-     * Optional, defaulting to empty. It used to carry a 20-character minimum,
-     * which meant an image could only ever be added by hand — a drop target
-     * has no way to invent a description. This is a personal tool, and the
-     * owner's call is that dropping an image in should just work; alt text
-     * stays available for the entries that want it.
-     */
-    alt: z.string().default(''),
     caption: z.string().min(1).optional(),
     credit: z.object({ title: z.string().min(1), url: z.url() }).optional(),
   })

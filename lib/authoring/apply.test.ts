@@ -109,7 +109,7 @@ describe('applyEdits', () => {
     const svg = Buffer.from('<svg xmlns="http://www.w3.org/2000/svg"></svg>').toString('base64');
     const withImage = REAL.replace(
       '---\n\n##',
-      'image:\n  src: /images/methods/tree-testing.svg\n  alt: A tree test diagram showing nesting\n---\n\n##',
+      'image:\n  src: /images/methods/tree-testing.svg\n---\n\n##',
     );
     const store = fakeStore({ 'content/methods/ia-structure/tree-testing.mdx': withImage });
     const edits: PendingEdit[] = [
@@ -220,7 +220,7 @@ describe('applyEdits creating a first image', () => {
     expect(binary.content).toBeInstanceOf(Uint8Array);
   });
 
-  test('the created block carries no alt and the file still validates', async () => {
+  test('the created block still validates', async () => {
     const { files } = await applyEdits(fakeStore(), [
       { kind: 'image', id: 'tree-testing', filename: 'drop.svg', base64: SVG },
     ]);
@@ -232,7 +232,7 @@ describe('applyEdits creating a first image', () => {
   test('replacing an image on a card that has one still rewrites src in place', async () => {
     const withImage = REAL.replace(
       '---\n\n##',
-      'image:\n  src: /images/methods/tree-testing.png\n  alt: A tree test diagram showing nesting\n---\n\n##',
+      'image:\n  src: /images/methods/tree-testing.png\n---\n\n##',
     );
     const store = fakeStore({ 'content/methods/ia-structure/tree-testing.mdx': withImage });
     const { files, errors } = await applyEdits(store, [
@@ -242,9 +242,11 @@ describe('applyEdits creating a first image', () => {
     const mdx = String(files.find((f) => f.path.endsWith('.mdx'))!.content);
     expect(mdx).toContain('  src: /images/methods/tree-testing.svg');
     expect(mdx).not.toContain('  src: /images/methods/tree-testing.png');
-    // The block is edited, not duplicated, and its alt survives.
+    // The block is edited in place, not duplicated, and nothing else in the
+    // frontmatter is disturbed.
     expect(mdx.match(/^image:$/gm)?.length).toBe(1);
-    expect(mdx).toContain('  alt: A tree test diagram showing nesting');
+    expect(mdx).toContain('id: tree-testing');
+    expect(mdx).toContain('effort: low');
   });
 
   test('a card with no frontmatter at all is reported, not silently patched', async () => {

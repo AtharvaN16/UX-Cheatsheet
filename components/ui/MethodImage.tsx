@@ -16,7 +16,7 @@ import type { MethodImage as MethodImageData } from '@/lib/content/schema';
 export function MethodImage({ image }: { image?: MethodImageData }) {
   if (!image) return null;
 
-  const { src, alt, caption, credit } = image;
+  const { src, caption, credit } = image;
 
   return (
     <figure className="my-2">
@@ -24,7 +24,9 @@ export function MethodImage({ image }: { image?: MethodImageData }) {
         {/* eslint-disable-next-line @next/next/no-img-element -- see component doc comment */}
         <img
           src={src}
-          alt={alt}
+          // Empty, not absent: alt="" marks the image decorative, whereas an
+          // <img> with no alt attribute makes screen readers read the filename.
+          alt=""
           loading="lazy"
           decoding="async"
           className="mx-auto block max-h-[60vh] w-full object-contain"

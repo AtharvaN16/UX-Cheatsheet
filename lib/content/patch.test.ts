@@ -173,7 +173,6 @@ describe('patchFrontmatterScalar', () => {
       'id: kano-model',
       'image:',
       '  src: /images/methods/old.svg',
-      '  alt: A description that is comfortably over twenty characters long',
       '---',
       '',
       '## What is it',
@@ -182,7 +181,6 @@ describe('patchFrontmatterScalar', () => {
     ].join('\n');
     const out = patchFrontmatterScalar(withImage, '  src', '/images/methods/new.png');
     expect(out).toContain('  src: /images/methods/new.png');
-    expect(out).toContain('  alt: A description that is comfortably over twenty characters long');
   });
 
   test('throws for a nested key that is absent, so a card with no image is reported', () => {

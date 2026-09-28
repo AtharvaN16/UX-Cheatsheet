@@ -120,7 +120,6 @@ describe('frontmatterSchema', () => {
 describe('imageSchema', () => {
   const localImage = {
     src: '/images/methods/tree-testing.png',
-    alt: 'A tree-testing task list beside the navigation hierarchy under test',
   };
 
   test('the field is optional — every existing method stays valid without it', () => {
@@ -128,7 +127,7 @@ describe('imageSchema', () => {
     expect(r.image).toBeUndefined();
   });
 
-  test('accepts a local image with alt text', () => {
+  test('accepts a local image', () => {
     const r = frontmatterSchema.parse({ ...valid, image: localImage });
     expect(r.image?.src).toBe('/images/methods/tree-testing.png');
   });
@@ -142,7 +141,6 @@ describe('imageSchema', () => {
   test('accepts a remote image when credited', () => {
     const image = {
       src: 'https://example.test/kano.png',
-      alt: 'Kano curves plotting customer satisfaction against feature investment',
       credit: { title: 'Kano Model', url: 'https://example.test/paper' },
     };
     const r = frontmatterSchema.parse({ ...valid, image });
@@ -152,7 +150,6 @@ describe('imageSchema', () => {
   test('rejects a remote image with no credit', () => {
     const image = {
       src: 'https://example.test/kano.png',
-      alt: 'Kano curves plotting customer satisfaction against feature investment',
     };
     expect(() => frontmatterSchema.parse({ ...valid, image })).toThrow();
   });
@@ -172,27 +169,9 @@ describe('imageSchema', () => {
     expect(() => frontmatterSchema.parse({ ...valid, image })).toThrow();
   });
 
-  // alt used to be required with a 20-character floor, which made an image
-  // impossible to add from a drop target. It is now optional.
-  test('accepts an image with no alt at all, defaulting it to empty', () => {
-    const r = frontmatterSchema.parse({ ...valid, image: { src: localImage.src } });
-    expect(r.image?.alt).toBe('');
-  });
-
-  test('accepts short alt text', () => {
-    const image = { ...localImage, alt: 'diagram' };
-    expect(frontmatterSchema.parse({ ...valid, image }).image?.alt).toBe('diagram');
-  });
-
-  test('keeps the alt text an existing entry already has', () => {
-    const r = frontmatterSchema.parse({ ...valid, image: localImage });
-    expect(r.image?.alt).toBe(localImage.alt);
-  });
-
   test('rejects a malformed credit url', () => {
     const image = {
       src: 'https://example.test/kano.png',
-      alt: 'Kano curves plotting customer satisfaction against feature investment',
       credit: { title: 'Kano Model', url: 'not-a-url' },
     };
     expect(() => frontmatterSchema.parse({ ...valid, image })).toThrow();

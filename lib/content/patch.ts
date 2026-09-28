@@ -133,7 +133,7 @@ export function hasImageBlock(fileText: string): boolean {
  * beside. Indentation matches the fourteen existing blocks, so the next edit
  * can reach `  src` through `patchFrontmatterScalar` exactly as it does there.
  *
- * `alt` is deliberately not written. The schema defaults it to empty, and a
+ * No `alt` line is written: the field no longer exists in the schema, and a
  * placeholder string in the file would be worse than its absence.
  */
 export function insertImageBlock(fileText: string, src: string): string {
