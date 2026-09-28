@@ -33,6 +33,17 @@ export function validateMethodText(fileText: string, rel: string): string[] {
     return errors;
   }
 
+  // loadMethods enforces id == filename (load.ts) and the build fails without
+  // it. Checking it here too means an edit that changes `id` can never be
+  // committed, even if some future caller bypasses the field allowlist: a
+  // mismatched id produces a duplicate id and unresolved cross-references at
+  // build time, which the authoring UI has no way to undo.
+  const expectedId = rel.replace(/\.mdx$/, '');
+  if (parsed.data.id !== expectedId) {
+    errors.push(`${rel}: id — must match filename (expected ${expectedId}.mdx)`);
+    return errors;
+  }
+
   const sections = parseSections(content);
   const missing = missingSections(sections, parsed.data.kind);
   if (missing.length > 0) errors.push(`${rel}: sections — missing ${missing.join(', ')}`);

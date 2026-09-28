@@ -78,8 +78,12 @@ export class GitHubStore implements ContentStore {
   }
 
   async read(path: string): Promise<{ text: string; version: string }> {
+    // Encode each segment but keep the separators: a path carrying a `?` or
+    // `#` would otherwise alter the request rather than address a file. Paths
+    // are allowlisted upstream, so this is defence in depth.
+    const safe = path.split('/').map(encodeURIComponent).join('/');
     const data = await this.api<{ content: string; sha: string }>(
-      `/contents/${path}?ref=${encodeURIComponent(this.cfg.branch)}`,
+      `/contents/${safe}?ref=${encodeURIComponent(this.cfg.branch)}`,
     );
     return {
       text: Buffer.from(data.content, 'base64').toString('utf8'),

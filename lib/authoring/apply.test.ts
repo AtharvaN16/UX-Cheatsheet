@@ -131,3 +131,65 @@ describe('applyEdits', () => {
     expect(files).toEqual([]);
   });
 });
+
+describe('applyEdits rejects what the UI would never send', () => {
+  // Regression: the per-field route enforced this allowlist, and folding those
+  // routes into applyEdits dropped it. A session holder could then rewrite any
+  // frontmatter line — including `id`, which commits cleanly and then breaks
+  // every later deploy in a way the authoring UI cannot undo.
+  test('refuses a frontmatter field that is not an editable enum', async () => {
+    for (const field of ['title', 'id', 'domain', '  url', 'aka']) {
+      const { errors, files } = await applyEdits(fakeStore(), [
+        { kind: 'frontmatter', id: 'tree-testing', field, value: 'anything' },
+      ]);
+      expect(errors.some((e) => e.includes('is not editable'))).toBe(true);
+      expect(files).toEqual([]);
+    }
+  });
+
+  test('refuses a value outside the enum, including newline injection', async () => {
+    for (const value of ['enormous', 'low\ninjected: yes', '']) {
+      const { errors, files } = await applyEdits(fakeStore(), [
+        { kind: 'frontmatter', id: 'tree-testing', field: 'effort', value },
+      ]);
+      expect(errors.some((e) => e.includes('must be one of'))).toBe(true);
+      expect(files).toEqual([]);
+    }
+  });
+
+  test('accepts a legitimate enum change', async () => {
+    const { errors, files } = await applyEdits(fakeStore(), [
+      { kind: 'frontmatter', id: 'tree-testing', field: 'effort', value: 'high' },
+    ]);
+    expect(errors).toEqual([]);
+    expect(String(files[0].content)).toContain('effort: high');
+  });
+
+  test('refuses a card kind outside the three real kinds', async () => {
+    const { errors, files } = await applyEdits(fakeStore(), [
+      { kind: 'card', title: 'Bad Kind Card', cardKind: 'NOT_A_KIND', domainId: 'ia-structure', groupTitle: null },
+    ]);
+    expect(errors.some((e) => e.includes('must be one of'))).toBe(true);
+    expect(files).toEqual([]);
+  });
+
+  test('one bad edit discards the whole batch, including the good edits', async () => {
+    const { errors, files } = await applyEdits(fakeStore(), [
+      { kind: 'section', id: 'tree-testing', heading: 'Tips', markdown: 'perfectly fine' },
+      { kind: 'frontmatter', id: 'tree-testing', field: 'title', value: 'PWNED' },
+    ]);
+    expect(errors.length).toBeGreaterThan(0);
+    expect(files).toEqual([]);
+  });
+});
+
+describe('validateMethodText guards id against filename', () => {
+  test('an id that no longer matches its filename is refused', async () => {
+    // Belt and braces: even if the field allowlist were bypassed, this is the
+    // check that stops a committed file from bricking every later deploy.
+    const { validateMethodText } = await import('./validate');
+    const renamed = REAL.replace('id: tree-testing', 'id: usability-testing');
+    const errors = validateMethodText(renamed, 'tree-testing.mdx');
+    expect(errors.some((e) => e.includes('must match filename'))).toBe(true);
+  });
+});

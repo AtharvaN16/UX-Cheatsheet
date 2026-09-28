@@ -311,12 +311,21 @@ On the record, so these are known limits rather than assumptions:
   `public/images/methods/<id>.<ext>`, `lib/taxonomy.json` — but the credential
   itself is not that narrow.
 - **Anyone who signs in can commit to `main` and trigger production deploys.**
-  Content is validated before committing, so a bad edit cannot break the build —
-  but a valid, unwanted edit will go live.
+  Edits are validated before committing, and the API restricts frontmatter
+  changes to four closed enums (`kind`, `gives`, `effort`, `timeframe`) so no
+  other line can be rewritten — a security review found that allowlist missing
+  and it was restored. `validateMethodText` also refuses an `id` that no longer
+  matches its filename, which is the one edit that would commit cleanly and then
+  fail every later build. That said, the authoring path validates *less* than
+  `bun run validate` does: it does not re-check cross-references across the whole
+  content set. A valid, unwanted edit will go live, and an exotic one could still
+  in principle produce a repo state the build rejects.
 - **The endpoints are the boundary, not the UI.** Hiding the dock protects
   nothing. Every route under `app/api/authoring/` calls `guardRequest(request)`
-  as its first statement (`login` and `session` do their own origin check inline
-  and are exempted by name in `lib/authoring/guard.test.ts`). Cross-origin
+  before reading the request body (`terminal` calls the stricter `devOnlyRoute()`
+  first, so it 404s in production even for a signed-in user; `login` and
+  `session` do their own origin check inline and are exempted by name in
+  `lib/authoring/guard.test.ts`). Cross-origin
   protection is the `Origin` / `Sec-Fetch-Site` header check in
   `guardRequest` — adequate for modern browsers, and not a substitute for the
   session check.

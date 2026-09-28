@@ -15,7 +15,13 @@ import manifest from '../content/manifest.json';
  * real tree, so it cannot silently drift.
  */
 export function relPathForMethod(id: string): string {
-  const domain = (manifest as Record<string, string>)[id];
-  if (!domain) throw new Error(`unknown method "${id}"`);
+  // Object.hasOwn, not a bare lookup: `constructor`, `__proto__`, `toString`
+  // and friends are all truthy on a plain object, which would defeat the
+  // "an attacker-supplied string simply is not in the set" guarantee above.
+  // None of them can produce a path separator, so this was not a traversal —
+  // but the invariant should hold as written rather than by luck.
+  const table = manifest as Record<string, string>;
+  if (!Object.hasOwn(table, id)) throw new Error(`unknown method "${id}"`);
+  const domain = table[id];
   return `content/methods/${domain}/${id}.mdx`;
 }
