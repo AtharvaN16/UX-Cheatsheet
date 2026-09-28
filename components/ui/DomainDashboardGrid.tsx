@@ -243,6 +243,21 @@ export function DomainDashboardGrid({ allMethods }: DomainDashboardGridProps) {
     return list;
   }, [domainTitleById, methodsById]);
 
+  /**
+   * The sheet renders from the *current* item, not the object captured when it
+   * was clicked. After an authoring save calls router.refresh(), fresh
+   * `allMethods` props rebuild `allTopicItems`; without this lookup the open
+   * sheet would keep showing pre-edit text — a successful save that looks like
+   * a failed one. Falls back to the snapshot so closing still behaves.
+   */
+  const liveSelectedConcept = useMemo(
+    () =>
+      selectedConcept
+        ? (allTopicItems.find((i) => i.id === selectedConcept.id) ?? selectedConcept)
+        : null,
+    [selectedConcept, allTopicItems],
+  );
+
 
   const bookmarkedTopicItems = useMemo(
     () => allTopicItems.filter((item) => bookmarkedIds.has(item.id)),
@@ -733,7 +748,7 @@ export function DomainDashboardGrid({ allMethods }: DomainDashboardGridProps) {
         </main>
       </div>
 
-      <ConceptSheetModal item={selectedConcept} onClose={() => setSelectedConcept(null)} />
+      <ConceptSheetModal item={liveSelectedConcept} onClose={() => setSelectedConcept(null)} />
     </>
   );
 }

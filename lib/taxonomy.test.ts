@@ -1,17 +1,24 @@
 import { expect, test, describe } from 'bun:test';
 import { getTaxonomyEntryCount, getTaxonomyForDomain } from './taxonomy';
 
+// lib/taxonomy.json is no longer a static file: the add-card feature writes to
+// it at runtime. So nothing here may assert an exact entry count or a whole-file
+// equality -- adding one card through the app would turn the suite red and the
+// obvious "fix" (regenerating the snapshot) would quietly destroy the migration
+// guarantee. Every assertion below is written to survive growth.
 describe('getTaxonomyEntryCount', () => {
   test('sums items across every group in a multi-group domain', () => {
     const tax = getTaxonomyForDomain('evaluation');
     const expected = tax!.groups.reduce((sum: number, g) => sum + g.items.length, 0);
     expect(getTaxonomyEntryCount('evaluation')).toBe(expected);
-    expect(getTaxonomyEntryCount('evaluation')).toBe(14);
+    expect(getTaxonomyEntryCount('evaluation')).toBeGreaterThan(0);
   });
 
   test('sums items across a domain with multiple named subgroups', () => {
-    // ux-psychology has two groups: Human Behavior + Motivation Models
-    expect(getTaxonomyEntryCount('ux-psychology')).toBe(40);
+    const tax = getTaxonomyForDomain('ux-psychology');
+    expect(tax!.groups.length).toBeGreaterThan(1);
+    const expected = tax!.groups.reduce((sum: number, g) => sum + g.items.length, 0);
+    expect(getTaxonomyEntryCount('ux-psychology')).toBe(expected);
   });
 
   test('returns 0 for an unknown domain id', () => {
@@ -23,8 +30,43 @@ import snapshot from './taxonomy.snapshot.json';
 import { TAXONOMY } from './taxonomy';
 
 describe('taxonomy JSON migration', () => {
-  test('TAXONOMY is unchanged by the move to JSON', () => {
-    expect(JSON.parse(JSON.stringify(TAXONOMY))).toEqual(snapshot);
+  // The snapshot is the pre-migration TypeScript literal, frozen. Its job is to
+  // prove the move to JSON lost nothing -- NOT to pin the file's current
+  // contents, which the app now appends to. So: every entry that existed before
+  // the migration must still exist, in the same domain and group, with the same
+  // title. Additions are allowed; losses and mutations are not.
+  test('the migration lost nothing: every pre-migration entry survives intact', () => {
+    const live = new Map<string, string>();
+    for (const domain of TAXONOMY) {
+      for (const group of domain.groups) {
+        for (const item of group.items) {
+          live.set(`${domain.domainId}|${group.title}|${item.id}`, item.title);
+        }
+      }
+    }
+
+    const missing: string[] = [];
+    const renamed: string[] = [];
+    for (const domain of snapshot) {
+      for (const group of domain.groups) {
+        for (const item of group.items) {
+          const key = `${domain.domainId}|${group.title}|${item.id}`;
+          if (!live.has(key)) missing.push(key);
+          else if (live.get(key) !== item.title) renamed.push(key);
+        }
+      }
+    }
+
+    expect(missing).toEqual([]);
+    expect(renamed).toEqual([]);
+  });
+
+  test('the snapshot is not empty, so the check above cannot pass vacuously', () => {
+    const count = snapshot.reduce(
+      (n, d) => n + d.groups.reduce((m, g) => m + g.items.length, 0),
+      0,
+    );
+    expect(count).toBeGreaterThan(300);
   });
 
   // DEVIATION FROM PLAN: the plan asserted global id uniqueness, but 13 ids are

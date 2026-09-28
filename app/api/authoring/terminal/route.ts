@@ -5,11 +5,12 @@ import { devOnlyGuard } from '@/lib/authoring/devOnly';
  * Open a terminal at the repo root so Claude Code is one keystroke away.
  *
  * No part of the command comes from the request: the path is process.cwd() and
- * the body is ignored. Combined with the dev guard, the entire input space of
- * this shell-executing endpoint is "was it called".
+ * the body is ignored. Combined with the dev guard — which also rejects
+ * cross-origin callers, or any web page you visit could spawn terminals — the
+ * entire input space of this shell-executing endpoint is "was it called".
  */
-export async function POST(): Promise<Response> {
-  const blocked = devOnlyGuard();
+export async function POST(request: Request): Promise<Response> {
+  const blocked = devOnlyGuard(request);
   if (blocked) return blocked;
 
   if (process.platform !== 'darwin') {

@@ -5,7 +5,7 @@ import { insertTaxonomyItem, toId } from '@/lib/authoring/taxonomyEdit';
 const KINDS = ['concept', 'framework', 'method'];
 
 export async function POST(request: Request): Promise<Response> {
-  const blocked = devOnlyGuard();
+  const blocked = devOnlyGuard(request);
   if (blocked) return blocked;
 
   const { title, kind, domainId, groupTitle } = (await request.json()) as {

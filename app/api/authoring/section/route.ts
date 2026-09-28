@@ -5,7 +5,7 @@ import { getStore } from '@/lib/authoring/store';
 import { patchSection } from '@/lib/content/patch';
 
 export async function POST(request: Request): Promise<Response> {
-  const blocked = devOnlyGuard();
+  const blocked = devOnlyGuard(request);
   if (blocked) return blocked;
 
   const { id, heading, markdown } = (await request.json()) as {
@@ -16,6 +16,17 @@ export async function POST(request: Request): Promise<Response> {
 
   if (!id || !heading || typeof markdown !== 'string') {
     return Response.json({ errors: ['id, heading and markdown are required'] }, { status: 400 });
+  }
+
+  // An empty body passes every existing check: parseSections still yields the
+  // key, and missingSections only tests whether the heading is present. So
+  // every required section on a card can be blanked and `bun run validate`
+  // still calls the file valid. Refuse it here instead.
+  if (markdown.trim() === '') {
+    return Response.json(
+      { errors: [`${heading} cannot be empty — delete the card in Claude Code if that is the intent`] },
+      { status: 400 },
+    );
   }
 
   let rel: string;

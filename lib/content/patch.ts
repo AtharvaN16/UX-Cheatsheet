@@ -1,4 +1,4 @@
-import { scanLinesWithFenceState } from './scan';
+import { scanLinesWithFenceState, hasUnclosedFence, headingsOf } from './scan';
 
 /**
  * Replace the body of one `## ` section, leaving every other byte of the file
@@ -28,6 +28,21 @@ export function patchSection(fileText: string, heading: string, markdown: string
 
   if (start === -1) throw new Error(`unknown section "${heading}"`);
 
+  // GUARD 1 — refuse an unclosed code fence.
+  //
+  // An unclosed fence hides every following `## ` from the scanner. The file
+  // still looks fine and `bun run validate` still passes, because `Using AI`
+  // and `Notes` are not in the required set. But the NEXT edit to this section
+  // finds no heading after it, concludes it is the last section, and rewrites
+  // everything to EOF — silently deleting the sections in between. Two
+  // successful-looking saves, one destroyed card. Rejecting here is what stops
+  // that chain at step one.
+  if (hasUnclosedFence(markdown)) {
+    throw new Error(
+      'unclosed code fence — every ``` or ~~~ must be closed, or the rest of the card becomes invisible',
+    );
+  }
+
   const body = markdown.replace(/\s+$/, '');
 
   // Preserve the blank line between heading and body when the section already
@@ -37,12 +52,29 @@ export function patchSection(fileText: string, heading: string, markdown: string
   // differently keeps doing it differently.
   const gap = lines[start + 1] === '' ? [''] : [];
 
-  if (end === -1) {
-    // Last section: keep exactly one trailing newline at end of file.
-    return [...lines.slice(0, start + 1), ...gap, body, ''].join('\n');
+  const next =
+    end === -1
+      ? // Last section: keep exactly one trailing newline at end of file.
+        [...lines.slice(0, start + 1), ...gap, body, ''].join('\n')
+      : [...lines.slice(0, start + 1), ...gap, body, '', ...lines.slice(end)].join('\n');
+
+  // GUARD 2 — a section edit may change one section's prose and nothing else.
+  //
+  // Comparing the ordered heading list before and after is a single check that
+  // catches every structural accident at once: a section lost (the fence case,
+  // if the file was already damaged), a new `## ` pasted in from another
+  // document, or a `## ` YAML comment in frontmatter being treated as a
+  // heading. Cheaper and far harder to outwit than enumerating those cases.
+  const before = headingsOf(fileText);
+  const after = headingsOf(next);
+  if (before.join('\u0000') !== after.join('\u0000')) {
+    throw new Error(
+      `edit would restructure the card: headings went from [${before.join(', ')}] ` +
+        `to [${after.join(', ')}] — a section edit may only change that section's text`,
+    );
   }
 
-  return [...lines.slice(0, start + 1), ...gap, body, '', ...lines.slice(end)].join('\n');
+  return next;
 }
 
 /**

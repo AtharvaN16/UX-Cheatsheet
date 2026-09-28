@@ -41,6 +41,15 @@ export function AuthoringProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!IS_DEV) return;
     const onKey = (e: KeyboardEvent) => {
+      // Same guard as PaletteProvider: ⌘E inside an open section textarea used
+      // to unmount the editor mid-sentence and silently drop the draft, and
+      // ⌘⇧K used to throw a half-typed card title away. From the page body
+      // both still fire.
+      const target = e.target as HTMLElement | null;
+      const typing =
+        target?.tagName === 'INPUT' || target?.tagName === 'TEXTAREA' || target?.isContentEditable;
+      if (typing) return;
+
       if (e.key === 'e' && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setEditing((v) => !v);

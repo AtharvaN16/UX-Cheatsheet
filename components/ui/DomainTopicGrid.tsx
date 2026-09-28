@@ -899,6 +899,22 @@ export function DomainTopicGrid({
     return result;
   }, [allItems, activeTab, activeUseCases, effectiveKindFilter, effectiveEffortFilter, searchQuery, sortOrder, showBookmarkedOnly, bookmarkedIds]);
 
+  /**
+   * The sheet renders from the *current* item, not the object captured when it
+   * was clicked. `selectedConcept` is a snapshot; after an authoring save calls
+   * router.refresh(), fresh `methods` props rebuild `allItems`, and without this
+   * lookup the open sheet would keep showing the pre-edit text — a successful
+   * save that looks like a failed one. Falls back to the snapshot if the item
+   * is gone, so closing still behaves.
+   */
+  const liveSelectedConcept = useMemo(
+    () =>
+      selectedConcept
+        ? (allItems.find((i) => i.id === selectedConcept.id) ?? selectedConcept)
+        : null,
+    [selectedConcept, allItems],
+  );
+
   const isModalOpen = selectedConcept !== null;
 
   // Escape on the topic page (sheet closed) navigates back to the main cheatsheet page preserving scroll.
@@ -1107,7 +1123,7 @@ export function DomainTopicGrid({
 
       {/* Bottom Sheet Concept Modal */}
       <ConceptSheetModal
-        item={selectedConcept}
+        item={liveSelectedConcept}
         onClose={() => setSelectedConcept(null)}
       />
     </>

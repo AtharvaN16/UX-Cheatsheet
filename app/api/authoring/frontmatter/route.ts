@@ -14,7 +14,7 @@ const EDITABLE: Record<string, readonly string[]> = {
 };
 
 export async function POST(request: Request): Promise<Response> {
-  const blocked = devOnlyGuard();
+  const blocked = devOnlyGuard(request);
   if (blocked) return blocked;
 
   const { id, field, value } = (await request.json()) as {

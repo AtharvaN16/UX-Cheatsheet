@@ -84,6 +84,33 @@ describe('patchSection', () => {
     );
   });
 
+  // Reproduced end-to-end before this guard existed: an unclosed fence hid the
+  // following headings from the scanner, then the NEXT save to the same section
+  // concluded it was the last one and rewrote everything to EOF, deleting
+  // `## Using AI`. Both saves returned 200 and `bun run validate` stayed green.
+  test('refuses markdown containing an unclosed code fence', () => {
+    expect(() => patchSection(FILE, 'How to do it', 'Intro.\n\n```\nnever closed')).toThrow(
+      'unclosed code fence',
+    );
+  });
+
+  test('accepts a properly closed fence', () => {
+    const out = patchSection(FILE, 'How to do it', 'Intro.\n\n```\nclosed\n```');
+    expect(out).toContain('```\nclosed\n```');
+  });
+
+  test('refuses a body that would inject a new top-level heading', () => {
+    expect(() => patchSection(FILE, 'How to do it', 'Text.\n\n## Injected\n\nmore')).toThrow(
+      'would restructure the card',
+    );
+  });
+
+  test('a normal edit leaves the heading list identical', () => {
+    const headings = (t: string) => t.match(/^## .+$/gm) ?? [];
+    const out = patchSection(FILE, 'How to do it', 'Completely different steps.');
+    expect(headings(out)).toEqual(headings(FILE));
+  });
+
   test('throws a named error for a heading that does not exist', () => {
     expect(() => patchSection(FILE, 'Nonexistent', 'x')).toThrow('unknown section "Nonexistent"');
   });

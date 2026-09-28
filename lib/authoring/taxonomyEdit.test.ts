@@ -24,6 +24,16 @@ describe('toId', () => {
     expect(toId('Jobs   to  be Done')).toBe('jobs-to-be-done');
     expect(toId('A/B Testing')).toBe('a-b-testing');
   });
+
+  test('folds accents to their base letter rather than deleting them', () => {
+    expect(toId('Émpathy Mapping')).toBe('empathy-mapping');
+    expect(toId('Ünïcödé Ideas')).toBe('unicode-ideas');
+  });
+
+  test('still rejects a title with nothing id-able in it', () => {
+    expect(toId('???')).toBe('');
+    expect(toId('   ')).toBe('');
+  });
 });
 
 describe('insertTaxonomyItem', () => {

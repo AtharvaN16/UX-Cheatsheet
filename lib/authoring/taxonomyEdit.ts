@@ -5,6 +5,11 @@ const KEBAB = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 /** Derive a card id from its title, matching the kebab-case ids already in use. */
 export function toId(title: string): string {
   return title
+    .normalize('NFD')
+    // Strip combining marks so accented letters fold to their base rather than
+    // being deleted outright: "Émpathy" must become "empathy", not "mpathy",
+    // and "Ünïcödé Ideas" must not collapse to "n-c-d-ideas".
+    .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
     .replace(/['’]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
