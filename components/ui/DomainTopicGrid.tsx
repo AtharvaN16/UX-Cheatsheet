@@ -13,6 +13,8 @@ import { USE_CASES } from '@/lib/useCases';
 import { ConceptSheetModal, type ConceptSheetItem, SHEET_TRANSITION } from '@/components/ui/ConceptSheetModal';
 import { DomainBanner } from '@/components/ui/DomainBanner';
 import { inferKind } from '@/lib/inferKind';
+import { domainCoverage } from '@/lib/coverage';
+import { CoverageBadge } from '@/components/ui/CoverageBadge';
 import { shouldSkipEntrance } from '@/lib/entranceGuard';
 import { ENTRANCE, EASE_ARRIVE, cardDelay, ENTRANCE_SETTLED_MS } from '@/lib/entranceChoreography';
 
@@ -686,6 +688,14 @@ export function DomainTopicGrid({
     return map;
   }, [methods, secondaryMethods]);
 
+  // Authoring progress for this domain. Rendered by CoverageBadge, which is a
+  // no-op outside development — the taxonomy is the denominator, so this is
+  // "entries with a card" and not "cards on this page".
+  const coverage = useMemo(
+    () => domainCoverage(domainId, writtenMap.keys()),
+    [domainId, writtenMap],
+  );
+
   // Consolidate all items under their respective topics
   const allItems = useMemo<DomainItem[]>(() => {
     const list: DomainItem[] = [];
@@ -931,6 +941,12 @@ export function DomainTopicGrid({
         {/* Domain Banner */}
         <DomainBanner domainId={domainId} title={domainTitle} />
 
+        {coverage && (
+          <div className="px-8 sm:px-12">
+            <CoverageBadge coverage={coverage} />
+          </div>
+        )}
+
         {/* Inner Content Section padded with px-8 sm:px-12 to align with banner text */}
         <div className="w-full space-y-8 px-8 sm:px-12">
           {/* Search — its own row above the category/use-case row. Recessed rectangle
@@ -1034,7 +1050,15 @@ export function DomainTopicGrid({
                     className="group block h-full text-left focus:outline-none cursor-pointer"
                   >
                     <div
-                      className="h-full min-h-[160px] sm:min-h-[180px] flex flex-col justify-between rounded-2xl border p-6 sm:p-7 transition-all border-border/60 group-hover:border-primary/50 relative"
+                      className={`h-full min-h-[160px] sm:min-h-[180px] flex flex-col justify-between rounded-2xl border p-6 sm:p-7 transition-all group-hover:border-primary/50 relative ${
+                        item.isWritten
+                          ? 'border-border/60'
+                          : // Nothing written behind this entry yet. 70% is the floor that
+                            // keeps #1A1A1A body text above 4.5:1 on this background; a
+                            // dashed edge carries the same signal without relying on
+                            // opacity alone, which some displays flatten.
+                            'border-dashed border-border/50 opacity-70'
+                      }`}
                       style={{ backgroundColor: '#f1eee6' }}
                     >
                       {/* Interactive Bookmark Button on Top Right (Show on Hover unless bookmarked) */}

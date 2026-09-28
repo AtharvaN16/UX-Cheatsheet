@@ -9,6 +9,8 @@ import {
   getGroupColor,
 } from '@/lib/domains';
 import { getDomainColor } from '@/lib/colors';
+import { computeCoverage } from '@/lib/coverage';
+import { CoverageBadge } from '@/components/ui/CoverageBadge';
 import { getDomainIcon } from '@/lib/domainIcons';
 import { TAXONOMY } from '@/lib/taxonomy';
 import { get1Liner } from '@/lib/taxonomyDescriptions';
@@ -39,6 +41,13 @@ export function DomainDashboardGrid({ allMethods }: DomainDashboardGridProps) {
   const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set());
   const [selectedConcept, setSelectedConcept] = useState<ConceptSheetItem | null>(null);
   const [activeGroupTitle, setActiveGroupTitle] = useState<string>('');
+
+  // Whole-taxonomy authoring progress. CoverageBadge renders nothing outside
+  // development, so this never reaches the deployed bundle.
+  const coverage = useMemo(
+    () => computeCoverage(allMethods.map((m) => m.id)),
+    [allMethods],
+  );
 
   // Load bookmarks from localStorage
   useEffect(() => {
@@ -316,7 +325,9 @@ export function DomainDashboardGrid({ allMethods }: DomainDashboardGridProps) {
         </div>
 
         <div className="flex items-center gap-3 self-end sm:self-auto">
-          {/* Bookmarked Topics Toggle */}
+          <CoverageBadge coverage={coverage} label="of taxonomy written" />
+
+        {/* Bookmarked Topics Toggle */}
           <button
             onClick={() => setShowBookmarked((v) => !v)}
             className={`inline-flex items-center justify-center rounded-full border w-10 h-10 shrink-0 transition-colors ${
@@ -597,7 +608,13 @@ export function DomainDashboardGrid({ allMethods }: DomainDashboardGridProps) {
                       tabIndex={0}
                       className="group block h-full text-left focus:outline-none cursor-pointer"
                     >
-                      <div className="h-full min-h-[170px] sm:min-h-[190px] flex flex-col justify-between rounded-2xl border p-6 bg-[#F0EDE6] border-[#E5E2D9] transition-all duration-200 group-hover:border-[#1A1A1A]/40 group-hover:shadow-md relative">
+                      <div
+                        className={`h-full min-h-[170px] sm:min-h-[190px] flex flex-col justify-between rounded-2xl border p-6 bg-[#F0EDE6] transition-all duration-200 group-hover:border-[#1A1A1A]/40 group-hover:shadow-md relative ${
+                          item.isWritten
+                            ? 'border-[#E5E2D9]'
+                            : 'border-dashed border-[#D8D3C6] opacity-70'
+                        }`}
+                      >
                         <button
                           type="button"
                           onClick={(e) => {
