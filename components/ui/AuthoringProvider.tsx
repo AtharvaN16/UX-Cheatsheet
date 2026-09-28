@@ -41,20 +41,30 @@ export function AuthoringProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!IS_DEV) return;
     const onKey = (e: KeyboardEvent) => {
-      // Same guard as PaletteProvider: ⌘E inside an open section textarea used
-      // to unmount the editor mid-sentence and silently drop the draft, and
-      // ⌘⇧K used to throw a half-typed card title away. From the page body
-      // both still fire.
+      // Protect an open draft, but only a draft.
+      //
+      // The thing worth guarding is the section editor: toggling edit mode
+      // while it is open unmounts it and the typed text is gone with no undo.
+      // That editor is a <textarea>. Guarding every <input> as well was too
+      // broad and broke the feature outright — the category search box on
+      // /c/[category] takes focus on page load, so ⌘⇧K did nothing at all
+      // until you clicked elsewhere first. Verified in the browser.
       const target = e.target as HTMLElement | null;
-      const typing =
-        target?.tagName === 'INPUT' || target?.tagName === 'TEXTAREA' || target?.isContentEditable;
-      if (typing) return;
+      const inDraft = target?.tagName === 'TEXTAREA' || target?.isContentEditable === true;
+      if (inDraft) return;
 
-      if (e.key === 'e' && (e.metaKey || e.ctrlKey)) {
+      // Physical-key matching, for the same reason as PaletteProvider: `e.key`
+      // varies with Shift, Caps Lock and keyboard layout, so two handlers
+      // comparing characters disagreed about who owned ⌘⇧K.
+      const cmd = e.metaKey || e.ctrlKey;
+
+      // ⌘⇧E, not ⌘E: plain ⌘E is a macOS system shortcut ("Use Selection for
+      // Find"), so it is contested inside any text field.
+      if (e.code === 'KeyE' && cmd && e.shiftKey) {
         e.preventDefault();
         setEditing((v) => !v);
       }
-      if (e.key === 'K' && e.shiftKey && (e.metaKey || e.ctrlKey)) {
+      if (e.code === 'KeyK' && cmd && e.shiftKey) {
         e.preventDefault();
         setAddOpen(true);
       }

@@ -27,7 +27,7 @@ export function AuthorDock() {
         type="button"
         onClick={toggleEditing}
         aria-pressed={isEditing}
-        title="Toggle editing (⌘E)"
+        title="Toggle editing (⌘⇧E)"
         className={`${ICON} ${isEditing ? ACTIVE : IDLE}`}
       >
         ✎

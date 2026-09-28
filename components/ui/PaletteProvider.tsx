@@ -62,7 +62,17 @@ export function PaletteProvider({
         target?.tagName === 'TEXTAREA' ||
         target?.isContentEditable;
 
-      if ((e.key === 'k' && (e.metaKey || e.ctrlKey)) || (e.key === '/' && !typing)) {
+      // Match the *physical* key, not the character it produced. `e.key` for
+      // this chord is "k" or "K" depending on Shift, Caps Lock and layout, and
+      // the authoring shortcuts sit on the same physical key — so matching on
+      // the character made which handler won a matter of luck. Verified in the
+      // browser: ⌘⇧K was opening this search palette instead of add-card.
+      //
+      // `!e.shiftKey` is the other half: ⌘⇧K belongs to authoring, not search.
+      const isSearchChord =
+        e.code === 'KeyK' && (e.metaKey || e.ctrlKey) && !e.shiftKey && !e.altKey;
+
+      if (isSearchChord || (e.key === '/' && !typing)) {
         e.preventDefault();
         setIsOpen((v) => !v);
       }
