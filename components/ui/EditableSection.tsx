@@ -25,30 +25,28 @@ export function EditableSection({
   markdown: string;
   children: React.ReactNode;
 }) {
-  const { isEditing } = useAuthoring();
+  const { isEditing, authed, saveEdit } = useAuthoring();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState(markdown);
   const [errors, setErrors] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
 
-  if (!IS_DEV || !isEditing) return <>{children}</>;
+  if ((!IS_DEV && !authed) || !isEditing) return <>{children}</>;
 
   const save = async () => {
     setSaving(true);
     setErrors([]);
-    const res = await fetch('/api/authoring/section', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ id: methodId, heading, markdown: draft }),
-    });
+    const r = await saveEdit({ kind: 'section', id: methodId, heading, markdown: draft });
     setSaving(false);
-    if (res.ok) {
+    if (r.ok) {
       setOpen(false);
-      router.refresh();
+      // Only development has anything to refresh: there the save has already
+      // hit the working tree and the dev server can re-render it. On the live
+      // site the page is a build artefact until Sync lands a commit.
+      if (IS_DEV) router.refresh();
     } else {
-      const body = (await res.json()) as { errors?: string[] };
-      setErrors(body.errors ?? ['save failed']);
+      setErrors(r.errors ?? ['save failed']);
     }
   };
 

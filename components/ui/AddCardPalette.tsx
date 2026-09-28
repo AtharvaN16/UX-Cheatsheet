@@ -40,7 +40,7 @@ interface GroupRow {
  * 'kind' step may claim 1/2/3; on the 'title' step they are just characters.
  */
 export function AddCardPalette() {
-  const { isAddOpen, setAddOpen } = useAuthoring();
+  const { isAddOpen, setAddOpen, authed, saveEdit } = useAuthoring();
   const router = useRouter();
   const params = useParams<{ category?: string }>();
 
@@ -90,7 +90,7 @@ export function AddCardPalette() {
     listRef.current?.querySelector('[data-active="true"]')?.scrollIntoView({ block: 'nearest' });
   }, [step, cursor]);
 
-  if (!IS_DEV || !isAddOpen) return null;
+  if ((!IS_DEV && !authed) || !isAddOpen) return null;
 
   const id = toId(title);
   const collision = id !== '' && existing.has(id);
@@ -114,16 +114,20 @@ export function AddCardPalette() {
   const create = async (domainId: string, groupTitle: string | null) => {
     if (busy) return;
     setBusy(true);
-    const res = await fetch('/api/authoring/card', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ title, kind: kind ?? guess, domainId, groupTitle }),
+    const r = await saveEdit({
+      kind: 'card',
+      title,
+      cardKind: kind ?? guess,
+      domainId,
+      groupTitle,
     });
-    if (res.ok) {
+    if (r.ok) {
       close();
-      router.refresh();
+      // Only development has anything to refresh; on the live site the taxonomy
+      // is a build artefact until Sync lands a commit.
+      if (IS_DEV) router.refresh();
     } else {
-      setErrors(((await res.json()) as { errors?: string[] }).errors ?? ['could not create card']);
+      setErrors(r.errors ?? ['could not create card']);
       setBusy(false);
     }
   };

@@ -13,6 +13,28 @@ const FIELDS = [
 ] as const;
 
 /**
+ * Read a picked file as raw base64.
+ *
+ * Images travel as base64 inside the JSON save body in both environments —
+ * there is no multipart path anymore, because the live site's save is a queued
+ * JSON edit and dev must exercise the same one. `readAsDataURL` is the only
+ * FileReader mode that base64-encodes, so the `data:<mime>;base64,` prefix it
+ * prepends is stripped here: the server sniffs raw bytes, not a data URL.
+ */
+function readAsBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(reader.error ?? new Error('could not read file'));
+    reader.onload = () => {
+      const result = String(reader.result);
+      const comma = result.indexOf(',');
+      resolve(comma === -1 ? result : result.slice(comma + 1));
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/**
  * The closed-enum frontmatter fields, as segmented controls.
  *
  * Only enums are here on purpose. Free-text and array fields (`sources`,
@@ -22,36 +44,47 @@ const FIELDS = [
  * over a closed list cannot produce an invalid value at all.
  */
 export function FrontmatterPanel({ method }: { method: Method }) {
-  const { isEditing } = useAuthoring();
+  const { isEditing, authed, saveEdit } = useAuthoring();
   const router = useRouter();
   const [errors, setErrors] = useState<string[]>([]);
   const [busy, setBusy] = useState<string | null>(null);
 
-  if (!IS_DEV || !isEditing) return null;
+  if ((!IS_DEV && !authed) || !isEditing) return null;
 
   const set = async (field: string, value: string) => {
     setBusy(field);
     setErrors([]);
-    const res = await fetch('/api/authoring/frontmatter', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ id: method.id, field, value }),
-    });
+    const r = await saveEdit({ kind: 'frontmatter', id: method.id, field, value });
     setBusy(null);
-    if (res.ok) router.refresh();
-    else setErrors(((await res.json()) as { errors?: string[] }).errors ?? ['save failed']);
+    // Only development has anything to refresh; on the live site the page is a
+    // build artefact until Sync lands a commit.
+    if (r.ok) {
+      if (IS_DEV) router.refresh();
+    } else {
+      setErrors(r.errors ?? ['save failed']);
+    }
   };
 
   const upload = async (file: File) => {
     setBusy('image');
     setErrors([]);
-    const body = new FormData();
-    body.set('id', method.id);
-    body.set('file', file);
-    const res = await fetch('/api/authoring/image', { method: 'POST', body });
+
+    let base64: string;
+    try {
+      base64 = await readAsBase64(file);
+    } catch {
+      setBusy(null);
+      setErrors(['could not read that file']);
+      return;
+    }
+
+    const r = await saveEdit({ kind: 'image', id: method.id, filename: file.name, base64 });
     setBusy(null);
-    if (res.ok) router.refresh();
-    else setErrors(((await res.json()) as { errors?: string[] }).errors ?? ['upload failed']);
+    if (r.ok) {
+      if (IS_DEV) router.refresh();
+    } else {
+      setErrors(r.errors ?? ['upload failed']);
+    }
   };
 
   return (
