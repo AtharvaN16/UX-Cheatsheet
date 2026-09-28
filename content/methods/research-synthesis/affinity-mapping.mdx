@@ -1,0 +1,113 @@
+---
+id: affinity-mapping
+title: Affinity Mapping
+aka: ["Affinity Diagramming", "KJ Method"]
+domain: research-synthesis
+alsoIn: []
+kind: method
+gives: qualitative
+effort: medium
+timeframe: hours
+needs:
+  - "Raw observations already written one per note — quotes and behaviours, not conclusions"
+  - "The people who will act on the findings in the room for the whole session, not a readout afterwards"
+  - "Wall or board space where every note stays visible at once; scrolling breaks the technique"
+  - "A 2-4 hour block. Clustering abandoned halfway leaves piles nobody trusts"
+useCases: [analyze-findings, understand-users]
+useInstead:
+  - when: "You need an analysis you can defend next quarter — which extract sits under which theme, and on what grounds"
+    method: thematic-analysis
+  - when: "The corpus is too large for a wall and one analyst will work through it alone"
+    method: qualitative-coding
+  - when: "You want users rather than the team doing the grouping, because the output is navigation structure and labels"
+    method: card-sorting
+related:
+  before: [user-interviews, contextual-inquiry]
+  after: [insight-statements, journey-mapping]
+  alongside: [thematic-analysis, participatory-design]
+sources:
+  - title: "Explanation of the KJ Method"
+    author: Kawakita Research Institute
+    url: https://kj-kawakita.co.jp/explanation-of-the-kj-method/
+    type: article
+    seminal: true
+  - title: "The KJ Method: A Technique for Analyzing Data Derived from Japanese Ethnology"
+    author: Raymond Scupin
+    url: https://digitalcommons.lindenwood.edu/faculty-research-papers/32/
+    type: paper
+    year: 1997
+    seminal: false
+  - title: "Philosophy and Methodology of Clustering in Pattern Mining: Japanese Anthropologist Jiro Kawakita's KJ Method"
+    author: Takashi Iba, Ayaka Yoshikawa & Konomi Munakata
+    url: https://hillside.net/plop/2017/papers/proceedings/papers/12-iba-2.pdf
+    type: paper
+    year: 2017
+    seminal: false
+  - title: "Contextual Design: Defining Customer-Centered Systems"
+    author: Hugh Beyer & Karen Holtzblatt
+    url: https://archive.org/details/contextualdesign00beye
+    type: book
+    year: 1998
+    seminal: false
+  - title: "Affinity Diagramming for Collaboratively Sorting UX Findings and Design Ideas"
+    author: Rachel Krause & Kara Pernice, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/affinity-diagram/
+    type: article
+    year: 2024
+    seminal: false
+---
+## What is it
+
+The team writes one observation per note, puts every note on a wall, and clusters them bottom-up by felt similarity, pairs before groups, titling the groups only at the end.
+
+It is Jiro Kawakita's **KJ method**, built in the 1950s and 60s to order chaotic ethnographic field data and long standard in Japanese industry. UX inherited it largely through Beyer and Holtzblatt's contextual design and runs it, as affinity diagramming, almost entirely without the credit; the NN/g explainer does not mention Kawakita at all.
+
+## Purpose
+
+Two outputs, and teams remember only the first. You get clusters. You also get people who argued their way to those clusters and therefore believe them — shared understanding held by the people who will act on it, which is what justifies a whole team's afternoon.
+
+## When to use
+
+- Material from several sessions is in and a decision lands this week
+- The findings have to be owned by engineers and PMs, not cited at them
+- The territory is unfamiliar enough that you do not trust your own categories yet
+
+## How to do it
+
+- Write the notes beforehand: one observation each, in the participant's words. "Users want better onboarding" is a conclusion, not a note.
+- Put them all up unsorted, and have everyone read the whole wall before anything moves.
+- Build upward, never downward. Kawakita is explicit that group formation goes from smaller scale to larger; arriving with buckets imposes your framework on the data.
+- Keep a parking area: a note that fits nowhere is often the most interesting on the wall.
+- Title each group with a claim, not a noun: "registrars keep a private spreadsheet because they cannot undo a submission", not "data entry".
+- Transcribe the titles *with* their member notes the same day. A photograph is not a record.
+
+## Example
+
+A team on school-administration software brings 170 notes from nine registrar interviews to a two-hour session with two engineers and the PM. A cluster about pre-submission screenshots merges with one about duplicate draft records, and the title becomes a claim: registrars build private undo systems the product does not offer. The roadmap item moves from "improve the form" to "make submission reversible", with the engineer who wanted validation watching it turn.
+
+## Common mistakes
+
+- **Pre-labelled buckets on the wall.** The clusters become your prior categories with evidence stapled on — how a team confirms what it already believed.
+- **One person moving notes while everyone watches.** The second output is gone; that is a solo analysis with an audience.
+- **Notes that are already conclusions.** Interpretations cluster far too easily, having been written to fit a story.
+- **Stopping at clusters.** Unnamed groups decay into "that wall we did" within a fortnight and cannot be cited.
+
+## Limitations
+
+- **No audit trail.** Nothing records why a note landed where it did, so a challenge next quarter is answered from memory.
+- **Seniority shapes the wall.** The technique has no defence against the loudest voice, and agreement in the room is not evidence.
+- **The last session over-contributes.** The freshest interview is the one everyone can picture, so its notes anchor early clusters.
+- **It returns the team's categories.** Rooms converge on distinctions the product already makes.
+
+## Tips
+
+Run the first fifteen minutes in silence. The talking afterwards goes better because people explain a grouping they already made rather than negotiate one they have not felt.
+
+## Using AI
+
+**Where it helps**
+- A second clustering of the transcribed notes, read against the wall: which notes did the room never place?
+- Turning noun-shaped group titles into claims, given the member notes underneath
+
+**Where it fails**
+- Producing the map. A cluster set handed to a team that was not in the room has the shape of consensus and none of it; nobody in the standup can say why a note sits where it does.

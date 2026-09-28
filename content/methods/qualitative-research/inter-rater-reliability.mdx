@@ -1,0 +1,123 @@
+---
+id: inter-rater-reliability
+title: Inter-rater Reliability
+aka: ["IRR", "Intercoder Reliability", "Inter-coder Agreement"]
+domain: qualitative-research
+alsoIn: [quantitative-research]
+kind: concept
+gives: quantitative
+effort: medium
+timeframe: days
+needs:
+  - "A written codebook with a definition, inclusion and exclusion rules, and one worked example per code"
+  - "A fixed unit of analysis — the thing being coded (an utterance, a turn, a whole session)"
+  - "Two or more coders who will code independently, without discussing the units they are being scored on"
+  - "A sampled subset of the corpus to double-code, drawn across it rather than from the first few transcripts"
+useCases: [analyze-findings, validate-research, reduce-bias]
+useInstead:
+  - when: "The question is whether your codes capture the phenomenon at all, not whether two people apply them the same way — build the categories up from the data instead of scoring an existing scheme"
+    method: grounded-theory
+  - when: "You need confidence that a finding is real rather than that a code was applied consistently — corroborate it across independent sources"
+    method: triangulation
+related:
+  before: [grounded-theory]
+  after: [triangulation]
+  alongside: [user-interviews, mixed-methods-design]
+sources:
+  - title: "A Coefficient of Agreement for Nominal Scales"
+    author: Jacob Cohen
+    url: https://explore.openaire.eu/search/publication?pid=10.1177%2F001316446002000104
+    type: paper
+    year: 1960
+    seminal: true
+  - title: "Measuring Nominal Scale Agreement Among Many Raters"
+    author: Joseph L. Fleiss
+    url: https://explore.openaire.eu/search/publication?pid=10.1037%2Fh0031619
+    type: paper
+    year: 1971
+    seminal: false
+  - title: "The Measurement of Observer Agreement for Categorical Data"
+    author: J. Richard Landis & Gary G. Koch
+    url: https://explore.openaire.eu/search/publication?pid=10.2307%2F2529310
+    type: paper
+    year: 1977
+    seminal: false
+  - title: "Content Analysis: An Introduction to Its Methodology (4th Edition)"
+    author: Klaus Krippendorff
+    url: https://books.google.com/books/about/Content_Analysis.html?id=FixGDwAAQBAJ
+    type: book
+    year: 2018
+    seminal: false
+  - title: "High Agreement but Low Kappa: I. The Problems of Two Paradoxes"
+    author: Alvan R. Feinstein & Domenic V. Cicchetti
+    url: https://explore.openaire.eu/search/publication?pid=10.1016%2F0895-4356%2890%2990158-L
+    type: paper
+    year: 1990
+    seminal: false
+  - title: "Intercoder Reliability in Qualitative Research: Debates and Practical Guidelines"
+    author: Cliodhna O'Connor & Helene Joffe
+    url: https://explore.openaire.eu/search/publication?pid=10.1177%2F1609406919899220
+    type: paper
+    year: 2020
+    seminal: false
+---
+
+## What is it
+
+The degree to which two or more people independently applying the same codebook to the same data assign the same codes, reported as a chance-corrected coefficient rather than a raw percentage.
+
+## Why it matters
+
+A claim built on codes is only as stable as the coding: if a second analyst would code the transcripts differently, the finding is an artefact of who analysed it.
+
+## Key ideas
+
+### Percent agreement overstates reliability
+
+Coders working at random still agree often. Cohen's illustration: two psychiatrists each labelling 10% of admissions schizophrenic, blindly and at random, jointly "agree" on 0.1 × 0.1 + 0.9 × 0.9 = 82% of cases — zero reliability. Every coefficient below subtracts that baseline.
+
+### Which coefficient
+
+- **Cohen's kappa** — two raters, nominal codes, one shared coding sheet.
+- **Fleiss' kappa** — a fixed number of ratings per item by raters who need not be the same each time; the normal case once coding is spread across a team.
+- **Krippendorff's alpha** — any number of coders, incomplete data, and ordinal or interval codes, where kappa assumes nominal categories and no gaps.
+
+### The kappa paradox
+
+Feinstein and Cicchetti showed high observed agreement can yield a low kappa when prevalence is skewed: if 95% of utterances are "not a complaint", chance agreement is near-total and a careful pair scores badly. Rare codes are where this bites.
+
+## Example
+
+A team codes 400 free-text cancellation reasons into six categories, two analysts double-coding 80. Raw agreement is 86%, but the price category dominates, so chance agreement is high and Cohen's kappa lands at 0.58 (figures illustrative). Nearly all misses sit on one boundary — "too expensive" against "didn't use it enough" — a definition to split, not a training problem. The coefficient said nothing about whether price was the right lens on churn.
+
+## Application
+
+- Fix the unit of analysis first; much apparent disagreement is two people segmenting differently, which is a separate computation.
+- Double-code 10-25% sampled across the corpus, coders working blind. Once they have discussed a unit, agreement on it measures the conversation.
+- Treat a low score as a diagnostic, not a verdict: fix the codebook, recode, re-measure.
+- Report which coefficient, how many coders, what share was double-coded, and the prevalences.
+
+## Limitations
+
+- **It measures consistency, not correctness.** Nothing in the statistic asks whether the codebook describes the data.
+- **It is sensitive to prevalence and marginals.** Coefficients from different corpora do not compare cleanly, even for coder pairs of equal skill.
+- **It buys little on small interpretive work.** On eight interviews and one analyst, the overhead exceeds what the number supports.
+
+## Common misconceptions
+
+- **"High IRR means the codebook is right."** It means the codebook is applied *consistently*. Two raters can reliably apply a scheme that misses the phenomenon entirely, agreeing perfectly on categories no user would recognise. Reliability is a precondition for a defensible claim, never evidence for one.
+- **"Kappa above 0.8 is the standard."** The familiar bands — slight, fair, moderate, substantial, almost perfect — are conventions attributed to Landis and Koch, who offered them as arbitrary benchmarks, not derived cutoffs.
+- **"IRR makes qualitative analysis objective."** O'Connor and Joffe: it improves the systematicity, communicability and transparency of coding. It does not convert interpretation into measurement.
+
+## Tips
+
+Keep the disagreement matrix, not just the coefficient: it names which codes got confused, usually one or two adjacent definitions — a codebook fix, not retraining.
+
+## Using AI
+
+**Where it helps**
+- Computing the coefficients and confusion matrix, and checking your choice fits the data's shape.
+- Stress-testing a codebook before coders touch it: which edge cases do two definitions both admit?
+
+**Where it fails**
+- Standing in as the second coder. A model coding the same corpus twice agrees with itself to a degree that looks like excellent reliability and measures only its own determinism; a human-versus-model kappa reports how model-like that human is, not whether the codebook holds.

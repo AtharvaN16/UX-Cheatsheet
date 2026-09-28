@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" width="560" height="360" role="img">
+  <rect width="560" height="360" fill="#141414"/>
+  <defs>
+    <marker id="ins-up" viewBox="0 0 10 10" refX="5" refY="1" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 10 L5 0 L10 10 z" fill="#6a6a6a"/>
+    </marker>
+  </defs>
+
+  <line x1="44" y1="300" x2="44" y2="52" stroke="#6a6a6a" stroke-width="1" marker-end="url(#ins-up)"/>
+  <text x="26" y="180" transform="rotate(-90 26 180)" text-anchor="middle" fill="#8a8a8a" font-family="Georgia,serif" font-size="12">explanatory power</text>
+
+  <g stroke="#3a3a3a" stroke-width="1">
+    <line x1="60" y1="140" x2="530" y2="140"/>
+    <line x1="60" y1="226" x2="530" y2="226"/>
+  </g>
+  <line x1="316" y1="62" x2="316" y2="300" stroke="#3a3a3a" stroke-width="1" stroke-dasharray="3 4"/>
+
+  <g font-family="Georgia,serif">
+    <rect x="60" y="72" width="4" height="46" fill="#2E8A75"/>
+    <text x="76" y="86" fill="#2E8A75" font-size="14">Insight</text>
+    <text x="76" y="105" fill="#b4b4b4" font-size="11">&#8220;the total lands after people anchor on</text>
+    <text x="76" y="119" fill="#b4b4b4" font-size="11">the price, so the fee reads as a penalty&#8221;</text>
+    <text x="332" y="92" fill="#2E8A75" font-size="11">names a mechanism</text>
+    <text x="332" y="108" fill="#2E8A75" font-size="11">implies a specific change</text>
+    <text x="332" y="124" fill="#8a8a8a" font-size="11">a colleague could argue it is wrong</text>
+
+    <rect x="60" y="160" width="4" height="46" fill="#3B72B2"/>
+    <text x="76" y="174" fill="#3B72B2" font-size="14">Finding</text>
+    <text x="76" y="193" fill="#b4b4b4" font-size="11">&#8220;people hesitate at the fee total&#8221;</text>
+    <text x="76" y="207" fill="#7a7a7a" font-size="11">the pattern across the observations</text>
+    <text x="332" y="180" fill="#8a8a8a" font-size="11">says what, not why</text>
+    <text x="332" y="196" fill="#8a8a8a" font-size="11">every reader infers a different fix</text>
+    <text x="332" y="212" fill="#B24A58" font-size="11">nothing here to disagree with</text>
+
+    <rect x="60" y="246" width="4" height="46" fill="#8a8a8a"/>
+    <text x="76" y="260" fill="#c8c8c8" font-size="14">Observation</text>
+    <text x="76" y="279" fill="#b4b4b4" font-size="11">&#8220;six of nine re-read the fee line</text>
+    <text x="76" y="293" fill="#b4b4b4" font-size="11">before confirming&#8221;</text>
+    <text x="332" y="266" fill="#8a8a8a" font-size="11">one session at a time</text>
+    <text x="332" y="282" fill="#8a8a8a" font-size="11">no interpretation yet</text>
+    <text x="332" y="298" fill="#B24A58" font-size="11">a fact, not a claim</text>
+  </g>
+
+  <text x="296" y="336" text-anchor="middle" fill="#5f5f5f" font-family="Georgia,serif" font-size="11" font-style="italic">the same nine sessions, read at three levels &#183; only the top rung changes a decision</text>
+</svg>

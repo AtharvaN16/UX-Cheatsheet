@@ -1,0 +1,100 @@
+---
+id: qualitative-coding
+title: Qualitative Coding
+aka: ["Coding", "Tagging"]
+domain: research-synthesis
+alsoIn: []
+kind: method
+gives: qualitative
+effort: high
+timeframe: days
+needs:
+  - "Transcripts, notes or open-text responses in a form you can split into segments"
+  - "A decision on where codes come from: inductively from the data, deductively from a prior frame, or both"
+  - "A codebook with a definition and a boundary per code, not just a list of names"
+  - "A place the codes live that outlasts the project — a spreadsheet, a repository or an analysis tool"
+useCases: [analyze-findings, understand-behavior]
+useInstead:
+  - when: "You need to move from labels to a defensible set of themes using a published procedure"
+    method: thematic-analysis
+  - when: "The point is shared team understanding by Friday, and nobody will reread the corpus"
+    method: affinity-mapping
+  - when: "Agreement between coders has to be measured and reported rather than argued out"
+    method: inter-rater-reliability
+related:
+  before: [user-interviews, diary-studies]
+  after: [thematic-analysis, insight-statements]
+  alongside: [inter-rater-reliability, affinity-mapping]
+sources:
+  - title: "The Coding Manual for Qualitative Researchers"
+    author: Johnny Saldaña
+    url: https://books.google.com/books/about/The_Coding_Manual_for_Qualitative_Resear.html?id=ZhxiCgAAQBAJ
+    type: book
+    year: 2015
+    seminal: true
+  - title: "Using thematic analysis in psychology"
+    author: Virginia Braun & Victoria Clarke
+    url: "https://www2.uwe.ac.uk/services/Marketing/students/Newstudents/HAS/Using%20thematic%20analysis%20in%20psychology.pdf"
+    type: paper
+    year: 2006
+    seminal: false
+  - title: "Analyze Qualitative Data: Thematic Analysis"
+    author: Maria Rosala, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/thematic-analysis/
+    type: article
+    year: 2022
+    seminal: false
+---
+## What is it
+
+Assigning a short label to a segment of data so it can be retrieved, compared and grouped later. Coding is the operation, not a method in itself: thematic analysis, grounded theory and the sticky notes on an affinity wall all rest on it, and their claims are made or lost here. Saldaña is blunt: it is an interpretive act, not data entry. Naming a segment is already a judgement.
+
+## Purpose
+
+To make a corpus navigable in terms you chose. Once 400 extracts carry 30 codes, you can ask what else happened around *abandons task and asks a colleague* — a question the transcripts cannot answer.
+
+## When to use
+
+- The corpus is too large to hold in your head and will be revisited later
+- Several people are analysing the same material and their decisions have to be comparable
+- You need to point at evidence for a specific claim months after the sessions
+
+## How to do it
+
+- Decide where codes come from. **Inductive (open)** codes are written from the data as you read; **deductive (a priori)** codes come from a research question or framework. Most work runs both, keeping a channel open for what the frame did not anticipate.
+- Pick a grain and hold it. A code on a whole transcript is a filing label; a code on every clause gives 400 codes and no structure.
+- Do **first-cycle** coding across the whole corpus before judging anything — Saldaña's term for the initial pass that stays close to the data.
+- Then **second-cycle** coding: merge, split and reorganise into a smaller structured set. Categories appear here; it is analytic work, not tidying.
+- Build the codebook as you go. Each entry needs a name, a definition, a boundary saying what does *not* belong, and one example extract.
+- Recode the first transcripts at the end; the codebook you finished with is not the one you started with.
+
+## Example
+
+A team studying a delivery-driver app codes 22 diary entries. *Route deviation* and *customer contact* come from the research questions; coding then surfaces something unplanned — drivers photographing the parcel *and* the doorway, coded *self-protective documentation*. Segment boundaries decide the meaning: that line alone reads as a habit, but with the sentence after it ("in case they say it never arrived") it is dispute anticipation, the claim the team can act on.
+
+## Common mistakes
+
+- **Codes that name topics rather than meanings.** *Pricing* tells you where in the transcript you are; *compares price against a competitor mid-task* tells you what happened.
+- **A codebook of names with no definitions.** Two coders diverge invisibly, and nobody can reconstruct which reading applied where.
+- **Coding only what the frame predicted.** A purely deductive pass returns your own hypotheses, well-evidenced.
+- **Treating code frequency as a finding.** Counts reflect how much people talked, which reflects your discussion guide.
+
+## Limitations
+
+- **Consistency looks like rigour.** A code applied faithfully across 40 transcripts can still be the wrong lens throughout, and consistency hides it.
+- **Coding fragments narrative.** Segmenting loses sequence, so a coded corpus supports pattern claims better than process claims.
+- **Second-cycle collapse is a judgement.** No procedure tells you when two codes are one, and that call shapes every theme above it.
+- **It cannot reach what was not recorded.** Silences, tone and what a participant chose not to say leave no segment to label.
+
+## Tips
+
+Keep an explicit *unsure* code rather than forcing a decision, and note why each contested extract went where it did. Those notes, not the code list, let you defend the analysis.
+
+## Using AI
+
+**Where it helps**
+- Applying a well-defined codebook across a large corpus for a first pass you then spot-check
+- Proposing merges among 200 first-cycle codes, as candidates for the second-cycle decision
+
+**Where it fails**
+- Building the codebook. Code names are where interpretation lives, and a model returns a neat taxonomy of the topics you asked about, with the exclusion boundaries — the part that makes coding checkable — quietly invented.

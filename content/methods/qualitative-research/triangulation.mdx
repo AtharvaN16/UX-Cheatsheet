@@ -1,0 +1,105 @@
+---
+id: triangulation
+title: Triangulation
+aka: ["Methodological Triangulation", "Data Triangulation"]
+domain: qualitative-research
+alsoIn: []
+kind: concept
+gives: mixed
+effort: medium
+timeframe: weeks
+needs:
+  - "One written question that every source is genuinely answering, agreed before any comparison"
+  - "Two or more sources chosen because they fail in different ways, not because you happen to have both"
+  - "A decision, made before you look, about what you will do if the sources disagree"
+useCases: [validate-research, reduce-bias, analyze-findings]
+useInstead:
+  - when: "You are planning a study and need to decide how the quantitative and qualitative strands sequence, weight and sample — triangulation is what you do with results, not how you design for them"
+    method: mixed-methods-design
+  - when: "The disagreement is between two people coding the same dataset, which is a measurement-agreement problem rather than a cross-method one"
+    method: inter-rater-reliability
+  - when: "One well-run study would settle the question and the second source is being added for reassurance rather than for a different kind of error"
+    method: usability-testing
+related:
+  before: [mixed-methods-design]
+  after: []
+  alongside: [usability-testing, user-interviews, observation]
+sources:
+  - title: "The Research Act in Sociology: A Theoretical Introduction to Sociological Methods"
+    author: Norman K. Denzin
+    url: https://archive.org/details/sociologicalmeth1970unse
+    type: book
+    year: 1970
+    seminal: true
+  - title: "Qualitative Research & Evaluation Methods: Integrating Theory and Practice (4th Edition)"
+    author: Michael Quinn Patton
+    url: https://books.google.com/books/about/Qualitative_Research_Evaluation_Methods.html?id=ovAkBQAAQBAJ
+    type: book
+    year: 2014
+    seminal: false
+  - title: "Triangulation: Get Better Research Results by Using Multiple UX Methods"
+    author: Kathryn Whitenton, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/triangulation-better-research-results-using-multiple-ux-methods/
+    type: article
+    year: 2021
+    seminal: false
+image:
+  src: /images/methods/triangulation.svg
+  alt: Four sources — data, investigator, theory and method — converging on a single claim, which then branches into two outcomes, convergence raising confidence and divergence moving the question
+  caption: "Denzin's four types, and the two things their results can do"
+---
+
+## What is it
+
+Attacking one question with sources that fail in different ways, then reading the pattern of agreement and disagreement between them. Denzin named four types — *data*, *investigator*, *theory* and *methodological*.
+
+## Why it matters
+
+Every method has a characteristic failure: analytics cannot say why, interviews rely on self-report, usability tests watch a task nobody chose. Triangulation trades one blind spot against another, so its value sits in the *independence* of the errors, not the number of sources.
+
+## Key ideas
+
+- **Data triangulation** — same method, other times, settings and people; catches artefacts of when you happened to look.
+- **Investigator triangulation** — two researchers analyse the same material independently, so one analyst's expectations do not become the finding.
+- **Theory triangulation** — one dataset read through rival explanatory frames; some behaviours only one frame explains.
+- **Methodological triangulation** — different methods on one question; Denzin's *between-method* is the useful case, *within-method* the weaker one.
+- **Divergence is informative.** Convergence is the cheap outcome. Disagreement means one of three things: the question means something different inside each instrument, the phenomenon is conditional on something you were not varying, or one instrument is broken. All three are findings; none is an error to average away.
+- **Independent failure modes are the selection rule.** Two studies drawn from your logged-in users share the same missing population.
+
+## Example
+
+A cancellation flow. Assume analytics show 40% of users who open Cancel never complete it, read internally as retention. A survey of that group finds almost all meant to cancel; five sessions show they stop because nothing confirms the charge will stop, then cancel by email next day. Each measured a different thing, so the output is a corrected question, not an average: how many intended cancellations complete through *any* channel?
+
+## Application
+
+- Write the question down first and name what each source can and cannot see about it.
+- Choose the second for a different failure mode, not for volume — if you cannot say how it fails differently, it is not one.
+- Report divergences explicitly, with the reading you took and why — a reading you commit to before you can see which strand flatters the roadmap.
+
+## Limitations
+
+- **It cannot fix a badly framed question.** Four sources answering the wrong question agree beautifully and mislead in unison.
+- **Shared bias reads exactly like corroboration.** A survey and an interview are both self-report; nothing in the results separates the two, so only the design tells you which you have.
+- **There is no arithmetic for combining sources.** Integration is a judgement you defend in prose, not a weighted confidence figure.
+- **Cost scales with sources, confidence does not.** The second source buys most of the gain; the fourth buys very little.
+
+## Common misconceptions
+
+- **"More sources, therefore more true."** Confidence comes from errors being uncorrelated; a correlated source adds only cost.
+- **"Disagreement means the research failed."** It usually means the sources measured different things — the most useful thing you learned.
+- **"Triangulation establishes validity."** Patton frames it as a credibility strategy for one claim, not a proof procedure.
+- **"It is the same as mixed methods."** A mixed-methods design decides sequence, weighting and sampling before collection; triangulation is the interpretive move afterwards.
+- **"You need three."** Nothing in Denzin requires three; the name is a surveying metaphor, not a count.
+
+## Tips
+
+Before opening the second source, write down which result would change your mind about the first. If none would, you are collecting support.
+
+## Using AI
+
+**Where it helps**
+- Tabulating what each source actually measured, surfacing shared-bias overlaps before you read agreement as corroboration.
+- Enumerating rival explanations for a divergence, including the dull possibility that an instrument is broken.
+
+**Where it fails**
+- Reconciling the strands. Given a survey, an analytics extract and session notes, a model produces a smooth account in which everything agrees, because coherence is what it optimises for — smoothing exactly the divergence that carried the information.

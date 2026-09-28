@@ -1,0 +1,105 @@
+---
+id: user-flows
+title: User Flows
+aka: ["User Flow Diagram", "Flow Diagram"]
+domain: ia-structure
+alsoIn: [interaction-design]
+kind: method
+gives: qualitative
+effort: medium
+timeframe: days
+needs:
+  - A named user goal, plus the entry points people actually arrive through
+  - An inventory of the system states and conditions that change the path (signed out, empty, unpermissioned, payment failed)
+  - Analytics or usability-test observations showing which paths real people take
+useCases: [identify-problems, evaluate-navigation, improve-interaction]
+useInstead:
+  - when: You only need the ideal step-by-step route through one specific task, with no branches or alternative entry points
+    method: task-flows
+  - when: You need to know whether people can locate things in the structure at all, rather than document the path you intend
+    method: tree-testing
+  - when: You need to sequence a release around user activities over time rather than diagram interactions
+    method: story-mapping
+related:
+  before: [task-flows, user-interviews]
+  after: [usability-testing, navigation-design]
+  alongside: [site-maps, information-architecture]
+image:
+  src: /images/methods/user-flows.svg
+  alt: Three entry points converging on a product page, then a decision diamond splitting into a direct checkout path and a sign-in detour that rejoins it
+  caption: A user flow shows every entry point and every branch, not just the happy path
+sources:
+  - title: "A Visual Vocabulary for Describing Information Architecture and Interaction Design"
+    author: Jesse James Garrett
+    url: http://www.jjg.net/ia/visvocab/
+    type: standard
+    year: 2002
+    seminal: true
+  - title: "User Journeys vs. User Flows"
+    author: Kate Kaplan, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/user-journeys-vs-user-flows/
+    type: article
+    year: 2023
+    seminal: false
+  - title: "Wireflows: A UX Deliverable for Workflows and Apps"
+    author: Page Laubheimer, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/wireflows/
+    type: article
+    year: 2016
+    seminal: false
+---
+
+## What is it
+
+A diagram of every path a person can take through a product toward a goal: each entry point, and every decision, branch and dead end it produces. Garrett's visual vocabulary supplies the notation — diamonds for system decisions, dashed connectors for conditional paths.
+
+The boundary that matters: a **task flow** traces one task to completion — one spine, one start, one success end, no branching — and asks *is this route efficient?* A **user flow** covers every entry point, decision branch and failure ending, and asks *does this still work when real people arrive from different places in different states?*
+
+## Purpose
+
+Makes the *shape* of an experience inspectable before it is built. A feature that reads as four steps in a spec usually has three entry points and two states nobody accounted for; the diagram hands engineering the complete path list, not the happy one.
+
+## When to use
+
+- You're designing a feature whose route differs by state — signed out, trial expired, empty account, no permission
+- Analytics show a drop-off and you need to see which branch loses the traffic
+- A flow exists, nobody documented it, and every change is guesswork
+
+## How to do it
+
+- Fix the goal and the actor — one flow, one goal, one role: "reorders a past basket", not "shopping".
+- List entry points first: notification, email link, search result, deep link — entry points are where shipped flows break.
+- Lay the direct route left to right; that spine is the task flow. Then walk it, attaching a decision point wherever the system evaluates something with more than one result.
+- Draw every branch to a real end: rejoin the spine, a distinct success, or a named failure. A branch trailing off the page is an undesigned case.
+- Validate against analytics or a usability test before treating it as fact.
+
+## Example
+
+A grocery app's "reorder a past basket" looks like three taps. Diagrammed, it had three entry points, branches on stock, card validity and delivery-slot availability, and a referenced sign-in flow, since notifications open on logged-out devices. The out-of-stock branch carried a third of the traffic and none of the design attention.
+
+## Common mistakes
+
+- **Drawing only the happy path** — that is a task flow wearing a user flow's label, and shipping it as one creates false confidence the cases are covered.
+- **Omitting entry points** — a flow starting at the home screen misses that most sessions begin at a notification or link, in a different state.
+- **Loading it with UI detail** — field labels turn a macrostructure diagram into a spec that is wrong within a sprint. Make a wireflow if you want screens.
+- **Labelling branches with intent rather than conditions** — "keep shopping" isn't testable; "cart is non-empty and no slot is reserved" is, and can be implemented.
+
+## Limitations
+
+- **Shows possible paths, not actual ones.** The diagram maps what the system permits; which branches carry real traffic only analytics or usability-testing answers.
+- **Combinatorial blow-up.** Four independent conditions produce sixteen states; past a handful the diagram is unreadable, so you suppress cases and it stops being complete.
+- **The vocabulary isn't standardised.** Nielsen Norman Group reserves "user journey" for the cross-channel, over-time view and uses "user flow" more narrowly. Agree the definition first.
+- **Goes stale silently.** Nothing in a diagram breaks when the product changes, so an out-of-date flow keeps looking authoritative.
+
+## Tips
+
+Walk the spine asking "and what if not?" — that question generates almost every branch worth drawing.
+
+## Using AI
+
+**Where it helps**
+- Enumerating candidate failure and state branches from a spec, as a checklist a designer prunes.
+- Converting a flow to text notation and back, so it lives in version control rather than a stale diagram file.
+
+**Where it fails**
+- Producing a complete-looking flow for your product. A model substitutes conventional states and entry points for your real ones, so the branches it invented are indistinguishable from the ones it missed until production breaks.

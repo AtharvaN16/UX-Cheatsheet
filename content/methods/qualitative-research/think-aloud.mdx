@@ -1,0 +1,103 @@
+---
+id: think-aloud
+title: Think Aloud
+aka: ["Concurrent Think Aloud", "CTA", "Thinking Aloud Protocol", "Verbal Protocol"]
+domain: qualitative-research
+alsoIn: [evaluation]
+kind: method
+gives: qualitative
+effort: low
+timeframe: days
+needs:
+  - "A task someone can attempt in a prototype or live build"
+  - "Screen and audio recording, with consent to record the participant's voice"
+  - "A facilitator disciplined enough to stay silent through long pauses"
+  - "Tasks short enough that continuous narration doesn't exhaust the participant"
+useCases: [diagnose-usability, understand-mental-models, identify-problems]
+useInstead:
+  - when: "You need task times or success rates you can trust — narrating inflates task time, so a concurrent session cannot also be your measurement"
+    method: retrospective-think-aloud
+  - when: "You need release-over-release performance numbers rather than an explanation of one session"
+    method: benchmark-testing
+related:
+  alongside: [usability-testing, observation]
+sources:
+  - title: "Protocol Analysis: Verbal Reports as Data"
+    author: K. Anders Ericsson & Herbert A. Simon
+    url: https://archive.org/details/protocolanalysis0000eric
+    type: book
+    year: 1984
+    seminal: true
+  - title: "Thinking Aloud: The #1 Usability Tool"
+    author: Jakob Nielsen, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/thinking-aloud-the-1-usability-tool/
+    type: article
+    year: 2012
+    seminal: false
+  - title: "Concurrent or Retrospective Thinking Aloud in Usability Tests: A Meta-Analytic Review"
+    author: Morten Hertzum
+    url: https://forskning.ruc.dk/en/publications/concurrent-or-retrospective-thinking-aloud-in-usability-tests-a-m/
+    type: paper
+    year: 2024
+    seminal: false
+  - title: "Retrospective vs. concurrent think-aloud protocols: Testing the usability of an online library catalogue"
+    author: Maaike J. van den Haak, Menno D.T. de Jong & Peter Jan Schellens
+    url: https://research.utwente.nl/en/publications/retrospective-vs-concurrent-think-aloud-protocols-testing-the-usa/
+    type: paper
+    year: 2003
+    seminal: false
+---
+
+## What is it
+
+The participant keeps up a running commentary while working — what they see, what they expect, what they are about to try — while the facilitator stays quiet. Ericsson and Simon set the rule that still defines it: ask for a report of thoughts as they occur, *not* for explanation or justification.
+
+## Purpose
+
+Supplies the reasoning behind an action at the moment it happens. It turns "they hesitated here" into "they hesitated because".
+
+## When to use
+
+- Inside a formative usability test, where diagnosing causes matters more than measuring anything
+- When the sample is too small for statistics anyway, so reactivity costs you nothing
+- When you need the words users reach for to name things on screen
+
+## How to do it
+
+- Instruct once, narrowly: keep saying whatever goes through your head, don't explain it, there are no wrong thoughts. A twenty-second demonstration beats describing it.
+- When the participant goes quiet, nudge with something content-free — "keep talking".
+- Log where the silences fall. They cluster on the hard moments, so silence is data.
+- Read the verbalisation against the observed behaviour, never on its own; the disagreements between the two channels matter most.
+- Don't report task time. Hertzum's meta-analysis of 42 concurrent-versus-retrospective comparisons found task time reliably longer under concurrent thinking aloud.
+- Keep tasks short — van den Haak and colleagues found reactivity sharpest at high task complexity.
+
+## Example
+
+Suppose a payments team tests a scheduled-transfer flow with six participants thinking aloud. Watched silently, the repeated pause on the confirmation screen looks like reading. The narration says otherwise: most voice some version of "wait, has this already gone?" — the heading reads *Transfer scheduled* while the primary button still reads *Confirm*.
+
+## Common mistakes
+
+- **Asking "why?" during the task** — the most common violation of the original protocol. You get a theory instead of the behaviour's antecedent, and the participant becomes a commentator on their own session.
+- **Filling silence with conversation** — every facilitator utterance steers attention toward whatever you just mentioned.
+- **Treating the verbalisation as the finding** — people report intention, rarely mechanism. It is a lead, not a conclusion.
+- **Running it on long, high-workload tasks** — twenty minutes of forced narration yields fatigue, thinning commentary, and a performance nothing like the real one.
+
+## Limitations
+
+- **It distorts what it measures.** Speaking competes for the same working memory as the task, so timings inflate and strategies simplify. Any number here describes someone narrating a task, not doing one, which also rules out eye-tracking and quantitative rounds.
+- **Narrating can generate the insight it appears to observe.** Articulating a half-formed thought sometimes resolves it, so a participant may "notice" a label they would have missed in silence — invisible in the transcript.
+- **Incomplete by construction.** Only what is in working memory and available to language gets said, and automated expert behaviour is exactly what does not verbalise. Weakest on tasks power users have internalised.
+- **Unevenly demanding.** Narration is harder in a second language, at lower verbal fluency, and with some speech or cognitive differences; a sparse protocol there is about the participant, not the design.
+
+## Tips
+
+Treat the first task as a throwaway warm-up. Narration is a skill nobody practises, and the opening minutes are more self-conscious performance than thought.
+
+## Using AI
+
+**Where it helps**
+- Transcribing and timestamping sessions against screen-recording events, so you can jump to the moment behind a quote
+- Flagging every facilitator utterance in a transcript, making protocol violations countable between sessions
+
+**Where it fails**
+- Generating a think-aloud transcript from a design or a synthetic persona. A model produces fluent narration for a screen no one has used. The real thing was evidence because the confusion was involuntary; a generated protocol is only the model's prior about interfaces — the intuition this method exists to check.

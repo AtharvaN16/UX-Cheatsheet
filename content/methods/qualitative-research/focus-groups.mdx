@@ -1,0 +1,104 @@
+---
+id: focus-groups
+title: Focus Groups
+aka: ["Group Discussions", "Focus Group Discussions"]
+domain: qualitative-research
+alsoIn: []
+kind: method
+gives: qualitative
+effort: medium
+timeframe: weeks
+needs:
+  - A moderator willing to interrupt a dominant participant and keep re-inviting the quiet ones
+  - 6-8 participants per group, and at least three groups per segment — one group is an anecdote
+  - "A screener that separates rather than mixes: peers talk freely without a manager, a rival or a novice in the room"
+  - A note-taker tracking who speaks, in what order, and who stops speaking
+useCases: [understand-preferences, understand-users]
+useInstead:
+  - when: "You need individual depth — one person's reasoning, sequence and edge cases, uncontaminated by what a room made them willing to say"
+    method: user-interviews
+  - when: You need to know what people can actually do with the thing rather than what they say about it
+    method: usability-testing
+  - when: You want a room's collective energy pointed at producing ideas rather than at reporting on itself
+    method: brainstorming
+related:
+  before: []
+  after: [user-interviews, usability-testing]
+  alongside: []
+sources:
+  - title: "Focus Groups: A Practical Guide for Applied Research (5th Edition)"
+    author: Richard A. Krueger & Mary Anne Casey
+    url: https://www.sagepub.com/en-us/nam/focus-groups/book243860
+    type: book
+    year: 2014
+    seminal: true
+  - title: "The Use and Misuse of Focus Groups"
+    author: Jakob Nielsen, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/focus-groups/
+    type: article
+    year: 1997
+    seminal: false
+  - title: "Just Enough Research, 2nd Edition"
+    author: Erika Hall
+    url: https://abookapart.com/blogs/press/just-enough-research-2nd-edition-is-now-available.html
+    type: book
+    year: 2019
+    seminal: false
+---
+
+## What is it
+
+Six to eight people from a target audience in a moderated discussion against a topic guide. The unit of analysis is the group, not the person: the data is what gets said *and* how the room reacts. Erika Hall's advice in *Just Enough Research*: never, ever hold one.
+
+## Purpose
+
+The one thing no one-on-one gives you: opinions formed and defended in front of peers — which words survive challenge, which objections get conceded, where consensus is real and where social. Krueger and Casey insist the output is the *range* of views, never a count.
+
+## When to use
+
+- You need the arguments a community makes to each other, and the vocabulary that survives them
+- The decision being designed for is itself collective — a team or a committee
+- You don't yet know which questions deserve a one-on-one hour
+
+Not for usability, preference measurement, feature validation, or anything people want to look competent about.
+
+## How to do it
+
+- Segment hard: homogeneous within a group, varied across them.
+- Ten questions for 90 minutes; with seven people that is a minute each per question — your ceiling on depth.
+- Collect written answers *before* discussion, so you know who moved.
+- Say disagreement is the point, then moderate for it: round by seat, the silent invited by name, a third consecutive turn cut off.
+- Never demo the product — Nielsen's point is that the session becomes a demo, and watching one tells you nothing about use.
+- Run three groups per segment and analyse *across* them; a theme from one group is a property of that room.
+
+## Example
+
+Three groups of seven care coordinators, for a team building home-care rota software. Coordinators say "a run", never "a route", and every group split loudly over whether last-minute reassignment is scheduling or staffing — a fault line one-on-ones return as two contradictory accounts. The same groups were unanimously keen on a mobile approval flow; usability testing later showed they would not leave the desktop rota.
+
+## Common mistakes
+
+- **Validating a design in a group** — a room, a demo and a hopeful designer produce consensus that predicts nothing.
+- **Reading agreement as signal** — agreeing is cheaper than dissenting, so convergence is partly an artefact of speaking order.
+- **Mixing hierarchy in one group** — nobody names their own workaround in front of whoever wrote the policy.
+- **Counting hands** — "five of eight preferred B", from people who heard each other choose, is not preference data but gets quoted as such.
+
+## Limitations
+
+- **Conformity cannot be undone in analysis.** Once views converge, no one's prior position is recoverable: a participant's view and the room's effect on it are inseparable. Written answers first mitigates that; it does not fix it.
+- **Airtime goes by personality.** The dominant participant is over-represented, the quiet one absent, and absence leaves no trace to correct for.
+- **The stated/actual gap is worse than in interviews.** Participants manage an impression for peers too, so money, hygiene, competence and skipped steps come back sanitised — and you cannot watch eight people use something at once to check it.
+- **Your n is groups, not people.** Three groups of eight is n=3 for anything the group influenced, so interview sample-size intuition overstates it eightfold.
+- **Moderation decides the result**, and is invisible afterwards: a badly moderated transcript reads like a good one.
+
+## Tips
+
+If the appeal is recruiting efficiency, run five one-on-ones instead — similar hours, attributable data, no conformity effect.
+
+## Using AI
+
+**Where it helps**
+- Diarising the recording and reporting airtime per speaker — dominance becomes something you can show the stakeholder citing the consensus
+- Screening a draft guide for questions that can only produce a show of hands
+
+**Where it fails**
+- Synthetic focus groups: a model role-playing eight participants manufactures the convergence without the people, precisely the artefact that makes real groups untrustworthy. Simulated participants have no interests to defend, so they never argue.

@@ -1,0 +1,105 @@
+---
+id: empathy-maps
+title: Empathy Maps
+aka: ["Empathy Mapping", "Empathy Map Canvas"]
+domain: research-synthesis
+alsoIn: []
+kind: framework
+gives: qualitative
+effort: low
+timeframe: hours
+needs:
+  - Raw material from at least one real session with the person being mapped — transcript, field notes, or recording
+  - "A provenance convention: some mark that separates entries taken from the record from entries the team inferred"
+  - One named participant per map, not a segment
+useCases: [understand-users, analyze-findings, discover-needs]
+useInstead:
+  - when: You need patterns across many participants rather than a picture of one
+    method: affinity-mapping
+  - when: You need behaviour and emotion tracked across time and touchpoints, not at a single moment
+    method: journey-mapping
+  - when: You need a durable artefact that carries user segments into roadmap and prioritisation decisions
+    method: personas
+related:
+  before: [user-interviews, contextual-inquiry]
+  after: [insight-statements, pov-statements, personas]
+  alongside: [affinity-mapping, thematic-analysis]
+sources:
+  - title: "Gamestorming: A Playbook for Innovators, Rulebreakers, and Changemakers"
+    author: Dave Gray, Sunni Brown & James Macanufo
+    url: https://books.google.com/books/about/Gamestorming.html?id=3OCbAgAAQBAJ
+    type: book
+    year: 2010
+    seminal: true
+  - title: "Empathy Mapping: The First Step in Design Thinking"
+    author: Sarah Gibbons, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/empathy-mapping/
+    type: article
+    year: 2018
+    seminal: false
+  - title: "A d.school Design Project Guide"
+    author: Thomas Both, Hasso Plattner Institute of Design at Stanford
+    url: https://dschool.sfo3.digitaloceanspaces.com/documents/DESIGNPROJECTGUIDE-SEPT-2016-V3_2.pdf
+    type: article
+    year: 2016
+    seminal: false
+image:
+  src: /images/methods/empathy-maps.svg
+  alt: The four empathy map quadrants split by a vertical seam, with says and does on the observed side and thinks and feels on the inferred side
+  caption: "Two quadrants are recorded, two are supplied by the team — the canvas doesn't say which."
+---
+
+## What is it
+
+A four-quadrant canvas — says, thinks, does, feels — filled in for one person from the record of a session you ran with them. Dave Gray designed it at XPLANE and published it in *Gamestorming* (2010).
+
+## Purpose
+
+Gets one person's account out of a transcript and onto a surface a team can read in thirty seconds, and makes the contradictions visible — the supervisor who says the scanner is fine and then re-counts every pallet by hand. The juxtaposition between quadrants is the payload.
+
+## When to use
+
+- Right after interviews or contextual inquiry, for a shared read on individuals before you synthesise across them
+- As the input to a POV or insight statement about one person, where the specificity is the point
+
+## Structure
+
+- **Says** — verbatim quotes, in the participant's words
+- **Does** — actions and behaviours you observed
+- **Thinks** — beliefs you infer from hesitation, tone, word choice
+- **Feels** — emotions you infer from the same clues
+
+Two of those are observations and two are inferences — the d.school's instructions are explicit that thoughts and feelings cannot be observed directly and must be inferred from clues. The canvas shows none of that. Four identical boxes give a recorded quote and a guess about someone's inner life the same standing, which is how assumptions get cited back as findings a fortnight later.
+
+## How to use
+
+- Work one session at a time, transcript open beside the canvas.
+- Fill *says* and *does* first, and only from the record. If you can't point at the line it came from, it doesn't belong in that half.
+- Then fill *thinks* and *feels*, marking every entry — different ink, a bracket, an "I". That convention is most of what separates a useful map from a projection exercise.
+- Pull needs and insights out at the edges, from tensions between quadrants rather than from one sticky note — and where an inference would change a decision, rewrite it as a question for the next session.
+
+## Example
+
+A team maps supervisor P2 after a warehouse visit. Says: "the scanner's fine, I just double-check." Does: re-counts every pallet against a paper sheet. Thinks, flagged inferred: expects to be blamed for a miscount. Feels, flagged inferred: quietly exposed. The tension across the seam is the finding — and because that half is flagged, the next visit asks about accountability rather than shipping reassurance on a guess.
+
+## Common mistakes
+
+- **Building the map with no research in the room.** A canvas assembled from what the team imagines is a map of the team's projections, formatted to look like evidence. With no session behind it, call it an assumption map.
+- **Averaging several people onto one canvas.** NN/g separates one-user maps from aggregated ones; aggregating smooths away the variation that made the sessions worth running.
+- **Leaving inferences unmarked.** Within a week nobody remembers which stickies were quotes, and the map gets cited as data.
+- **Paraphrasing the says quadrant.** The participant's own words are the reusable asset; they feed labels, copy, and survey wording later.
+
+## Limitations
+
+- The name oversells it. Sorting quotes into four boxes is a synthesis exercise, not empathy, and can be done competently by someone who was never in the room.
+- It captures one flattened moment. Sequence, duration, and the way a feeling turns mid-task fall out of the format.
+- Nothing in the canvas tests an inference. A confidently wrong *thinks* entry propagates into personas and POV statements unchecked.
+
+## Using AI
+
+**Where it helps**
+- Extracting candidate *says* and *does* entries from a transcript with timestamps, so each stays traceable to a line
+- Surfacing contradictions between quadrants across a set of finished maps
+
+**Where it fails**
+- Filling in *thinks* and *feels*. Asked to infer inner life from a transcript, a model returns plausible emotional attribution with no access to the pause, tone, or glance a real inference rests on — and it never marks its output as inference. The map's existing failure mode, automated.

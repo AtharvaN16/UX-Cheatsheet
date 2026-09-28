@@ -1,0 +1,112 @@
+---
+id: taxonomy
+title: Taxonomy
+aka: ["Controlled Vocabulary", "Classification Scheme", "Faceted Classification"]
+domain: ia-structure
+alsoIn: []
+kind: framework
+gives: qualitative
+effort: high
+timeframe: weeks
+needs:
+  - A content inventory covering every item the scheme has to classify
+  - Evidence of how users group the content — open card-sort results, internal search logs, or support-ticket language
+  - A named owner who will add and retire terms after launch
+useCases: [understand-mental-models, understand-systems]
+useInstead:
+  - when: The grouping is already right and only the on-screen wording is failing people
+    method: labeling
+  - when: The content set is small and stable enough that one fixed menu covers it, so a formal scheme is pure overhead
+    method: site-maps
+  - when: You have no evidence yet for how users group the content, so any scheme you draft now is internal opinion
+    method: card-sorting
+related:
+  before: [content-inventory, card-sorting]
+  after: [labeling, tree-testing]
+  alongside: [information-architecture, navigation-design]
+image:
+  src: /images/methods/taxonomy.svg
+  alt: A single hierarchy giving one path to an item beside three independent facets whose values combine to reach the same item
+  caption: A hierarchy files an item once; facets let the same item be reached by every true combination
+sources:
+  - title: "Information Architecture: For the Web and Beyond (4th Edition)"
+    author: Louis Rosenfeld, Peter Morville & Jorge Arango
+    url: https://books.google.com/books/about/Information_Architecture.html?id=dZaJCgAAQBAJ
+    type: book
+    year: 2015
+    seminal: true
+  - title: "ANSI/NISO Z39.19-2005 (R2010) Guidelines for the Construction, Format, and Management of Monolingual Controlled Vocabularies"
+    author: National Information Standards Organization
+    url: https://www.niso.org/publications/ansiniso-z3919-2005-r2010
+    type: standard
+    year: 2010
+    seminal: false
+  - title: "Taxonomy 101: Definition, Best Practices, and How It Complements Other IA Work"
+    author: Page Laubheimer, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/taxonomy-101/
+    type: article
+    year: 2022
+    seminal: false
+  - title: "How to Make Sense of Any Mess"
+    author: Abby Covert
+    url: https://www.howtomakesenseofanymess.com/
+    type: book
+    year: 2014
+    seminal: false
+---
+
+## What is it
+
+The classification scheme underneath a product's content: approved concepts, their relationships, and the rules for assigning items to them. It lives in a spreadsheet or CMS fields, never on screen — users see the navigation built on it, wearing the words labeling chose.
+
+## Purpose
+
+Gives one durable answer to "where does this belong?" that survives whoever is asking. Without a scheme each item is filed by whoever published it, and findability decays one item at a time.
+
+## When to use
+
+- Items arrive faster than anyone can file them, and the menu cannot keep up
+- One concept is described three ways ("plan", "tier", "subscription level"), so filters and search cannot match across them
+- You need faceted filtering, or an item belongs in two places and a single tree forces a false choice
+
+## Structure
+
+- **Terms (the controlled vocabulary)**: approved concepts, one preferred form each, variants kept as equivalents; Z39.19 covers how to formulate them.
+- **Hierarchical relationships**: broader/narrower links, one organizing principle per level. A term with two parents is a polyhierarchy.
+- **Equivalence relationships**: synonyms, abbreviations and legacy names mapped to the preferred term, so search matches words you rejected.
+- **Facets**: small independent taxonomies for separate dimensions — light, care level, price band. Users combine them; a hierarchy makes them pick one path.
+- **Governance rules**: who may add a term, and when the scheme is reviewed.
+
+## How to use
+
+- Start from the content inventory, not the menu; the menu hides whole classes of item.
+- Group it from outside evidence — card-sort clusters, search logs, support-ticket wording — then decide per dimension: hierarchy or facet, where independent variation means facet.
+- Write one preferred form per concept, rejected variants as equivalents. Pilot-classify 30 to 50 items with two people separately; disagreement shows where the rules stay ambiguous.
+- Hand the groups to labeling, evaluate with tree-testing, record an owner.
+
+## Example
+
+A plant shop filed 900 SKUs in one tree: Indoor > Low light > Ferns, so a Boston fern that also takes bright indirect light never appeared under "Bright". Facets for light, care and height surfaced it under every true combination. Defining that facet was taxonomy; naming it "Light needs" not "Lux tolerance" was labeling.
+
+## Common mistakes
+
+- **Designing from the org chart**: departments become top-level terms, and users do not know your departments.
+- **Mixing organizing principles in one level**: an audience ("For students") beside a format ("Videos") makes filing a coin flip, for publisher and searcher alike.
+- **Collapsing the scheme into the menu**: navigation cannot show everything a taxonomy carries, so the facets and equivalences search needs get dropped.
+- **No equivalence terms, no owner**: people who type a rejected word get zero results and rarely report it, and an ungoverned scheme gains duplicates until the facets stop being trusted.
+
+## Limitations
+
+- **Cannot make a badly named group usable**: a correct grouping behind a vague label still fails, and taxonomy work never surfaces it — labeling and tree-testing do.
+- **Facets multiply maintenance**: each must be populated for every item, and a facet at 30% coverage is worse than none — the filter silently hides valid results.
+- **No test validates a taxonomy directly**: card sorts judge grouping and naming, tree tests judge the navigation on top; the relationships are only checked by proxy.
+- **Any scheme freezes one reading of the content**: it fits today's catalogue, misclassifies the next product line, and costs more to re-facet with every item tagged.
+
+## Using AI
+
+**Where it helps**
+- Proposing candidate facets and value lists from a CMS export, and flagging inconsistently described concepts.
+- Bulk-tagging content against an approved scheme, with a human checking a sample first.
+
+**Where it fails**
+- Generating the scheme from a product description. A model returns a plausible hierarchy reflecting general web convention and your prompt's phrasing, not how your users group your content — none of the evidence a card sort would supply. The mismatch surfaces as low findability in a tree test.

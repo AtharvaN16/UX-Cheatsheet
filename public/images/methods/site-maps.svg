@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" width="640" height="380" role="img">
+  <rect width="640" height="380" fill="#141414"/>
+
+  <!-- parent-child connectors -->
+  <g stroke="#3a3a3a" stroke-width="1" fill="none">
+    <path d="M340 74 L340 106"/>
+    <path d="M149 106 L531 106"/>
+    <path d="M149 106 L149 138"/>
+    <path d="M340 106 L340 138"/>
+    <path d="M531 106 L531 138"/>
+
+    <path d="M149 170 L149 206"/>
+    <path d="M101 206 L197 206"/>
+    <path d="M101 206 L101 238"/>
+    <path d="M197 206 L197 238"/>
+
+    <path d="M340 170 L340 206"/>
+    <path d="M292 206 L388 206"/>
+    <path d="M292 206 L292 238"/>
+    <path d="M388 206 L388 238"/>
+
+    <path d="M531 170 L531 206"/>
+    <path d="M483 206 L579 206"/>
+    <path d="M483 206 L483 238"/>
+    <path d="M579 206 L579 238"/>
+  </g>
+
+  <!-- level 1 -->
+  <rect x="285" y="42" width="110" height="32" rx="3" fill="#1c1c1c" stroke="#6B46C1" stroke-width="1.6"/>
+  <text x="340" y="63" text-anchor="middle" font-family="Georgia,serif" font-size="13" fill="#ededed">Home</text>
+
+  <!-- level 2 -->
+  <g font-family="Georgia,serif" font-size="13" fill="#dcdcdc">
+    <rect x="89" y="138" width="120" height="32" rx="3" fill="#1c1c1c" stroke="#6B46C1" stroke-width="1.2" stroke-opacity="0.75"/>
+    <text x="149" y="159" text-anchor="middle">Products</text>
+    <rect x="280" y="138" width="120" height="32" rx="3" fill="#1c1c1c" stroke="#6B46C1" stroke-width="1.2" stroke-opacity="0.75"/>
+    <text x="340" y="159" text-anchor="middle">Support</text>
+    <rect x="471" y="138" width="120" height="32" rx="3" fill="#1c1c1c" stroke="#6B46C1" stroke-width="1.2" stroke-opacity="0.75"/>
+    <text x="531" y="159" text-anchor="middle">Company</text>
+  </g>
+
+  <!-- level 3 -->
+  <g font-family="Georgia,serif" font-size="11" fill="#b4b4b4">
+    <rect x="60" y="238" width="82" height="28" rx="3" fill="#191919" stroke="#3a3a3a"/>
+    <text x="101" y="256" text-anchor="middle">Catalog</text>
+    <rect x="156" y="238" width="82" height="28" rx="3" fill="#191919" stroke="#3a3a3a"/>
+    <text x="197" y="256" text-anchor="middle">Pricing</text>
+    <rect x="251" y="238" width="82" height="28" rx="3" fill="#191919" stroke="#3a3a3a"/>
+    <text x="292" y="256" text-anchor="middle">Help centre</text>
+    <rect x="347" y="238" width="82" height="28" rx="3" fill="#191919" stroke="#3a3a3a"/>
+    <text x="388" y="256" text-anchor="middle">Contact</text>
+    <rect x="442" y="238" width="82" height="28" rx="3" fill="#191919" stroke="#3a3a3a"/>
+    <text x="483" y="256" text-anchor="middle">About</text>
+    <rect x="538" y="238" width="82" height="28" rx="3" fill="#191919" stroke="#3a3a3a"/>
+    <text x="579" y="256" text-anchor="middle">Careers</text>
+  </g>
+
+  <!-- a page reachable from a second branch, drawn as a cross-link rather than duplicated -->
+  <path d="M280 160 C246 176 232 200 224 236" fill="none" stroke="#6B46C1" stroke-width="1" stroke-opacity="0.65" stroke-dasharray="4 4"/>
+  <text x="252" y="196" font-family="Georgia,serif" font-size="11" font-style="italic" fill="#8a7bb5">cross-link</text>
+
+  <!-- depth -->
+  <g stroke="#3a3a3a" stroke-width="1">
+    <line x1="32" y1="42" x2="32" y2="266"/>
+    <line x1="28" y1="46" x2="32" y2="42"/><line x1="36" y1="46" x2="32" y2="42"/>
+    <line x1="28" y1="262" x2="32" y2="266"/><line x1="36" y1="262" x2="32" y2="266"/>
+  </g>
+  <text x="-154" y="18" transform="rotate(-90)" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#8a8a8a">Depth — levels to reach a page</text>
+
+  <!-- breadth -->
+  <g stroke="#3a3a3a" stroke-width="1">
+    <line x1="60" y1="322" x2="620" y2="322"/>
+    <line x1="64" y1="318" x2="60" y2="322"/><line x1="64" y1="326" x2="60" y2="322"/>
+    <line x1="616" y1="318" x2="620" y2="322"/><line x1="616" y1="326" x2="620" y2="322"/>
+  </g>
+  <text x="340" y="346" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#8a8a8a">Breadth — siblings at one level</text>
+</svg>

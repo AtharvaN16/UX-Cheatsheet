@@ -1,0 +1,111 @@
+---
+id: personas
+title: Personas
+aka: ["User Personas", "Design Personas"]
+domain: research-synthesis
+alsoIn: []
+kind: framework
+gives: qualitative
+effort: medium
+timeframe: weeks
+needs:
+  - Research across the audience — interviews or observation, not a workshop's recollection of users
+  - "Behavioural variables to cluster on: what people do, avoid, and work around"
+  - A named decision the personas are meant to inform, and someone who will invoke them in it
+useCases: [understand-users, analyze-findings]
+useInstead:
+  - when: What you need is the job someone is trying to get done rather than who they are
+    method: jobs-to-be-done
+  - when: You have no research yet and want the team's beliefs on the table, labelled as beliefs
+    method: proto-personas
+  - when: The design turns on the sequence of a behaviour over time, not on who performs it
+    method: journey-mapping
+related:
+  before: [user-interviews, thematic-analysis]
+  after: [insight-statements, jtbd-statements]
+  alongside: [empathy-maps, proto-personas]
+sources:
+  - title: "The Inmates Are Running the Asylum"
+    author: Alan Cooper
+    url: https://archive.org/details/inmatesarerunnin00coop
+    type: book
+    year: 1999
+    seminal: true
+  - title: "Personas: Practice and Theory"
+    author: John Pruitt & Jonathan Grudin
+    url: https://www.microsoft.com/en-us/research/publication/personas-practice-theory/
+    type: paper
+    year: 2003
+    seminal: false
+  - title: "The Personas' New Clothes: Methodological and Practical Arguments against a Popular Method"
+    author: Christopher N. Chapman & Russell P. Milham
+    url: https://cnchapman.wordpress.com/wp-content/uploads/2007/03/chapman-milham-personas-hfes2006-0139-0330.pdf
+    type: paper
+    year: 2006
+    seminal: false
+  - title: "Why Personas Fail"
+    author: Kim Flaherty, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/why-personas-fail/
+    type: article
+    year: 2018
+    seminal: false
+---
+
+## What is it
+
+A small set of named characters, each standing for a pattern of behaviour and goals found across real research participants, adopted as the specific person a team designs for instead of "the user".
+
+## Purpose
+
+Cooper's argument in *The Inmates Are Running the Asylum* was about scope, not empathy. An elastic "user" stretches to accommodate any feature, because someone, somewhere, might want it; a named person with a specific working day does not. The persona's real job is to let a team say no — the strongest case for them, and the first thing most persona projects forget.
+
+## When to use
+
+- Work gets justified with "some users might want this" and nobody challenges it
+- You have research, and behaviour diverges across audiences in ways that change the design, not the marketing
+- Several teams build one product while privately imagining different audiences
+
+## Structure
+
+Everything in a persona should be able to change a decision.
+
+- **Behaviour** — what they do now, including the workaround and the tool they use instead of yours
+- **Goals** — the outcome they want, and the decision they are trying to make
+- **Context** — where, when, under what interruption, on whose approval
+- **Vocabulary** — their words for the thing, for labels and copy
+- **Abandonment** — what makes them revert
+
+The name and photo are memory aids, not evidence; age, income and favourite coffee are decoration that makes an assumption look like a finding. Three to five personas, or nobody holds them.
+
+## How to use
+
+- Cluster coded research on behavioural variables, not demographic ones
+- Give each persona a scope — which decisions it informs — and revisit it when the audience moves
+- Use them out loud in review: name the persona a feature serves, and the ones it doesn't
+- Record which attribute rests on which evidence, so a disputed one gets checked, not argued
+
+## Example
+
+A team building rota software for home-care agencies derives three personas from 14 interviews. The coordinator persona's load-bearing line is not her age but that she rebuilds the week in a spreadsheet each Friday, distrusting the in-app totals — so the dashboard is dropped and export fixed first.
+
+## Common mistakes
+
+- **Demographics standing in for behaviour** — "35, urban, two children" changes nothing you would build; the three open tabs and the 7am shift change everything.
+- **Made once, never opened again** — Flaherty's account of persona failure is mostly this: built in a silo, handed over, never invoked in a decision, then cited as evidence research is waste.
+- **One persona per stakeholder** — twelve personas is the elastic user again, with photographs.
+- **Marketing segments relabelled** — purchase-intent segments answer who to target, not what to build.
+
+## Limitations
+
+- **No demonstrable validity.** Chapman and Milham's central argument: a persona can be neither verified nor falsified. It is admittedly fictional, so no data disproves it, and inconvenient evidence gets dismissed as irrelevant.
+- **Coverage is unknown.** Each added attribute narrows the group described, by an amount nobody can calculate without correlation data — their illustration, on deliberately simple assumptions, puts a 21-attribute persona at about 130 people in the US. Nor can qualitative personas say what share of your users each represents, so "our primary persona" is a claim about attention as much as evidence.
+- **Politically usable.** Since the underlying data is rarely inspectable, a persona wins arguments rather than settling them — how a synthesis artefact ends up blocking the research that would correct it.
+
+## Using AI
+
+**Where it helps**
+- Clustering coded transcripts into candidate behavioural patterns, and showing which attributes co-occur
+- Interrogating a draft: per attribute, ask what decision changes if it were different, then cut the ones with no answer
+
+**Where it fails**
+- Generating personas from a product description. The output is fluent, complete and formatted exactly like a researched persona — the danger, given personas are already hard to falsify. It strips out the evidence that made a good one trustworthy, and looks identical.

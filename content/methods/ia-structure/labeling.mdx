@@ -1,0 +1,107 @@
+---
+id: labeling
+title: Labeling
+aka: ["Labeling Systems", "Nomenclature", "Category Naming"]
+domain: ia-structure
+alsoIn: [content-design]
+kind: method
+gives: qualitative
+effort: medium
+timeframe: days
+needs:
+  - A settled set of groups to name — the taxonomy or draft structure the labels will sit on
+  - Users' own vocabulary captured from open card sorts, internal search logs, interviews or support tickets
+  - One place — a label table — where each approved label and its rejected variants are recorded
+useCases: [understand-mental-models, reduce-cognitive-effort]
+useInstead:
+  - when: People are getting lost and backtracking through the structure rather than misreading one word — the grouping is wrong, not the wording
+    method: taxonomy
+  - when: You need numbers on whether people can find things in the structure at all, not a better set of words
+    method: tree-testing
+  - when: You don't yet know what vocabulary users reach for, so there is nothing evidence-based to draft from
+    method: card-sorting
+related:
+  before: [card-sorting, taxonomy]
+  after: [tree-testing]
+  alongside: [navigation-design, content-inventory]
+sources:
+  - title: "Information Architecture: For the Web and Beyond (4th Edition), Chapter 7: Labeling Systems"
+    author: Louis Rosenfeld, Peter Morville & Jorge Arango
+    url: https://books.google.com/books/about/Information_Architecture.html?id=dZaJCgAAQBAJ
+    type: book
+    year: 2015
+    seminal: true
+  - title: "5 Tips for Avoiding Confusing Category Names"
+    author: Hoa Loranger & Taylor Dykes, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/category-names-suck/
+    type: article
+    year: 2013
+    seminal: false
+  - title: "3 Common IA Mistakes (that Are All Due to Low Information Scent)"
+    author: Page Laubheimer, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/3-ia-mistakes/
+    type: article
+    year: 2023
+    seminal: false
+  - title: "The Difference Between Information Architecture (IA) and Navigation"
+    author: Jen Cardello, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/ia-vs-navigation/
+    type: article
+    year: 2014
+    seminal: false
+---
+
+## What is it
+
+Choosing, testing and maintaining the words that represent content to users: menu items, category headings, breadcrumbs, filter names, link text. A taxonomy decides that two things are siblings; labeling decides what their parent is called on screen.
+
+## Purpose
+
+Labels are the information scent people read to predict what a click will get them. A correct structure behind a vague label performs like a broken one: someone who cannot tell what a category holds skips it. Labeling is also the cheapest repair — changing a word re-files nothing.
+
+## When to use
+
+- A tree test shows a task failing with *high* directness — people went confidently to the wrong place. That is a wording problem, not a grouping problem.
+- Search logs show people asking for something by a word that appears nowhere in your interface
+- The same thing is called three things across screens, after growth by team or acquisition
+- Marketing has proposed branded category names and you need an evidence-based counter-argument
+
+## How to do it
+
+- Inventory every label and where it appears — menu, heading, breadcrumb, filter, title tag. Conflicts between surfaces show up immediately.
+- Harvest candidates from users' own language: card-sort group names, search queries, support-ticket phrasing. Not a naming brainstorm.
+- Draft two or three variants per group and record why each loser lost; that record stops the argument reopening every quarter. Prefer clarity over cleverness; forced parallelism across a menu is not worth an awkward label.
+- Test the shortlist with tree-testing against findability tasks, or a first-click test for a handful.
+- Write winners into one label table, rejected synonyms recorded as equivalence terms in the taxonomy so search still matches them.
+
+## Example
+
+A payroll product's settings had two top-level items, "Company" and "Organisation". In a tree test, "change who approves timesheets" failed while directness stayed high: almost everyone clicked "Company" first, and it held billing. Renaming them "Billing & plan" and "People & permissions" fixed the task without moving a page.
+
+## Common mistakes
+
+- **Vague action verbs as category names**: "Explore", "Discover", "Solutions" differentiate nothing, so people who cannot predict the contents skip the item.
+- **Shipping internal terminology**: the spec's name becomes the menu label, and it tests fine inside the company because everyone testing knows the word.
+- **Relabeling when the structure is broken**: tree-test failures with heavy backtracking mean people are lost in the grouping, and renaming only relocates the confusion. Go back to taxonomy.
+- **Labels that exist only in the menu**: one concept named differently in breadcrumb, heading and filter destroys any sense of having arrived.
+- **Icon-only labels for anything unconventional**: magnifier and hamburger are learned; a custom glyph with no word beside it is an unlabeled category.
+
+## Limitations
+
+- **Cannot rescue a wrong grouping**: a better word on the wrong parent only makes it more attractive, pushing success rates down rather than up.
+- **Label performance is task-dependent**: a label winning across five findability tasks can lose on a sixth nobody wrote; the result is local to your sample.
+- **Clarity and brand voice genuinely conflict**: testing quantifies what a branded name costs in findability, but cannot decide whether the brand should pay it.
+- **Menu-length labels cannot carry the scheme's precision**: two words cannot express every distinction a taxonomy makes, so resolution is lost however well the label tests.
+
+## Tips
+
+Treat zero-result site-search queries as a standing labeling backlog — each is someone naming the thing in their own words. Add them as equivalence terms before renaming around one query.
+
+## Using AI
+
+**Where it helps**
+- Generating label variants to test against each other, and screening a draft menu for vague verbs, jargon and overlap.
+- Clustering site-search and support-ticket phrasing to surface the words users reach for.
+
+**Where it fails**
+- Picking the winning label. A model's choice reflects general web convention and its own fluency, not your users' vocabulary, and it will justify that choice convincingly enough to read like a tree-test result — indistinguishable from a tested label until findability drops.

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380" width="600" height="380" role="img">
+  <rect width="600" height="380" fill="#141414"/>
+
+  <!-- the evidential seam the canvas itself never marks -->
+  <text x="300" y="32" text-anchor="middle" fill="#6a6a6a" font-family="Georgia,serif" font-size="11" font-style="italic">the line the canvas doesn&#8217;t draw</text>
+  <g stroke="#8a8a8a" stroke-width="1" stroke-dasharray="4 5">
+    <line x1="300" y1="44" x2="300" y2="98"/>
+    <line x1="300" y1="306" x2="300" y2="326"/>
+  </g>
+
+  <!-- column headers -->
+  <g font-family="Georgia,serif" text-anchor="middle">
+    <text x="210" y="66" dx="-2" fill="#5A92C6" font-size="12" letter-spacing="2">OBSERVED</text>
+    <text x="210" y="84" fill="#6a6a6a" font-size="10.5" font-style="italic">in the session record</text>
+    <text x="390" y="66" dx="-2" fill="#B24A58" font-size="12" letter-spacing="2">INFERRED</text>
+    <text x="390" y="84" fill="#6a6a6a" font-size="10.5" font-style="italic">supplied by the team</text>
+  </g>
+
+  <!-- the canvas: four identical boxes, identical strokes -->
+  <g stroke="#3a3a3a" stroke-width="1" fill="none">
+    <rect x="120" y="102" width="360" height="200"/>
+    <line x1="120" y1="202" x2="480" y2="202"/>
+    <line x1="300" y1="102" x2="300" y2="302"/>
+  </g>
+
+  <g font-family="Georgia,serif" text-anchor="middle">
+    <text x="210" y="148" fill="#5A92C6" font-size="16">Says</text>
+    <text x="210" y="170" fill="#6a6a6a" font-size="10.5">verbatim quote</text>
+    <text x="210" y="248" fill="#5A92C6" font-size="16">Does</text>
+    <text x="210" y="270" fill="#6a6a6a" font-size="10.5">observed action</text>
+    <text x="390" y="148" fill="#B24A58" font-size="16">Thinks</text>
+    <text x="390" y="170" fill="#6a6a6a" font-size="10.5">attributed belief</text>
+    <text x="390" y="248" fill="#B24A58" font-size="16">Feels</text>
+    <text x="390" y="270" fill="#6a6a6a" font-size="10.5">attributed emotion</text>
+  </g>
+
+  <text x="300" y="352" text-anchor="middle" fill="#6a6a6a" font-family="Georgia,serif" font-size="11" font-style="italic">mark the inferred entries, or they get cited as data</text>
+</svg>

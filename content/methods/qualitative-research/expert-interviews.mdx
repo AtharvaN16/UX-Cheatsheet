@@ -1,0 +1,102 @@
+---
+id: expert-interviews
+title: Expert Interviews
+aka: ["SME Interviews", "Subject-Matter Expert Interviews", "Domain Expert Interviews"]
+domain: qualitative-research
+alsoIn: []
+kind: method
+gives: qualitative
+effort: medium
+timeframe: days
+needs:
+  - Two to four people who hold the domain knowledge you lack — practitioners, regulators, internal specialists
+  - "Homework done first: the glossary, the regulation, the existing docs, so expert time isn't spent on definitions"
+  - A short guide built around the domain's exceptions and decision points, not its overview
+  - A running glossary the whole team reads
+useCases: [understand-mental-models, discover-needs, plan-work]
+useInstead:
+  - when: You need to know how the people who will use the product actually behave, not how an expert believes the domain works
+    method: user-interviews
+  - when: The expertise lives in practised judgement the expert cannot narrate from memory, so it has to be watched in place
+    method: contextual-inquiry
+  - when: You want expert judgement on a specific interface rather than knowledge about the domain behind it
+    method: expert-review
+related:
+  before: [assumption-mapping]
+  after: [user-interviews, contextual-inquiry]
+  alongside: [expert-review]
+sources:
+  - title: "Interviewing Experts"
+    author: Alexander Bogner, Beate Littig & Wolfgang Menz (eds.)
+    url: https://books.google.com/books/about/Interviewing_Experts.html?id=m5SGDAAAQBAJ
+    type: book
+    year: 2009
+    seminal: true
+  - title: "UX Strategies for Complex-Application Design"
+    author: Kate Kaplan, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/strategies-complex-application-design/
+    type: article
+    year: 2025
+    seminal: false
+  - title: "Interviewing Users: How to Uncover Compelling Insights (2nd edition)"
+    author: Steve Portigal
+    url: https://portigal.com/Books/interviewing-users-2/
+    type: book
+    year: 2023
+    seminal: false
+---
+
+## What is it
+
+An interview with someone who holds specialist knowledge of the domain — a customs broker, a clinical coder — run to acquire that knowledge, not to study the expert as a user. An expert gives you a model of the domain; a user gives you their own experience. Bogner separates orienting in a new field, extracting its rules, and testing your own model.
+
+## Purpose
+
+In a specialised domain you cannot write a discussion guide, scenario or screener until you know what the work involves. Expert interviews buy that literacy in hours, and separate law from industry convention from one company's habit — a distinction nobody inside states, because everyone there knows it.
+
+## When to use
+
+- The domain has its own vocabulary, certifications or regulations
+- You need to know what is legally or technically non-negotiable before scoping
+- A workflow spans roles you cannot reach yet
+- Stakeholders keep citing "how the industry works" and you cannot check it
+
+## How to do it
+
+- Map what you need from whom: rules and edge cases sit with practitioners, process shape with whoever coordinates it. One expert rarely holds both.
+- Read first — an expert answers at the level your questions imply.
+- Anchor every question in a real case — "the last declaration you had to argue about" — and ask for the artefact.
+- Chase the exceptions. The canonical path is documented; exception handling is the part only a person knows, and where products break.
+- Interview at least two experts likely to disagree; where they diverge, your design has a real decision. Keep a glossary in their phrasing and read it back.
+
+## Example
+
+A team building customs-declaration software interviewed two licensed brokers before writing a research plan. Liability for a wrong commodity code sits with the declarant, not the software, so the planned "auto-classify on upload" became a suggestion with a mandatory named sign-off. The two also disagreed on when to request a ruling — a call the product had treated as a lookup.
+
+## Common mistakes
+
+- **Treating the expert as a proxy user** — someone can explain how claims adjudication works and be wrong about how the twelve adjudicators downstairs spend their morning.
+- **Letting the expert specify the interface** — they design for their own fluency, the wrong reference point for everyone else.
+- **Interviewing only the most senior person** — seniority correlates with describing the official process, and with having stopped doing the work.
+- **Not separating rule from habit** — "you can't do that" gets logged as a constraint when it was a preference, and a real constraint gets designed away.
+- **One expert, treated as the domain** — you cannot tell an industry norm from one person's practice.
+
+## Limitations
+
+- **Experts describe the domain normatively.** You get the process as it should run, cleaned of shortcuts, because naming them implicates the expert. Watching the work is the only correction.
+- **Expertise creates blind spots.** What an expert no longer experiences as a step is what will defeat your users, and the interview cannot surface it.
+- **The expert has interests.** Someone whose professional value rests on a skill you propose to automate answers honestly inside a frame that protects it.
+- **No sample validity.** Nothing generalises to users: this is domain knowledge, not evidence about behaviour, and filing it under "findings" gets it cited as though it were.
+
+## Tips
+
+Ask for "the weirdest one you've handled this year", then ask for the file. The story gives you the exception; the artefact gives you the fields, codes and states nobody would have listed.
+
+## Using AI
+
+**Where it helps**
+- Pre-reading public regulation, standards and trade documentation, so the expert's hour goes on judgement, not definitions.
+- Screening your guide for questions already answerable from those documents.
+
+**Where it fails**
+- Standing in for the expert. A model is fluent on the canonical case and equally fluent on local convention and exceptions — where it reconstructs plausible detail rather than reporting practice. Nothing marks which is which, and those exceptions are why you wanted an expert.

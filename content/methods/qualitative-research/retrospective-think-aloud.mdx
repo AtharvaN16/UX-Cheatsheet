@@ -1,0 +1,104 @@
+---
+id: retrospective-think-aloud
+title: Retrospective Think Aloud
+aka: ["RTA", "Retrospective Think-Aloud Protocol", "Retrospective Protocol"]
+domain: qualitative-research
+alsoIn: [evaluation]
+kind: method
+gives: mixed
+effort: medium
+timeframe: days
+needs:
+  - "A silent task session recorded as screen capture — with cursor, and a gaze trail if you have an eye-tracker"
+  - "A debrief that runs immediately after the tasks, in the same sitting"
+  - "Roughly double the session time of a plain usability test, so fewer tasks per participant"
+  - "A facilitator who anchors questions to what is visible on the replay instead of asking why"
+useCases: [diagnose-usability, measure-usability, understand-mental-models]
+useInstead:
+  - when: "You need to know why someone hesitated as it happened — by the time you ask afterwards, the reason has been reconstructed"
+    method: think-aloud
+  - when: "You want the whole workflow in its real setting rather than a reconstruction of one recorded task"
+    method: contextual-inquiry
+related:
+  alongside: [usability-testing, benchmark-testing]
+sources:
+  - title: "Protocol Analysis: Verbal Reports as Data"
+    author: K. Anders Ericsson & Herbert A. Simon
+    url: https://archive.org/details/protocolanalysis0000eric
+    type: book
+    year: 1984
+    seminal: true
+  - title: "Retrospective vs. concurrent think-aloud protocols: Testing the usability of an online library catalogue"
+    author: Maaike J. van den Haak, Menno D.T. de Jong & Peter Jan Schellens
+    url: https://research.utwente.nl/en/publications/retrospective-vs-concurrent-think-aloud-protocols-testing-the-usa/
+    type: paper
+    year: 2003
+    seminal: true
+  - title: "Concurrent or Retrospective Thinking Aloud in Usability Tests: A Meta-Analytic Review"
+    author: Morten Hertzum
+    url: https://forskning.ruc.dk/en/publications/concurrent-or-retrospective-thinking-aloud-in-usability-tests-a-m/
+    type: paper
+    year: 2024
+    seminal: false
+  - title: "UX Research Methods: Glossary"
+    author: Raluca Budiu, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/research-methods-glossary/
+    type: article
+    year: 2023
+    seminal: false
+---
+
+## What is it
+
+Two passes over one task set: the participant works in silence while you record the screen, then narrates their thinking as you replay it together immediately afterwards.
+
+## Purpose
+
+Separates measurement from explanation: the silent pass yields task times, error counts and scan patterns uncontaminated by talking, the replay the verbal account. You trade in-the-moment cognition for clean performance data.
+
+## When to use
+
+- You need performance numbers *and* reasoning from one session
+- You're running eye-tracking, where speaking moves the gaze you're recording
+- Narration during the task is impossible or absurd — a phone call, a two-handed task, anything timed
+- The task is complex or high-workload, where van den Haak and colleagues found concurrent reactivity sharpest
+
+## How to do it
+
+- Choose the replay cue before you record: screen capture, capture plus cursor, or a gaze trail.
+- Run the tasks with no prompting, noting your own observations; that channel is the one you lose.
+- Debrief in the same sitting, minutes later.
+- Let the participant drive the replay and pause where *they* hesitated, not only where you noticed.
+- Anchor every question to something visible: "you stopped here — what was going through your head?" rather than "why is this confusing?" Hertzum found retrospective sessions already tilt toward explanations and recommendations; don't invite more.
+- Mark reconstruction when you hear it. "I must have been looking for the total" is a guess, not a memory; check it against the recording.
+
+## Example
+
+Suppose a team re-benchmarks a thermostat pairing flow against last quarter's numbers. Concurrent narration would inflate the task times and break the comparison, so the tasks run silently and the replay explains the one that got slower: a pairing spinner participants read as a frozen screen. "I probably thought the app had crashed" — *probably* is the tell, and the recordings show each of them force-quitting.
+
+## Common mistakes
+
+- **Debriefing hours or days later** — the further from the task, the more the account is reasoning about the interface rather than recall of a moment.
+- **Asking "why did you do that?"** — Ericsson and Simon's protocol excludes explanation and justification, and asking why mid-task is its most common violation. In a replay, "why" produces a narrative fitted to what the participant can now see.
+- **Replaying a bare screen capture** — with few visual cues, the participant narrates what a reasonable person would have thought, not what they thought.
+- **Letting the replay turn into a design review** — a participant volunteering fixes produces recommendations, not problem reports.
+
+## Limitations
+
+- **The narration is reconstruction, not observation.** People explain what they must have been thinking, consistent with the outcome they can now see. The account is coherent in a way real in-task cognition is not; that coherence is the artefact.
+- **Hindsight and self-presentation push the same way.** Watching yourself miss a button invites "oh, it was right there" — a judgement made with knowledge you didn't have then.
+- **You lose the observation channel.** Van den Haak and colleagues found concurrent protocols surface more problems through observation, retrospective ones through verbalisation; a silent struggle neither of you flags on replay isn't detected.
+- **Longer sessions mean fewer tasks.** Hertzum found total session time longer for retrospective than concurrent, so the same budget covers less of the product.
+
+## Tips
+
+Write down your own read of each hesitation before the replay, then compare. Divergence is a question worth chasing; agreement is a confirmed finding.
+
+## Using AI
+
+**Where it helps**
+- Cutting a long recording down to the hesitation, backtrack and error moments worth replaying
+- Tagging transcripts for reconstruction markers — "must have", "probably", "I guess" — separating recall from inference
+
+**Where it fails**
+- Narrating a session on the participant's behalf. A model produces a fluent causal account of every pause from the recording alone — precisely this method's own failure mode, a story fitted to a visible outcome. The real account was evidence because the person was there.

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 300" width="560" height="300" role="img">
+  <rect width="560" height="300" fill="#141414"/>
+  <defs>
+    <linearGradient id="involvement" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2E8A75"/>
+      <stop offset="0.5" stop-color="#3B72B2"/>
+      <stop offset="1" stop-color="#B24A58"/>
+    </linearGradient>
+  </defs>
+
+  <g font-family="Georgia,serif" fill="#8a8a8a" font-size="13">
+    <text x="280" y="38" text-anchor="middle" fill="#c8c8c8">Degree of observer involvement</text>
+  </g>
+
+  <g font-family="Georgia,serif" font-size="12">
+    <text x="78" y="78" fill="#2E8A75">Behaviour closest to unobserved</text>
+    <text x="482" y="78" text-anchor="end" fill="#B24A58">Meaning reachable from inside</text>
+    <text x="78" y="100" fill="#8a8a8a">Cost: may misread what it means</text>
+    <text x="482" y="100" text-anchor="end" fill="#8a8a8a">Cost: presence shapes the scene</text>
+  </g>
+
+  <g stroke="#3a3a3a" stroke-width="1">
+    <line x1="50" y1="150" x2="510" y2="150"/>
+    <line x1="80" y1="138" x2="80" y2="128"/>
+    <line x1="213" y1="138" x2="213" y2="128"/>
+    <line x1="347" y1="138" x2="347" y2="128"/>
+    <line x1="480" y1="138" x2="480" y2="128"/>
+  </g>
+
+  <rect x="80" y="146" width="400" height="8" rx="4" fill="url(#involvement)"/>
+
+  <g fill="#141414" stroke="#e5e5e5" stroke-width="1.5">
+    <circle cx="80" cy="150" r="5"/>
+    <circle cx="213" cy="150" r="5"/>
+    <circle cx="347" cy="150" r="5"/>
+    <circle cx="480" cy="150" r="5"/>
+  </g>
+
+  <g font-family="Georgia,serif" font-size="12" fill="#c8c8c8" text-anchor="middle">
+    <text x="80" y="180">Complete</text>
+    <text x="80" y="196">observer</text>
+    <text x="213" y="180">Observer-as-</text>
+    <text x="213" y="196">participant</text>
+    <text x="347" y="180">Participant-</text>
+    <text x="347" y="196">as-observer</text>
+    <text x="480" y="180">Complete</text>
+    <text x="480" y="196">participant</text>
+  </g>
+
+  <g font-family="Georgia,serif" font-size="11" fill="#7a7a7a" text-anchor="middle">
+    <text x="280" y="240">Fly-on-the-wall sits at the left; contextual inquiry and shadowing sit in the middle.</text>
+    <text x="280" y="266" fill="#5f5f5f">After Gold (1958)</text>
+  </g>
+</svg>

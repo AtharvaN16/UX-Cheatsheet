@@ -1,0 +1,110 @@
+---
+id: proto-personas
+title: Proto-personas
+aka: ["Proto Personas", "Provisional Personas", "Ad-hoc Personas", "Lean Personas"]
+domain: research-synthesis
+alsoIn: []
+kind: framework
+gives: conceptual
+effort: low
+timeframe: hours
+needs:
+  - "The people who hold beliefs about the audience in one room: design, engineering, whoever talks to customers"
+  - A label and date applied to the artefact itself, not to the deck it appears in
+  - A research plan the resulting assumptions can actually be routed into
+useCases: [understand-users, handle-uncertainty]
+useInstead:
+  - when: You can get research, and the output has to survive being quoted in a roadmap review
+    method: personas
+  - when: What you need is the assumptions themselves ranked by risk, not characters to carry them
+    method: assumption-mapping
+  - when: You need to find out who your users actually are rather than who the team thinks they are
+    method: user-interviews
+related:
+  before: [assumption-mapping]
+  after: [user-interviews, personas]
+  alongside: [lean-ux, empathy-maps]
+sources:
+  - title: "Using Proto-Personas for Executive Alignment"
+    author: Jeff Gothelf
+    url: https://uxmag.com/articles/using-proto-personas-for-executive-alignment
+    type: article
+    year: 2012
+    seminal: true
+  - title: "Lean UX, 3rd Edition"
+    author: Jeff Gothelf & Josh Seiden
+    url: https://books.google.com/books/about/Lean_UX_3rd_Edition.html?id=InkhzgEACAAJ
+    type: book
+    year: 2021
+    seminal: false
+  - title: "3 Persona Types: Lightweight, Qualitative, and Statistical"
+    author: Page Laubheimer, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/persona-types/
+    type: article
+    year: 2020
+    seminal: false
+  - title: "The Personas' New Clothes: Methodological and Practical Arguments against a Popular Method"
+    author: Christopher N. Chapman & Russell P. Milham
+    url: https://cnchapman.wordpress.com/wp-content/uploads/2007/03/chapman-milham-personas-hfes2006-0139-0330.pdf
+    type: paper
+    year: 2006
+    seminal: false
+---
+
+## What is it
+
+A persona drafted in a couple of hours from what the team already believes about its users, with no new research, and marked as such. Gothelf's version comes from a workshop where people write down their assumptions about the audience, then defend them to each other.
+
+## Purpose
+
+Two jobs. Surfacing disagreement that would otherwise stay implicit — three people can hold three different audiences in their heads for a year without noticing. And turning those beliefs into claims specific enough to test, which is what a research plan needs as input. A way of not starting with an unexamined audience, not a way of skipping research.
+
+## When to use
+
+- Before research, when a decision is being made and there is no data yet
+- On a lean team that would otherwise skip personas and design for nobody in particular
+- When "we know our users" has to become specific enough to be wrong — Gothelf's original use was executive alignment
+
+## Structure
+
+The same fields as a researched persona — behaviour, goals, context, vocabulary — plus two that carry the method:
+
+- **The label.** "Assumptions, not research", with the date and who was in the room — on the artefact, in the filename, on the slide.
+- **The claims.** Each belief phrased so it can turn out false: not "busy professional" but "checks the rota on a phone between visits, three times a day".
+
+The label is load-bearing. Strip it and a proto-persona is indistinguishable from a researched one — the format is identical — so it gets treated as one, cited in a roadmap review six months later by people who cannot tell which kind it was.
+
+## How to use
+
+- Two to three hours, whole team, including whoever holds the strongest opinion
+- Draft individually before comparing; the divergence between drafts is the real output
+- Consolidate to three to five, keeping disagreements visible rather than averaging them away
+- Rank the claims by risk and confidence — most load-bearing, least known — and hand that list to the research plan
+- Set an expiry: after research, a revised proto-persona becomes a persona and an unrevised one is deleted
+
+## Example
+
+A team building an internal expenses tool runs a two-hour session. Two engineers assume submissions happen monthly at a desk; the finance lead assumes receipts photographed in taxis. Both go into a file labelled "ASSUMPTIONS, not research — March". Eight interviews later the taxi version holds for field staff, the desk one for office staff, and the tool has to serve both.
+
+## Common mistakes
+
+- **Dropping the label once it gets prettied up** — the Figma pass is what converts an assumption into an apparent finding.
+- **Treating the workshop as the research** — "we did personas" lands in a status update and validation never gets scheduled.
+- **Averaging the room** — one consensus proto-persona hides the disagreement that was the reason to run it.
+- **Adding a stock photo and demographics** — looks researched, adds nothing testable.
+
+## Limitations
+
+- **It records team belief, not users**, and inherits every bias in the room, including who got invited. NN/g's warning: proto-personas are often inaccurate and can reinforce incorrect beliefs — a wrong assumption made concrete and memorable is harder to dislodge.
+- **The label decays faster than the artefact.** Screenshot, paste, reuse — provenance is the first thing lost, and cannot be recovered from the file.
+- **No coverage claim whatsoever.** Chapman and Milham's objections to personas all apply here, minus the data.
+- **It cannot settle what it surfaces.** It shows the room disagrees; only research says who was right.
+
+## Using AI
+
+**Where it helps**
+- Widening the candidate set — audiences and situations nobody in the room thought to name
+- Rewriting each belief as a falsifiable claim with a way to test it
+
+**Where it fails**
+- Writing the proto-persona itself. The value is a room disagreeing out loud about who the user is; a generated one arrives as confident, uncontested prose indistinguishable from a researched persona — the exact failure the label prevents.

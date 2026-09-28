@@ -1,0 +1,104 @@
+---
+id: pov-statements
+title: POV Statements
+aka: ["Point of View Statement", "POV Madlib", "Point-of-View Madlib"]
+domain: research-synthesis
+alsoIn: []
+kind: framework
+gives: qualitative
+effort: low
+timeframe: hours
+needs:
+  - Finished synthesis on real sessions — a POV written before the research is a guess in a template
+  - One specific person to write about, with the detail that makes them that person
+  - "A candidate insight: something the research told you that you did not already believe"
+useCases: [discover-needs, analyze-findings, generate-ideas]
+useInstead:
+  - when: You need to state what the research taught you rather than frame it as one person's problem
+    method: insight-statements
+  - when: You need the job someone is trying to get done, stated independently of who they are
+    method: jtbd-statements
+  - when: You need to compare and prioritise several problem areas for investment rather than commit to one
+    method: opportunity-areas
+related:
+  before: [empathy-maps, insight-statements, affinity-mapping]
+  after: [hmw-questions, brainstorming]
+  alongside: [personas, jtbd-statements]
+sources:
+  - title: "A d.school Design Project Guide"
+    author: Thomas Both, Hasso Plattner Institute of Design at Stanford
+    url: https://dschool.sfo3.digitaloceanspaces.com/documents/DESIGNPROJECTGUIDE-SEPT-2016-V3_2.pdf
+    type: article
+    year: 2016
+    seminal: true
+  - title: "Design Thinking Bootleg"
+    author: Stanford d.school
+    url: https://dschool.stanford.edu/resources/design-thinking-bootleg
+    type: tool
+    year: 2018
+    seminal: false
+  - title: "User Need Statements: The 'Define' Stage in Design Thinking"
+    author: Sarah Gibbons, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/user-need-statements/
+    type: article
+    year: 2019
+    seminal: false
+---
+
+## What is it
+
+The Stanford d.school's point-of-view formulation: **[user] needs to [need] because [surprising insight]**. Three slots, one sentence — and the result is a reframing of the challenge, not a summary of the research.
+
+## Purpose
+
+Synthesis leaves a pile of things you know; ideation needs one thing to push against. A POV is that conversion, and it constrains the solution space without naming a solution.
+
+## When to use
+
+- At the handoff from synthesis to ideation, once you have themes and at least one real insight
+- When a team is arguing about solutions before agreeing which problem it is solving
+
+## Structure
+
+- **User** — one person, with the detail that makes them that person, not a demographic
+- **Need** — what they are trying to do, stated as a verb
+- **Because** — the insight explaining why the need goes unmet
+
+### The need has to be a verb
+
+"Needs a faster checkout" is a noun, and a noun is a solution wearing a need's clothing — it has decided the answer lives in the checkout flow. "Needs to be confident the order is correct before paying" leaves the answer open: a review step, a confirmation email, an undo window. NN/g puts it plainly — nobody needs a dropdown, they need to see their choices and pick one.
+
+### The because clause is what makes it generative
+
+If the *because* restates the need — "needs to be confident the order is correct because she wants to be sure" — you have a tautology in three slots that will decorate a deck without moving a decision. That clause carries the thing you didn't know before the research, which is why it, not the need, is where ideas come from.
+
+## How to use
+
+- Draft six rough variants, one slot at a time, then pick. The d.school warns that polishing a POV can dull the edge of its insight.
+- Hand the chosen one straight to How Might We questions — that is what it exists to feed, and HMWs inherit its looseness.
+- Keep one POV per person worth framing; collapsing several re-generalises what synthesis just took apart.
+
+## Example
+
+Instead of "a teenage girl needs more nutritious food because vitamins are vital to good health," the d.school writes "a teenage girl with a bleak outlook needs to feel more socially accepted when eating healthy food, because in her neighbourhood a social risk is more dangerous than a health risk." The first states a fact; the second names a tension a designer can work on.
+
+## Common mistakes
+
+- **Writing it before the research.** The *because* slot invites confident filling, and a plausible assumption sits in it indistinguishably from a finding.
+- **Too broad to constrain anything.** "Busy professionals need to manage their time better because modern life is hectic" rules out nothing and could have been written on day one.
+- **So narrow it contains its own answer.** "Needs a one-tap reorder because she buys the same thing weekly" is a backlog item; the session it launches has one idea in it.
+
+## Limitations
+
+- It carries no evidence with it. Detached from the research, a POV is indistinguishable from a well-phrased opinion — and it travels further than its deck.
+- It fixes one person's frame. Problems living between people — handoffs, incentives, organisational conflict — don't fit the slots.
+- Nothing in the format tests the insight. A *because* built on an unmarked inference from an empathy map reads exactly like one built on observed behaviour.
+
+## Using AI
+
+**Where it helps**
+- Generating slot variants from your synthesis notes, to feel where a framing is too broad or too narrow
+- Flagging need slots holding nouns, and because-clauses that only restate the need
+
+**Where it fails**
+- Writing the statement from a brief. A model returns a grammatical POV with a confident *because* — the slot reserved for what the research taught you that you didn't expect. It fills that slot with the most typical explanation available, which is by construction the opposite of an insight.

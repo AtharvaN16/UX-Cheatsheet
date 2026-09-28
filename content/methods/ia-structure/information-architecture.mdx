@@ -1,0 +1,100 @@
+---
+id: information-architecture
+title: Information Architecture
+aka: ["IA"]
+domain: ia-structure
+alsoIn: []
+kind: concept
+gives: conceptual
+effort: medium
+timeframe: weeks
+needs:
+  - A defined scope — the set of content and functionality the structure has to cover
+  - Agreement on whose vocabulary and mental model the structure is being optimized for
+useCases: [understand-mental-models, understand-systems]
+useInstead:
+  - when: You need to evaluate whether one specific structure works, not reason about how structure is organized
+    method: tree-testing
+  - when: You need evidence for how to group content rather than a way to think about grouping
+    method: card-sorting
+related:
+  before: [content-inventory, card-sorting]
+  after: [site-maps, navigation-design, tree-testing]
+  alongside: [taxonomy, labeling, mental-models]
+sources:
+  - title: "Information Architecture: For the Web and Beyond"
+    author: Louis Rosenfeld, Peter Morville & Jorge Arango
+    url: https://books.google.com/books/about/Information_Architecture.html?id=dZaJCgAAQBAJ
+    type: book
+    year: 2015
+    seminal: true
+  - title: "How to Make Sense of Any Mess"
+    author: Abby Covert
+    url: https://www.howtomakesenseofanymess.com/
+    type: book
+    year: 2014
+    seminal: false
+  - title: "The Difference Between Information Architecture (IA) and Navigation"
+    author: Jen Cardello, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/ia-vs-navigation/
+    type: article
+    year: 2014
+    seminal: false
+  - title: "Information Architecture: Study Guide"
+    author: Page Laubheimer, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/ia-study-guide/
+    type: article
+    year: 2022
+    seminal: false
+---
+
+## What is it
+
+The structural layer of a product: how content and functionality are grouped, named, related, and made findable. It's the skeleton, not the skin — an architecture lives in inventories, hierarchies and relationship models; the menus are the part a user sees.
+
+## Why it matters
+
+Findability complaints arrive dressed as interface problems — "the menu is confusing". Navigation, labels and search can only expose the structure underneath: if two things belong together and the architecture says they don't, no menu design fixes it. Structure is also the most expensive thing to get wrong late: moving a box on paper costs an afternoon, moving it once routes, permissions and indexing depend on it costs a quarter.
+
+## Key ideas
+
+- **Four interlocking systems** (Rosenfeld, Morville and Arango): organization, labeling, navigation, search. Each can be correct while another is broken — a sound hierarchy with wrong labels fails like a bad hierarchy.
+- **The structure is invisible; navigation is the tip of it.** NN/g's framing: IA lives in spreadsheets and diagrams, not wireframes. Design navigation first and the structure gets decided by whatever fit the header.
+- **Language is the material.** Covert's point: most arguments that look structural are disagreements about what words mean. Until the team settles whether "Reports" and "Insights" name the same thing, every diagram is provisional.
+
+## Example
+
+A B2B analytics product had four top-level sections — Dashboards, Reports, Insights, Explore — all meaning "look at your data", split by whichever team shipped them. A nav redesign changed nothing; a card sort showed users distinguished *saved* from *ad-hoc*, not the four. The fix was one Analyze area faceted that way.
+
+## Application
+
+- **Enumerate before you architect.** You cannot structure content you haven't listed.
+- **Name the organizing dimension out loud**, and write down which competing dimension you give up.
+- **Get evidence at both ends**: card-sorting to generate groupings, tree-testing to check navigability.
+- **Document structure separately from UI** — a site map plus the taxonomy — so it can be reviewed without collapsing into visual design.
+
+## Limitations
+
+- **It cannot resolve a business disagreement about what the product is.** If two divisions can't agree whether they sell one product or three, that fight resurfaces in the navigation.
+- **Any hierarchy privileges one dimension.** Product, audience, task or lifecycle — not all four, and users who organize by the one you dropped pay for it. Facets let several coexist, at a maintenance cost nobody budgets.
+- **It's unfalsifiable as a whole.** You can test a specific tree with specific tasks; "is our IA good" has no measurement.
+- **Search doesn't rescue it.** It ranks against the same labels and groupings the architecture supplies, so bad structure produces bad results, less visibly.
+
+## Common misconceptions
+
+- **"The sitemap is the IA."** A site map is one view of one system — organization — rendered as a diagram. It says nothing about labeling rules, metadata, or relationships that cross the hierarchy.
+- **"IA is navigation design."** Cardello's NN/g article exists to draw this distinction: navigation is the visible mechanism, the architecture is the structure it reveals. They're decided at different times, on different evidence.
+- **"It's an upfront phase you finish."** Content and features keep arriving. An architecture without a rule for where new things go decays into whatever the last team found convenient.
+
+## Tips
+
+Before proposing a restructure, write the one sentence a user would have to believe for it to work ("people think of these as saved versus one-off"). That sentence is testable with a card sort; a diagram isn't.
+
+## Using AI
+
+**Where it helps**
+- Pulling a first-pass content list out of a sitemap.xml, CMS export or crawl.
+- Pressure-testing a proposed hierarchy for inconsistency — categories at mixed levels of abstraction, labels used in two senses.
+
+**Where it fails**
+- Producing a tidy hierarchy from a content list. It reflects general web conventions and the shape of your existing labels — the two things IA research exists to check — and reads like the output of a card sort, minus any contact with your users' mental models.

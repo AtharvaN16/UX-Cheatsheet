@@ -1,0 +1,105 @@
+---
+id: observation
+title: Observation
+aka: ["Direct Observation", "Field Observation", "Observational Research"]
+domain: qualitative-research
+alsoIn: []
+kind: method
+gives: qualitative
+effort: medium
+timeframe: days
+needs:
+  - Access to the place and the hours where the behaviour actually happens
+  - "A decided observer role: how visible you will be and whether you may interrupt"
+  - A protocol naming what you will record — sequence, duration, errors, workarounds, interruptions
+  - Consent from the participant and from whoever controls the site
+useCases: [understand-behavior, identify-problems, discover-needs]
+useInstead:
+  - when: You need the reasoning behind a behaviour and the reasoning is not visible in the behaviour
+    method: user-interviews
+  - when: You want the participant's account of the work as it happens and interrupting to ask is acceptable
+    method: contextual-inquiry
+  - when: The behaviour is spread across days or happens somewhere you cannot be present
+    method: diary-studies
+  - when: You need to follow one person through a whole shift rather than sample a setting
+    method: shadowing
+related:
+  before: [user-interviews]
+  after: [grounded-theory, triangulation]
+  alongside: [fly-on-the-wall-observation, shadowing, contextual-inquiry, ethnography]
+sources:
+  - title: "Roles in Sociological Field Observations"
+    author: Raymond L. Gold
+    url: https://academic.oup.com/sf/article-abstract/36/3/217/2226541
+    type: paper
+    year: 1958
+    seminal: true
+  - title: "Field Studies"
+    author: Susan Farrell & Therese Fessenden, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/field-studies/
+    type: article
+    year: 2024
+    seminal: false
+  - title: "Observing the User Experience: A Practitioner's Guide to User Research (2nd Edition)"
+    author: Elizabeth Goodman, Mike Kuniavsky & Andrea Moed
+    url: https://books.google.com/books/about/Observing_the_User_Experience.html?id=jmj5LCAG6kwC
+    type: book
+    year: 2012
+    seminal: false
+image:
+  src: /images/methods/observation.svg
+  alt: A spectrum from complete observer through observer-as-participant and participant-as-observer to complete participant, with what each end of the range gains and costs the researcher
+  caption: "Gold's four field roles: involvement buys access to meaning and costs you an unaltered scene"
+---
+
+## What is it
+
+Watching behaviour happen and recording what you see, without asking the person to narrate or explain it. It is the technique underneath the family of field methods: fly-on-the-wall, shadowing, contextual inquiry and ethnography are each observation with a particular observer role, duration and licence to interrupt. Those have their own cards; this one is the common core.
+
+## Purpose
+
+Observation gets the parts of behaviour people cannot report: steps automated years ago and no longer noticed, the workaround they stopped calling a workaround, what interrupts them. Self-report is a reconstruction; observation is a record.
+
+## When to use
+
+- The behaviour is habitual, physical or fast enough that people cannot narrate it accurately
+- You need real frequencies, timings or error counts from the wild rather than a lab task
+- You have a suspected problem but not a describable one, and need to see the failure to write the research question
+
+## How to do it
+
+- Decide your observer role before you arrive. The spectrum above is that decision: involvement buys access to meaning and costs you an unaltered scene.
+- Write a protocol naming what counts as an event worth recording — without one, notes from five sites are five incommensurable stories, and two observers cannot be compared.
+- Pick a sampling scheme: *continuous* for windows under an hour, *time sampling* for a snapshot every few minutes, *event sampling* for each occurrence of a defined trigger — usually the right default.
+- Keep description and inference separate — two columns, or two colours. Inference mixed into the record cannot be removed later.
+
+## Example
+
+A tablet app for hotel housekeeping tested clean and fast in the lab. Two mornings of event-sampled observation on a real floor — trigger: every touch of the tablet — found it face-down on the cart all shift: both hands occupied, the screen locked after thirty seconds, statuses entered per corridor from memory. Nobody had reported it; from the inside that was the job, not an app problem. The fix was a longer lock timeout and a cart mount, neither of them a screen.
+
+## Common mistakes
+
+- **Writing interpretations as observations** — "she was frustrated" is a conclusion; "she re-scanned the same barcode four times, then said 'come on'" is data you can still argue with.
+- **Drifting into an interview** — ask questions if you decide to, but decide; by accident you no longer know which behaviour was spontaneous.
+- **Observing only where access was easy** — the compliant team volunteers; the site running the interesting workaround declines.
+- **One session treated as the setting** — a Tuesday morning is not the week, but one window becomes "how they work" when no second window contradicts it.
+
+## Limitations
+
+- **Behaviour without reasons.** Observation is silent on motivation, tradeoffs and the option someone rejected; getting those means switching methods.
+- **Your presence changes the scene.** Being watched shifts behaviour toward the version people believe is correct. Lower-involvement roles reduce this; nothing removes it.
+- **Rare and private behaviour is out of reach.** Anything happening monthly, at 2am, or alone cannot be waited out at any realistic budget.
+- **The subjectivity moved into the coding.** A protocol makes notes comparable, but you chose the categories before you knew what you would see, and whatever fits none gets quietly dropped.
+
+## Tips
+
+Write up the same day. Field notes are shorthand only you can decode, and the context that made them legible is gone by the weekend.
+
+## Using AI
+
+**Where it helps**
+- Turning timestamped notes from several sessions into one comparable event log, flagging lines that slid from description into inference
+- Drafting a candidate code list, then checking it for categories that overlap or cannot be told apart live
+
+**Where it fails**
+- Coding behaviour from video: a model labels a pause "hesitation" and a re-scan "confusion", unable to tell either from a colleague walking past — coded observational data without the observer who knew what else was in the room.

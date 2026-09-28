@@ -1,0 +1,108 @@
+---
+id: navigation-design
+title: Navigation Design
+aka: ["Navigation Systems", "Nav Design"]
+domain: ia-structure
+alsoIn: [interaction-design]
+kind: framework
+gives: conceptual
+effort: medium
+timeframe: weeks
+needs:
+  - A settled content hierarchy — a site map or validated card sort, not a blank canvas
+  - Analytics on the entry points people actually arrive through, not just the homepage
+  - Label vocabulary taken from research rather than internal terminology
+useCases: [improve-interaction, reduce-cognitive-effort]
+useInstead:
+  - when: The structure behind the navigation is unproven and you need evidence people can find things before designing any of its UI
+    method: tree-testing
+  - when: The categories themselves are wrong, not the way they're exposed
+    method: card-sorting
+  - when: Menus are technically fine but you need to see where people actually get stuck and why
+    method: usability-testing
+related:
+  before: [information-architecture, site-maps, card-sorting]
+  after: [tree-testing, usability-testing]
+  alongside: [labeling, jakobs-law, hicks-law, serial-position-effect]
+sources:
+  - title: "Information Architecture: For the Web and Beyond"
+    author: Louis Rosenfeld, Peter Morville & Jorge Arango
+    url: https://books.google.com/books/about/Information_Architecture.html?id=dZaJCgAAQBAJ
+    type: book
+    year: 2015
+    seminal: true
+  - title: "Menus Tutorial — Web Accessibility Initiative"
+    author: W3C Web Accessibility Initiative (WAI)
+    url: https://www.w3.org/WAI/tutorials/menus/
+    type: standard
+    seminal: false
+  - title: "Hamburger Menus and Hidden Navigation Hurt UX Metrics"
+    author: Kara Pernice & Raluca Budiu, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/hamburger-menus/
+    type: article
+    year: 2016
+    seminal: false
+  - title: "Menu-Design Checklist: 17 UX Guidelines"
+    author: Page Laubheimer, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/menu-design/
+    type: article
+    year: 2024
+    seminal: false
+---
+
+## What is it
+
+The set of navigation systems a product exposes, and which part of the structure each reveals. Rosenfeld, Morville and Arango split them into *embedded* systems inside the hierarchy and *supplemental* ones like search outside it. Designing navigation means populating those slots deliberately instead of accumulating menus.
+
+## Purpose
+
+Structure decides what is findable in principle; navigation decides what is findable in practice. It both moves people and tells them where they are, and Laubheimer finds that second job the most commonly missed on website menus.
+
+## When to use
+
+- You have a validated hierarchy and must decide how much to expose, where
+- The product grew a new section and the top level no longer holds it
+- Analytics show people reaching content only through search or direct links
+
+## Structure
+
+- **Global navigation**: every screen, top level only — the most constrained and most contested slot on the page.
+- **Local navigation**: siblings and children within a section, where deep hierarchies survive or fail since global nav carries one level.
+- **Contextual navigation**: inline links between items the hierarchy doesn't connect, honouring a polyhierarchy without duplicating pages.
+- **Supplemental navigation**: search, A–Z indexes, the sitemap — routes for people the hierarchy doesn't serve.
+- **Utility navigation**: account, cart, language, settings — separate from content, constantly confused with global navigation.
+- **Wayfinding cues**: current-state indicators, breadcrumbs, titles — the "you are here" layer that makes the other five interpretable; far cheaper designed in than retrofitted. WCAG 2.4.5 and 2.4.8 apply.
+
+## How to use
+
+- **Start from the site map and the top tasks, not the page template.** Global slots go to tasks that earn them, not departments that ask.
+- **Assign every branch to one of the systems above.** Anything in none is reachable only by search — decide that explicitly.
+- **Default to visible over hidden.** NN/g measured hidden desktop navigation used by 27% of participants versus 48–50% for visible patterns.
+- **Specify keyboard and screen-reader behaviour with the visuals** — a fly-out is an interaction pattern, not a hover effect.
+- **Tree-test the structure, then usability-test the navigation** — they fail for different reasons, and one test conflates them.
+
+## Example
+
+A payroll SaaS hid all nine top-level areas behind a desktop hamburger because the mobile app did; support tickets clustered on two features customers never found. A left rail for the five weekly-task areas made the same nine reachable without touching the hierarchy.
+
+## Common mistakes
+
+- **Hover-activated submenus.** They don't exist on touch, fire on accidental pass-through, and are hostile to motor impairment. Click behaves the same everywhere.
+- **No current-location indicator.** People can navigate perfectly and still not know where they landed, making every later choice a guess.
+- **Treating search as structural cover.** Search helps people who already know what to call the thing — a supplement, not a repair.
+- **Rebuilding native menu semantics in divs.** Widgets that look right but carry no roles or focus management are a routine accessibility failure the WAI tutorial exists to prevent.
+
+## Limitations
+
+- **It cannot repair a bad hierarchy.** If categories are wrong or labels unrecognised, every pattern exposes the same wrong structure more attractively.
+- **Global navigation matters less than its share of the argument.** Most sessions start deep, from search or a link, so the menu is usually a recovery tool, not the primary path.
+- **The typology says nothing about visual weight.** It tells you *which* system a branch belongs in, not what should dominate the page; identical assignments can perform very differently.
+
+## Using AI
+
+**Where it helps**
+- Auditing every page template for a missing current-state indicator, breadcrumb or skip link
+- Checking menu markup against WCAG criteria and flagging missing roles or focus handling, to confirm in a screen reader
+
+**Where it fails**
+- Proposing the navigation structure from a product description. The output is the average nav bar of the training data, reading as your users' mental model when it reflects none. It will also call a custom menu accessible from markup alone, a claim only operating it can settle.

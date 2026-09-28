@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" width="560" height="360" role="img">
+  <rect width="560" height="360" fill="#141414"/>
+
+  <!-- ladder rails -->
+  <g stroke="#3a3a3a" stroke-width="1.5">
+    <line x1="196" y1="58" x2="196" y2="312"/>
+    <line x1="246" y1="58" x2="246" y2="312"/>
+  </g>
+
+  <!-- rungs: bottom (least power) to top (most power) -->
+  <g stroke-width="3">
+    <line x1="196" y1="292" x2="246" y2="292" stroke="#5a5a5a"/>
+    <line x1="196" y1="238" x2="246" y2="238" stroke="#7d7d7d"/>
+    <line x1="196" y1="184" x2="246" y2="184" stroke="#7d7d7d"/>
+    <line x1="196" y1="130" x2="246" y2="130" stroke="#5A92C6"/>
+    <line x1="196" y1="76" x2="246" y2="76" stroke="#5A92C6"/>
+  </g>
+
+  <!-- rung names -->
+  <g font-family="Georgia,serif" font-size="15">
+    <text x="262" y="297" fill="#6f6f6f">Decided elsewhere</text>
+    <text x="262" y="243" fill="#9a9a9a">Informing</text>
+    <text x="262" y="189" fill="#9a9a9a">Consulting</text>
+    <text x="262" y="135" fill="#5A92C6">Co-deciding</text>
+    <text x="262" y="81" fill="#5A92C6">Participant control</text>
+  </g>
+
+  <!-- grouping brackets -->
+  <g stroke="#3a3a3a" stroke-width="1" fill="none">
+    <path d="M182 286 L174 286 L174 298 L182 298"/>
+    <path d="M182 178 L174 178 L174 244 L182 244"/>
+    <path d="M182 70 L174 70 L174 136 L182 136"/>
+  </g>
+  <g font-family="Georgia,serif" font-size="13" text-anchor="end">
+    <text x="164" y="297" fill="#6f6f6f">Non-participation</text>
+    <text x="164" y="215" fill="#9a9a9a">Tokenism</text>
+    <text x="164" y="107" fill="#5A92C6">Shared power</text>
+  </g>
+
+  <!-- direction of increasing power -->
+  <g stroke="#3a3a3a" stroke-width="1.5" fill="none">
+    <line x1="500" y1="300" x2="500" y2="72"/>
+    <path d="M494 82 L500 68 L506 82"/>
+  </g>
+  <text x="522" y="190" transform="rotate(-90 522 190)" text-anchor="middle" font-family="Georgia,serif" font-size="13" fill="#8a8a8a">Power held by participants</text>
+</svg>

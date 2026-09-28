@@ -1,0 +1,110 @@
+---
+id: site-maps
+title: Site Maps
+aka: ["Sitemap", "Site Mapping", "IA Diagram"]
+domain: ia-structure
+alsoIn: []
+kind: method
+gives: conceptual
+effort: medium
+timeframe: days
+needs:
+  - A content inventory or crawl of what actually exists, not a recollection of it
+  - Evidence about how users group that content — a card sort, analytics, or search logs
+  - "An agreed scope boundary (which surfaces the map covers: marketing site, app, help centre)"
+useCases: [understand-systems, plan-work]
+useInstead:
+  - when: You have a structure drawn and need to know whether people can actually find things in it
+    method: tree-testing
+  - when: You don't have defensible groupings yet and the map would just encode internal opinion
+    method: card-sorting
+  - when: What you need to map is a sequence of steps through a task, not where content sits
+    method: user-flows
+related:
+  before: [content-inventory, card-sorting]
+  after: [tree-testing, navigation-design]
+  alongside: [information-architecture, labeling]
+image:
+  src: /images/methods/site-maps.svg
+  alt: A three-level content hierarchy branching from a home node into sections and child pages, with depth and breadth marked on the axes
+  caption: Every site map is a bet about how much breadth to expose and how much depth to bury
+sources:
+  - title: "Information Architecture: For the Web and Beyond"
+    author: Louis Rosenfeld, Peter Morville & Jorge Arango
+    url: https://books.google.com/books/about/Information_Architecture.html?id=dZaJCgAAQBAJ
+    type: book
+    year: 2015
+    seminal: true
+  - title: "Information Architecture vs. Sitemaps"
+    author: Samhita Tankala, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/information-architecture-sitemaps/
+    type: article
+    year: 2023
+    seminal: false
+  - title: "Flat vs. Deep Website Hierarchies"
+    author: Kathryn Whitenton, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/flat-vs-deep-hierarchy/
+    type: article
+    year: 2013
+    seminal: false
+  - title: "Site Map Usability"
+    author: Jakob Nielsen, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/site-map-usability/
+    type: article
+    year: 2008
+    seminal: false
+---
+
+## What is it
+
+A diagram of every place content lives and how those places nest — one node per page, parent-child lines between them: the hierarchy made visible, without navigation UI or visual design.
+
+Three things share the name and aren't this: the footer "Site Map" page, the sitemap.xml file crawlers read, and information architecture itself — the whole system of organization, labelling and navigation, of which the map depicts one part.
+
+## Purpose
+
+Turns hierarchy into something a team can argue about in one view. Until it's drawn, depth and breadth get decided one page at a time by whoever ships next, and nobody notices a top task drifting four levels down. It then anchors tree-test tasks, navigation scope and redirects.
+
+## When to use
+
+- You're planning a redesign or migration and need the current structure visible before committing to a new one
+- You have card-sort clusters and need a structure from them: a top level, a depth, a home for every orphan
+- The team keeps disagreeing about where something belongs, with no shared artifact to point at
+
+## How to do it
+
+- **Start from a crawl, not memory.** The pages nobody remembered are where the problem lives, and the current-state map is what redirects get built from.
+- **Set the top level first.** Every node inherits it, so it is the most expensive decision on the map.
+- **Place the card-sort clusters, then handle the leftovers.** Orphans and outliers are the real work. Number the nodes so tickets reference the same one.
+- **Decide depth branch by branch.** Flat means long menus and blurry category boundaries, deep means more clicks and more wrong turns — see Whitenton on flat versus deep. High-traffic tasks earn shallow placement.
+- **Mark cross-links separately from parent-child lines.** A page in two branches is a polyhierarchy; drawing it twice hides the decision instead of recording it.
+
+## Example
+
+A regional insurer's crawl put a sixth of its 380 pages under Customer Service, burying "Start a claim" — the most frequent reason anyone visits — four levels down. Drawn as a hierarchy, that is the first thing you see: promote Claims, retire the dormant Policy Support pages.
+
+## Common mistakes
+
+- **Mirroring the org chart.** Departments feel correct inside the company and arbitrary outside it, because users don't know which team owns what.
+- **Drawing the navigation instead of the hierarchy.** A map holding exactly the header items is a picture of the nav bar; most structure sits below what navigation exposes.
+- **Building it from opinion and calling it validated.** A workshop map is a hypothesis: card sorting supplies its input, tree testing its evidence.
+- **Letting it go stale.** A map that no longer matches the CMS is worse than none, because people still trust it.
+
+## Limitations
+
+- **A tree can't express a structure that isn't one.** Faceted browsing, tag systems and search-first products route people laterally; parent-child lines flatter a structure the product lacks.
+- **It says nothing about findability.** A coherent hierarchy built on labels nobody recognises still fails, and only a tree test tells you which case you're in.
+- **It implies a journey most users don't take.** Sessions typically start deep, from search or a link, not at the root. The sitemap page it often spawns is barely used: 7% of participants turned to one in Nielsen's second study, down from 27%.
+
+## Tips
+
+Keep the map and the content inventory in one artifact, one node per page, so structure and content status (owner, last updated, keep/merge/kill) cannot drift apart.
+
+## Using AI
+
+**Where it helps**
+- Turning a crawl or CMS export into a first-pass nested outline, flagging orphans, duplicate titles and deep branches
+- Drafting the redirect table between current-state and future-state maps, mechanical and error-prone by hand
+
+**Where it fails**
+- Generating the structure from a product description. A model returns a tidy hierarchy that looks like the output of a card sort and a tree test, but it reflects general web conventions, not your users' grouping — and those disagreements are exactly what is worth mapping.

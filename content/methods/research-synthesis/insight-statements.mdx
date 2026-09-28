@@ -1,0 +1,111 @@
+---
+id: insight-statements
+title: Insight Statements
+aka: ["Research Insights", "Key Insights"]
+domain: research-synthesis
+alsoIn: []
+kind: method
+gives: qualitative
+effort: medium
+timeframe: days
+needs:
+  - A coded or clustered body of research rather than a pile of raw notes
+  - "Traceable evidence per claim: participant ids, quotes or session timestamps"
+  - A named decision the statements are meant to inform, so "so what" has an answer
+useCases: [analyze-findings, understand-users]
+useInstead:
+  - when: You need to name where it is worth acting rather than what you learned
+    method: opportunity-areas
+  - when: You are still looking for the pattern across the data and do not have one yet
+    method: thematic-analysis
+  - when: You want a framing device to launch ideation from a chosen user and need, not a synthesis output
+    method: pov-statements
+  - when: You want to state the job a user is trying to get done rather than a claim about what your research showed
+    method: jtbd-statements
+related:
+  before: [affinity-mapping, thematic-analysis]
+  after: [opportunity-areas, pov-statements]
+  alongside: [qualitative-coding, journey-mapping]
+sources:
+  - title: "Just Enough Research (2nd Edition)"
+    author: Erika Hall
+    url: https://abookapart.com/products/just-enough-research
+    type: book
+    year: 2019
+    seminal: true
+  - title: "Data vs. Findings vs. Insights: The Differences Explained"
+    author: Sara Paul, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/data-findings-insights-differences/
+    type: article
+    year: 2023
+    seminal: false
+  - title: "Interviewing Users: How to Uncover Compelling Insights (2nd Edition)"
+    author: Steve Portigal
+    url: https://portigal.com/Books/interviewing-users-2/
+    type: book
+    year: 2023
+    seminal: false
+image:
+  src: /images/methods/insight-statements.svg
+  alt: Three ascending rungs labelled observation, finding and insight, each carrying the same checkout example, with a right-hand column showing that only the top rung names a mechanism and can be disagreed with
+  caption: "The two tests that separate the rungs: does it say why, and could someone argue with it?"
+---
+
+## What is it
+
+A written claim explaining *why* a pattern in your research exists — precise enough to act on, and precise enough to disagree with. One or two sentences, carrying its evidence and a confidence level.
+
+## Purpose
+
+A study decays into anecdote unless somebody writes down what it meant. Insight statements are the unit that survives the deck, and writing one forces a vague team feeling into a claim explicit enough to be wrong.
+
+## When to use
+
+- You have clustered qualitative data and need to turn themes into claims a team can act on
+- A decision is imminent and stakeholders need the *why* behind a behaviour, not a tour of nine sessions
+- You are stocking a research repository and need atomic claims that outlive the project they came from
+
+## How to do it
+
+Keep three things apart; conflating them is the whole problem.
+
+- **Observation** — what you saw, session by session: "six of nine participants re-read the fee line before confirming." No interpretation.
+- **Finding** — the pattern across observations: "people hesitate at the fee total." True, and not yet useful.
+- **Insight** — why the pattern exists, put so a different action follows: the total lands after people anchored on the item price, so the fee reads as a penalty rather than a cost, and re-reading is people checking they are not being tricked.
+
+Then, per insight:
+
+- Name the mechanism or tension, not the effect. If you cannot say *because*, you have a finding.
+- Attach the evidence — ids, quotes, timestamps — so anyone can audit the claim back to data. An untraceable insight is an opinion with a citation style.
+- Mark a confidence level and what it rests on: participant count, segment spread, agreement with other data.
+- Apply the disagreement test: if a colleague who knows the domain cannot construct a plausible counter-claim, you wrote a description.
+
+## Example
+
+A subscription team studying churn expects a pricing problem. Observation: most interviewees cancelled days after an unfamiliar renewal email. Finding: notices trigger cancellation. Insight: the email lands after weeks of non-use, so it works as a usage audit rather than a bill — pointing at re-engagement, not discounting. Confidence tentative, one segment.
+
+## Common mistakes
+
+- **Relabelling a finding as an insight** — "users find checkout confusing" names no mechanism and implies no action, so everyone leaves with a different idea of what to do.
+- **Writing only comfortable insights** — if every statement confirms what the team believed, synthesis has become ratification. The valuable ones cost somebody an assumption.
+- **Dropping the evidence trail** — a claim circulated without its sessions cannot be re-checked, and gets quoted long after it stopped being true.
+- **Promoting one vivid participant** — a compelling story is a hypothesis; it becomes an insight when it recurs, or when you can say why it generalises.
+
+## Limitations
+
+- An insight is an inference, not a measurement. The mechanism you name is the best available explanation of the data, and stays a hypothesis until something tests it.
+- Explanatory power and evidence strength vary independently: the most interesting statement in a set often rests on the fewest participants, so confidence has to be written down rather than implied by tone.
+- Quality is bounded by the questions asked; synthesis cannot recover a mechanism nobody asked about.
+
+## Tips
+
+Write the statement with *because* in it, then delete the word. If the sentence stops making sense, you had a finding.
+
+## Using AI
+
+**Where it helps**
+- Drafting competing explanations for an established theme, to check against transcripts rather than adopt
+- Auditing a finished set for the restatement failure: which statements name no mechanism and imply no action
+
+**Where it fails**
+- Generating insights straight from transcripts. A model produces fluent statements that read exactly like insight, *because* clause included, since fluency is what it optimises. What it cannot supply is the part that matters: an explanation that survived the contradictory detail in the data. Ask for the observations behind anything it hands you.

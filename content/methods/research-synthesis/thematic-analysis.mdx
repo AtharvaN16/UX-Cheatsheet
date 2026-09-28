@@ -1,0 +1,108 @@
+---
+id: thematic-analysis
+title: Thematic Analysis
+aka: ["TA", "Reflexive Thematic Analysis"]
+domain: research-synthesis
+alsoIn: [qualitative-research]
+kind: method
+gives: qualitative
+effort: high
+timeframe: weeks
+needs:
+  - "Transcripts or full notes you can reread, not a summary deck"
+  - "A named variant chosen up front — reflexive, codebook and coding-reliability TA answer to different rules"
+  - "Analysis time of roughly the same order as collection time"
+  - "A written record of coding decisions and theme definitions, kept as you go"
+useCases: [analyze-findings, understand-behavior, understand-mental-models]
+useInstead:
+  - when: "The team needs to reach shared understanding in an afternoon and will act on it directly"
+    method: affinity-mapping
+  - when: "You only need segments labelled for retrieval in a repository, with no themes built on top"
+    method: qualitative-coding
+  - when: "You want a theory explaining a process, with recruitment driven by the analysis as it develops"
+    method: grounded-theory
+related:
+  before: [qualitative-coding, user-interviews]
+  after: [insight-statements, personas]
+  alongside: [affinity-mapping, triangulation]
+sources:
+  - title: "Using thematic analysis in psychology"
+    author: Virginia Braun & Victoria Clarke
+    url: "https://www2.uwe.ac.uk/services/Marketing/students/Newstudents/HAS/Using%20thematic%20analysis%20in%20psychology.pdf"
+    type: paper
+    year: 2006
+    seminal: true
+  - title: "Understanding TA"
+    author: Virginia Braun & Victoria Clarke
+    url: https://www.thematicanalysis.net/understanding-ta/
+    type: article
+    seminal: false
+  - title: "Resources for thematic analysis"
+    author: Virginia Braun & Victoria Clarke
+    url: https://www.thematicanalysis.net/resources-for-ta/
+    type: article
+    seminal: false
+  - title: "Analyze Qualitative Data: Thematic Analysis"
+    author: Maria Rosala, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/thematic-analysis/
+    type: article
+    year: 2022
+    seminal: false
+image:
+  src: /images/methods/thematic-analysis.svg
+  alt: "Three tiers showing many data extracts collapsing into fewer codes and two named themes, with the analyst's judgement marked at each step"
+  caption: "Extracts to codes to themes: the narrowing at each tier is a decision, not a rollup"
+---
+
+## What is it
+
+A systematic method for developing patterns of meaning across a qualitative dataset. Braun and Clarke's 2006 paper sets out six phases: familiarising yourself with the data, generating initial codes, searching for themes, reviewing themes, defining and naming themes, producing the report. It is the literature-backed version of what most teams do informally after interviews.
+
+## Purpose
+
+To get from a pile of transcripts to a few claims you can defend — including to the person who asks which extracts support theme two, and why you read them that way.
+
+## When to use
+
+- You need patterns across interviews, diary entries or open-text responses, not a per-participant summary
+- The finding will be challenged or funded against, so the route from data to claim has to be inspectable
+
+## How to do it
+
+- **Familiarise.** Read everything once without coding. Braun and Clarke advise writing from this phase, not at the end.
+- **Code.** Label segments across the whole corpus, coding for as many patterns as you can and keeping enough context to stay interpretable.
+- **Generate initial themes.** Cluster codes into candidate patterns of shared meaning. The 2006 paper calls this "searching for themes"; the later work renames it *generating*, on purpose.
+- **Review.** Check each candidate against its own extracts, then the whole dataset; what does not survive is split, merged or dropped.
+- **Define and name.** Write a few sentences per theme saying what it is and is not. A theme you cannot define in prose is a topic.
+- **Write up.** Build the argument around the themes, using extracts as evidence rather than decoration.
+
+## Example
+
+A team on payroll software codes 14 bookkeeper interviews. Codes like *checks the total twice*, *screenshots before submitting* and *keeps a shadow spreadsheet* collapse into one theme: bookkeepers maintain private verification because the system cannot show what changed. *Asks a colleague to re-check* sits under a second theme: approval is social, not a product state. A candidate called *frustration with the UI* is dropped in review: it is a topic the guide asked about, with no shared meaning across participants.
+
+## Common mistakes
+
+- **Writing "three themes emerged".** Braun and Clarke argue against exactly this phrasing: it is a passive account that denies the researcher's active role in identifying patterns, selecting which are of interest and reporting them; if nobody decided, nobody can be questioned.
+- **Mistaking a topic for a theme.** "Onboarding" is where data lives; a theme is a pattern of meaning that cuts across topics.
+- **Mixing variants.** Borrowing reflexive TA's language while demanding inter-rater agreement imports a standard that approach rejects.
+- **Reporting counts.** "Nine of 14 participants" reads as measurement from a sample never built to support it.
+
+## Limitations
+
+- **It is not reproducible in the way the word implies.** Two competent analysts produce different theme sets from one corpus, and reflexive TA treats that as a property of interpretation, not a defect to measure away.
+- **The label says nothing about standards.** Coding-reliability TA treats coder agreement as evidence of quality; reflexive TA rejects it. "We ran thematic analysis" leaves the reader guessing which rules applied.
+- **Sample size has no formula.** Braun and Clarke's "(Mis)conceptualising themes" argues directly against sample-size tools for TA; you cannot pre-commit to a number.
+- **It describes patterns, not mechanisms.** It will not tell you why a pattern holds or what would change it.
+
+## Tips
+
+Write the theme definition before you settle the name. Names attract agreement in a readout; a definition is what lets a colleague say "that extract does not belong here" — the only way a theme improves.
+
+## Using AI
+
+**Where it helps**
+- First-cycle coding at volume, giving a candidate code list you edit against the transcripts
+- Hunting disconfirming extracts for a theme you have defined, slow work by hand
+
+**Where it fails**
+- Generating the themes. Asked for themes, a model returns themes: fluent, shaped by the question rather than the corpus, and phrased in the passive register — "three themes emerged" — the literature was written to stop.

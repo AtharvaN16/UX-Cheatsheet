@@ -1,0 +1,105 @@
+---
+id: diary-studies
+title: Diary Studies
+aka: ["Experience Sampling", "Self-Report Logging"]
+domain: qualitative-research
+alsoIn: []
+kind: method
+gives: qualitative
+effort: high
+timeframe: weeks
+needs:
+  - "A behaviour that recurs often enough to be logged, but not so often that logging it takes over the day"
+  - "One capture channel participants already carry — SMS, a messaging bot, a mobile form"
+  - "More participants than you need, because attrition across weeks is the default"
+  - "Researcher time to read entries daily and probe while the episode is still reconstructable"
+useCases: [understand-behavior, understand-users]
+useInstead:
+  - when: "You want provocation and unfamiliar framings to feed design imagination, not a dependable record of what happened"
+    method: cultural-probes
+  - when: "You can be present while the behaviour happens, so you don't need the participant to act as your instrument"
+    method: contextual-inquiry
+  - when: "You need to know whether the experience is measurably improving release over release, not what it consists of"
+    method: longitudinal-testing
+related:
+  before: [user-interviews]
+  after: [grounded-theory, triangulation]
+  alongside: [contextual-inquiry, cultural-probes]
+sources:
+  - title: "Diary Methods: Capturing Life as it is Lived"
+    author: Niall Bolger, Angelina Davis & Eshkol Rafaeli
+    url: https://cris.biu.ac.il/en/publications/diary-methods-capturing-life-as-it-is-lived-4/
+    type: paper
+    year: 2003
+    seminal: true
+  - title: "When Participants Do the Capturing: The Role of Media in Diary Studies"
+    author: Scott Carter & Jennifer Mankoff
+    url: https://www.madpickle.net/scott/pubs/carter-diary-05.pdf
+    type: paper
+    year: 2005
+    seminal: false
+  - title: "Diary Studies: Understanding Long-Term User Behavior and Experiences"
+    author: Kim Flaherty, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/diary-studies/
+    type: article
+    year: 2024
+    seminal: false
+image:
+  src: /images/methods/diary-studies.svg
+  alt: "Three logging cadences sampled against the same week of real events — event-based entries land on each event, interval-based entries collapse a whole day into one summary, and signal-based entries land when the researcher prompts, sometimes with no event nearby"
+  caption: "One week, three cadences — what each one records and what it loses"
+---
+
+## What is it
+
+Participants log their own experience repeatedly over days or weeks, in short entries made close to the moment. You analyse the set for patterns within each person and across people. The researcher is absent by design; the participant is the instrument.
+
+## Purpose
+
+Some things only exist in the gaps between sessions: how a habit forms, where a workflow breaks on the third Tuesday. Recall across weeks is reconstructed rather than remembered; the study buys coverage of time you cannot otherwise get.
+
+## When to use
+
+- The behaviour is intermittent, spread across days, or happens somewhere you can't go
+- You need the triggers and the sequence, not the snapshot — what preceded the abandoned cart
+- Recall is the thing you distrust: mundane or slightly embarrassing behaviour is what people compress and rationalise afterwards
+
+## How to do it
+
+- **Decide the cadence first.** It fixes what the study can ever show, more than sample size does. Event-based logging fires on the behaviour, interval-based on a schedule such as end of day, signal-based when you prompt. Event-based preserves episodes; interval-based buys compliance and dissolves them into summaries.
+- **Pick the logging mode.** In Carter and Mankoff's terms, *feedback* studies have participants answer in the moment; *elicitation* studies have them capture a photo or voice note for a later interview — more accurate versus lighter to carry.
+- **Keep an entry under a minute and pilot it for two days.** Three fields beats twelve; a form that feels like homework becomes no entry at all.
+- **Read entries daily and probe the same day** — captured media is unreconstructable later without an annotation made at capture time.
+- **Close with an exit interview** built on the participant's own entries: they evidence that something happened, the interview is where you learn why.
+
+## Example
+
+An expenses app team wanted to know why receipts arrived in a flood at month end. Three weeks, event-based: twelve participants photographed each claimable purchase and noted what they did next. The delay wasn't forgetfulness — people were waiting on a cost code from a manager and batched the asking, so the app's reminders addressed a problem nobody had.
+
+## Common mistakes
+
+- **Choosing the cadence for the team's convenience.** End-of-day logging is easiest to run and destroys the episode-level detail the study was commissioned to get.
+- **Treating entry counts as a finding.** Entry frequency measures compliance and prompt design as much as behaviour.
+- **Reading the entries only at the end.** By then nobody can tell you what the ambiguous photo was — including the person who took it.
+- **Skipping the exit interview.** Entries without one are a well-timestamped mystery.
+- **Recruiting people who like the product.** Enthusiasts log diligently and are the least representative of the behaviour in question.
+
+## Limitations
+
+- **You only ever see reported behaviour.** Anything unnoticed, unmentioned or too dull to log is invisible, and the data can't tell you which of the three a gap was.
+- **Being in the study changes the behaviour.** Logging your coffee purchases makes you aware of them, so early days read differently from late ones.
+- **Compliance and resolution pull against each other.** Lowering the burden to keep people in lowers what you learn per entry.
+- **Long calendar time, thin material per participant.** Three weeks elapsed can yield less analysable substance than two site visits.
+
+## Tips
+
+Send the first prompt within an hour of onboarding and reply to entry one personally. A first entry that vanishes into a form makes every later one optional.
+
+## Using AI
+
+**Where it helps**
+- Clustering hundreds of short entries into themes and flagging within-person change over time — the volume that makes diary analysis expensive
+- Transcribing voice notes and captions into one searchable, timestamped set
+
+**Where it fails**
+- Filling the gaps. From a sparse diary, a model writes a smooth narrative across the missing days, indistinguishable from entries actually logged. The value is knowing which moments are evidenced and which absent; interpolation erases that line.

@@ -1,0 +1,105 @@
+---
+id: journey-mapping
+title: Journey Mapping
+aka: ["Customer Journey Map", "User Journey Map"]
+domain: research-synthesis
+alsoIn: [service-design]
+kind: method
+gives: mixed
+effort: medium
+timeframe: weeks
+needs:
+  - A named actor and a single scenario, agreed before anything is drawn
+  - Research you can point at per cell — transcripts, diary entries or observation notes
+  - "A stakeholder with authority to accept ownership of pain points, or the map stops at description"
+useCases: [analyze-findings, identify-problems, understand-users]
+useInstead:
+  - when: You don't yet know whether your product belongs in this experience, so mapping against your own touchpoints would prejudge the answer
+    method: experience-mapping
+  - when: You need the branching route through an interface rather than the experience over time
+    method: user-flows
+  - when: You only need one persona's mindset at a single moment, with no chronology
+    method: empathy-maps
+related:
+  before: [user-interviews, contextual-inquiry, thematic-analysis, personas]
+  after: [opportunity-areas, hmw-questions, story-mapping]
+  alongside: [experience-mapping, empathy-maps, insight-statements]
+image:
+  src: /images/methods/journey-mapping.svg
+  alt: Five stages across the top with lanes beneath for actions, thoughts, emotion and touchpoints, an emotion curve dipping at the set-up stage, and that pain point assigned to a named owner
+  caption: One actor, one scenario, and every pain point tied to somebody who can act on it
+sources:
+  - title: "Journey Mapping 101"
+    author: Sarah Gibbons, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/journey-mapping-101/
+    type: article
+    year: 2018
+    seminal: true
+  - title: "When and How to Create Customer Journey Maps"
+    author: Kate Kaplan, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/customer-journey-mapping/
+    type: article
+    year: 2016
+    seminal: false
+  - title: "Mapping Experiences: A Guide to Creating Value through Journeys, Blueprints and Diagrams"
+    author: James Kalbach
+    url: https://archive.org/details/mappingexperienc0000kalb
+    type: book
+    year: 2016
+    seminal: false
+---
+
+## What is it
+
+A chronological visualisation of one actor's path toward one goal, built from research. Stages run across the top; lanes beneath carry what the person does, thinks and feels, which touchpoints they hit, and where it hurts. The standard skeleton, from Nielsen Norman Group: actor, scenario, phases, actions and emotions, opportunities.
+
+Two boundaries. An **experience map** drops your product from the frame entirely; a journey map assumes your organisation is already in it. And neither is a flow — a flow is a route through an interface, a journey is an experience over time, including the stretches where your product is closed.
+
+## Purpose
+
+Turns scattered findings into one artefact a cross-functional room can argue with. The work is as political as analytical: the customer's sequence laid beside your org chart shows that the worst moment sits in the gap between two teams who each believe they own half of it.
+
+## When to use
+
+- After research, when teams have each read a different report
+- When a quantitative anomaly needs a narrative — a churn spike tells you where, not what happened
+- When ownership of stages is contested and the map is how you settle it
+
+## How to do it
+
+- Fix the actor and scenario in one sentence first. Two actors means two maps.
+- Set stages from what participants did, not from your funnel; funnel stages import your model and hide everything between them.
+- Source every cell to a quote, an observation or a log event. An unsourced cell is an assumption; mark it as one on the artefact.
+- Plot emotion from what people said and showed — the curve is read first and invented most often.
+- Validate against a fresh sample, then give every pain point one owner and a decision date. That last step is what separates a map from a poster.
+
+## Example
+
+A B2B analytics tool mapped "an ops lead brings their team onto a paid plan". The low point sat at data import, not pricing: a failed upload reported success, and the user found out days later, mid-presentation. Nobody owned it — the importer was Platform's, the confirmation copy Growth's.
+
+## Common mistakes
+
+- **Building it in a workshop from what the team already believes** — the result is a diagram of the room's assumptions, indistinguishable at a glance from a researched one. That resemblance is the danger: it gets cited for years.
+- **Averaging several personas into one journey** — a composite path belongs to nobody, and its curve smooths away the peaks you needed.
+- **Starting the map at your product** — journeys begin before awareness and continue after churn; cropping to your touchpoints redraws your assumptions.
+- **Treating the render as the deliverable** — the insight is in the synthesis; outsource the making and you keep the poster, not the argument.
+
+## Limitations
+
+- **One actor, one scenario.** The scoping that makes it readable makes it silent about everyone else; a real customer base needs several maps that contradict each other.
+- **Emotion is interpreted, not measured.** Two researchers draw the curve differently from the same transcripts, and the artefact shows no sign of it.
+- **It goes stale silently.** Nothing in a map breaks when the product ships, so an old journey keeps looking authoritative.
+- **It says nothing about delivery.** The staff and backstage systems behind each touchpoint need a service blueprint.
+
+## Tips
+
+Print the curve unlabelled and ask a stakeholder to narrate it. If they can't, the stages are wrong or the curve carries no evidence.
+
+## Using AI
+
+**Where it helps**
+- Clustering coded excerpts into candidate stages for a researcher to rearrange against the transcripts
+- Auditing a finished map for cells with no linked evidence — the pass teams skip
+
+**Where it fails**
+- Generating the map from a product description. It returns the conventional discover-try-buy-use arc with a plausible emotion curve — exactly the assumption-based map the method exists to replace, and fluent enough to be harder to challenge than a colleague's guess.

@@ -1,0 +1,117 @@
+---
+id: mixed-methods-design
+title: Mixed-Methods Design
+aka: ["Mixed Methods Research", "Multi-Method Research Design"]
+domain: qualitative-research
+alsoIn: [quantitative-research]
+kind: framework
+gives: mixed
+effort: high
+timeframe: weeks
+needs:
+  - "One research question that both strands answer, written down before either strand is designed"
+  - "A decision recorded up front about which strand leads and which informs it"
+  - "A named integration point — the analysis step where the two datasets actually meet (a joint display, a merged matrix, a follow-up sampling frame)"
+  - "Enough calendar time for a sequential design, where the second strand cannot be specified until the first has been analysed"
+  - "Someone on the team who can credibly run both strands, or two people who will sit in each other's analysis"
+useCases: [validate-research, analyze-findings, understand-behavior]
+useInstead:
+  - when: "You already have a finding and want to know whether it holds up across independent sources, rather than structure two methods to do different jobs"
+    method: triangulation
+  - when: "You need the reason behind a number and have no appetite for a formal integration plan — a handful of interviews with people in that segment will get you there"
+    method: user-interviews
+  - when: "The question is about one interface and a moderated session gives you behaviour and reasoning in the same pass"
+    method: usability-testing
+related:
+  before: [assumption-mapping]
+  after: [triangulation]
+  alongside: [user-interviews, benchmark-testing, a-b-testing]
+sources:
+  - title: "Designing and Conducting Mixed Methods Research (3rd Edition)"
+    author: John W. Creswell & Vicki L. Plano Clark
+    url: https://books.google.com/books/about/Designing_and_Conducting_Mixed_Methods_R.html?id=eTwmDwAAQBAJ
+    type: book
+    year: 2017
+    seminal: true
+  - title: "Achieving Integration in Mixed Methods Designs — Principles and Practices"
+    author: Michael D. Fetters, Leslie A. Curry & John W. Creswell
+    url: https://explore.openaire.eu/search/publication?pid=10.1111%2F1475-6773.12117
+    type: paper
+    year: 2013
+    seminal: false
+  - title: "Mixed-Methods Research: Combining Qualitative and Quantitative Data"
+    author: Rachel Banawa, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/mixed-methods-research/
+    type: article
+    year: 2025
+    seminal: false
+image:
+  src: /images/methods/mixed-methods-design.svg
+  alt: "Three timelines comparing mixed-methods designs — convergent parallel runs a quantitative and a qualitative strand at the same time and merges them, explanatory sequential runs quantitative first then qualitative, exploratory sequential runs qualitative first then quantitative"
+  caption: "Sequence and priority are the design decision, not whether to use both kinds of data."
+---
+
+## What is it
+
+A quantitative and a qualitative strand planned together to answer one question, with an explicit decision about which leads and where the datasets meet. The plan for that meeting *is* the design: a survey and some interviews run in parallel and never integrated is two studies, not mixed methods.
+
+## Purpose
+
+To give each strand a different job. Quant establishes prevalence and magnitude; qual establishes mechanism, meaning and vocabulary. The design makes the handoff deliberate, so the second strand is scoped *from* the first's results.
+
+## When to use
+
+- A metric moved and nobody can explain it.
+- You are about to measure something you cannot yet name, so there is no instrument to write.
+- A decision needs both a size and a reason.
+- Different stakeholders discount different evidence and the case must survive both.
+
+## Structure
+
+Creswell and Plano Clark's three core designs differ only in sequence and priority.
+
+### Convergent parallel
+
+Both strands run at once, then merge in a joint display setting each theme beside the number it speaks to. Equal priority; viable only when both can be specified up front.
+
+### Explanatory sequential
+
+Quant leads. You find a surprising result, then sample qualitatively *from inside it* — participants chosen from the first strand's data, which is what makes it sequential rather than two parallel studies. A fresh convenience sample throws the mechanism away.
+
+### Exploratory sequential
+
+Qual leads. You discover the constructs, categories and wording, then build an instrument from them and measure how common they are. The qual output is an *input* to the quant design.
+
+## How to use
+
+- Write the single question both strands serve. If it splits cleanly in two, you have two studies.
+- Choose sequence and priority explicitly; it is the only decision here that changes what you learn.
+- Name the integration point before fieldwork — joint display, sampling frame, coded matrix. Fetters, Curry and Creswell place integration at the design, methods and reporting levels.
+- Decide in advance what a disagreement means; divergence is a result, and teams without a rule believe whichever strand suits them.
+
+## Example
+
+An invoicing product saw trial-to-paid conversion fall after a signup redesign while every funnel step held or improved (figures illustrative). Explanatory sequential: quant defined the population — trials that finished onboarding then went dormant — and nine interviews drawn *only* from that cohort found "invite your accountant" had moved behind a settings menu, and the accountant usually authorises the purchase. Integration artefact: a joint display pairing each dormant segment with its stated reason.
+
+## Common mistakes
+
+- **Two parallel studies called mixed methods.** Analysed separately, written up in sequence, nothing integrated — nothing gained over either alone.
+- **Sequential in name, parallel in fact.** The second strand was recruited before the first was analysed, so its sample cannot speak to the result.
+- **No protocol for disagreement.** When the survey says satisfied and the interviews say frustrated, an unprepared team quietly drops one.
+- **Treating the qual strand as a small quant strand.** Nine interviews do not establish prevalence, however carefully you count who said what.
+
+## Limitations
+
+- **Cost is additive; the inference is not.** Integration can still produce nothing neither strand had alone.
+- **Sequential designs serialise the schedule.** The second strand cannot be briefed until the first is analysed.
+- **Integration is a judgement call.** No statistic tells you how far a theme should move your reading of a number.
+- **It cannot rescue a weak strand.** A badly worded survey integrated with good interviews yields a well-structured wrong answer.
+
+## Using AI
+
+**Where it helps**
+- Drafting the joint display that puts each theme next to the metric it claims to explain.
+- Turning an exploratory strand's codes into candidate survey items, flagging the double-barrelled ones.
+
+**Where it fails**
+- Performing the integration. Asked to reconcile themes with metrics, a model produces a fluent narrative in which they agree — smoothing the divergence this design exists to expose, a consensus manufactured from two summaries.

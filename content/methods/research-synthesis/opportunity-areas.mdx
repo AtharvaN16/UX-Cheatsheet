@@ -1,0 +1,99 @@
+---
+id: opportunity-areas
+title: Opportunity Areas
+aka: ["Opportunity Framing", "Problem Areas"]
+domain: research-synthesis
+alsoIn: []
+kind: method
+gives: qualitative
+effort: medium
+timeframe: days
+needs:
+  - A set of evidenced insights, so each area can be traced to data rather than to a preference
+  - "A stated outcome the areas are meant to serve: without one, everything looks worth doing"
+  - Agreement that no solution will be named in this session
+useCases: [discover-opportunities, prioritize-decisions]
+useInstead:
+  - when: You need the structured, continuously updated map from outcome through opportunities to solutions and assumption tests
+    method: opportunity-solution-tree
+  - when: You need to explain what the research meant rather than name where to act on it
+    method: insight-statements
+  - when: You have already picked an area and want a generative prompt to open up solutions
+    method: hmw-questions
+  - when: The areas are already named and the open question is which one goes first
+    method: impact-effort-matrix
+related:
+  before: [insight-statements, affinity-mapping]
+  after: [opportunity-solution-tree, hmw-questions, rice]
+  alongside: [jtbd-statements, kano-model]
+sources:
+  - title: "Continuous Discovery Habits: Discover Products that Create Customer Value and Business Value"
+    author: Teresa Torres
+    url: https://www.producttalk.org/2021/05/continuous-discovery-habits/
+    type: book
+    year: 2021
+    seminal: true
+  - title: "Prioritize Opportunities, Not Solutions"
+    author: Teresa Torres
+    url: https://www.producttalk.org/prioritize-opportunities/
+    type: article
+    year: 2019
+    seminal: false
+  - title: "Assessing Opportunities"
+    author: Product Talk
+    url: https://www.producttalk.org/glossary-discovery-assessing-opportunities/
+    type: article
+    year: 2025
+    seminal: false
+---
+## What is it
+
+The named regions of the user's problem space where a team has decided it is worth working — stated as unmet needs, not things to build. They sit between synthesis and solutioning: after you know what is true, before you commit to what to make.
+
+## Purpose
+
+Where to work and what to build are two decisions, and collapsing them throws away the option space. "Make the fee structure predictable before checkout" admits a calculator, a simpler fee model, or an earlier total. "Add a fee calculator" admits one.
+
+## When to use
+
+- Synthesis has produced insights and somebody is about to turn them into tickets
+- Several features compete for one slot and you need to know whether they address the same need
+- A quarter is being planned and the honest input is four places worth working, not a backlog
+
+## How to do it
+
+- Start from insights, not ideas — each area should trace to evidence the friction is real.
+- Write it in words a user could recognise, at the grain they feel it. "Checkout" is a screen; "I never know what I will actually pay until the last step, so I stop" is a moment with a cause.
+- State what would have to be different for the area to count as addressed, in user terms. That is what stops it sliding back into a feature.
+- Size and compare them with an existing prioritisation method rather than inventing a score: an impact/effort matrix for a fast read, RICE or ICE when the ranking must be defended, the Kano model for the kind of satisfaction on offer.
+- For the rigorous form — an outcome at the root, a branching opportunity space, solutions and assumption tests below — graduate to an opportunity solution tree; a flat list is the lightweight version.
+
+## Example
+
+A payments team synthesising abandoned baskets names three areas: the final total is unpredictable; it is unclear which saved card gets charged; people who leave have no route back. The team arrived wanting a fee calculator — which addresses only the first, and now competes with showing the total earlier and with dropping the fee.
+
+## Common mistakes
+
+- **Writing a feature and calling it an area** — "notifications" is a solution with the problem sanded off: no visible evidence, and no way to tell what would count as solving it.
+- **Naming one area and moving on** — the value is comparative. One area is a decision already taken, presented as a discovery.
+- **Areas nobody can trace to research** — an unevidenced area is prioritised with the same confidence as the evidenced ones beside it.
+- **Sizing by how loud the complaint was** — frequency in your sample is not frequency in your population.
+
+## Limitations
+
+- **This is where solutions get laundered.** The commonest real use of the phrase is retrofitting problem-space language onto something the team already wanted to build — a document that looks like discovery and functions as justification. The tell: only one solution ever fits the area.
+- **Granularity is arbitrary and consequential.** The same evidence supports one broad area or six narrow ones, and that choice pre-decides how the work gets scoped and staffed.
+- **An area carries no value of its own.** That somewhere is worth working says nothing about its worth against the others; that needs a prioritisation method and a business case the areas cannot supply.
+
+## Tips
+
+Ask whether a competitor could address this area in a way you would not have thought of. If not, you wrote your own solution in problem-space grammar.
+
+## Using AI
+
+**Where it helps**
+- Rewriting feature-shaped statements into problem-space phrasing, then flagging those that still admit one solution
+- Checking a set for overlap, and for insights that no area covers
+
+**Where it fails**
+- Proposing the areas themselves from a product description or a persona. The output is a tidy list of the industry's generic problems, and reads as more complete than research-derived areas precisely because nothing in it is specific enough to be missing.

@@ -1,0 +1,97 @@
+---
+id: content-inventory
+title: Content Inventory
+aka: ["Content Audit"]
+domain: ia-structure
+alsoIn: []
+kind: method
+gives: mixed
+effort: high
+timeframe: weeks
+needs:
+  - Access to every place content actually lives — CMS, help centre, PDFs, in-product copy
+  - A named owner for the spreadsheet, and someone who can say who owns each page
+  - A decision on grain — page-level or asset-level — made before anyone starts typing
+useCases: [plan-work, identify-problems]
+useInstead:
+  - when: You need to know how users would group content, not what content exists
+    method: card-sorting
+  - when: You already know what exists and need to document the structure it should take
+    method: site-maps
+related:
+  after: [card-sorting, taxonomy, site-maps]
+  alongside: [information-architecture]
+sources:
+  - title: "Doing a Content Inventory (Or, A Mind-Numbingly Detailed Odyssey Through Your Web Site)"
+    author: Jeffrey Veen
+    url: https://veen.com/jeff/archives/content-inventory.html
+    type: article
+    year: 2002
+    seminal: true
+  - title: "Content Inventory and Auditing 101"
+    author: Anna Kaley, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/content-audits/
+    type: article
+    year: 2020
+    seminal: false
+  - title: "Content Strategy for the Web"
+    author: Kristina Halvorson
+    url: https://archive.org/details/contentstrategyf0000halv
+    type: book
+    year: 2010
+    seminal: false
+---
+
+## What is it
+
+A row-per-item spreadsheet of every piece of content you have: what it is, where it lives, who owns it, when it last changed. An *inventory* records what exists; an *audit* adds the judgment — keep, revise, merge, kill. Do both in one sheet.
+
+## Purpose
+
+Replaces everyone's partial memory with one enumerated list. You cannot card-sort content you haven't listed, or argue about cuts without a row to point at. Veen's claim: whoever builds it becomes the only person who knows how the whole thing fits together.
+
+## When to use
+
+- Before a redesign, replatform or CMS migration, where count and formats set the scope
+- Before card-sorting or a taxonomy, to get the item set
+- When nobody can say how many pages exist within an order of magnitude
+- When content quality is the suspected problem and every complaint is anecdotal
+
+## How to do it
+
+- **Decide the grain first.** Page-level rows suffice for structural work; asset-level rows are needed for migrations. Mixing the two mid-sheet is how an inventory becomes unusable.
+- **Fix the columns before collecting.** Veen's set holds: link ID, title, URL, document type, controlled-vocabulary keywords, owner; NN/g adds format, dates and metadata. Add an ROT flag — redundant, outdated, trivial.
+- **Crawl, then walk it by hand.** A sitemap.xml or CMS export gets the URLs. Hunt what a crawler can't see: help centre, PDFs, email templates, in-product copy.
+- **Add audit columns in a second pass**, once the list is stable: accuracy, traffic, a keep/revise/merge/remove call and its reason. Separating the passes stops people redefining "keep" mid-discovery.
+- **Sample-verify 5% of rows, then name an owner and an update trigger**, or the sheet is stale in a quarter.
+
+## Example
+
+A university department site was assumed to hold "maybe 300 pages". A crawl plus a sweep of faculty subdirectories found 2,100 URLs — 640 for courses that no longer ran, 180 near-duplicate admissions pages from four offices. "Redesign the site" became "retire 820, consolidate 180 into 12, card-sort the rest".
+
+## Common mistakes
+
+- **Starting without agreed columns**, so three people fill in "type" three ways and the sheet can't be filtered. Columns are a schema; changing them means re-doing rows.
+- **Stopping at the count**, which gives you breadth and nothing about quality. Delivering it after the new IA is drawn fails in reverse: a checklist for a structure it should have informed.
+- **Letting the crawler be the whole method.** It finds what's linked and public; orphaned pages, gated content and in-product copy are invisible, and disproportionately broken.
+- **Delegating it as a junior task.** The knowledge from walking every page is most of the value, and it leaves with the contractor.
+
+## Limitations
+
+- **A snapshot with a short half-life.** Any site with active publishing diverges from the sheet the day you stop.
+- **It tells you what exists, never what's missing.** Gaps surface only against user tasks or a competitor's coverage.
+- **Quality columns are judgment, not measurement.** Without a rubric and a calibration pass, two auditors recommend differently on the same page.
+- **Traffic biases the cut toward findable content.** A page with no visits may be worthless, or just buried by the architecture you're about to fix.
+
+## Tips
+
+Force one of keep / revise / merge / remove onto every row, with a *reason*. That converts an inventory into a decision document, and the reasons survive the meeting where a stakeholder defends their page.
+
+## Using AI
+
+**Where it helps**
+- Normalizing a messy crawl or CMS export into consistent columns.
+- Clustering near-duplicate pages and drafting per-page summaries, so a reviewer triages from the sheet rather than 2,000 URLs.
+
+**Where it fails**
+- Producing the audit recommendations. A model fills a keep/revise/remove column for every row and it looks like a completed audit — but it cannot know whether a page is current, who depends on it, or which of two duplicates is maintained. A recommendation on a page nobody opened is worse than an empty cell.

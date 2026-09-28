@@ -1,0 +1,93 @@
+---
+id: jtbd-statements
+title: JTBD Statements
+aka: ["Job Stories", "Job Statements"]
+domain: research-synthesis
+alsoIn: []
+kind: framework
+gives: qualitative
+effort: low
+timeframe: hours
+needs:
+  - "Interview evidence with real triggering situations in it, not a workshop's assumptions"
+  - "A decision on which tradition you are writing in (job story or outcome-driven) before anyone starts drafting"
+useCases: [discover-needs, define-value]
+useInstead:
+  - when: You need the theory of why customers hire and fire solutions rather than the wording of the statement
+    method: jobs-to-be-done
+  - when: You are framing one person's need and its emotional weight rather than a recurring situational job
+    method: pov-statements
+related:
+  before: [jobs-to-be-done, insight-statements]
+  after: [hmw-questions, story-mapping]
+  alongside: [pov-statements, opportunity-areas]
+sources:
+  - title: "Designing Features Using Job Stories"
+    author: Alan Klement
+    url: https://www.intercom.com/blog/using-job-stories-design-features-ui-ux/
+    type: article
+    year: 2013
+    seminal: true
+  - title: "Turn Customer Input into Innovation"
+    author: Anthony W. Ulwick
+    url: https://hbr.org/2002/01/turn-customer-input-into-innovation
+    type: article
+    year: 2002
+    seminal: true
+  - title: "Jobs to Be Done (JTBD): The Original Framework"
+    author: Anthony W. Ulwick, Strategyn
+    url: https://strategyn.com/jobs-to-be-done-template/
+    type: article
+    seminal: false
+---
+
+## What is it
+
+Two live templates for writing a job down so a team can build against it. The **job story** format — "When [situation], I want to [motivation], so I can [expected outcome]" — was popularised by Alan Klement with Intercom in 2013. Ulwick's **outcome-driven job statement** is a verb, an object of control and a contextual clarifier. Jobs theory explains why either works; this is about the sentence.
+
+## Purpose
+
+The statement is what survives the research. Transcripts get archived; the sentence travels into briefs and backlogs, read by people who never met a participant. Name a solution in it and the design space closes before anyone opens it; leave out the situation and nobody knows when the need fires.
+
+## When to use
+
+- You have interview evidence and need a durable form of the need
+- You are replacing persona-shaped user stories — "as a busy manager, I want…" — with something anchored in circumstance, not identity
+- You need the needs stated so they can be scored and ranked, which is why Ulwick's format exists
+
+## Structure
+
+- **Job story — situation first.** "When an important new customer signs up, I want to be notified, so I can start a conversation with them." No persona, no feature: how the notification arrives is a design decision, not the job.
+- **Outcome-driven statement — measurable.** Verb, object, clarifier, no adjectives: "get breakfast while commuting to work." Its desired-outcome statements add a metric and a direction — "minimize the time it takes to identify the correct drill bit size" — so each can be rated for importance and satisfaction.
+- **The two disagree; don't blend them.** The job story is a narrative about progress that resists decomposition; Ulwick's is a functional job broken into measurables. Mixed, you get a list nobody can empathise with or survey.
+
+## How to use
+
+- Take the situation clause from a transcript. A real trigger — "the invoice bounced back a second time" — is what makes it actionable.
+- Write the motivation as progress, not interface: "I want to know the payment cleared", not "I want a green badge".
+- Test stability: if it reads as nonsense against the technology of fifteen years ago, it names a solution. A job outlives whatever serves it.
+- Make the outcome clause say what the motivation makes possible, not the motivation again.
+
+## Example
+
+A freelance invoicing tool's backlog read "as a freelancer, I want payment reminders so I can get paid faster." From the transcripts: "When a client is two weeks past due and I still need them next month, I want to chase the invoice without sounding aggressive, so I can be paid without losing the client." That last clause moved the team from a bigger *Send reminder* button to editable reminder tone.
+
+## Common mistakes
+
+- **A user story with new punctuation** — "When I log in, I want to see my dashboard, so I can see my dashboard." The outcome restates the motivation and the situation is a screen, not a circumstance.
+- **A solution in the motivation** — "I want to filter by tag" is a feature; the job is whatever finding the right thing quickly serves.
+- **Adjectives in the job statement** — "quickly", "easily", "reliably" belong in the desired outcomes, not the job.
+
+## Limitations
+
+- **It formats evidence; it produces none.** A job story written in a workshop is a well-formed guess, and both templates are fluent enough that it sails through review.
+- **Neither format prioritises.** Ulwick's ranks needs only after a separate survey; job stories do not rank at all.
+
+## Using AI
+
+**Where it helps**
+- Redrafting persona-shaped user stories as job stories, flagging any with no situation to draw on
+- Checking a batch for named solutions, adjectives, and restated outcomes
+
+**Where it fails**
+- Inventing the situation clause. It can only come from something that happened to somebody; a model supplies a fluent, average trigger no participant described — a statement that reads correct and points nowhere.

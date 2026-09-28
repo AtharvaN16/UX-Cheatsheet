@@ -1,0 +1,107 @@
+---
+id: participatory-design
+title: Participatory Design
+aka: ["Cooperative Design", "Scandinavian Design Tradition"]
+domain: qualitative-research
+alsoIn: []
+kind: concept
+gives: conceptual
+effort: high
+timeframe: months
+needs:
+  - A named list of decisions participants are allowed to change, agreed by whoever owns them
+  - Sponsorship from someone senior enough to be bound by those decisions
+  - "Access to the affected group, not only the buying group: the people who will use the thing daily"
+  - Budget to pay participants for their time as expert contributors
+useCases: [understand-users, discover-needs]
+useInstead:
+  - when: You need a concrete facilitated session next month with materials and an agenda, not a change in who holds authority over the project
+    method: co-design-workshops
+  - when: You need to learn how people work and have no mandate or intention to share design decisions with them
+    method: contextual-inquiry
+  - when: The question is what people's practice actually looks like over time rather than who gets to shape it
+    method: ethnography
+related:
+  before: [contextual-inquiry, ethnography]
+  after: [co-design-workshops]
+  alongside: [cultural-probes]
+sources:
+  - title: "Work-Oriented Design of Computer Artifacts"
+    author: Pelle Ehn
+    url: https://openlibrary.org/works/OL6397424W
+    type: book
+    year: 1988
+    seminal: true
+  - title: "Participatory Design: Principles and Practices"
+    author: Douglas Schuler & Aki Namioka (eds.)
+    url: https://www.routledge.com/Participatory-Design-Principles-and-Practices/Schuler-Namioka/p/book/9780805809510
+    type: book
+    year: 1993
+    seminal: false
+  - title: "A Ladder of Citizen Participation"
+    author: Sherry R. Arnstein
+    url: https://lithgow-schmidt.dk/sherry-arnstein/ladder-of-citizen-participation.html
+    type: paper
+    year: 1969
+    seminal: false
+  - title: "Routledge International Handbook of Participatory Design"
+    author: Jesper Simonsen & Toni Robertson (eds.)
+    url: https://www.routledge.com/Routledge-International-Handbook-of-Participatory-Design/Simonsen-Robertson/p/book/9780415720212
+    type: book
+    year: 2013
+    seminal: false
+image:
+  src: /images/methods/participatory-design.svg
+  alt: A five-rung ladder rising from decided elsewhere through informing and consulting to co-deciding and participant control, bracketed into non-participation at the bottom, tokenism in the middle and shared power at the top
+  caption: "After Arnstein (1969): the rung is set by what participants can veto, not by how collaborative the room feels"
+---
+
+## What is it
+
+A commitment about who decides, not a session you book. People who will live with a system have a standing right to shape it, and adopting that changes a project's governance. It comes out of 1970s Scandinavian workplace democracy: Ehn and Kyng's UTOPIA project put typographers' union representatives on the team designing the tools that would reshape their trade.
+
+## Why it matters
+
+It makes two claims, and they come apart. The *political* claim: people affected by a change should hold power over it. The *epistemic* claim: tacit knowledge of the work — the reason the official process is abandoned on Fridays — lives in the practitioner and degrades when relayed through a researcher's notes.
+
+Teams routinely accept the second and decline the first, and that gap is where participation theatre lives: materials, a warm session, no transfer of authority.
+
+## Key ideas
+
+- **Mutual learning.** Designers learn the work; participants learn what the technology can and cannot do. Hence the tradition's mock-ups and props rather than specs — nobody participates in wireframes and story points.
+- **Participation is a ladder, not a switch.** Arnstein puts informing and consultation on the tokenism rungs, partnership, delegated power and citizen control on the rungs above. Your rung is set by what participants can *veto*, not by how collaborative the room feels.
+- **The affected group is wider than the user.** Anyone whose work, pay, autonomy or safety changes has standing — including those the system makes redundant.
+
+## Example
+
+A logistics company replacing the paper run sheet drivers fill in at each drop. Consultative: shadow drivers, run a feedback session, ship — their point that the sheet doubles as evidence in disputed-delivery claims dies in the backlog because nobody at the scope cut knew what it was for. Participatory: two drivers elected by their depot hold a written veto over proof of delivery, and the same fact becomes a constraint nobody can drop. Authority, not technique.
+
+## Application
+
+- Before recruiting anyone, write the list of decisions participants can change and get whoever owns each to sign it. Empty list, no participation — call it research.
+- Get participation in before the choices that foreclose everything else: platform, data model, business model, buyer.
+
+## Limitations
+
+- **It cannot manufacture authority you don't have.** A designer without sponsorship can run every technique in the canon and still deliver tokenism: the rung is set by the org chart, not the facilitation.
+- **No tie-breaker for real conflicts of interest.** When management wants throughput and workers want predictable hours, participation surfaces the conflict and hands it back unresolved. Scandinavian practice had unions and labour law; a product team has neither.
+- **Representation is unsolved.** Participants are volunteers, and co-deciding a system that may cut your own hours is a heavier ask than an interview: the people it would cut hardest decline most often.
+
+## Common misconceptions
+
+- **"We ran a co-design workshop, so the project is participatory."** The workshop is a format. If the team is free to ignore the outputs, or the session came after the platform was chosen, the output is decoration and the rung is tokenism.
+- **"Users design the product."** Designers still do the design work, without sole authority over what it is for.
+- **"A nicer name for user research."** Research extracts knowledge and leaves the decision where it was; this moves it. The techniques overlap almost entirely, hence the confusion.
+
+## Tips
+
+The fastest honesty test on a project claiming to be participatory: name one decision reversed because participants said so. If nobody can, it is consultation, whatever the deck calls it.
+
+## Using AI
+
+**Where it helps**
+- Reading a brief against the delivery plan to flag decisions already locked, so the list of changeable decisions is honest.
+- Keeping participants' wording attached to a requirement as it travels into tickets, so the reason a constraint exists outlives whoever heard it.
+
+**Where it fails**
+- Simulated stakeholder panels. A model produces a plausible transcript of nurses discussing your design: the shape of consent without anyone having consented. The claim is about power, and no model transfers any.

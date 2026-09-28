@@ -1,0 +1,105 @@
+---
+id: grounded-theory
+title: Grounded Theory
+aka: ["GT", "Constructivist Grounded Theory"]
+domain: qualitative-research
+alsoIn: []
+kind: concept
+gives: qualitative
+effort: high
+timeframe: months
+needs:
+  - "A question about a social or behavioural process, not about whether a design works"
+  - "Ongoing access to participants, because who you recruit next is decided mid-study by the analysis"
+  - "A coding and memo trail kept for the whole study — the record of how categories formed is part of the evidence"
+  - "An agreed school (Glaserian, Straussian or constructivist) and someone who has run a study in it"
+useCases: [understand-behavior, analyze-findings, understand-mental-models]
+useInstead:
+  - when: "You want the recurring patterns across a set of interviews, not a new theory. Code inductively for themes and stop — thematic analysis is the honest name for that work, and it does not commit you to theoretical sampling"
+    method: thematic-analysis
+  - when: "Your question is about the texture of a setting, its artefacts and its culture rather than about explaining one process"
+    method: ethnography
+  - when: "A decision lands this quarter. Grounded theory stops at saturation, which is a property of the categories and not a date you can commit to"
+    method: contextual-inquiry
+related:
+  before: [user-interviews, observation]
+  after: []
+  alongside: [ethnography, triangulation]
+sources:
+  - title: "The Discovery of Grounded Theory: Strategies for Qualitative Research"
+    author: Barney G. Glaser & Anselm L. Strauss
+    url: https://archive.org/details/discoveryofgroun00glas
+    type: book
+    year: 1967
+    seminal: true
+  - title: "Basics of Qualitative Research: Techniques and Procedures for Developing Grounded Theory (2nd Edition)"
+    author: Anselm Strauss & Juliet M. Corbin
+    url: https://books.google.com/books/about/Basics_of_Qualitative_Research.html?id=wTwYUnHYsmMC
+    type: book
+    year: 1998
+    seminal: false
+  - title: "Constructing Grounded Theory: A Practical Guide through Qualitative Analysis"
+    author: Kathy Charmaz
+    url: https://books.google.com/books/about/Constructing_Grounded_Theory.html?id=l4lgzHLy28gC
+    type: book
+    year: 2006
+    seminal: false
+  - title: "Analyze Qualitative Data: Thematic Analysis"
+    author: Maria Rosala, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/thematic-analysis/
+    type: article
+    year: 2022
+    seminal: false
+---
+
+## What is it
+
+A methodology for *generating* a theory from data rather than testing one or summarising what people said: you collect a little, analyse immediately, and let what emerged decide who you talk to next. The output explains a process, not a themed list.
+
+## Why it matters
+
+It is the most misused term in UX research. "We did grounded theory" nearly always means "we read our notes and found themes". That costs twice: it claims a rigour the work did not have, and it hides what grounded theory really offers — recruitment controlled by the analysis rather than the brief.
+
+## Key ideas
+
+- **Theoretical sampling** — who you recruit next fills gaps in the emerging categories, not fixed in advance. Applied work quietly drops this, and dropping it turns grounded theory into thematic analysis with a better-sounding name.
+- **Constant comparison** — every new incident compared against earlier ones and against the codes, continuously, not at the end.
+- **Coding upward** — incidents to codes, codes to categories, categories to one *core category* accounting for most of the variation.
+- **Memo-writing** — analytic notes written while coding. Memos, not transcripts, are what the theory is written from.
+- **Theoretical saturation** — you stop when more data stops altering the categories; a property of the categories, never a participant count.
+- **Three schools, not one method** — Glaser held to emergence and warned against forcing data into a template; Strauss and Corbin added procedural scaffolding (axial coding, the coding paradigm); Charmaz treats theory as co-constructed rather than found in the data. The disagreements are substantive — name your school.
+
+## Example
+
+A team on a freight-brokerage tool runs four dispatcher interviews and gets an obvious theme: distrust of auto-assignment. Under theoretical sampling that theme picks the next participants — a dispatcher disciplined after a bad auto-assignment, a night-shift dispatcher with nobody to escalate to. Comparison yields the core category: dispatchers absorb blame for decisions the system will not explain. Thematic analysis would have stopped at "distrust of automation".
+
+## Application
+
+- Scope it as a programme, not a study: months, recruitment open, one school not three.
+- Keep memos and coding decisions auditable; they are the only evidence the theory came from data.
+- The honest partial adoption in product work is to borrow constant comparison and memo-writing, then call the result thematic analysis.
+
+## Limitations
+
+- **Saturation is claimed, never proven** — it holds only for categories you happened to build, and one nobody built cannot saturate.
+- **It is incompatible with fixed scope.** Panels, procurement and sprint planning want a participant count up front; theoretical sampling refuses to give one.
+- **The core category is a judgement** — two competent analysts on the same corpus can centre different processes and both defend it.
+- **The unprimed stance is a fiction in applied work.** Glaserian GT asks you to delay the literature so categories are not forced; you already know your domain, so the condition cannot be met.
+
+## Common misconceptions
+
+- **"Grounded theory means coding interviews."** Coding is one component; without theoretical sampling and iteration to saturation, there is no grounded theory.
+- **"Grounded just means bottom-up, so any inductive analysis counts."** Grounded means grounding a *theory* in data, not the direction of coding — propositions that explain a process and generate predictions you could be wrong about.
+
+## Tips
+
+Before reaching for the term, ask one question: did an early finding change who you recruited next? If not, you did thematic analysis. Saying so costs nothing; overclaiming costs the room's trust the moment someone asks how the sample was chosen.
+
+## Using AI
+
+**Where it helps**
+- Constant comparison at volume: surfacing later incidents that resemble or contradict a category you have memoed.
+- Stress-testing a draft core category by asking for the cases it fails to explain.
+
+**Where it fails**
+- Producing the theory. Given a fixed set of transcripts a model returns a tidy core category and a confident saturation claim, because both are recognisable literary forms — neither earnable without fieldwork that has not happened.

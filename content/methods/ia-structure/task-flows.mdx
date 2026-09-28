@@ -1,0 +1,102 @@
+---
+id: task-flows
+title: Task Flows
+aka: ["Task Flow Diagram", "Task Sequence Diagram"]
+domain: ia-structure
+alsoIn: [interaction-design]
+kind: method
+gives: qualitative
+effort: low
+timeframe: hours
+needs:
+  - One specific task with an observable start and a definable completion
+  - Observation of real users performing it, or a practitioner who does it daily
+  - Agreement on who the actor is, since the same task decomposes differently by role
+useCases: [identify-problems, improve-interaction, plan-work]
+useInstead:
+  - when: The route forks by entry point, user state or system condition and you need those branches on the page
+    method: user-flows
+  - when: You need per-step time or keystroke-level cost estimates rather than a diagram of the sequence
+    method: goms-klm
+  - when: You need to find where real people actually stall in the task, not document the intended route
+    method: usability-testing
+related:
+  before: [contextual-inquiry]
+  after: [user-flows, usability-testing]
+  alongside: [goms-klm, cognitive-walkthrough]
+sources:
+  - title: "Task Analysis and Training Design"
+    author: John Annett & Keith D. Duncan
+    url: https://eric.ed.gov/?id=ED019566
+    type: paper
+    year: 1967
+    seminal: true
+  - title: "Task Analysis: Support Users in Achieving Their Goals"
+    author: Maria Rosala, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/task-analysis/
+    type: article
+    year: 2020
+    seminal: false
+  - title: "Designing for the Digital Age: How to Create Human-Centered Products and Services"
+    author: Kim Goodwin
+    url: https://archive.org/details/designingfordigi0000good
+    type: book
+    year: 2009
+    seminal: false
+---
+
+## What is it
+
+A linear diagram of the steps one task takes, start to completion, in the order they happen: one actor, one route, no branching. It descends from Annett and Duncan's hierarchical task analysis — a goal decomposed into operations you can count.
+
+The boundary that matters: a **task flow** traces one task to completion — one spine, one start, one success end, no branching — and asks *is this route efficient?* A **user flow** covers every entry point, decision branch and failure ending, and asks *does this still work when real people arrive from different places in different states?*
+
+## Purpose
+
+Makes step count visible. Most process pain is not a broken screen but a route with eleven steps, four of which re-enter data the system already has. The count is the baseline a redesign has to beat.
+
+## When to use
+
+- You're redesigning a workflow and need a before/after step count
+- A task feels heavy but nobody can say where the weight is
+- You're about to draw a user flow and need the spine first — the direct route everything else branches off
+
+## How to do it
+
+- Name the goal and the task separately — "get reimbursed" is the goal, "submit an expense report" is the task; confuse them and the diagram never ends.
+- Observe it in context rather than reconstructing it from a spec; contextual-inquiry sessions reveal the steps the spec omits and the workarounds it forbids.
+- Write every step as a verb the actor performs — "enters receipt total", not "receipt screen"; nouns mean you've drifted into screens.
+- Decompose until each step is a single decision or input — too coarse if you can't name what goes wrong there, too fine at "moves the cursor".
+- Count the actor's steps at the end; that number is what the redesign has to beat.
+
+## Example
+
+Submitting an expense report in one finance tool ran to fourteen actor steps: category, sub-category, merchant, amount, currency, date, receipt photo, a retyped amount, cost centre, project code, justification, policy checkbox, preview, submit. Four of those re-type data the uploaded receipt already carried.
+
+## Common mistakes
+
+- **Drawing screens instead of steps** — screen names lock the diagram to the current design, so it can't evaluate a redesign.
+- **Reconstructing the flow from the spec** — documented and performed process differ, and that difference is the most valuable thing the exercise finds.
+- **Letting branches creep in** — one diamond and you've started a user flow. Commit to that or footnote the exception.
+- **Inconsistent granularity** — mixing "logs in" with "tabs to the amount field" makes the step count meaningless, which was the point.
+- **One flow for all roles** — averaging an expert and a novice into one route describes nobody's work.
+
+## Limitations
+
+- **Says nothing about frequency.** A fourteen-step task done twice a year matters less than a four-step task done sixty times a day.
+- **Step count is not effort.** Fourteen trivial steps can be lighter than four decisions under uncertainty; a cost estimate needs goms-klm or usability-test timing.
+- **Deliberately hides the exceptions.** The single-route simplicity that makes it readable makes it silent about error states, permissions and entry points — the cases behind most production incidents.
+- **Only as good as the observation behind it.** Built from a stakeholder's description rather than watched work, it documents the official process, not the real one.
+
+## Tips
+
+Annotate who performs each step — actor, system or third party — before shortening the flow: the actor's steps that use data the system already holds are the cheapest wins.
+
+## Using AI
+
+**Where it helps**
+- Turning think-aloud notes into a first-pass step list a designer corrects against what they watched.
+- Normalising granularity across flows written by different people, so step counts become comparable.
+
+**Where it fails**
+- Generating the task flow from a description of the product. A model produces the documented-looking version — plausible, evenly granular, and missing exactly the workarounds and re-entered fields observation exists to find.

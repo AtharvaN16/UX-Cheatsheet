@@ -1,0 +1,98 @@
+---
+id: shadowing
+title: Shadowing
+aka: ["Work Shadowing", "Job Shadowing"]
+domain: qualitative-research
+alsoIn: []
+kind: method
+gives: qualitative
+effort: high
+timeframe: days
+needs:
+  - One participant at a time and a block of their real working day — half a shift minimum, a full one if the work has a rhythm
+  - "Permission from two parties: the participant, and whoever controls the site — a manager, a ward lead, a floor supervisor"
+  - A note format that captures time, place and tool rather than prose — a paper timeline or a structured notes app
+  - 4-6 participants spread across different shifts, sites or levels of tenure
+useCases: [understand-behavior, understand-users, discover-needs]
+useInstead:
+  - when: You need behaviour in a setting to stay natural — being beside one person changes what they do, and you want the place observed rather than the person accompanied
+    method: fly-on-the-wall-observation
+  - when: You need to interrogate the reasoning at every step and check your interpretation with the person as they work, rather than following and asking in the gaps
+    method: contextual-inquiry
+  - when: The behaviour is spread across weeks or happens when no observer can be present
+    method: diary-studies
+related:
+  before: [user-interviews]
+  after: [task-flows]
+  alongside: [fly-on-the-wall-observation, contextual-inquiry]
+sources:
+  - title: "Shadowing: And Other Techniques for Doing Fieldwork in Modern Societies"
+    author: Barbara Czarniawska
+    url: https://openlibrary.org/books/OL18744490M
+    type: book
+    year: 2007
+    seminal: true
+  - title: "Studying Actions in Context: A Qualitative Shadowing Method for Organizational Research"
+    author: Seonaidh McDonald
+    url: https://pure.uhi.ac.uk/en/publications/studying-actions-in-context-a-qualitative-shadowing-method-for-or/
+    type: paper
+    year: 2005
+  - title: "The Hawthorne Effect or Observer Bias in User Research"
+    author: Mayya Azarova, Nielsen Norman Group
+    url: https://www.nngroup.com/articles/hawthorne-effect-observer-bias-user-research/
+    type: article
+    year: 2023
+---
+
+## What is it
+
+You follow one person through a stretch of their real work — a shift, a delivery route — as they move between tasks, tools and rooms. You are visible and acknowledged, and can ask a short question when a gap opens. The unit of study is a person's day.
+
+## Purpose
+
+A spec's clean sequence is in practice a day of interruptions, handoffs, waiting and re-entering the same data in three places. Shadowing captures that connective tissue, and because the person is there and talking, the reasoning behind it: why a step was skipped, which tool they trust.
+
+## When to use
+
+- The role moves between contexts all day: a nurse, a field engineer, an agent on five queues
+- You need the whole arc of a job, not the workflow diagram stakeholders handed you — what triggers the work, what blocks it, what happens after your product closes
+
+## How to do it
+
+- Agree scope before you arrive: hours, areas, what you will and won't record, who sees the notes. Arranging this without the manager's knowledge puts the participant at risk, not you.
+- Negotiate a stop signal, a hand gesture is enough, and honour it for confidential calls or patient contact. Consent is rolling, not a signature at 9am.
+- Follow, don't lead: they pick the next task, and questions go in the gaps, never mid-task.
+- Keep questions descriptive, not evaluative: "what were you checking there?" beats "why didn't you use search?", which makes you an auditor.
+- Log a timeline, not prose: timestamp, location, tool, what happened, what interrupted. That is what reveals a 20-minute task as four minutes of work and sixteen of waiting.
+- Debrief within the hour, and shadow 4-6 people across shifts and sites; shifts vary more than roles do.
+
+## Example
+
+A field-service app team built a one-handed phone form for job reports, assuming technicians filed at the customer's address. Shadowing three technicians showed reports written in the van afterwards, from photos and biro notes on the printed work order: signing off on site meant standing in someone's kitchen while they watched. The form was not the gap; capture-now, assemble-later was.
+
+## Common mistakes
+
+- **Shadowing whoever the manager nominates** — you get the compliant performer; the person with a clipboard workaround for a broken system is the more useful day.
+- **Two hours and a debrief** — the first hour is performance, and the wrap-up at end of shift is where duplicated effort hides.
+- **Recording more than you can justify** — audio and video sweep up colleagues and patients who agreed to nothing.
+- **Writing inference as observation** — "frustrated by the scanner" is a guess; "scanned three times, then typed the code" is what happened.
+
+## Limitations
+
+- **You change what you are watching.** People present a better version of themselves when observed; shortcuts and rule-bending go first. That is the Hawthorne effect, and what survives is the sanctioned day.
+- **One person's day is not the work.** Depth on individuals, never distribution, so no shadowing result supports a frequency claim.
+- **Parts of the day are closed to you.** The confidential call, the examination, the conversation that stops when you walk in — often where the decision gets made.
+- **The output resists aggregation.** Six timelines do not average into one, and two researchers shadowing the same role build different models.
+
+## Tips
+
+Watch the first and last fifteen minutes of a shift: setup and wrap-up rituals, reprinting yesterday's list or texting the next shift, appear in no specification.
+
+## Using AI
+
+**Where it helps**
+- Converting a timestamped field log into a sequence model, and diffing timelines across participants
+- Drafting the scope-and-consent note for the site manager, including what you will not record
+
+**Where it fails**
+- Generating a "day in the life" for a role from job descriptions and forum threads. It reads like a shadowing write-up, but it is assembled from how the work is publicly described — the sanitised account shadowing exists to get behind.
