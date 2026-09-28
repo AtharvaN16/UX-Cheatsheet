@@ -37,7 +37,16 @@ export async function POST(request: Request): Promise<Response> {
     return Response.json({ errors: ['nothing to sync'] }, { status: 400 });
   }
 
-  const store = getStore();
+  // getStore() throws when GITHUB_TOKEN or GITHUB_REPO is missing, and that is
+  // the single most likely first-run misconfiguration. Outside a try it became
+  // an uncaught throw and Next returned a bare 500 with no body — the message
+  // naming the variable never reached anyone. Caught, it says what to set.
+  let store;
+  try {
+    store = getStore();
+  } catch (e) {
+    return Response.json({ errors: [(e as Error).message] }, { status: 500 });
+  }
 
   let result;
   try {
