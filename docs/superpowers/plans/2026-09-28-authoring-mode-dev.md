@@ -1276,8 +1276,8 @@ Expected: FAIL — `Cannot find module './devOnly'`
 /**
  * Authoring endpoints mutate the working tree, so they must not exist outside
  * development. This is the server-side half of that guarantee; the client half
- * is that the UI is compiled out. Neither is sufficient alone — hiding a button
- * does not protect a route.
+ * is that the UI renders nothing. Neither is sufficient alone — hiding a button
+ * does not protect a route, which is why this guard is the real boundary.
  *
  * Plan B replaces this with an auth check when editing goes to the live site.
  */
@@ -1600,8 +1600,10 @@ const AuthoringContext = createContext<Authoring | null>(null);
  * Editing state, shared by the dock and every editable surface.
  *
  * `IS_DEV` is a compile-time constant, so in a production build this whole
- * module's interactive branches are dead code the bundler drops — the client
- * half of the dev-only guarantee whose server half is `devOnlyGuard`.
+ * module's interactive branches are gated off at runtime. Note this does NOT
+ * dead-code-eliminate: exporting `IS_DEV` defeats constant folding, so these
+ * components ship inert rather than being dropped. The real boundary is
+ * `devOnlyGuard` on the server.
  */
 export const IS_DEV = process.env.NODE_ENV === 'development';
 
@@ -1734,10 +1736,19 @@ Expected: the dock appears bottom-left; `⌘E` highlights the pencil; the `▶_`
 - [ ] **Step 6: Verify it is absent from a production build**
 
 ```bash
-bun run build && grep -rl "Authoring controls" .next/static 2>/dev/null; echo "exit=$?"
+bun run build
+grep -c "Authoring controls" .next/server/app/index.html   # expect 0
+bun run start &
+sleep 8
+curl -s -o /dev/null -w '%{http_code}\n' -X POST http://localhost:3000/api/authoring/section
 ```
 
-Expected: no matching files — the dock is compiled out.
+Expected: `0` occurrences in the prerendered HTML, and `404` from the route.
+
+Do NOT assert the strings are absent from `.next/static`. They are present: the
+components ship in a ~40K chunk and are gated at runtime, because exporting
+`IS_DEV` prevents the minifier folding it to a constant. What matters is that
+nothing renders and no route answers — both of which this checks directly.
 
 - [ ] **Step 7: Commit**
 

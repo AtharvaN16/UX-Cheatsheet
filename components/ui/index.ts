@@ -5,3 +5,10 @@
 // may import from `@astryxdesign/*`. Later tasks populate this barrel as they
 // add wrapper components here.
 export { MethodImage } from './MethodImage';
+
+// Dev-only authoring layer (see docs/superpowers/specs/2026-09-28-authoring-mode-design.md).
+export { AuthoringProvider, useAuthoring, IS_DEV } from './AuthoringProvider';
+export { AuthorDock } from './AuthorDock';
+export { AddCardPalette } from './AddCardPalette';
+export { EditableSection } from './EditableSection';
+export { FrontmatterPanel } from './FrontmatterPanel';

@@ -108,9 +108,9 @@ mark {
 /* 1. Fixed Height Native HTML <dialog> Container - STRICT 500px ALWAYS */
 dialog,
 dialog[open],
-div[role="dialog"],
-div[role="dialog"] > div,
-div[role="dialog"] > div > div {
+div[role="dialog"]:not([data-authoring]),
+div[role="dialog"]:not([data-authoring]) > div,
+div[role="dialog"]:not([data-authoring]) > div > div {
   height: 500px !important;
   min-height: 500px !important;
   max-height: 500px !important;
@@ -125,14 +125,14 @@ div[role="dialog"] > div > div {
 }
 
 dialog *,
-div[role="dialog"] [class*="Layout"] {
+div[role="dialog"]:not([data-authoring]) [class*="Layout"] {
   box-sizing: border-box;
 }
 
 dialog > form,
 dialog > div,
-div[role="dialog"] form,
-div[role="dialog"] [class*="Layout"],
+div[role="dialog"]:not([data-authoring]) form,
+div[role="dialog"]:not([data-authoring]) [class*="Layout"],
 dialog [class*="Layout"] {
   height: 100% !important;
   min-height: 100% !important;
@@ -149,8 +149,8 @@ dialog header,
 dialog [data-astryx-component="layout-header"],
 dialog [data-astryx-component="command-palette-input"],
 dialog div[class*="command-palette-input"],
-div[role="dialog"] header,
-div[role="dialog"] [data-astryx-component="command-palette-input"] {
+div[role="dialog"]:not([data-authoring]) header,
+div[role="dialog"]:not([data-authoring]) [data-astryx-component="command-palette-input"] {
   height: 52px !important;
   min-height: 52px !important;
   max-height: 52px !important;
@@ -168,15 +168,15 @@ div[role="dialog"] [data-astryx-component="command-palette-input"] {
 
 dialog header *,
 dialog [data-astryx-component="command-palette-input"] *,
-div[role="dialog"] header *,
-div[role="dialog"] [data-astryx-component="command-palette-input"] * {
+div[role="dialog"]:not([data-authoring]) header *,
+div[role="dialog"]:not([data-authoring]) [data-astryx-component="command-palette-input"] * {
   background-color: transparent !important;
   background: transparent !important;
   box-shadow: none !important;
 }
 
 dialog input,
-div[role="dialog"] input {
+div[role="dialog"]:not([data-authoring]) input {
   background-color: transparent !important;
   background: transparent !important;
   padding: 0 !important;
@@ -194,10 +194,10 @@ dialog [data-astryx-component="command-palette-list"],
 dialog [role="listbox"],
 dialog div[class*="Empty"],
 dialog div[class*="empty"],
-div[role="dialog"] [class*="Content"],
-div[role="dialog"] [class*="List"],
-div[role="dialog"] [class*="Empty"],
-div[role="dialog"] [role="listbox"] {
+div[role="dialog"]:not([data-authoring]) [class*="Content"],
+div[role="dialog"]:not([data-authoring]) [class*="List"],
+div[role="dialog"]:not([data-authoring]) [class*="Empty"],
+div[role="dialog"]:not([data-authoring]) [role="listbox"] {
   flex: 1 1 auto !important;
   height: 100% !important;
   min-height: 0 !important;
@@ -211,7 +211,7 @@ div[role="dialog"] [role="listbox"] {
 /* 4. SINGLE 42px FOOTER FRAME (NO INNER / OUTER DUPLICATION) */
 dialog footer,
 dialog [data-astryx-component="layout-footer"],
-div[role="dialog"] [data-astryx-component="layout-footer"] {
+div[role="dialog"]:not([data-authoring]) [data-astryx-component="layout-footer"] {
   height: 42px !important;
   min-height: 42px !important;
   max-height: 42px !important;
@@ -232,7 +232,7 @@ div[role="dialog"] [data-astryx-component="layout-footer"] {
 }
 
 dialog [data-astryx-component="layout-footer"] *,
-div[role="dialog"] [data-astryx-component="layout-footer"] * {
+div[role="dialog"]:not([data-authoring]) [data-astryx-component="layout-footer"] * {
   border: none !important;
   box-shadow: none !important;
   margin: 0 !important;
@@ -245,7 +245,7 @@ div[role="dialog"] [data-astryx-component="layout-footer"] * {
 }
 
 dialog [data-astryx-component="layout-footer"] span,
-div[role="dialog"] [data-astryx-component="layout-footer"] span {
+div[role="dialog"]:not([data-authoring]) [data-astryx-component="layout-footer"] span {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -254,7 +254,7 @@ div[role="dialog"] [data-astryx-component="layout-footer"] span {
 }
 
 dialog [data-astryx-component="layout-footer"] kbd,
-div[role="dialog"] [data-astryx-component="layout-footer"] kbd {
+div[role="dialog"]:not([data-authoring]) [data-astryx-component="layout-footer"] kbd {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;

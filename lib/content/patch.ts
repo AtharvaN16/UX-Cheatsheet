@@ -30,12 +30,19 @@ export function patchSection(fileText: string, heading: string, markdown: string
 
   const body = markdown.replace(/\s+$/, '');
 
+  // Preserve the blank line between heading and body when the section already
+  // had one. Every one of the 1357 sections in content/ is written that way, so
+  // dropping it would reformat the file on every edit and bury the real change
+  // in whitespace noise. Preserving beats imposing: a file that does it
+  // differently keeps doing it differently.
+  const gap = lines[start + 1] === '' ? [''] : [];
+
   if (end === -1) {
     // Last section: keep exactly one trailing newline at end of file.
-    return [...lines.slice(0, start + 1), body, ''].join('\n');
+    return [...lines.slice(0, start + 1), ...gap, body, ''].join('\n');
   }
 
-  return [...lines.slice(0, start + 1), body, '', ...lines.slice(end)].join('\n');
+  return [...lines.slice(0, start + 1), ...gap, body, '', ...lines.slice(end)].join('\n');
 }
 
 /**

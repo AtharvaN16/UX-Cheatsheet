@@ -11,6 +11,16 @@ import { LinkProvider } from '@astryxdesign/core/Link';
 // client-only runtime style injection, since lib/cheatsheet.css (imported in
 // app/globals.css) already carries the token CSS at server-render time.
 import { cheatsheetTheme } from '@/lib/cheatsheet';
+// Dev-only authoring layer. AuthoringProvider must wrap the tree because
+// ConceptSheetModal's editable sections call useAuthoring() unconditionally.
+// In a production build `IS_DEV` is false, so the dock and the palette render
+// null and nothing authoring-related reaches the prerendered HTML. Verified:
+// they are NOT dropped from the bundle (see AuthoringProvider), they are inert
+// in it. The boundary that actually matters is `devOnlyGuard`, which 404s every
+// /api/authoring route in production.
+import { AuthoringProvider } from '@/components/ui/AuthoringProvider';
+import { AuthorDock } from '@/components/ui/AuthorDock';
+import { AddCardPalette } from '@/components/ui/AddCardPalette';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -25,7 +35,13 @@ export function Providers({ children }: { children: React.ReactNode }) {
     // comment for the other half of this fix.
     <Theme theme={cheatsheetTheme} mode="light">
       <LinkProvider component={Link}>
-        <MotionConfig reducedMotion="user">{children}</MotionConfig>
+        <MotionConfig reducedMotion="user">
+          <AuthoringProvider>
+            {children}
+            <AuthorDock />
+            <AddCardPalette />
+          </AuthoringProvider>
+        </MotionConfig>
       </LinkProvider>
     </Theme>
   );

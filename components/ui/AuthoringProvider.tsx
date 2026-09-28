@@ -15,8 +15,16 @@ const AuthoringContext = createContext<Authoring | null>(null);
  * Editing state, shared by the dock and every editable surface.
  *
  * `IS_DEV` is a compile-time constant, so in a production build this whole
- * module's interactive branches are dead code the bundler drops — the client
- * half of the dev-only guarantee whose server half is `devOnlyGuard`.
+ * module's interactive branches are gated off at runtime.
+ *
+ * Measured, not assumed: this does NOT get dead-code-eliminated. Because
+ * `IS_DEV` is *exported*, the minifier cannot prove it constant across module
+ * boundaries, so it survives as a runtime reference and these components ship
+ * in a ~40K chunk. They are inert there — every one returns null before
+ * rendering, nothing appears in the prerendered HTML, and every
+ * /api/authoring route answers 404 in production. Plan B ships this UI to
+ * production deliberately behind auth, so eliminating it now would be undone
+ * immediately.
  */
 export const IS_DEV = process.env.NODE_ENV === 'development';
 

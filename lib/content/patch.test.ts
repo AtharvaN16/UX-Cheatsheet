@@ -57,6 +57,33 @@ describe('patchSection', () => {
     expect(out).not.toContain('Not A Heading');
   });
 
+  // Every section in content/ separates its heading from its body with a blank
+  // line. Losing it would reformat the file on every edit.
+  test('preserves the blank line after a heading when the section had one', () => {
+    const spaced = [
+      '## What is it',
+      '',
+      'Old body.',
+      '',
+      '## Tips',
+      '',
+      'Old tips.',
+      '',
+    ].join('\n');
+    expect(patchSection(spaced, 'What is it', 'New body.')).toBe(
+      ['## What is it', '', 'New body.', '', '## Tips', '', 'Old tips.', ''].join('\n'),
+    );
+    expect(patchSection(spaced, 'Tips', 'New tips.')).toBe(
+      ['## What is it', '', 'Old body.', '', '## Tips', '', 'New tips.', ''].join('\n'),
+    );
+  });
+
+  test('does not invent a blank line for a section that had none', () => {
+    expect(patchSection(FILE, 'How to do it', '- only step')).toContain(
+      '## How to do it\n- only step',
+    );
+  });
+
   test('throws a named error for a heading that does not exist', () => {
     expect(() => patchSection(FILE, 'Nonexistent', 'x')).toThrow('unknown section "Nonexistent"');
   });
