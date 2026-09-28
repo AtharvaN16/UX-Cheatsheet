@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Method } from '@/lib/content';
-import { IS_DEV, PENDING_CONTROL_CLASS, PendingDot, useAuthoring } from './AuthoringProvider';
+import { IS_DEV, PENDING_CONTROL_CLASS, PendingDot, UndoEdit, useAuthoring } from './AuthoringProvider';
 
 // `gives` is deliberately not offered here. It stays in the schema and in all
 // 161 content files, but nothing renders it and nothing filters on it, so a
@@ -46,7 +46,7 @@ function readAsBase64(file: File): Promise<string> {
  * over a closed list cannot produce an invalid value at all.
  */
 export function FrontmatterPanel({ method }: { method: Method }) {
-  const { isEditing, authed, saveEdit, pendingField, pendingCountFor, discardEdits } =
+  const { isEditing, authed, saveEdit, pendingField, pendingCountFor, discardEdits, discardField } =
     useAuthoring();
   const cardPendingCount = pendingCountFor(method.id);
   const router = useRouter();
@@ -122,7 +122,12 @@ export function FrontmatterPanel({ method }: { method: Method }) {
           <div key={field} className="mb-3">
             <label className="mb-1.5 block text-[14px] font-medium uppercase tracking-[0.06em] text-[#8C887E]">
               {label}
-              {queued !== undefined && <PendingDot />}
+              {queued !== undefined && (
+                <>
+                  <PendingDot />
+                  <UndoEdit onUndo={() => discardField(method.id, field)} label={label} />
+                </>
+              )}
             </label>
             <div className="flex gap-1">
               {options.map((o) => (

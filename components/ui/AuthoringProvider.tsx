@@ -37,6 +37,10 @@ interface Authoring {
   discardEdits: (id: string) => void;
   /** Drop the entire queue, including new-card entries. */
   discardAll: () => void;
+  /** Drop one queued section edit. */
+  discardSection: (id: string, heading: string) => void;
+  /** Drop one queued frontmatter edit. */
+  discardField: (id: string, field: string) => void;
   /** End the session in this browser. */
   logout: () => Promise<void>;
   /** Whether the dock is collapsed to a dot. */
@@ -90,6 +94,20 @@ export const PENDING_CUE_CLASS =
 export const PENDING_CONTROL_CLASS = 'ring-2 ring-[#E8B307] ring-offset-1';
 
 /** The same signal where a left rule would not fit — beside a field label. */
+/** Small inline "revert this one change" control, used wherever amber appears. */
+export function UndoEdit({ onUndo, label }: { onUndo: () => void; label: string }) {
+  return (
+    <button
+      type="button"
+      onClick={onUndo}
+      title={`Undo ${label} — discards this change without syncing`}
+      className="ml-2 shrink-0 rounded-[5px] border border-[#E8B307]/50 bg-white px-1.5 py-0.5 text-[12px] font-medium text-[#8a6a12] hover:bg-[#FDE047]/30"
+    >
+      ↩ Undo
+    </button>
+  );
+}
+
 export function PendingDot() {
   const label = 'Queued — not synced yet';
   return (
@@ -256,6 +274,21 @@ export function AuthoringProvider({ children }: { children: React.ReactNode }) {
    */
   const discardAll = useCallback(() => setPending([]), []);
 
+  // Single-edit undo. The amber cue already says exactly what changed, so the
+  // control that reverts it belongs beside the thing it reverts rather than
+  // only at card or queue level.
+  const discardSection = useCallback((id: string, heading: string) => {
+    setPending((list) =>
+      list.filter((e) => !(e.kind === 'section' && e.id === id && e.heading === heading)),
+    );
+  }, []);
+
+  const discardField = useCallback((id: string, field: string) => {
+    setPending((list) =>
+      list.filter((e) => !(e.kind === 'frontmatter' && e.id === id && e.field === field)),
+    );
+  }, []);
+
   /**
    * Sign out of this browser. Editing is switched off first so the page does
    * not sit in edit mode with no session behind it — every save would 401.
@@ -364,6 +397,8 @@ export function AuthoringProvider({ children }: { children: React.ReactNode }) {
         pendingCountFor,
         discardEdits,
         discardAll,
+        discardSection,
+        discardField,
         logout,
         dockCollapsed,
         setDockCollapsed,

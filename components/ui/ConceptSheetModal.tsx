@@ -8,7 +8,7 @@ import { useMethodLookup, type MethodLookupEntry } from '@/components/ui/Palette
 import { MethodImage } from '@/components/ui/MethodImage';
 import { EditableSection } from '@/components/ui/EditableSection';
 import { FrontmatterPanel } from '@/components/ui/FrontmatterPanel';
-import { PENDING_CUE_CLASS, useAuthoring } from '@/components/ui/AuthoringProvider';
+import { PENDING_CUE_CLASS, UndoEdit, useAuthoring } from '@/components/ui/AuthoringProvider';
 
 export interface ConceptSheetItem {
   id: string;
@@ -205,9 +205,31 @@ export function FormattedText({
  * Renders nothing of its own when there is nothing queued, so the normal
  * reading experience is untouched.
  */
-function PendingBody({ pending, children }: { pending: boolean; children: React.ReactNode }) {
+function PendingBody({
+  pending,
+  onUndo,
+  label,
+  children,
+}: {
+  pending: boolean;
+  onUndo?: () => void;
+  label?: string;
+  children: React.ReactNode;
+}) {
   if (!pending) return <>{children}</>;
-  return <div className={PENDING_CUE_CLASS}>{children}</div>;
+  return (
+    <div className={PENDING_CUE_CLASS}>
+      {onUndo && (
+        <div className="mb-1.5 flex items-center">
+          <span className="text-[12px] font-medium uppercase tracking-[0.06em] text-[#8a6a12]">
+            Unsynced
+          </span>
+          <UndoEdit onUndo={onUndo} label={label ?? 'this change'} />
+        </div>
+      )}
+      {children}
+    </div>
+  );
 }
 
 /** One section's body: queued text if there is any, otherwise the built text. */
@@ -219,6 +241,7 @@ interface SectionBody {
 }
 
 function TipsContent({ methodId, tips }: { methodId: string; tips: SectionBody }) {
+  const { discardSection } = useAuthoring();
   if (!tips.content) return null;
 
   return (
@@ -237,7 +260,11 @@ function TipsContent({ methodId, tips }: { methodId: string; tips: SectionBody }
       {/* Tips renders here rather than in the mapped section list, so it needs
           its own <EditableSection> or it would be the one block with no pencil. */}
       <EditableSection methodId={methodId} heading={tips.heading} markdown={tips.content}>
-        <PendingBody pending={tips.isPending}>
+        <PendingBody
+          pending={tips.isPending}
+          onUndo={() => discardSection(methodId, tips.heading)}
+          label={tips.heading}
+        >
           <FormattedText
             content={tips.content}
             style={{ fontSize: '16px', fontWeight: 400, lineHeight: '1.6' }}
@@ -263,6 +290,7 @@ function CollapsibleSection({
   isPending: boolean;
   tips?: SectionBody;
 }) {
+  const { discardSection } = useAuthoring();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -299,7 +327,11 @@ function CollapsibleSection({
           >
             <div className="p-6 sm:p-7 pt-4 space-y-4">
               <EditableSection methodId={methodId} heading={title} markdown={content}>
-                <PendingBody pending={isPending}>
+                <PendingBody
+                  pending={isPending}
+                  onUndo={() => discardSection(methodId, title)}
+                  label={title}
+                >
                   <FormattedText
                     content={content}
                     style={{ fontSize: '20px', fontWeight: 400, lineHeight: '1.6' }}
@@ -451,7 +483,7 @@ function FurtherReadingSection({ sources }: { sources?: Method['sources'] }) {
 
 export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
   const lookup = useMethodLookup();
-  const { pendingSection } = useAuthoring();
+  const { pendingSection, discardSection } = useAuthoring();
 
   // Lock body scroll and listen for Escape key
   useEffect(() => {
@@ -583,7 +615,11 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
                     heading={whatIsIt.heading}
                     markdown={whatIsIt.content}
                   >
-                    <PendingBody pending={whatIsIt.isPending}>
+                    <PendingBody
+                      pending={whatIsIt.isPending}
+                      onUndo={() => discardSection(item.method!.id, whatIsIt.heading)}
+                      label={whatIsIt.heading}
+                    >
                       <FormattedText
                         content={overview}
                         style={{ fontSize: '30px', fontWeight: 600, lineHeight: '1.4' }}
@@ -659,7 +695,11 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
                               heading={sectionTitle}
                               markdown={sectionContent}
                             >
-                              <PendingBody pending={queued !== undefined}>
+                              <PendingBody
+                                pending={queued !== undefined}
+                                onUndo={() => discardSection(methodId, sectionTitle)}
+                                label={sectionTitle}
+                              >
                                 <FormattedText
                                   content={sectionContent}
                                   style={{ fontSize: '20px', fontWeight: 400, lineHeight: '1.6' }}
