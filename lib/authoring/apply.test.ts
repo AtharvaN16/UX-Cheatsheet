@@ -2,6 +2,7 @@ import { expect, test, describe } from 'bun:test';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { applyEdits } from './apply';
+import { validateMethodText } from './validate';
 import type { ContentStore } from './store';
 import type { PendingEdit } from './pending';
 
@@ -191,5 +192,67 @@ describe('validateMethodText guards id against filename', () => {
     const renamed = REAL.replace('id: tree-testing', 'id: usability-testing');
     const errors = validateMethodText(renamed, 'tree-testing.mdx');
     expect(errors.some((e) => e.includes('must match filename'))).toBe(true);
+  });
+});
+
+describe('applyEdits creating a first image', () => {
+  const SVG = Buffer.from('<svg xmlns="http://www.w3.org/2000/svg"></svg>').toString('base64');
+
+  // The gap this closes: adding an image used to require an `image:` block to
+  // already exist, so only the fourteen cards that had one were reachable.
+  test('a card with no image block gets one, plus the binary write', async () => {
+    expect(REAL).not.toContain('image:');
+    const edits: PendingEdit[] = [
+      { kind: 'image', id: 'tree-testing', filename: 'drop.svg', base64: SVG },
+    ];
+    const { files, errors } = await applyEdits(fakeStore(), edits);
+    expect(errors).toEqual([]);
+    expect(files.map((f) => f.path).sort()).toEqual([
+      'content/methods/ia-structure/tree-testing.mdx',
+      'public/images/methods/tree-testing.svg',
+    ]);
+
+    const mdx = files.find((f) => f.path.endsWith('.mdx'))!;
+    expect(String(mdx.content)).toContain('image:\n  src: /images/methods/tree-testing.svg\n---');
+    expect(mdx.version).toBe('v1');
+
+    const binary = files.find((f) => f.path.startsWith('public/'))!;
+    expect(binary.content).toBeInstanceOf(Uint8Array);
+  });
+
+  test('the created block carries no alt and the file still validates', async () => {
+    const { files } = await applyEdits(fakeStore(), [
+      { kind: 'image', id: 'tree-testing', filename: 'drop.svg', base64: SVG },
+    ]);
+    const mdx = String(files.find((f) => f.path.endsWith('.mdx'))!.content);
+    expect(mdx).not.toContain('alt:');
+    expect(validateMethodText(mdx, 'tree-testing.mdx')).toEqual([]);
+  });
+
+  test('replacing an image on a card that has one still rewrites src in place', async () => {
+    const withImage = REAL.replace(
+      '---\n\n##',
+      'image:\n  src: /images/methods/tree-testing.png\n  alt: A tree test diagram showing nesting\n---\n\n##',
+    );
+    const store = fakeStore({ 'content/methods/ia-structure/tree-testing.mdx': withImage });
+    const { files, errors } = await applyEdits(store, [
+      { kind: 'image', id: 'tree-testing', filename: 'new.svg', base64: SVG },
+    ]);
+    expect(errors).toEqual([]);
+    const mdx = String(files.find((f) => f.path.endsWith('.mdx'))!.content);
+    expect(mdx).toContain('  src: /images/methods/tree-testing.svg');
+    expect(mdx).not.toContain('  src: /images/methods/tree-testing.png');
+    // The block is edited, not duplicated, and its alt survives.
+    expect(mdx.match(/^image:$/gm)?.length).toBe(1);
+    expect(mdx).toContain('  alt: A tree test diagram showing nesting');
+  });
+
+  test('a card with no frontmatter at all is reported, not silently patched', async () => {
+    const store = fakeStore({ 'content/methods/ia-structure/tree-testing.mdx': '## Tips\nx\n' });
+    const { errors, files } = await applyEdits(store, [
+      { kind: 'image', id: 'tree-testing', filename: 'drop.svg', base64: SVG },
+    ]);
+    expect(errors.some((e) => e.includes('no frontmatter block'))).toBe(true);
+    expect(files).toEqual([]);
   });
 });

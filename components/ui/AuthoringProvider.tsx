@@ -20,6 +20,17 @@ interface Authoring {
   setNeedsLogin: (v: boolean) => void;
   login: (password: string) => Promise<{ ok: boolean; error?: string }>;
   pending: PendingEdit[];
+  /**
+   * The queued value for a section body, or undefined if nothing is queued.
+   *
+   * On the live site a save does not change the page — the page is a build
+   * artefact, and the edit only joins `pending` until Sync commits it. Without
+   * these two lookups every editor appeared to silently discard the change, so
+   * every render site of an editable value reads through them.
+   */
+  pendingSection: (id: string, heading: string) => string | undefined;
+  /** The queued value for a frontmatter field, or undefined. */
+  pendingField: (id: string, field: string) => string | undefined;
   saveEdit: (edit: PendingEdit) => Promise<{ ok: boolean; errors?: string[] }>;
   sync: () => Promise<{ ok: boolean; errors?: string[] }>;
   syncing: boolean;
@@ -44,6 +55,29 @@ const AuthoringContext = createContext<Authoring | null>(null);
  * route outside development.
  */
 export const IS_DEV = process.env.NODE_ENV === 'development';
+
+/**
+ * The quiet "this is queued, not saved" cue.
+ *
+ * Amber rather than the blue used for active editing or the green used for a
+ * landed sync: queued work is neither. A 2px rule down the left edge of the
+ * affected body is enough to notice on a second look and easy to ignore on the
+ * first — it must not compete with the content it marks.
+ */
+export const PENDING_CUE_CLASS = 'border-l-2 border-[#FDE047] pl-4';
+
+/** The same signal where a left rule would not fit — beside a field label. */
+export function PendingDot() {
+  const label = 'Queued — not synced yet';
+  return (
+    <span
+      title={label}
+      aria-label={label}
+      role="img"
+      className="ml-1.5 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#FDE047] align-middle"
+    />
+  );
+}
 
 export function useAuthoring(): Authoring {
   const ctx = useContext(AuthoringContext);
@@ -165,6 +199,27 @@ export function AuthoringProvider({ children }: { children: React.ReactNode }) {
     [pending],
   );
 
+  // `addEdit` keeps one entry per slot, so the first match is the only match.
+  // In development `pending` is always empty and both of these return undefined,
+  // which is exactly right: there the file on disk already holds the new text.
+  const pendingSection = useCallback(
+    (id: string, heading: string) =>
+      pending.find(
+        (e): e is Extract<PendingEdit, { kind: 'section' }> =>
+          e.kind === 'section' && e.id === id && e.heading === heading,
+      )?.markdown,
+    [pending],
+  );
+
+  const pendingField = useCallback(
+    (id: string, field: string) =>
+      pending.find(
+        (e): e is Extract<PendingEdit, { kind: 'frontmatter' }> =>
+          e.kind === 'frontmatter' && e.id === id && e.field === field,
+      )?.value,
+    [pending],
+  );
+
   const sync = useCallback(async (): Promise<{ ok: boolean; errors?: string[] }> => {
     if (pending.length === 0) return { ok: true };
     setSyncing(true);
@@ -247,6 +302,8 @@ export function AuthoringProvider({ children }: { children: React.ReactNode }) {
         setNeedsLogin,
         login,
         pending,
+        pendingSection,
+        pendingField,
         saveEdit,
         sync,
         syncing,

@@ -14,6 +14,7 @@ import { CoverageBadge } from '@/components/ui/CoverageBadge';
 import { getDomainIcon } from '@/lib/domainIcons';
 import { TAXONOMY, resolveKind } from '@/lib/taxonomy';
 import { get1Liner } from '@/lib/taxonomyDescriptions';
+import { useAuthoring } from '@/components/ui/AuthoringProvider';
 import type { Method } from '@/lib/content';
 import { ConceptSheetModal, type ConceptSheetItem } from '@/components/ui/ConceptSheetModal';
 
@@ -39,6 +40,8 @@ export function DomainDashboardGrid({ allMethods }: DomainDashboardGridProps) {
   const [domainGroupSectionOpen, setDomainGroupSectionOpen] = useState(true);
   const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set());
   const [selectedConcept, setSelectedConcept] = useState<ConceptSheetItem | null>(null);
+  // See DomainTopicGrid: a queued 'What is it' edit IS the card's description.
+  const { pendingSection } = useAuthoring();
   const [activeGroupTitle, setActiveGroupTitle] = useState<string>('');
 
   // Whole-taxonomy authoring progress. CoverageBadge renders nothing outside
@@ -205,7 +208,10 @@ export function DomainDashboardGrid({ allMethods }: DomainDashboardGridProps) {
         group.items.forEach((item) => {
           seenIds.add(item.id);
           const written = methodsById.get(item.id);
-          const rawDesc = written?.sections['What is it'] ?? get1Liner(item.id, item.title);
+          const rawDesc =
+            pendingSection(item.id, 'What is it') ??
+            written?.sections['What is it'] ??
+            get1Liner(item.id, item.title);
           const cleanDesc = rawDesc.replace(/\n+/g, ' ').trim();
 
           list.push({
@@ -225,7 +231,10 @@ export function DomainDashboardGrid({ allMethods }: DomainDashboardGridProps) {
     methodsById.forEach((written, id) => {
       if (!seenIds.has(id)) {
         const domainTitle = domainTitleById.get(written.domain) ?? written.domain;
-        const rawDesc = written.sections['What is it'] ?? get1Liner(id, written.title);
+        const rawDesc =
+          pendingSection(id, 'What is it') ??
+          written.sections['What is it'] ??
+          get1Liner(id, written.title);
         const cleanDesc = rawDesc.replace(/\n+/g, ' ').trim();
 
         list.push({
@@ -241,7 +250,7 @@ export function DomainDashboardGrid({ allMethods }: DomainDashboardGridProps) {
     });
 
     return list;
-  }, [domainTitleById, methodsById]);
+  }, [domainTitleById, methodsById, pendingSection]);
 
   /**
    * The sheet renders from the *current* item, not the object captured when it

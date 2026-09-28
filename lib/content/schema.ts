@@ -38,18 +38,20 @@ export const sourceSchema = z.object({
  */
 const LOCAL_IMAGE = /^\/images\/methods\/[a-z0-9]+(-[a-z0-9]+)*\.(png|jpe?g|svg|webp)$/;
 
-/** Shortest alt text that can plausibly describe a diagram rather than name it. */
-const MIN_ALT = 20;
-
 export const imageSchema = z
   .object({
     src: z.union([
       z.string().regex(LOCAL_IMAGE, 'must be /images/methods/<kebab-name>.(png|jpg|svg|webp) or a URL'),
       z.url(),
     ]),
-    alt: z
-      .string()
-      .min(MIN_ALT, `must be at least ${MIN_ALT} characters — describe the image, don't label it`),
+    /**
+     * Optional, defaulting to empty. It used to carry a 20-character minimum,
+     * which meant an image could only ever be added by hand — a drop target
+     * has no way to invent a description. This is a personal tool, and the
+     * owner's call is that dropping an image in should just work; alt text
+     * stays available for the entries that want it.
+     */
+    alt: z.string().default(''),
     caption: z.string().min(1).optional(),
     credit: z.object({ title: z.string().min(1), url: z.url() }).optional(),
   })

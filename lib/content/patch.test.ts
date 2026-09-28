@@ -190,3 +190,72 @@ describe('patchFrontmatterScalar', () => {
       .toThrow('unknown frontmatter field "  src"');
   });
 });
+
+import { insertImageBlock, hasImageBlock } from './patch';
+import { validateMethodText } from '../authoring/validate';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+const REAL_NO_IMAGE = readFileSync(
+  join(import.meta.dir, '../../content/methods/ia-structure/tree-testing.mdx'),
+  'utf8',
+);
+
+describe('insertImageBlock', () => {
+  test('adds the block at the end of the frontmatter, matching the two-space style', () => {
+    const out = insertImageBlock(FM, '/images/methods/tree-testing.svg');
+    expect(out.split('\n').slice(0, 8)).toEqual([
+      '---',
+      'id: tree-testing',
+      'kind: method',
+      'effort: medium',
+      'timeframe: days',
+      'image:',
+      '  src: /images/methods/tree-testing.svg',
+      '---',
+    ]);
+  });
+
+  test('leaves the body untouched', () => {
+    const out = insertImageBlock(FM, '/images/methods/tree-testing.svg');
+    expect(out).toContain('Write the line `kind: method` in your notes.');
+    expect(out.split('\n').length).toBe(FM.split('\n').length + 2);
+  });
+
+  test('the result still parses and passes validateMethodText', () => {
+    const out = insertImageBlock(REAL_NO_IMAGE, '/images/methods/tree-testing.svg');
+    expect(out).toContain('image:\n  src: /images/methods/tree-testing.svg\n---');
+    expect(validateMethodText(out, 'tree-testing.mdx')).toEqual([]);
+  });
+
+  // The src it writes has to be reachable by the replacer, or the first edit
+  // would create a block that the second could never update.
+  test('the block it writes can then be re-pointed by patchFrontmatterScalar', () => {
+    const once = insertImageBlock(REAL_NO_IMAGE, '/images/methods/tree-testing.svg');
+    const twice = patchFrontmatterScalar(once, '  src', '/images/methods/tree-testing.png');
+    expect(twice).toContain('  src: /images/methods/tree-testing.png');
+    expect(validateMethodText(twice, 'tree-testing.mdx')).toEqual([]);
+  });
+
+  test('throws when the card already has an image block', () => {
+    const once = insertImageBlock(FM, '/images/methods/a.svg');
+    expect(() => insertImageBlock(once, '/images/methods/b.svg')).toThrow(
+      'already has an image block',
+    );
+  });
+
+  test('throws when there is no frontmatter block', () => {
+    expect(() => insertImageBlock('## Only a body\n', '/images/methods/a.svg')).toThrow(
+      'no frontmatter block',
+    );
+    expect(() => insertImageBlock('---\nid: x\n', '/images/methods/a.svg')).toThrow(
+      'no frontmatter block',
+    );
+  });
+
+  test('an `image:` word in the body is not mistaken for a block', () => {
+    const body = ['---', 'id: x', '---', '', '## Tips', 'image: not frontmatter', ''].join('\n');
+    expect(hasImageBlock(body)).toBe(false);
+    expect(insertImageBlock(body, '/images/methods/a.svg')).toContain('image:\n  src:');
+  });
+});

@@ -172,13 +172,21 @@ describe('imageSchema', () => {
     expect(() => frontmatterSchema.parse({ ...valid, image })).toThrow();
   });
 
-  test('rejects a missing alt', () => {
-    expect(() => frontmatterSchema.parse({ ...valid, image: { src: localImage.src } })).toThrow();
+  // alt used to be required with a 20-character floor, which made an image
+  // impossible to add from a drop target. It is now optional.
+  test('accepts an image with no alt at all, defaulting it to empty', () => {
+    const r = frontmatterSchema.parse({ ...valid, image: { src: localImage.src } });
+    expect(r.image?.alt).toBe('');
   });
 
-  test('rejects placeholder alt text that is too short to describe anything', () => {
+  test('accepts short alt text', () => {
     const image = { ...localImage, alt: 'diagram' };
-    expect(() => frontmatterSchema.parse({ ...valid, image })).toThrow();
+    expect(frontmatterSchema.parse({ ...valid, image }).image?.alt).toBe('diagram');
+  });
+
+  test('keeps the alt text an existing entry already has', () => {
+    const r = frontmatterSchema.parse({ ...valid, image: localImage });
+    expect(r.image?.alt).toBe(localImage.alt);
   });
 
   test('rejects a malformed credit url', () => {

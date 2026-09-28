@@ -1,7 +1,7 @@
 // lib/authoring/apply.ts
 import type { ContentStore, FileWrite } from './store';
 import type { PendingEdit } from './pending';
-import { patchSection, patchFrontmatterScalar } from '../content/patch';
+import { patchSection, patchFrontmatterScalar, insertImageBlock, hasImageBlock } from '../content/patch';
 import { validateMethodText } from './validate';
 import { relPathForMethod } from './resolve';
 import { insertTaxonomyItem } from './taxonomyEdit';
@@ -140,7 +140,12 @@ export async function applyEdits(store: ContentStore, edits: PendingEdit[]): Pro
           const target = imageTargetFor(id, e.filename);
           const bad = sniffImage(bytes, target.rel.split('.').pop()!);
           if (bad) throw new Error(bad);
-          text = patchFrontmatterScalar(text, '  src', target.src);
+          // A card with no `image:` block gets one created. Requiring it to
+          // already exist meant the drop target could only ever replace an
+          // image, so 147 of the 161 cards were unreachable from the UI.
+          text = hasImageBlock(text)
+            ? patchFrontmatterScalar(text, '  src', target.src)
+            : insertImageBlock(text, target.src);
           files.push({ path: target.rel, content: bytes, version: '' });
         }
       } catch (err) {

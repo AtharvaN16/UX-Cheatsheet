@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import type { Method } from '@/lib/content';
 import { type TaxonomyGroup, resolveKind } from '@/lib/taxonomy';
 import { get1Liner } from '@/lib/taxonomyDescriptions';
+import { useAuthoring } from '@/components/ui/AuthoringProvider';
 import { getStubUseCases } from '@/lib/taxonomyUseCases';
 import { USE_CASES } from '@/lib/useCases';
 import { ConceptSheetModal, type ConceptSheetItem, SHEET_TRANSITION } from '@/components/ui/ConceptSheetModal';
@@ -635,6 +636,10 @@ export function DomainTopicGrid({
   const [sortOrder, setSortOrder] = useState<'default' | 'a-z' | 'z-a'>('default');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [selectedConcept, setSelectedConcept] = useState<DomainItem | null>(null);
+  // A queued 'What is it' edit is the card's own description text, so the grid
+  // must show it too — otherwise editing the definition updates the sheet while
+  // the card behind it keeps the old wording, which reads as a failed save.
+  const { pendingSection } = useAuthoring();
   const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set());
   const [showBookmarkedOnly, setShowBookmarkedOnly] = useState(false);
   const [sortSectionOpen, setSortSectionOpen] = useState(true);
@@ -706,7 +711,10 @@ export function DomainTopicGrid({
         group.items.forEach((item) => {
           seenIds.add(item.id);
           const written = writtenMap.get(item.id);
-          const rawDesc = written?.sections['What is it'] ?? get1Liner(item.id, item.title);
+          const rawDesc =
+            pendingSection(item.id, 'What is it') ??
+            written?.sections['What is it'] ??
+            get1Liner(item.id, item.title);
           const cleanDesc = rawDesc.replace(/\n+/g, ' ').trim();
           const itemKind = resolveKind(item, domainId, written?.kind);
           const itemUseCases = written?.useCases?.length ? written.useCases : getStubUseCases(item.id);
@@ -728,7 +736,10 @@ export function DomainTopicGrid({
     // Add un-grouped written methods
     writtenMap.forEach((written, id) => {
       if (!seenIds.has(id)) {
-        const rawDesc = written.sections['What is it'] ?? get1Liner(id, written.title);
+        const rawDesc =
+          pendingSection(id, 'What is it') ??
+          written.sections['What is it'] ??
+          get1Liner(id, written.title);
         const cleanDesc = rawDesc.replace(/\n+/g, ' ').trim();
 
         list.push({
@@ -745,7 +756,7 @@ export function DomainTopicGrid({
     });
 
     return list;
-  }, [groups, domainTitle, domainId, writtenMap]);
+  }, [groups, domainTitle, domainId, writtenMap, pendingSection]);
 
   // Deep link from search (e.g. /c/ux-psychology?item=hicks-law): open that item's sheet on load
   useEffect(() => {

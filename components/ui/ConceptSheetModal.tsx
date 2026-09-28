@@ -8,6 +8,7 @@ import { useMethodLookup, type MethodLookupEntry } from '@/components/ui/Palette
 import { MethodImage } from '@/components/ui/MethodImage';
 import { EditableSection } from '@/components/ui/EditableSection';
 import { FrontmatterPanel } from '@/components/ui/FrontmatterPanel';
+import { PENDING_CUE_CLASS, useAuthoring } from '@/components/ui/AuthoringProvider';
 
 export interface ConceptSheetItem {
   id: string;
@@ -198,8 +199,27 @@ export function FormattedText({
   );
 }
 
-function TipsContent({ content }: { content: string }) {
-  if (!content) return null;
+/**
+ * Marks a body whose text came from the pending queue rather than the build.
+ *
+ * Renders nothing of its own when there is nothing queued, so the normal
+ * reading experience is untouched.
+ */
+function PendingBody({ pending, children }: { pending: boolean; children: React.ReactNode }) {
+  if (!pending) return <>{children}</>;
+  return <div className={PENDING_CUE_CLASS}>{children}</div>;
+}
+
+/** One section's body: queued text if there is any, otherwise the built text. */
+interface SectionBody {
+  heading: string;
+  /** Already resolved — the queued markdown when queued, else the source. */
+  content: string;
+  isPending: boolean;
+}
+
+function TipsContent({ methodId, tips }: { methodId: string; tips: SectionBody }) {
+  if (!tips.content) return null;
 
   return (
     <div className="mt-8 pt-6 border-t border-border/40">
@@ -214,11 +234,17 @@ function TipsContent({ content }: { content: string }) {
         </svg>
         <span className="tracking-wide">Pro Tip</span>
       </div>
-      <FormattedText
-        content={content}
-        style={{ fontSize: '16px', fontWeight: 400, lineHeight: '1.6' }}
-        className="text-secondary"
-      />
+      {/* Tips renders here rather than in the mapped section list, so it needs
+          its own <EditableSection> or it would be the one block with no pencil. */}
+      <EditableSection methodId={methodId} heading={tips.heading} markdown={tips.content}>
+        <PendingBody pending={tips.isPending}>
+          <FormattedText
+            content={tips.content}
+            style={{ fontSize: '16px', fontWeight: 400, lineHeight: '1.6' }}
+            className="text-secondary"
+          />
+        </PendingBody>
+      </EditableSection>
     </div>
   );
 }
@@ -228,12 +254,14 @@ function CollapsibleSection({
   methodId,
   title,
   content,
-  tipsContent,
+  isPending,
+  tips,
 }: {
   methodId: string;
   title: string;
   content: string;
-  tipsContent?: string;
+  isPending: boolean;
+  tips?: SectionBody;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -271,13 +299,15 @@ function CollapsibleSection({
           >
             <div className="p-6 sm:p-7 pt-4 space-y-4">
               <EditableSection methodId={methodId} heading={title} markdown={content}>
-                <FormattedText
-                  content={content}
-                  style={{ fontSize: '20px', fontWeight: 400, lineHeight: '1.6' }}
-                  className="text-secondary"
-                />
+                <PendingBody pending={isPending}>
+                  <FormattedText
+                    content={content}
+                    style={{ fontSize: '20px', fontWeight: 400, lineHeight: '1.6' }}
+                    className="text-secondary"
+                  />
+                </PendingBody>
               </EditableSection>
-              {tipsContent && <TipsContent content={tipsContent} />}
+              {tips && <TipsContent methodId={methodId} tips={tips} />}
             </div>
           </motion.div>
         )}
@@ -421,6 +451,7 @@ function FurtherReadingSection({ sources }: { sources?: Method['sources'] }) {
 
 export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
   const lookup = useMethodLookup();
+  const { pendingSection } = useAuthoring();
 
   // Lock body scroll and listen for Escape key
   useEffect(() => {
@@ -445,10 +476,32 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
   const kindTheme = getKindTheme(kindVal);
   const effortColorClass = getEffortColorClass(effortVal);
 
-  const tipsSection = item?.method
-    ? Object.entries(item.method.sections).find(([t]) => t.toLowerCase().trim() === 'tips')
-    : undefined;
-  const tipsContent = tipsSection ? tipsSection[1] : undefined;
+  /**
+   * "Tips" and "What is it" are pulled out of the mapped section list below and
+   * rendered in their own places — Tips inside the collapsible block, "What is
+   * it" as the lead paragraph. Both are resolved here so the queued value and
+   * the built value take the same path, and so each render site can hand
+   * <EditableSection> a heading that matches the file's own casing.
+   */
+  const named = (heading: string): SectionBody | undefined => {
+    if (!item?.method) return undefined;
+    const hit = Object.entries(item.method.sections).find(
+      ([t]) => t.toLowerCase().trim() === heading,
+    );
+    if (!hit) return undefined;
+    const queued = pendingSection(item.method.id, hit[0]);
+    return { heading: hit[0], content: queued ?? hit[1], isPending: queued !== undefined };
+  };
+
+  const tips = named('tips');
+  const whatIsIt = named('what is it');
+
+  // The lead paragraph is the card's one-liner, which the grids build by
+  // flattening this section's newlines away. A queued edit gets the same
+  // treatment so the sheet and the card agree.
+  const overview = whatIsIt?.isPending
+    ? whatIsIt.content.replace(/\n+/g, ' ').trim()
+    : (item?.description ?? '');
 
   return (
     <AnimatePresence>
@@ -519,13 +572,32 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
               {/* Dev-only authoring panel; renders nothing unless editing is on. */}
               {item.method && <FrontmatterPanel method={item.method} />}
 
-              {/* Overview Paragraph: Strictly 28-30px Semibold Lead */}
+              {/* Overview Paragraph: Strictly 28-30px Semibold Lead.
+                  This is the "What is it" section — the same text every grid
+                  card shows — so it is editable here, the only place it is
+                  rendered in full. */}
               <div className="pb-8 border-b border-border/40">
-                <FormattedText
-                  content={item.description}
-                  style={{ fontSize: '30px', fontWeight: 600, lineHeight: '1.4' }}
-                  className="text-primary tracking-tight"
-                />
+                {item.method && whatIsIt ? (
+                  <EditableSection
+                    methodId={item.method.id}
+                    heading={whatIsIt.heading}
+                    markdown={whatIsIt.content}
+                  >
+                    <PendingBody pending={whatIsIt.isPending}>
+                      <FormattedText
+                        content={overview}
+                        style={{ fontSize: '30px', fontWeight: 600, lineHeight: '1.4' }}
+                        className="text-primary tracking-tight"
+                      />
+                    </PendingBody>
+                  </EditableSection>
+                ) : (
+                  <FormattedText
+                    content={item.description}
+                    style={{ fontSize: '30px', fontWeight: 600, lineHeight: '1.4' }}
+                    className="text-primary tracking-tight"
+                  />
+                )}
               </div>
 
               {/* Optional diagram: renders only for the entries that carry one. */}
@@ -552,9 +624,14 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
                         if (isUxPsychologyConcept && normalizedTitle === 'how it works') return false;
                         return true;
                       })
-                      .map(([sectionTitle, sectionContent]) => {
+                      .map(([sectionTitle, sourceContent]) => {
                         const normalizedTitle = sectionTitle.toLowerCase().trim();
                         const isCollapsible = normalizedTitle === 'how to do it' || normalizedTitle === 'how to use';
+
+                        // On the live site a saved edit is only queued, so the
+                        // built text below is stale the moment one exists.
+                        const queued = pendingSection(methodId, sectionTitle);
+                        const sectionContent = queued ?? sourceContent;
 
                         if (isCollapsible) {
                           return (
@@ -563,7 +640,8 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
                               methodId={methodId}
                               title={sectionTitle}
                               content={sectionContent}
-                              tipsContent={tipsContent}
+                              isPending={queued !== undefined}
+                              tips={tips}
                             />
                           );
                         }
@@ -581,11 +659,13 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
                               heading={sectionTitle}
                               markdown={sectionContent}
                             >
-                              <FormattedText
-                                content={sectionContent}
-                                style={{ fontSize: '20px', fontWeight: 400, lineHeight: '1.6' }}
-                                className="text-secondary"
-                              />
+                              <PendingBody pending={queued !== undefined}>
+                                <FormattedText
+                                  content={sectionContent}
+                                  style={{ fontSize: '20px', fontWeight: 400, lineHeight: '1.6' }}
+                                  className="text-secondary"
+                                />
+                              </PendingBody>
                             </EditableSection>
                           </div>
                         );

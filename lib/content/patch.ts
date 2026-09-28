@@ -106,3 +106,47 @@ export function patchFrontmatterScalar(fileText: string, field: string, value: s
   lines[target + 1] = `${field}: ${value}`;
   return lines.join('\n');
 }
+
+/**
+ * True when the leading `---` block already carries a top-level `image:` key.
+ *
+ * Lets a caller choose between replacing `image.src` and creating the block,
+ * instead of inferring "no image yet" from a thrown error — which would also
+ * swallow "no frontmatter block" and report it as the wrong problem.
+ */
+export function hasImageBlock(fileText: string): boolean {
+  const lines = fileText.split('\n');
+  if (lines[0] !== '---') return false;
+
+  const close = lines.indexOf('---', 1);
+  if (close === -1) return false;
+
+  return lines.slice(1, close).some((l) => /^image:\s*$/.test(l) || /^image:\s/.test(l));
+}
+
+/**
+ * Create the `image:` block on a card that has none, carrying only `src`.
+ *
+ * Appended just before the closing `---` rather than inserted at the position
+ * the hand-authored cards happen to use: YAML mapping order is not meaningful,
+ * and appending needs no judgement about which neighbouring key it belongs
+ * beside. Indentation matches the fourteen existing blocks, so the next edit
+ * can reach `  src` through `patchFrontmatterScalar` exactly as it does there.
+ *
+ * `alt` is deliberately not written. The schema defaults it to empty, and a
+ * placeholder string in the file would be worse than its absence.
+ */
+export function insertImageBlock(fileText: string, src: string): string {
+  const lines = fileText.split('\n');
+  if (lines[0] !== '---') throw new Error('no frontmatter block');
+
+  const close = lines.indexOf('---', 1);
+  if (close === -1) throw new Error('no frontmatter block');
+
+  if (hasImageBlock(fileText)) {
+    throw new Error('this card already has an image block — replace its src instead');
+  }
+
+  lines.splice(close, 0, 'image:', `  src: ${src}`);
+  return lines.join('\n');
+}

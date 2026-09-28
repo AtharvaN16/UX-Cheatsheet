@@ -3,11 +3,13 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Method } from '@/lib/content';
-import { IS_DEV, useAuthoring } from './AuthoringProvider';
+import { IS_DEV, PendingDot, useAuthoring } from './AuthoringProvider';
 
+// `gives` is deliberately not offered here. It stays in the schema and in all
+// 161 content files, but nothing renders it and nothing filters on it, so a
+// control for it only invites edits that can never show up anywhere.
 const FIELDS = [
   { field: 'kind', label: 'Kind', options: ['concept', 'framework', 'method'] },
-  { field: 'gives', label: 'Gives', options: ['quantitative', 'qualitative', 'mixed', 'conceptual'] },
   { field: 'effort', label: 'Effort', options: ['low', 'medium', 'high'] },
   { field: 'timeframe', label: 'Timeframe', options: ['hours', 'days', 'weeks', 'months', 'ongoing'] },
 ] as const;
@@ -44,7 +46,7 @@ function readAsBase64(file: File): Promise<string> {
  * over a closed list cannot produce an invalid value at all.
  */
 export function FrontmatterPanel({ method }: { method: Method }) {
-  const { isEditing, authed, saveEdit } = useAuthoring();
+  const { isEditing, authed, saveEdit, pendingField } = useAuthoring();
   const router = useRouter();
   const [errors, setErrors] = useState<string[]>([]);
   const [busy, setBusy] = useState<string | null>(null);
@@ -94,11 +96,16 @@ export function FrontmatterPanel({ method }: { method: Method }) {
       </p>
 
       {FIELDS.map(({ field, label, options }) => {
-        const current = method[field as 'kind' | 'gives' | 'effort' | 'timeframe'];
+        // The queued value wins over the built page's value. Without this, on
+        // the live site pressing "high" saved correctly and then re-rendered
+        // with "low" still selected, which reads as a failed save.
+        const queued = pendingField(method.id, field);
+        const current = queued ?? method[field as 'kind' | 'effort' | 'timeframe'];
         return (
           <div key={field} className="mb-3">
             <label className="mb-1.5 block text-[14px] font-medium uppercase tracking-[0.06em] text-[#8C887E]">
               {label}
+              {queued !== undefined && <PendingDot />}
             </label>
             <div className="flex gap-1">
               {options.map((o) => (
