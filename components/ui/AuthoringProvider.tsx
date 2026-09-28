@@ -31,6 +31,10 @@ interface Authoring {
   pendingSection: (id: string, heading: string) => string | undefined;
   /** The queued value for a frontmatter field, or undefined. */
   pendingField: (id: string, field: string) => string | undefined;
+  /** How many queued edits touch one card. Drives the per-card undo button. */
+  pendingCountFor: (id: string) => number;
+  /** Drop every queued edit for one card, without touching the rest. */
+  discardEdits: (id: string) => void;
   saveEdit: (edit: PendingEdit) => Promise<{ ok: boolean; errors?: string[] }>;
   sync: () => Promise<{ ok: boolean; errors?: string[] }>;
   syncing: boolean;
@@ -64,7 +68,19 @@ export const IS_DEV = process.env.NODE_ENV === 'development';
  * affected body is enough to notice on a second look and easy to ignore on the
  * first — it must not compete with the content it marks.
  */
-export const PENDING_CUE_CLASS = 'border-l-2 border-[#FDE047] pl-4';
+/**
+ * How an unsynced change looks. Deliberately louder than a hairline: the whole
+ * point is that a queued edit is visible at a glance, because the previous
+ * version showed nothing at all and the app read as broken.
+ *
+ * Amber is a third state, distinct from the blue of "editing right now" and the
+ * green of "synced". Same hue as the search highlight already in use.
+ */
+export const PENDING_CUE_CLASS =
+  'border-l-[3px] border-[#E8B307] bg-[#FDE047]/15 pl-4 py-2 -my-2 rounded-r-[6px]';
+
+/** The same amber, for a control (a segmented button) rather than a block. */
+export const PENDING_CONTROL_CLASS = 'ring-2 ring-[#E8B307] ring-offset-1';
 
 /** The same signal where a left rule would not fit — beside a field label. */
 export function PendingDot() {
@@ -211,6 +227,20 @@ export function AuthoringProvider({ children }: { children: React.ReactNode }) {
     [pending],
   );
 
+  const pendingCountFor = useCallback(
+    (id: string) => pending.filter((e) => e.kind !== 'card' && e.id === id).length,
+    [pending],
+  );
+
+  /**
+   * Undo, scoped to one card. Nothing is sent anywhere — a queued edit has not
+   * reached the repository yet, so discarding it is purely local and instant.
+   * New-card entries are keyed differently and are never dropped by this.
+   */
+  const discardEdits = useCallback((id: string) => {
+    setPending((list) => list.filter((e) => e.kind === 'card' || e.id !== id));
+  }, []);
+
   const pendingField = useCallback(
     (id: string, field: string) =>
       pending.find(
@@ -304,6 +334,8 @@ export function AuthoringProvider({ children }: { children: React.ReactNode }) {
         pending,
         pendingSection,
         pendingField,
+        pendingCountFor,
+        discardEdits,
         saveEdit,
         sync,
         syncing,

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { Method } from '@/lib/content';
-import { IS_DEV, PendingDot, useAuthoring } from './AuthoringProvider';
+import { IS_DEV, PENDING_CONTROL_CLASS, PendingDot, useAuthoring } from './AuthoringProvider';
 
 // `gives` is deliberately not offered here. It stays in the schema and in all
 // 161 content files, but nothing renders it and nothing filters on it, so a
@@ -46,7 +46,9 @@ function readAsBase64(file: File): Promise<string> {
  * over a closed list cannot produce an invalid value at all.
  */
 export function FrontmatterPanel({ method }: { method: Method }) {
-  const { isEditing, authed, saveEdit, pendingField } = useAuthoring();
+  const { isEditing, authed, saveEdit, pendingField, pendingCountFor, discardEdits } =
+    useAuthoring();
+  const cardPendingCount = pendingCountFor(method.id);
   const router = useRouter();
   const [errors, setErrors] = useState<string[]>([]);
   const [busy, setBusy] = useState<string | null>(null);
@@ -95,6 +97,21 @@ export function FrontmatterPanel({ method }: { method: Method }) {
         Frontmatter
       </p>
 
+      {!IS_DEV && cardPendingCount > 0 && (
+        <div className="mb-3 flex items-center justify-between rounded-[8px] border border-[#E8B307]/40 bg-[#FDE047]/15 px-3 py-2">
+          <span className="text-[14px] text-[#5C574A]">
+            {cardPendingCount} unsynced change{cardPendingCount === 1 ? '' : 's'}
+          </span>
+          <button
+            type="button"
+            onClick={() => discardEdits(method.id)}
+            className="text-[14px] font-semibold text-[#A33] underline underline-offset-2 hover:text-[#8a2a2a]"
+          >
+            Undo all
+          </button>
+        </div>
+      )}
+
       {FIELDS.map(({ field, label, options }) => {
         // The queued value wins over the built page's value. Without this, on
         // the live site pressing "high" saved correctly and then re-rendered
@@ -115,7 +132,9 @@ export function FrontmatterPanel({ method }: { method: Method }) {
                   disabled={busy === field}
                   onClick={() => set(field, o)}
                   className={`flex-1 rounded-[7px] border px-2 py-1.5 text-[14px] ${
-                    current === o
+                    current === o && queued !== undefined
+                      ? `border-[#E8B307] bg-[#E8B307] font-semibold text-white ${PENDING_CONTROL_CLASS}`
+                      : current === o
                       ? 'border-[#5A92C6] bg-[#5A92C6] font-semibold text-white'
                       : 'border-[#E4DED2] bg-white text-[#6E6A5E] hover:bg-[#EAE6DD]'
                   }`}
