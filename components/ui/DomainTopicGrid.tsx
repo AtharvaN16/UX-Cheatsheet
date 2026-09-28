@@ -6,13 +6,12 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import type { Method } from '@/lib/content';
-import type { TaxonomyGroup } from '@/lib/taxonomy';
+import { type TaxonomyGroup, resolveKind } from '@/lib/taxonomy';
 import { get1Liner } from '@/lib/taxonomyDescriptions';
 import { getStubUseCases } from '@/lib/taxonomyUseCases';
 import { USE_CASES } from '@/lib/useCases';
 import { ConceptSheetModal, type ConceptSheetItem, SHEET_TRANSITION } from '@/components/ui/ConceptSheetModal';
 import { DomainBanner } from '@/components/ui/DomainBanner';
-import { inferKind } from '@/lib/inferKind';
 import { domainCoverage } from '@/lib/coverage';
 import { CoverageBadge } from '@/components/ui/CoverageBadge';
 import { shouldSkipEntrance } from '@/lib/entranceGuard';
@@ -709,7 +708,7 @@ export function DomainTopicGrid({
           const written = writtenMap.get(item.id);
           const rawDesc = written?.sections['What is it'] ?? get1Liner(item.id, item.title);
           const cleanDesc = rawDesc.replace(/\n+/g, ' ').trim();
-          const itemKind = written?.kind || inferKind(item.title, domainId, item.id);
+          const itemKind = resolveKind(item, domainId, written?.kind);
           const itemUseCases = written?.useCases?.length ? written.useCases : getStubUseCases(item.id);
 
           list.push({
@@ -738,7 +737,7 @@ export function DomainTopicGrid({
           topicTitle: domainTitle,
           description: cleanDesc,
           isWritten: true,
-          kind: written.kind || inferKind(written.title, domainId, written.id),
+          kind: resolveKind({ id: written.id, title: written.title }, domainId, written.kind),
           method: written,
           useCases: written.useCases,
         });
@@ -899,6 +898,22 @@ export function DomainTopicGrid({
 
     return result;
   }, [allItems, activeTab, activeUseCases, effectiveKindFilter, effectiveEffortFilter, searchQuery, sortOrder, showBookmarkedOnly, bookmarkedIds]);
+
+  /**
+   * The sheet renders from the *current* item, not the object captured when it
+   * was clicked. `selectedConcept` is a snapshot; after an authoring save calls
+   * router.refresh(), fresh `methods` props rebuild `allItems`, and without this
+   * lookup the open sheet would keep showing the pre-edit text — a successful
+   * save that looks like a failed one. Falls back to the snapshot if the item
+   * is gone, so closing still behaves.
+   */
+  const liveSelectedConcept = useMemo(
+    () =>
+      selectedConcept
+        ? (allItems.find((i) => i.id === selectedConcept.id) ?? selectedConcept)
+        : null,
+    [selectedConcept, allItems],
+  );
 
   const isModalOpen = selectedConcept !== null;
 
@@ -1108,7 +1123,7 @@ export function DomainTopicGrid({
 
       {/* Bottom Sheet Concept Modal */}
       <ConceptSheetModal
-        item={selectedConcept}
+        item={liveSelectedConcept}
         onClose={() => setSelectedConcept(null)}
       />
     </>

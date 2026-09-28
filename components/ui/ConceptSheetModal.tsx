@@ -6,6 +6,8 @@ import Link from 'next/link';
 import type { Method } from '@/lib/content';
 import { useMethodLookup, type MethodLookupEntry } from '@/components/ui/PaletteProvider';
 import { MethodImage } from '@/components/ui/MethodImage';
+import { EditableSection } from '@/components/ui/EditableSection';
+import { FrontmatterPanel } from '@/components/ui/FrontmatterPanel';
 
 export interface ConceptSheetItem {
   id: string;
@@ -223,10 +225,12 @@ function TipsContent({ content }: { content: string }) {
 
 /** Collapsible dropdown component for section content like "How to do it" */
 function CollapsibleSection({
+  methodId,
   title,
   content,
   tipsContent,
 }: {
+  methodId: string;
   title: string;
   content: string;
   tipsContent?: string;
@@ -266,11 +270,13 @@ function CollapsibleSection({
             className="overflow-hidden border-t border-border/40"
           >
             <div className="p-6 sm:p-7 pt-4 space-y-4">
-              <FormattedText
-                content={content}
-                style={{ fontSize: '20px', fontWeight: 400, lineHeight: '1.6' }}
-                className="text-secondary"
-              />
+              <EditableSection methodId={methodId} heading={title} markdown={content}>
+                <FormattedText
+                  content={content}
+                  style={{ fontSize: '20px', fontWeight: 400, lineHeight: '1.6' }}
+                  className="text-secondary"
+                />
+              </EditableSection>
               {tipsContent && <TipsContent content={tipsContent} />}
             </div>
           </motion.div>
@@ -510,6 +516,9 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
 
             {/* Scrollable Content Body (Flat Laws of UX Layout) */}
             <div className="flex-1 overflow-y-auto px-8 sm:px-14 pt-2 pb-10 space-y-16 bg-surface">
+              {/* Dev-only authoring panel; renders nothing unless editing is on. */}
+              {item.method && <FrontmatterPanel method={item.method} />}
+
               {/* Overview Paragraph: Strictly 28-30px Semibold Lead */}
               <div className="pb-8 border-b border-border/40">
                 <FormattedText
@@ -527,6 +536,9 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
                 <div className="space-y-10">
                   {/* Editorial Sections: Filter out redundant "What is it", "Tips", and "How it works" for UX Psychology concepts; make "How to do it" (methods) / "How to use" (frameworks) a collapsible dropdown */}
                   {(() => {
+                    /* Every section below belongs to this method, and each editor
+                       posts by method id — never by path. */
+                    const methodId = item.method.id;
                     const isUxPsychologyConcept =
                       ((item.topicTitle || '').toLowerCase().includes('psychology') ||
                         item.method.domain === 'ux-psychology' ||
@@ -548,6 +560,7 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
                           return (
                             <CollapsibleSection
                               key={sectionTitle}
+                              methodId={methodId}
                               title={sectionTitle}
                               content={sectionContent}
                               tipsContent={tipsContent}
@@ -563,11 +576,17 @@ export function ConceptSheetModal({ item, onClose }: ConceptSheetModalProps) {
                             >
                               {sectionTitle}
                             </h2>
-                            <FormattedText
-                              content={sectionContent}
-                              style={{ fontSize: '20px', fontWeight: 400, lineHeight: '1.6' }}
-                              className="text-secondary"
-                            />
+                            <EditableSection
+                              methodId={methodId}
+                              heading={sectionTitle}
+                              markdown={sectionContent}
+                            >
+                              <FormattedText
+                                content={sectionContent}
+                                style={{ fontSize: '20px', fontWeight: 400, lineHeight: '1.6' }}
+                                className="text-secondary"
+                              />
+                            </EditableSection>
                           </div>
                         );
                       });
