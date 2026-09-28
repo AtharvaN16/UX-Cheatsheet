@@ -16,8 +16,8 @@ import { cheatsheetTheme } from '@/lib/cheatsheet';
 // In a production build `IS_DEV` is false, so the dock and the palette render
 // null and nothing authoring-related reaches the prerendered HTML. Verified:
 // they are NOT dropped from the bundle (see AuthoringProvider), they are inert
-// in it. The boundary that actually matters is `devOnlyGuard`, which 404s every
-// /api/authoring route in production.
+// in it. The boundary that actually matters is `guardRequest`, which requires a
+// signed session on every /api/authoring route outside development.
 import { AuthoringProvider } from '@/components/ui/AuthoringProvider';
 import { AuthorDock } from '@/components/ui/AuthorDock';
 import { AddCardPalette } from '@/components/ui/AddCardPalette';

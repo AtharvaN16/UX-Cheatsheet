@@ -1,4 +1,4 @@
-import { devOnlyGuard } from '@/lib/authoring/devOnly';
+import { guardRequest } from '@/lib/authoring/guard';
 import { relPathForMethod } from '@/lib/authoring/resolve';
 import { validateMethodText } from '@/lib/authoring/validate';
 import { getStore } from '@/lib/authoring/store';
@@ -6,7 +6,7 @@ import { imageTargetFor, sniffImage } from '@/lib/authoring/imageName';
 import { patchFrontmatterScalar } from '@/lib/content/patch';
 
 export async function POST(request: Request): Promise<Response> {
-  const blocked = devOnlyGuard(request);
+  const blocked = guardRequest(request);
   if (blocked) return blocked;
 
   const form = await request.formData();

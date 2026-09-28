@@ -1,5 +1,5 @@
 import { execFile } from 'node:child_process';
-import { devOnlyGuard } from '@/lib/authoring/devOnly';
+import { guardRequest, devOnlyRoute } from '@/lib/authoring/guard';
 
 /**
  * Open a terminal at the repo root so Claude Code is one keystroke away.
@@ -10,7 +10,11 @@ import { devOnlyGuard } from '@/lib/authoring/devOnly';
  * entire input space of this shell-executing endpoint is "was it called".
  */
 export async function POST(request: Request): Promise<Response> {
-  const blocked = devOnlyGuard(request);
+  // Both checks, dev-only first: there is no terminal on a serverless
+  // function, so this route must 404 in production even for a signed-in user.
+  const notDev = devOnlyRoute();
+  if (notDev) return notDev;
+  const blocked = guardRequest(request);
   if (blocked) return blocked;
 
   if (process.platform !== 'darwin') {
