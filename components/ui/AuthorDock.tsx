@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { describeEdit } from '@/lib/authoring/pending';
 import { IS_DEV, useAuthoring } from './AuthoringProvider';
 
@@ -19,7 +20,13 @@ export function AuthorDock() {
     sync,
     syncing,
     justSynced,
+    discardAll,
   } = useAuthoring();
+
+  // Two-step, because discarding is the one irreversible thing in the dock:
+  // a queued edit exists nowhere else, so a stray click would lose real work.
+  // A native confirm() would do the job but reads as a browser error.
+  const [confirmingDiscard, setConfirmingDiscard] = useState(false);
 
   // Nothing at all until we know whether this browser is signed in: flashing a
   // "Sign in" button and then replacing it with the dock is worse than waiting
@@ -84,6 +91,34 @@ export function AuthorDock() {
           className="rounded-[8px] bg-[#5A92C6] px-2.5 py-1 text-[12px] font-semibold text-white disabled:opacity-60"
         >
           {syncing ? 'Syncing…' : `Sync ${pending.length}`}
+        </button>
+      )}
+      {!IS_DEV && pending.length > 0 && !syncing && (
+        <button
+          type="button"
+          onClick={() => {
+            if (confirmingDiscard) {
+              discardAll();
+              setConfirmingDiscard(false);
+            } else {
+              setConfirmingDiscard(true);
+              // Arm briefly, then disarm, so the dock never sits in a state
+              // where the next click throws work away unexpectedly.
+              setTimeout(() => setConfirmingDiscard(false), 4000);
+            }
+          }}
+          title={
+            confirmingDiscard
+              ? 'Click again to discard'
+              : `Discard without syncing:\n${pending.map(describeEdit).join('\n')}`
+          }
+          className={
+            confirmingDiscard
+              ? 'rounded-[8px] border border-[#A33] bg-[#FDF2F2] px-2.5 py-1 text-[12px] font-semibold text-[#A33]'
+              : `${ICON} ${IDLE}`
+          }
+        >
+          {confirmingDiscard ? `Discard ${pending.length}?` : '✕'}
         </button>
       )}
       {!IS_DEV && justSynced && pending.length === 0 && (

@@ -35,6 +35,8 @@ interface Authoring {
   pendingCountFor: (id: string) => number;
   /** Drop every queued edit for one card, without touching the rest. */
   discardEdits: (id: string) => void;
+  /** Drop the entire queue, including new-card entries. */
+  discardAll: () => void;
   saveEdit: (edit: PendingEdit) => Promise<{ ok: boolean; errors?: string[] }>;
   sync: () => Promise<{ ok: boolean; errors?: string[] }>;
   syncing: boolean;
@@ -241,6 +243,13 @@ export function AuthoringProvider({ children }: { children: React.ReactNode }) {
     setPending((list) => list.filter((e) => e.kind === 'card' || e.id !== id));
   }, []);
 
+  /**
+   * Clear everything. The per-card undo only reaches the card whose sheet is
+   * open, so without this a queue spread across several cards — or one whose
+   * card you can no longer find — had no way out but clearing site data.
+   */
+  const discardAll = useCallback(() => setPending([]), []);
+
   const pendingField = useCallback(
     (id: string, field: string) =>
       pending.find(
@@ -336,6 +345,7 @@ export function AuthoringProvider({ children }: { children: React.ReactNode }) {
         pendingField,
         pendingCountFor,
         discardEdits,
+        discardAll,
         saveEdit,
         sync,
         syncing,
